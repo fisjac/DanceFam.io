@@ -1,11 +1,13 @@
-from app.models import db, User
+from app.models import db, Type
+
+def seed_types():
+    convention = Type(name='Convention')
+    workshop = Type(name='Workshop')
+    solo_class = Type(name='Class')
 
 
-# Adds a demo user, you can add other users here if you want
-def seed_users():
-    demo = User(
-        username='Demo', email='demo@aa.io', password='password')
-    db.session.add(demo)
+    db.session.add_all([convention, workshop, solo_class])
+
     db.session.commit()
 
 
@@ -14,6 +16,6 @@ def seed_users():
 # TRUNCATE Removes all the data from the table, and RESET IDENTITY
 # resets the auto incrementing primary key, CASCADE deletes any
 # dependent entities
-def undo_users():
-    db.session.execute('TRUNCATE users RESTART IDENTITY CASCADE;')
+def undo_types():
+    db.session.execute('TRUNCATE types RESTART IDENTITY CASCADE;')
     db.session.commit()

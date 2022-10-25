@@ -1,6 +1,4 @@
 from .db import db
-from .memberships import memberships
-from .registrations import registration
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 
@@ -16,8 +14,8 @@ class User(db.Model, UserMixin):
     last_name = db.Column(db.String(255))
 
     # Relationships
-    communities = db.relationship("Membership", backpopulates="users")
-    events = db.relationship("Registration", backpopulates="users")
+    communities = db.relationship("Membership", back_populates="users")
+    events = db.relationship("Registration", back_populates="users")
 
     @property
     def password(self):
