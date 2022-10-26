@@ -1,12 +1,12 @@
-from app.models import db, Style
+from app.models import db, Role
 
-def seed_styles():
-    wcs = Style(name='West Coast Swing')
-    zouk = Style(name='Zouk')
-    tango = Style(name='Tango')
+def seed_roles():
+    organizer = Role(name='Organizer')
+    admin = Role(name='Admin')
+    member = Role(name='Member')
 
 
-    db.session.add_all([wcs, zouk, tango])
+    db.session.add_all([organizer, admin, member])
 
     db.session.commit()
 
@@ -16,6 +16,6 @@ def seed_styles():
 # TRUNCATE Removes all the data from the table, and RESET IDENTITY
 # resets the auto incrementing primary key, CASCADE deletes any
 # dependent entities
-def undo_styles():
-    db.session.execute('TRUNCATE styles RESTART IDENTITY CASCADE;')
+def undo_roles():
+    db.session.execute('TRUNCATE roles RESTART IDENTITY CASCADE;')
     db.session.commit()

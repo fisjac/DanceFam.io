@@ -7,3 +7,4 @@ class Community(db.Model):
   name = db.Column(db.String(255), nullable=False)
 
   users = db.relationship("Membership", back_populates="communities")
+  events = db.relationship('Event', back_populates='community')
