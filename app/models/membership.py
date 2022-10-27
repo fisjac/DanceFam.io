@@ -8,5 +8,5 @@ class Membership(db.Model):
   community_id = db.Column(db.Integer, db.ForeignKey("communities.id"))
   role_id = db.Column(db.Integer, db.ForeignKey("roles.id"))
 
-  users = db.relationship('User', back_populates='communities')
-  communities = db.relationship('Community', back_populates='users')
+  user = db.relationship('User', back_populates='communities')
+  community = db.relationship('Community', back_populates='users')

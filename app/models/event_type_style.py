@@ -29,12 +29,18 @@ class Event(db.Model):
 
   id = db.Column(db.Integer, primary_key=True)
   name = db.Column(db.String(255), nullable=False)
+  start_date= db.Column(db.DateTime, nullable=False)
+  end_date= db.Column(db.DateTime, nullable=False)
+  city = db.Column(db.String(255))
+  state = db.Column(db.String(255))
+  address = db.Column(db.String(255))
+  country = db.Column(db.String(255))
   community_id = db.Column(db.Integer, db.ForeignKey("communities.id"), nullable=False)
 
   # Relationships
   community = db.relationship("Community", back_populates="events")
 
-  users = db.relationship("Registration", back_populates="events")
+  users = db.relationship("Registration", back_populates="event")
 
   styles = db.relationship("Style", secondary=event_styles, back_populates='events')
 

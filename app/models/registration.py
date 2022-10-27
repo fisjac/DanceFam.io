@@ -8,5 +8,5 @@ class Registration(db.Model):
   event_id = db.Column(db.Integer, db.ForeignKey("events.id"))
   status_id = db.Column(db.Integer, db.ForeignKey("statuses.id"))
 
-  events = db.relationship('Event', back_populates='users')
-  users = db.relationship('User', back_populates='events')
+  event = db.relationship('Event', back_populates='users')
+  user = db.relationship('User', back_populates='events')

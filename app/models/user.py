@@ -14,8 +14,8 @@ class User(db.Model, UserMixin):
     last_name = db.Column(db.String(255))
 
     # Relationships
-    communities = db.relationship("Membership", back_populates="users")
-    events = db.relationship("Registration", back_populates="users")
+    communities = db.relationship("Membership", back_populates="user")
+    events = db.relationship("Registration", back_populates="user")
 
     @property
     def password(self):
