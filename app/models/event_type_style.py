@@ -31,6 +31,7 @@ class Event(db.Model):
   name = db.Column(db.String(255), nullable=False)
   start_date= db.Column(db.DateTime, nullable=False)
   end_date= db.Column(db.DateTime, nullable=False)
+  description = db.Column(db.String(255))
   city = db.Column(db.String(255))
   state = db.Column(db.String(255))
   address = db.Column(db.String(255))
@@ -46,6 +47,20 @@ class Event(db.Model):
 
   types = db.relationship('Type', secondary=event_types, back_populates='events')
 
+  def to_dict(self):
+    return {
+      'id': self.id,
+      'name': self.name,
+      'description': self.description,
+      'start_date': self.start_date,
+      'end_date': self.end_date,
+      'city': self.city,
+      'state': self.state,
+      'address': self.address,
+      'country': self.country,
+      'community_id': self.community_id,
+    }
+
 class Style(db.Model):
   __tablename__ = 'styles'
 
@@ -53,3 +68,9 @@ class Style(db.Model):
   name = db.Column(db.String(255), nullable=False)
 
   events = db.relationship('Event', secondary=event_styles, back_populates='styles')
+
+  def to_dict(self):
+    return {
+      'id': self.id,
+      'name': self.name,
+    }
