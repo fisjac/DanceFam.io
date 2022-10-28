@@ -32,7 +32,7 @@ def create_community():
         community = Community(
             name=form.data['name']
         )
-        membership = Membership(role_id=1)
+        membership = Membership(owner_status=True)
         membership.user = current_user
         membership.community = community
         db.session.add_all([community,membership])
@@ -60,7 +60,7 @@ def delete_community(id):
         return {
             "message": "Community couldn't be found",
             "statusCode": 404}, 404
-    elif Membership.get_membership(current_user.id, id).role_id != 1:
+    elif Membership.get_owner_id(id) != current_user.id:
         return {
             "message": "User not authorized to delete this community",
             "statusCode": 401}, 401
