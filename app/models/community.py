@@ -1,4 +1,8 @@
 from .db import db
+from .role import Role
+from .user import User
+from .membership import Membership
+from sqlalchemy.orm import join
 
 class Community(db.Model):
   __tablename__ = 'communities'
