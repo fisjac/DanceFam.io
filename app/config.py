@@ -1,6 +1,6 @@
 import os
 
-
+print(os.environ.get('DATABASE_URL'))
 class Config:
     SECRET_KEY = os.environ.get('SECRET_KEY')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
@@ -10,4 +10,4 @@ class Config:
     # so the connection uri must be updated here (for production)
     SQLALCHEMY_DATABASE_URI = os.environ.get(
         'DATABASE_URL').replace('postgres://', 'postgresql://')
-    SQLALCHEMY_ECHO = True
+    # SQLALCHEMY_ECHO = True
