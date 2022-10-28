@@ -17,15 +17,15 @@ event_types = db.Table(
 )
 
 class Type(db.Model):
-  __tablename__ = 'types'
+  __tablename__ = "types"
 
   id = db.Column(db.Integer, primary_key=True)
   name = db.Column(db.String(255), nullable=False)
 
-  events = db.relationship('Event', secondary=event_types, back_populates='types')
+  events = db.relationship("Event", secondary=event_types, back_populates="types")
 
 class Event(db.Model):
-  __tablename__ = 'events'
+  __tablename__ = "events"
 
   id = db.Column(db.Integer, primary_key=True)
   name = db.Column(db.String(255), nullable=False)
@@ -37,40 +37,42 @@ class Event(db.Model):
   address = db.Column(db.String(255))
   country = db.Column(db.String(255))
   community_id = db.Column(db.Integer, db.ForeignKey("communities.id"), nullable=False)
+  organiser_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
 
   # Relationships
   community = db.relationship("Community", back_populates="events")
 
   users = db.relationship("Registration", back_populates="event")
 
-  styles = db.relationship("Style", secondary=event_styles, back_populates='events')
+  styles = db.relationship("Style", secondary=event_styles, back_populates="events")
 
-  types = db.relationship('Type', secondary=event_types, back_populates='events')
+  types = db.relationship("Type", secondary=event_types, back_populates="events")
 
   def to_dict(self):
     return {
-      'id': self.id,
-      'name': self.name,
-      'description': self.description,
-      'start_date': self.start_date,
-      'end_date': self.end_date,
-      'city': self.city,
-      'state': self.state,
-      'address': self.address,
-      'country': self.country,
-      'community_id': self.community_id,
+      "id": self.id,
+      "name": self.name,
+      "description": self.description,
+      "start_date": self.start_date,
+      "end_date": self.end_date,
+      "city": self.city,
+      "state": self.state,
+      "address": self.address,
+      "country": self.country,
+      "community_id": self.community_id,
+      "organiser_id": self.organiser_id,
     }
 
 class Style(db.Model):
-  __tablename__ = 'styles'
+  __tablename__ = "styles"
 
   id = db.Column(db.Integer, primary_key=True)
   name = db.Column(db.String(255), nullable=False)
 
-  events = db.relationship('Event', secondary=event_styles, back_populates='styles')
+  events = db.relationship("Event", secondary=event_styles, back_populates="styles")
 
   def to_dict(self):
     return {
-      'id': self.id,
-      'name': self.name,
+      "id": self.id,
+      "name": self.name,
     }
