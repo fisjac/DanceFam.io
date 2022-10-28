@@ -36,7 +36,7 @@ class Event(db.Model):
   state = db.Column(db.String(255))
   address = db.Column(db.String(255))
   country = db.Column(db.String(255))
-  community_id = db.Column(db.Integer, db.ForeignKey("communities.id"), nullable=False)
+  community_id = db.Column(db.Integer, db.ForeignKey("communities.id"))
   organiser_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
 
   # Relationships
