@@ -29,8 +29,8 @@ class Event(db.Model):
 
   id = db.Column(db.Integer, primary_key=True)
   name = db.Column(db.String(255), nullable=False)
-  start_date= db.Column(db.DateTime, nullable=False)
-  end_date= db.Column(db.DateTime, nullable=False)
+  start= db.Column(db.DateTime, nullable=False)
+  end= db.Column(db.DateTime, nullable=False)
   description = db.Column(db.String(255))
   city = db.Column(db.String(255))
   state = db.Column(db.String(255))
@@ -44,17 +44,17 @@ class Event(db.Model):
 
   users = db.relationship("Registration", back_populates="event")
 
-  styles = db.relationship("Style", secondary=event_styles, back_populates="events")
+  # styles = db.relationship("Style", secondary=event_styles, back_populates="events")
 
-  types = db.relationship("Type", secondary=event_types, back_populates="events")
+  # types = db.relationship("Type", secondary=event_types, back_populates="events")
 
   def to_dict(self):
     return {
       "id": self.id,
       "name": self.name,
       "description": self.description,
-      "start_date": self.start_date,
-      "end_date": self.end_date,
+      "start": self.start,
+      "end": self.end,
       "city": self.city,
       "state": self.state,
       "address": self.address,
