@@ -1,9 +1,9 @@
 from flask.cli import AppGroup
 from .users import seed_users, undo_users
-from .types import seed_types, undo_types
-from .styles import seed_styles, undo_styles
-from .roles import seed_roles, undo_roles
-from .statuses import seed_statuses, undo_statuses
+# from .types import seed_types, undo_types
+# from .styles import seed_styles, undo_styles
+# from .roles import seed_roles, undo_roles
+# from .statuses import seed_statuses, undo_statuses
 from .communities import seed_communities, undo_communities
 from .events import seed_events, undo_events
 from .registrations import seed_registrations, undo_registrations
