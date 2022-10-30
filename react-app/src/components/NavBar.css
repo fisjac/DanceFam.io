@@ -1,0 +1,18 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+}
+
+.home-button {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.navbar-rhs {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}

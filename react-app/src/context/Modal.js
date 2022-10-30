@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState, useContext } from "react";
 import ReactDom from 'react-dom';
-import x_svg from '../img/x.svg'
 
 import './Modal.css'
 
@@ -59,13 +58,15 @@ export function Modal (props) {
         <div id="modal-container">
           <div id='modal-header'>
             {props.header || 'New Modal'}
-            <img
-            id='modal-close-button'
-              src={x_svg}
+            <div
+              id='modal-close-button'
               onClick={()=> {
                 props.setShowModal(false)
               }}
-              />
+              >
+              x
+            </div>
+
           </div>
           <div id='modal-content'>
             {React.cloneElement(props.children, {...props})}
