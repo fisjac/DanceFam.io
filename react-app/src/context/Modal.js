@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState, useContext } from "react";
 import ReactDom from 'react-dom';
 
+import logo from '../DanceFam.svg'
 import './Modal.css'
-
 export const ModalContext = React.createContext();
 
 export function ModalProvider({children}) {
@@ -57,6 +57,7 @@ export function Modal (props) {
       <div id="modal-background" onClick={()=>props.setShowModal(false)} />
         <div id="modal-container">
           <div id='modal-header'>
+            <img id='modal-logo' src={logo}/>
             {props.header || 'New Modal'}
             <div
               id='modal-close-button'

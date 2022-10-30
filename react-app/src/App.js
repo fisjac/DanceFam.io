@@ -27,9 +27,7 @@ function App() {
   return (
     <BrowserRouter>
       <NavBar />
-      <ProtectedRoute path='/' exact={true} >
-        <h1>My Home Page</h1>
-      </ProtectedRoute>
+      <h1>My Home Page</h1>
     </BrowserRouter>
   );
 }

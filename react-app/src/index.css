@@ -1,1 +1,17 @@
 /* TODO Add site wide styles */
+
+* {
+box-sizing: border-box;
+}
+
+body {
+  width: 100%;
+  margin: 0;
+}
+
+:root {
+  --theme-blue: #5A4AE3;
+  --theme-grey-blue: #988fe5;
+  --shadow: rgb(0,0,0,.1);
+  --theme-grey: #EFEFEF;
+}
