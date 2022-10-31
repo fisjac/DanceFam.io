@@ -1,0 +1,26 @@
+.dropdown_container {
+  position: relative;
+  z-index: 1;
+}
+
+.left {
+  float: left;
+  align-self: start;
+}
+
+.right {
+  float: right;
+  align-self: end;
+}
+
+.relative {
+  position: relative;
+}
+
+.absolute {
+  position: absolute;
+}
+
+.hidden {
+   display: none !important;
+}

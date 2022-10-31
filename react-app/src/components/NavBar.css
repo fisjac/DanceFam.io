@@ -58,6 +58,10 @@
 
 }
 
+.search-input:focus {
+  color: black;
+}
+
 
 .navbar-rhs {
   display: flex;
