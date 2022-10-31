@@ -15,11 +15,15 @@ const NavBar = () => {
   const user = useSelector(state=>state.session.user)
   return (
     <div className='navbar'>
-        <NavLink className='home-button' exact to='/'>
-          <img src={logo} style={{width:'40px'}}/>
+        <NavLink className='navbar-button' exact to='/'>
           <i className="fa-solid fa-bars"></i>
         </NavLink>
+        <div className='search-bar'>
+          <i className="fa-solid fa-magnifying-glass"></i>
+        </div>
       <div className='navbar-rhs'>
+      <i class="fa-solid fa-user"></i>
+      <i class="fa-solid fa-caret-down"></i>
         <ModalWrapper form={<LoginForm/>}>
           <div className='navbar-button'>
             Log In

@@ -5,15 +5,33 @@
   position: sticky;
   top: 0;
   width: 100%;
+  height: 40px;
 
-  background-color: var(--theme-grey);
+  background-color: var(--theme-grey-blue);
   border-bottom: 1px solid var(--shadow);
+
+  color: var(--icon-grey)
 }
 
-.home-button {
+.navbar-button {
   display: flex;
   align-items: center;
   cursor: pointer;
+  padding: 4px;
+  border-radius: 4px;
+  transition: .5s;
+}
+
+.navbar-button:hover {
+  background-color: var(--theme-dark-grey-blue);
+}
+
+.search-bar {
+  background-color: var(--theme-light-grey-blue);
+  min-width: 250px;
+  height: 30px;
+  padding: 5px;
+  border-radius: 5px;
 }
 
 .navbar-rhs {
