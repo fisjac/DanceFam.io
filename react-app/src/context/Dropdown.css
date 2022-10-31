@@ -24,3 +24,14 @@
 .hidden {
    display: none !important;
 }
+
+.dropdown-button {
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dropdown-button:hover {
+  background-color: var(--theme-background-grey);
+}

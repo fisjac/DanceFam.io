@@ -5,7 +5,7 @@ import { NavLink } from 'react-router-dom';
 import LogoutButton from './auth/LogoutButton';
 import ModalWrapper from '../context/Modal'
 
-// import logo from '../DanceFam.svg'
+import logo from '../DanceFam_Brush_notext.svg'
 
 import './NavBar.css'
 import SignUpForm from './auth/SignUpForm';
@@ -19,9 +19,6 @@ const NavBar = () => {
         <NavLink className='navbar-button' exact to='/'>
           <i className="fa-solid fa-bars"></i>
         </NavLink>
-        <div>
-
-        </div>
         <div className='search-area'>
           <div className='mag-glass'>
             <i className="fa-solid fa-magnifying-glass"></i>
@@ -35,12 +32,12 @@ const NavBar = () => {
         <DropDownWrapper menu={
           <div className='user-dropdown'>
             <ModalWrapper form={<LoginForm/>}>
-              <div className='navbar-button'>
+              <div className='dropdown-button'>
                 Log In
               </div>
             </ModalWrapper>
             <ModalWrapper form={<SignUpForm/>} header='Sign Up'>
-              <div className='navbar-button'>
+              <div className='dropdown-button'>
                 Sign Up
               </div>
             </ModalWrapper>
