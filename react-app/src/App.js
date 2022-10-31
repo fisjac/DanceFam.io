@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import LoginForm from './components/auth/LoginForm';
-import SignUpForm from './components/auth/SignUpForm';
 import NavBar from './components/NavBar';
 import Splash from './components/splash/Splash';
 import { authenticate } from './store/session';
 import Browser from './components/Browser';
 import Footer from './components/Footer';
-
+import CommunityPage from './components/CommunityPage';
+import EventPage from './components/EventPage';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -27,20 +26,30 @@ function App() {
 
   return (
     <BrowserRouter>
-      <NavBar />
-      <Route exact path='/'>
-       <Splash />
-       <Footer />
-      </Route>
-      <Route exact path='/home'>
-        <NavBar/>
-        <Browser/>
-        <Footer/>
-      </Route>
-      <Route path='/communities/:community'>
-        <CommunityPage/>
-      </Route>
+      <Switch>
+        <Route exact path='/'>
+          <Splash />
+          <Footer />
+        </Route>
+
+        <Route exact path='/home'>
+          <NavBar/>
+          <Browser/>
+          <Footer/>
+        </Route>
+
+        <Route path='/communities/:community'>
+          <NavBar/>
+          <CommunityPage/>
+        </Route>
+
+        <Route path='/events/:eventId'>
+          <NavBar/>
+          <EventPage/>
+        </Route>
+      </Switch>
     </BrowserRouter>
+
   );
 }
 
