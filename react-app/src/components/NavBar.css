@@ -2,7 +2,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  position: sticky;
+  position: absolute;
   top: 0;
   width: 100%;
   height: 40px;
@@ -12,6 +12,7 @@
 
   color: var(--icon-grey)
 }
+
 
 .navbar-button {
   display: flex;
@@ -32,6 +33,13 @@
   height: 30px;
   padding: 5px;
   border-radius: 5px;
+  cursor:text;
+
+  transition: .5s;
+}
+
+.search-bar:focus {
+  background-color: white;
 }
 
 .navbar-rhs {

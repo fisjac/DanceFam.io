@@ -18,9 +18,14 @@ const NavBar = () => {
         <NavLink className='navbar-button' exact to='/'>
           <i className="fa-solid fa-bars"></i>
         </NavLink>
-        <div className='search-bar'>
-          <i className="fa-solid fa-magnifying-glass"></i>
+        <div>
+
         </div>
+        <i className="fa-solid fa-magnifying-glass"></i>
+        <input
+          type='text'
+          className='search-bar'
+          />
       <div className='navbar-rhs'>
       <i className="fa-solid fa-user"></i>
       <i className="fa-solid fa-caret-down"></i>
