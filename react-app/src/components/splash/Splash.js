@@ -10,8 +10,8 @@ export default function Splash() {
     <div className='splash-page'>
       <div className='splash-top'>Top Bar</div>
       <div className='splash-main'>
-        <img src={dancers} style={{'width': '250px'}}/>
-        <NavLink className='app-button' to='/home'>Go to app</NavLink>
+        <img src={dancers} alt='dancers' style={{'width': '250px'}}/>
+        <NavLink className='app-button' to='/home'>Join the Fam</NavLink>
       </div>
     </div>
   )

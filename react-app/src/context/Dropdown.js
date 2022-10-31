@@ -32,7 +32,7 @@ export default function DropDownWrapper(props) {
           }
         }
         )}
-      {<Dropdown {...props}/>}
+      {<Dropdown {...props} showMenu={showMenu}/>}
     </>
   );
 };
@@ -43,7 +43,7 @@ export function Dropdown (props) {
 
   return (
     <div
-      className={`dropdown_container ${props.showMenu ? '' : 'hidden'}`}
+      className={`dropdown_container ${props.showMenu ? undefined : 'hidden' }`}
       >
       {newMenu}
     </div>

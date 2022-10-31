@@ -10,6 +10,7 @@ import ModalWrapper from '../context/Modal'
 import './NavBar.css'
 import SignUpForm from './auth/SignUpForm';
 import LoginForm from './auth/LoginForm';
+import DropDownWrapper from '../context/Dropdown';
 
 const NavBar = () => {
   const user = useSelector(state=>state.session.user)
@@ -31,19 +32,26 @@ const NavBar = () => {
             />
         </div>
       <div className='navbar-rhs'>
-      <i className="fa-solid fa-user"></i>
-      <i className="fa-solid fa-caret-down"></i>
-        <ModalWrapper form={<LoginForm/>}>
-          <div className='navbar-button'>
-            Log In
+        <DropDownWrapper menu={
+          <div className='user-dropdown'>
+            <ModalWrapper form={<LoginForm/>}>
+              <div className='navbar-button'>
+                Log In
+              </div>
+            </ModalWrapper>
+            <ModalWrapper form={<SignUpForm/>} header='Sign Up'>
+              <div className='navbar-button'>
+                Sign Up
+              </div>
+            </ModalWrapper>
+            {user && <LogoutButton />}
           </div>
-        </ModalWrapper>
-        <ModalWrapper form={<SignUpForm/>} header='Sign Up'>
+        }>
           <div className='navbar-button'>
-            Sign Up
+            <i className="fa-solid fa-user"></i>
+            <i className="fa-solid fa-caret-down"></i>
           </div>
-        </ModalWrapper>
-        {user && <LogoutButton />}
+        </DropDownWrapper>
       </div>
     </div>
   );

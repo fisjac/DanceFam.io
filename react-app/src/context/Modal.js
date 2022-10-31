@@ -57,7 +57,7 @@ export function Modal (props) {
       <div id="modal-background" onClick={()=>props.setShowModal(false)} />
         <div id="modal-container">
           <div id='modal-header'>
-            <img id='modal-logo' src={logo}/>
+            <img id='modal-logo' alt='logo' src={logo}/>
             {props.header || 'New Modal'}
             <div
               id='modal-close-button'
