@@ -2,6 +2,11 @@ import React from 'react'
 
 export default function Splash() {
   return (
-    <div>Splash</div>
+    <>
+      <div className='banner'>Banner</div>
+      <div>About</div>
+
+    </>
+
   )
 }
