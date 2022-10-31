@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState, useContext } from "react";
 import ReactDom from 'react-dom';
 
-import logo from '../DanceFam.svg'
+import logo from '../static/DanceFam.svg'
 import './Modal.css'
 export const ModalContext = React.createContext();
 

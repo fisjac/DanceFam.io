@@ -21,11 +21,15 @@ const NavBar = () => {
         <div>
 
         </div>
-        <i className="fa-solid fa-magnifying-glass"></i>
-        <input
-          type='text'
-          className='search-bar'
-          />
+        <div className='search-area'>
+          <div className='mag-glass'>
+            <i className="fa-solid fa-magnifying-glass"></i>
+          </div>
+          <input
+            type='text'
+            className='search-input'
+            />
+        </div>
       <div className='navbar-rhs'>
       <i className="fa-solid fa-user"></i>
       <i className="fa-solid fa-caret-down"></i>
