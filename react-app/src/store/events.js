@@ -5,28 +5,28 @@ const DELETE = 'events/DELETE';
 
 
 // Actions
-export function load_events (payload) {
+export function loadEvents (payload) {
   return {
     type: LOAD_EVENTS,
     payload
   }
 };
 
-export function load_event (payload) {
+export function loadEvent (payload) {
   return {
     type: LOAD_EVENT,
     payload
   }
 };
 
-export function edit_event (payload) {
+export function editEvent (payload) {
   return {
     type: EDIT,
     payload
   }
 };
 
-export function delete_event (payload) {
+export function removeEvent (payload) {
   return {
     type: DELETE,
     payload
@@ -35,27 +35,27 @@ export function delete_event (payload) {
 
 // Thunks
 
-export const get_events = () => async dispatch => {
+export const getEvents = () => async dispatch => {
   const response = await fetch('/api/events');
   if (response.ok) {
     const events = await response.json();
-    dispatch(load_events(events));
+    dispatch(loadEvents(events));
     return response;
   };
   return response;
 };
 
-export const get_event = (eventId) => async dispatch => {
+export const getEvent = (eventId) => async dispatch => {
   const response = await fetch(`/api/events/${eventId}`);
   if (response.ok) {
     const event = await response.json();
-    dispatch(load_event(event));
+    dispatch(loadEvent(event));
     return response;
   };
   return response;
 };
 
-export const edit_event = (event) => async dispatch => {
+export const updateEvent = (event) => async dispatch => {
   const response = await fetch(`/api/events/${event.id}`,{
     method: 'PUT',
     header: {'Content-Type': 'application/json'},
@@ -63,19 +63,19 @@ export const edit_event = (event) => async dispatch => {
   });
   if (response.ok) {
     const event = await response.json();
-    dispatch(edit_event(event));
-    dispatch(load_events())
+    dispatch(editEvent(event));
+    dispatch(loadEvents())
     return response;
   };
   return response;
 };
 
-export const delete_event = (eventId) => async dispatch => {
+export const deleteEvent = (eventId) => async dispatch => {
   const response = await fetch (`api/events/${eventId}`,{
     method: 'DELETE'
   });
   if (response.ok) {
-    dispatch(delete_event(eventId))
+    dispatch(removeEvent(eventId))
     return response;
   };
   return response;

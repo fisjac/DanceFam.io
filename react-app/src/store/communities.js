@@ -5,28 +5,28 @@ const DELETE = 'communities/DELETE';
 
 
 // Actions
-export function load_communities (payload) {
+export function loadCommunities (payload) {
   return {
     type: LOAD_COMMUNITIES,
     payload
   }
 };
 
-export function load_community (payload) {
+export function loadCommunity (payload) {
   return {
     type: LOAD_COMMUNITY,
     payload
   }
 };
 
-export function edit_community (payload) {
+export function editCommunity (payload) {
   return {
     type: EDIT,
     payload
   }
 };
 
-export function delete_community (payload) {
+export function removeCommunity (payload) {
   return {
     type: DELETE,
     payload
@@ -35,27 +35,27 @@ export function delete_community (payload) {
 
 // Thunks
 
-export const get_communities = () => async dispatch => {
+export const getCommunities = () => async dispatch => {
   const response = await fetch('/api/communities');
   if (response.ok) {
     const communities = await response.json();
-    dispatch(load_communities(communities));
+    dispatch(loadCommunities(communities));
     return response;
   };
   return response;
 };
 
-export const get_community = (communityId) => async dispatch => {
+export const getCommunity = (communityId) => async dispatch => {
   const response = await fetch(`/api/communities/${communityId}`);
   if (response.ok) {
     const community = await response.json();
-    dispatch(load_community(community));
+    dispatch(loadCommunity(community));
     return response;
   };
   return response;
 };
 
-export const edit_community = (community) => async dispatch => {
+export const updateCommunity = (community) => async dispatch => {
   const response = await fetch(`/api/communities/${community.id}`,{
     method: 'PUT',
     header: {'Content-Type': 'application/json'},
@@ -63,19 +63,19 @@ export const edit_community = (community) => async dispatch => {
   });
   if (response.ok) {
     const community = await response.json();
-    dispatch(edit_community(community));
-    dispatch(load_communities())
+    dispatch(editCommunity(community));
+    dispatch(loadCommunities())
     return response;
   };
   return response;
 };
 
-export const delete_community = (communityId) => async dispatch => {
+export const deleteCommunity = (communityId) => async dispatch => {
   const response = await fetch (`api/communities/${communityId}`,{
     method: 'DELETE'
   });
   if (response.ok) {
-    dispatch(delete_community(communityId))
+    dispatch(deleteCommunity(communityId))
     return response;
   };
   return response;
