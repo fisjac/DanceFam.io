@@ -99,7 +99,7 @@ export const signUp = (firstName, lastName, username, email, password) => async 
   }
 }
 
-export default function reducer(state = initialState, action) {
+export default function sessionReducer(state = initialState, action) {
   switch (action.type) {
     case SET_USER:
       return { user: action.payload }
