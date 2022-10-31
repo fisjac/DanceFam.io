@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import LoginForm from './components/auth/LoginForm';
-import SignUpForm from './components/auth/SignUpForm';
 import NavBar from './components/NavBar';
-import ProtectedRoute from './components/auth/ProtectedRoute';
-import UsersList from './components/UsersList';
-import User from './components/User';
+import Splash from './components/splash/Splash';
 import { authenticate } from './store/session';
+import Browser from './components/Browser';
+import Footer from './components/Footer';
+import CommunityPage from './components/CommunityPage';
+import EventPage from './components/EventPage';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -26,25 +26,30 @@ function App() {
 
   return (
     <BrowserRouter>
-      <NavBar />
       <Switch>
-        <Route path='/login' exact={true}>
-          <LoginForm />
+        <Route exact path='/'>
+          <Splash />
+          <Footer />
         </Route>
-        <Route path='/sign-up' exact={true}>
-          <SignUpForm />
+
+        <Route exact path='/home'>
+          <NavBar/>
+          <Browser/>
+          <Footer/>
         </Route>
-        <ProtectedRoute path='/users' exact={true} >
-          <UsersList/>
-        </ProtectedRoute>
-        <ProtectedRoute path='/users/:userId' exact={true} >
-          <User />
-        </ProtectedRoute>
-        <ProtectedRoute path='/' exact={true} >
-          <h1>My Home Page</h1>
-        </ProtectedRoute>
+
+        <Route path='/communities/:community'>
+          <NavBar/>
+          <CommunityPage/>
+        </Route>
+
+        <Route path='/events/:eventId'>
+          <NavBar/>
+          <EventPage/>
+        </Route>
       </Switch>
     </BrowserRouter>
+
   );
 }
 

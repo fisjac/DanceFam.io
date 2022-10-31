@@ -1,13 +1,13 @@
-from app.models import db, User, Event, Status, Registration
+from app.models import db, User, Event, Registration #, Status
 
 def seed_registrations():
     midnight_madness = db.session.query(Event).get(1)
-    going = db.session.query(Status).get(1)
+    # going = db.session.query(Status).get(1)
     demo = db.session.query(User).get(1)
 
     registration = Registration()
     registration.user = demo
-    registration.status=going
+    # registration.status=going
     registration.event = midnight_madness
     db.session.add_all([registration])
 
@@ -20,5 +20,5 @@ def seed_registrations():
 # resets the auto incrementing primary key, CASCADE deletes any
 # dependent entities
 def undo_registrations():
-    db.session.execute('TRUNCATE types RESTART IDENTITY CASCADE;')
+    db.session.execute('TRUNCATE registrations RESTART IDENTITY CASCADE;')
     db.session.commit()

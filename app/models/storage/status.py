@@ -1,4 +1,4 @@
-from .db import db
+from ..db import db
 
 class Status(db.Model):
   __tablename__ = 'statuses'

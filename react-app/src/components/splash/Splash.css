@@ -1,0 +1,38 @@
+.splash-page {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.splash-top {
+  display: flex;
+  justify-content: space-between;
+  height: 50px;
+  width: 100%;
+  background-color: var(--theme-grey-blue);
+  border-bottom: 1px solid var(--shadow);
+}
+
+
+.splash-main {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  flex-grow: 1;
+  background-color: var(--theme-grey-blue);
+}
+
+.app-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--theme-background-grey);
+  text-decoration: none;
+  font-weight: 600;
+  width: 200px;
+  height: 40px;
+  background-color: red;
+  border-radius: 12px;
+
+}

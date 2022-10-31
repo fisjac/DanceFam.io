@@ -1,1 +1,26 @@
 /* TODO Add site wide styles */
+
+* {
+box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+#root {
+  height:100vh;
+  width: 100vw;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --theme-grey-blue: hsl(246, 47%, 60%);
+  --theme-dark-grey-blue: hsl(246, 40%, 40%);
+  --shadow: rgb(0,0,0,.1);
+  --theme-background-grey: #EFEFEF;
+  --icon-grey: #d1d1d1;
+  --theme-light-grey-blue: hsl(246 55% 68%);
+  --theme-dark-grey: #b5b5b5;
+}

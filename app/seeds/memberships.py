@@ -1,13 +1,13 @@
-from app.models import db, User, Community, Role, Membership
+from app.models import db, User, Community, Membership #, Role
 
 def seed_memberships():
     dallas = db.session.query(Community).get(1)
-    role = db.session.query(Role).get(1)
+    # role = db.session.query(Role).get(1)
     demo = db.session.query(User).get(1)
 
-    membership = Membership()
+    membership = Membership(owner_status=True)
     membership.user=demo
-    membership.role=role
+    # membership.role=role
     membership.community = dallas
     db.session.add_all([membership])
 
@@ -20,5 +20,5 @@ def seed_memberships():
 # resets the auto incrementing primary key, CASCADE deletes any
 # dependent entities
 def undo_memberships():
-    db.session.execute('TRUNCATE types RESTART IDENTITY CASCADE;')
+    db.session.execute('TRUNCATE memberships RESTART IDENTITY CASCADE;')
     db.session.commit()
