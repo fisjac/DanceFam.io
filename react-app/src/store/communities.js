@@ -64,6 +64,7 @@ export const edit_community = (community) => async dispatch => {
   if (response.ok) {
     const community = await response.json();
     dispatch(edit_community(community));
+    dispatch(load_communities())
     return response;
   };
   return response;
@@ -86,13 +87,13 @@ initalState = {communities: null, singleCommunity: null};
 export default function communitiesReducer(state = initialState, action) {
   switch (action.type) {
     case LOAD_COMMUNITIES:
-      return;
+      return {...state, communities: {...action.payload}};
     case LOAD_COMMUNITY:
-      return;
+      return {...state, singleCommunity: {...action.payload}};
     case EDIT:
-      return;
+      return {...state, singleCommunity: {...action.payload}};
     case DELETE:
-      return;
+      return {communities: {...state.communities, [action.payload]: null}, singleCommunity: null};
     default:
       return state;
   }
