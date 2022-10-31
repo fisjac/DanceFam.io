@@ -82,7 +82,7 @@ export const deleteEvent = (eventId) => async dispatch => {
 };
 
 
-initalState = {events: null, singleEvent: null};
+const initialState = {events: null, singleEvent: null};
 
 export default function eventsReducer(state = initialState, action) {
   switch (action.type) {

@@ -82,7 +82,7 @@ export const deleteCommunity = (communityId) => async dispatch => {
 };
 
 
-initalState = {communities: null, singleCommunity: null};
+const initialState = {communities: null, singleCommunity: null};
 
 export default function communitiesReducer(state = initialState, action) {
   switch (action.type) {
