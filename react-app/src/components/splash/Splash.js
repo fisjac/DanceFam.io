@@ -18,7 +18,7 @@ export default function Splash() {
       </div>
       <div className='splash-main'>
 
-        <img src={dancers} alt='dancers' style={{'width': '250px'}}/>
+        <img className='dancers-img' src={dancers} alt='dancers'/>
         <NavLink className='app-button' to='/home'>Join the Fam</NavLink>
       </div>
     </div>

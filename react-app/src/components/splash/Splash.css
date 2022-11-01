@@ -49,6 +49,17 @@
 
 }
 
+.dancers-img {
+  width: 250px;
+  transition: .5s
+}
+
+.app-button:hover ~ .dancers-img {
+  -webkit-transform: scaleX(-1);
+  transform: scaleX(-1);
+  transition: .5s
+}
+
 .app-button:hover {
   box-shadow: 2px 2px 2px 2px var(--shadow);
 }
