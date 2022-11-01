@@ -1,0 +1,26 @@
+.main-page {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  padding: 0 5px;
+  flex-grow: 1;
+}
+
+.left-bar {
+  display: flex;
+  flex-direction: column;
+  width: 15%;
+}
+
+.event-scroll {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+
+}
+
+.right-bar {
+  display: flex;
+  flex-direction: column;
+  width: 25%;
+}

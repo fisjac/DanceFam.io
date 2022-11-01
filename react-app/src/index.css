@@ -2,6 +2,7 @@
 
 * {
 box-sizing: border-box;
+font-family: Quicksand;
 }
 
 body {
@@ -13,14 +14,17 @@ body {
   width: 100vw;
   margin: 0;
   padding: 0;
+  display: flex;
+  flex-direction: column;
 }
 
 :root {
-  --theme-grey-blue: hsl(246, 47%, 60%);
-  --theme-dark-grey-blue: hsl(246, 40%, 40%);
+  --theme-default: #5A4AE3;
+  --theme-dark: #444066;
+  --theme-medium: #473BB3;
+  --theme-light: #9C93EA;
+  --theme-grey: #b5b5b5;
+  --icon-grey: #d1d1d1;
   --shadow: rgb(0,0,0,.1);
   --theme-background-grey: #EFEFEF;
-  --icon-grey: #d1d1d1;
-  --theme-light-grey-blue: hsl(246 55% 68%);
-  --theme-dark-grey: #b5b5b5;
 }

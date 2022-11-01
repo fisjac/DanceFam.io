@@ -59,8 +59,9 @@ class Event(db.Model):
       "state": self.state,
       "address": self.address,
       "country": self.country,
-      "community_id": self.community_id,
-      "organiser_id": self.organiser_id,
+      "communityId": self.community_id,
+      "organiserId": self.organiser_id,
+      "attendeeCount": len(self.users)
     }
 
 # class Style(db.Model):

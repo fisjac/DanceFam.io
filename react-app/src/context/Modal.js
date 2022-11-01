@@ -1,8 +1,11 @@
 import React, { useEffect, useRef, useState, useContext } from "react";
 import ReactDom from 'react-dom';
 
-import logo from '../static/DanceFam.svg'
+import logo from '../static/DanceFamBrushNoText.svg'
+
+
 import './Modal.css'
+
 export const ModalContext = React.createContext();
 
 export function ModalProvider({children}) {
@@ -18,7 +21,7 @@ export function ModalProvider({children}) {
       <ModalContext.Provider value={value}>
         {children}
       </ModalContext.Provider>
-      <div ref={modalRef}></div>
+      <div id='modal-ref' ref={modalRef}></div>
     </>
   )
 }
@@ -57,7 +60,7 @@ export function Modal (props) {
       <div id="modal-background" onClick={()=>props.setShowModal(false)} />
         <div id="modal-container">
           <div id='modal-header'>
-            <img id='modal-logo' src={logo}/>
+            <img id='modal-logo' alt='logo' src={logo}/>
             {props.header || 'New Modal'}
             <div
               id='modal-close-button'
@@ -65,7 +68,7 @@ export function Modal (props) {
                 props.setShowModal(false)
               }}
               >
-              x
+              <i className="fa-solid fa-x"></i>
             </div>
 
           </div>

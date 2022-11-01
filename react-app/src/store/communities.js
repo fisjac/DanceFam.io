@@ -82,18 +82,22 @@ export const deleteCommunity = (communityId) => async dispatch => {
 };
 
 
-const initialState = {communities: null, singleCommunity: null};
+const initialState = {allCommunities: null, singleCommunity: null};
 
 export default function communitiesReducer(state = initialState, action) {
   switch (action.type) {
     case LOAD_COMMUNITIES:
-      return {...state, communities: {...action.payload}};
+      const allCommunities = action.payload.reduce((obj, community)=>{
+        obj[community.id]= community
+        return obj
+      },{})
+      return {...state, allCommunities};
     case LOAD_COMMUNITY:
       return {...state, singleCommunity: {...action.payload}};
     case EDIT:
       return {...state, singleCommunity: {...action.payload}};
     case DELETE:
-      return {communities: {...state.communities, [action.payload]: null}, singleCommunity: null};
+      return {allCommunities: {...state.allCommunities, [action.payload]: null}, singleCommunity: null};
     default:
       return state;
   }

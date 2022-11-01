@@ -39,7 +39,7 @@ const LoginForm = () => {
           <div className='error' key={ind}>{error}</div>
         ))}
       </div>}
-      <div>
+      <div className='input-field'>
         <label htmlFor='credential'>Credential</label>
         <input
           name='credential'
@@ -49,7 +49,7 @@ const LoginForm = () => {
           onChange={updateCredential}
         />
       </div>
-      <div>
+      <div className='input-field'>
         <label htmlFor='password'>Password</label>
         <input
           name='password'

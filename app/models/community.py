@@ -20,5 +20,5 @@ class Community(db.Model):
       'name': self.name,
       'memberCount': len(list(self.users)),
       'events': [event.id for event in self.events],
-      'owner_id': Membership.get_owner_id(self.id),
+      'ownerId': Membership.get_owner_id(self.id),
     }

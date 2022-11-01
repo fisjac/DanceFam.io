@@ -20,7 +20,7 @@ def validation_errors_to_error_messages(validation_errors):
 @community_routes.route('/')
 def communities():
     communities = Community.query.all()
-    return {'communities': [community.to_dict() for community in communities]}
+    return jsonify([community.to_dict() for community in communities])
 
 
 # POST
