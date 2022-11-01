@@ -9,9 +9,9 @@
 .splash-top {
   display: flex;
   justify-content: space-between;
-  height: 50px;
+  /* height: 50px; */
   width: 100%;
-  background-color: var(--theme-dark);
+  background-color: var(--theme-medium);
   border-bottom: 1px solid var(--shadow);
 }
 
@@ -22,7 +22,16 @@
   flex-direction: column;
   justify-content: center;
   flex-grow: 1;
-  background-color: var(--theme-dark);
+  background-color: var(--theme-medium);
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  height:50px;
+
+  background-color: var(--theme-background-grey);
+  border-radius: 5px;
 }
 
 .app-button {

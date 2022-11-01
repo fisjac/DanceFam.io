@@ -5,7 +5,7 @@ import { NavLink } from 'react-router-dom';
 import LogoutButton from './auth/LogoutButton';
 import ModalWrapper from '../context/Modal'
 
-import logo from '../DanceFam_Brush_notext.svg'
+// import logo from '../static/DanceFamBrushNoText.svg'
 
 import './NavBar.css'
 import SignUpForm from './auth/SignUpForm';

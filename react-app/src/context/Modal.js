@@ -1,7 +1,8 @@
 import React, { useEffect, useRef, useState, useContext } from "react";
 import ReactDom from 'react-dom';
 
-import logo from '../static/DanceFam_Brush_notext.svg'
+import logo from '../static/DanceFamBrushNoText.svg'
+
 
 import './Modal.css'
 
@@ -67,7 +68,7 @@ export function Modal (props) {
                 props.setShowModal(false)
               }}
               >
-              x
+              <i className="fa-solid fa-x"></i>
             </div>
 
           </div>

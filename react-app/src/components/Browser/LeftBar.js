@@ -2,6 +2,9 @@ import React from 'react'
 
 export default function LeftBar() {
   return (
-    <div>LeftBar</div>
+    <>
+      <div>Your Next Event</div>
+      <div>Your Communities</div>
+    </>
   )
 }

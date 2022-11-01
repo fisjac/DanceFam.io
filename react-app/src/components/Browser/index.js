@@ -1,9 +1,15 @@
 import React from 'react'
 
+import LeftBar from './LeftBar'
+import EventScroll from './EventScroll'
+import RightBar from './RightBar'
+
 export default function Browser() {
   return (
-    <div>
-      Browser Div
+    <div className='main-page'>
+      <LeftBar/>
+      <EventScroll/>
+      <RightBar/>
     </div>
   )
 }
