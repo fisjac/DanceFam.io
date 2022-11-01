@@ -9,7 +9,7 @@ function EventLine({event, allCommunities}) {
 
   return (
     <div className='eventline-container' onClick={()=>{
-      history.push(`/${allCommunities[event.communityId].name}/events/${event.id}`)
+      history.push(`/${allCommunities[event.communityId].name.replace(' ','-')}/events/${event.id}`)
     }}>
       <div className='eventline-header'>
         {start.toLocaleDateString(undefined, {weekday: 'long',month: 'long', day: 'numeric'})}

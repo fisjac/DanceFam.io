@@ -38,7 +38,7 @@ function App() {
           <Footer/>
         </Route>
 
-        <Route path='/:community'>
+        <Route exact path='/:community'>
           <NavBar/>
           <CommunityPage/>
         </Route>
