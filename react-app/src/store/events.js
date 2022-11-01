@@ -36,6 +36,7 @@ export function removeEvent (payload) {
 // Thunks
 
 export const getEvents = () => async dispatch => {
+  console.log('running thunk')
   const response = await fetch('/api/events');
   if (response.ok) {
     const events = await response.json();
@@ -82,18 +83,22 @@ export const deleteEvent = (eventId) => async dispatch => {
 };
 
 
-const initialState = {events: null, singleEvent: null};
+const initialState = {allEvents: null, singleEvent: null};
 
 export default function eventsReducer(state = initialState, action) {
   switch (action.type) {
     case LOAD_EVENTS:
-      return {...state, events: {...action.payload}};
+      const allEvents = action.payload.reduce((obj, event)=>{
+        obj[event.id]= event
+        return obj
+      },{})
+      return {...state, allEvents};
     case LOAD_EVENT:
       return {...state, singleEvent: {...action.payload}};
     case EDIT:
       return {...state, singleEvent: {...action.payload}};
     case DELETE:
-      return {events: {...state.events, [action.payload]: null}, singleEvent: null};
+      return {allEvents: {...state.allEvents, [action.payload]: null}, singleEvent: null};
     default:
       return state;
   }

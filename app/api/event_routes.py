@@ -18,7 +18,7 @@ def validation_errors_to_error_messages(validation_errors):
 @event_routes.route('/')
 def events():
     events = Event.query.all()
-    return {'events': [event.to_dict() for event in events]}
+    return jsonify([event.to_dict() for event in events])
 
 # GET by id
 @event_routes.route('/<int:id>')

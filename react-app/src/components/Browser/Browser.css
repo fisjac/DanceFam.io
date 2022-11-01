@@ -12,7 +12,7 @@
   width: 15%;
 }
 
-.center-scroll {
+.event-scroll {
   display: flex;
   flex-direction: column;
   flex-grow: 1;
