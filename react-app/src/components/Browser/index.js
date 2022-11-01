@@ -17,7 +17,6 @@ export default function Browser() {
   const allCommunities = useSelector(state=>state.communities.allCommunities);
 
   useEffect(()=>{
-    console.log('in useEffect')
     dispatch(eventActions.getEvents())
     dispatch(communityActions.getCommunities())
   },[dispatch])

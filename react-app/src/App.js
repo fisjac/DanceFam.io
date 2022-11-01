@@ -38,12 +38,12 @@ function App() {
           <Footer/>
         </Route>
 
-        <Route path='/communities/:community'>
+        <Route path='/:community'>
           <NavBar/>
           <CommunityPage/>
         </Route>
 
-        <Route path='/events/:eventId'>
+        <Route path='/:community/events/:eventId'>
           <NavBar/>
           <EventPage/>
         </Route>
