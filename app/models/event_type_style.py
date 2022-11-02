@@ -69,6 +69,22 @@ class Event(db.Model):
       "organiserId": self.organiser_id,
       "attendeeCount": len(self.registrations)
     }
+  def to_dict_detailed(self):
+    return {
+      "id": self.id,
+      "name": self.name,
+      "description": self.description,
+      "start": self.start,
+      "end": self.end,
+      "city": self.city,
+      "state": self.state,
+      "address": self.address,
+      "country": self.country,
+      "community": self.community.name,
+      "organiserId": self.organiser_id,
+      "attendeeCount": len(self.registrations),
+      "attendees": [registration.user.safe_info() for registration in self.registrations]
+    }
 
 # class Style(db.Model):
 #   __tablename__ = "styles"

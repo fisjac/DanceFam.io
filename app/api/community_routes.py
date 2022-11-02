@@ -50,7 +50,7 @@ def community(id):
         return {
             "message": "Community couldn't be found",
             "statusCode": 404}, 404
-    return community.to_dict()
+    return community.to_dict_detailed()
 
 
 # DELETE by Id

@@ -1,6 +1,5 @@
 from flask import jsonify
 from .db import db
-from .community import Community
 from .event_type_style import Event
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
@@ -36,8 +35,14 @@ class User(db.Model, UserMixin):
             'id': self.id,
             'username': self.username,
             'email': self.email,
-            'first_name': self.first_name,
-            'last_name': self.last_name,
-            'communities': Community.get_user_communities(self.id),
-            'events': Event.get_user_events(self.id)
+            'firstName': self.first_name,
+            'lastName': self.last_name,
+            'communities': [membership.community.name for membership in self.memberships],
+            'events': [registration.event.id for registration in self.registrations]
+        }
+    def safe_info(self):
+        return {
+            'firstName': self.first_name,
+            'lastName': self.last_name,
+
         }

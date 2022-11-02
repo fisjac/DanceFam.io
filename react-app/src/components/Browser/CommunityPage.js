@@ -15,12 +15,18 @@ export default function CommunityPage() {
   },[dispatch])
 
   const singleCommunity = useSelector(state=>state.communities.singleCommunity);
-  // if (!allCommunities || !singleCommunity) return null;
 
 
-  return (
-    <>
-      <div>{params.community}</div>
-    </>
+  return singleCommunity && (
+    <div className='community-page-main'>
+      <div className='community-page-header'>
+        <div className='community-page-image'></div>
+        <div className='community-page-title'>{singleCommunity.name}</div>
+      </div>
+      <div className='community-page-body'>
+        <div className='community-page-membercount'>{singleCommunity.memberCount} Members</div>
+        <div>Owner: {}</div>
+      </div>
+    </div>
   )
 }

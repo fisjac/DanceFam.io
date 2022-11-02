@@ -23,6 +23,7 @@ class Membership(db.Model):
       # 'role': Role.query.get(self.role_id).name
     }
 
+
   def get_owner_id(community_id):
     membership = db.session.query(Membership).\
       filter_by(community_id= community_id, owner_status=True).first()
