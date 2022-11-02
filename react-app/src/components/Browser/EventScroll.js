@@ -11,7 +11,7 @@ function EventLine({event, allCommunities}) {
     <div
       className='eventline-container'
       onClick={()=>{
-        history.push(`/${allCommunities[event.communityId].name.replace(' ','-')}/events/${event.id}`)
+        history.push(`/${event.community.replace(' ','-')}/events/${event.id}`)
       }}
       >
       <div className='eventline-header'>
@@ -26,12 +26,14 @@ function EventLine({event, allCommunities}) {
             className='eventline-community'
             onClick={(e)=>{
               e.stopPropagation();
-              history.push(`/${allCommunities[event.communityId].name
+              history.push(`/${event.community
                 .replace(' ','-')}`)
               }
             }
-            >{allCommunities[event.communityId].name}</div>
-          <div className='eventline-attendees'>{event.attendeeCount} attendees</div>
+            >{event.community}</div>
+          <div className='eventline-attendees'>
+            {event.attendeeCount} attendees
+          </div>
         </div>
 
       </div>
@@ -45,15 +47,13 @@ export default function EventScroll() {
 
   return allEvents && allCommunities && (
 
-    <div
-      className='event-scroll'
-      >
+    <>
       {
         Object.values(allEvents)
           .map(event => (
             <EventLine key={event.id} event={event} allCommunities={allCommunities}/>
           ))
         }
-    </div>
+    </>
   )
 }

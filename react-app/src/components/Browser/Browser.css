@@ -13,6 +13,28 @@
   width: 25%;
 }
 
+.left-bar-logo, .left-bar-logo-title{
+  height: 100%;
+}
+
+.left-bar-logo-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height:65px;
+  padding: 10px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  /* background-color: var(--theme-background-grey); */
+  border-radius: 5px;
+}
+
+.left-bar-logo-container:hover {
+  box-shadow: 2px 2px 2px 2px var(--shadow);
+
+}
+
+
 .planner {
   width: 100%;
   margin-right: 10px;
@@ -54,8 +76,13 @@
   font-size: 18px;
 }
 
+.event-box-date {
+  margin-top: 5px;
+  border-top: 1px solid var(--shadow);
+}
+
 /* Main portion */
-.event-scroll {
+.center-container {
   display: flex;
   margin: 0 20px;
   flex-direction: column;
