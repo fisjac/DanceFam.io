@@ -25,10 +25,15 @@
   background-color: var(--theme-medium);
 }
 
+.logo, .logo-title{
+  height: 100%;
+}
+
 .logo-container {
   display: flex;
   align-items: center;
-  height:50px;
+  height:100px;
+  padding: 10px;
 
   background-color: var(--theme-background-grey);
   border-radius: 5px;
@@ -54,7 +59,7 @@
   transition: .5s
 }
 
-.app-button:hover ~ .dancers-img {
+.app-button:hover + .dancers-img {
   -webkit-transform: scaleX(-1);
   transform: scaleX(-1);
   transition: .5s

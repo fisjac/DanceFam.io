@@ -8,19 +8,30 @@ function EventLine({event, allCommunities}) {
   const history = useHistory()
 
   return (
-    <div className='eventline-container' onClick={()=>{
-      history.push(`/${allCommunities[event.communityId].name.replace(' ','-')}/events/${event.id}`)
-    }}>
+    <div
+      className='eventline-container'
+      onClick={()=>{
+        history.push(`/${allCommunities[event.communityId].name.replace(' ','-')}/events/${event.id}`)
+      }}
+      >
       <div className='eventline-header'>
         {start.toLocaleDateString(undefined, {weekday: 'long',month: 'long', day: 'numeric'})}
       </div>
       <div className='eventline-body'>
         <div className='eventline-img'></div>
         <div className='eventline-details'>
-          <div>{start.toLocaleDateString(undefined, {weekday: 'short', month: 'short', day: 'numeric',})} ⋅ {start.toLocaleTimeString(undefined, {timeStyle: 'short'})}</div>
-          <div>{event.name}</div>
-          <div>{allCommunities[event.communityId].name}</div>
-          <div>{event.attendeeCount} attendees</div>
+          <div className='eventline-date'>{start.toLocaleDateString(undefined, {weekday: 'short', month: 'short', day: 'numeric',})} ⋅ {start.toLocaleTimeString(undefined, {timeStyle: 'short'})}</div>
+          <div className='eventline-name'>{event.name}</div>
+          <div
+            className='eventline-community'
+            onClick={(e)=>{
+              e.stopPropagation();
+              history.push(`/${allCommunities[event.communityId].name
+                .replace(' ','-')}`)
+              }
+            }
+            >{allCommunities[event.communityId].name}</div>
+          <div className='eventline-attendees'>{event.attendeeCount} attendees</div>
         </div>
 
       </div>

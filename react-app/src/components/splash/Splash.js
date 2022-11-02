@@ -11,15 +11,14 @@ export default function Splash() {
   return (
     <div className='splash-page'>
       <div className='splash-top'>
-      <div className='logo-container'>
-          <img src={logo} alt='logo' style={{'width': '50px'}}/>
-          <img src={title} alt='title' style={{'width': '100px'}}/>
-        </div>
       </div>
       <div className='splash-main'>
-
-        <img className='dancers-img' src={dancers} alt='dancers'/>
         <NavLink className='app-button' to='/home'>Join the Fam</NavLink>
+        <img className='dancers-img' src={dancers} alt='dancers'/>
+      <div className='logo-container'>
+          <img className='logo' src={logo} alt='logo'/>
+          <img className='logo-title' src={title} alt='title'/>
+        </div>
       </div>
     </div>
   )

@@ -1,5 +1,5 @@
 .navbar {
-  padding: 0 5px;
+  padding: 0 10px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -10,7 +10,7 @@
 
   background-color: var(--theme-default);
   border-bottom: 1px solid var(--shadow);
-
+  margin-bottom: 15px;
 }
 
 .navbar * {
