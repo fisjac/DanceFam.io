@@ -33,7 +33,7 @@ function App() {
           <Footer />
         </Route>
         <ProtectedRoute>
-          <Route exact path='/'>
+          <Route path='/'>
             <NavBar/>
             <Browser/>
             <Footer/>

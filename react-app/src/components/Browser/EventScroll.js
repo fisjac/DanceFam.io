@@ -47,15 +47,13 @@ export default function EventScroll() {
 
   return allEvents && allCommunities && (
 
-    <div
-      className='event-scroll'
-      >
+    <>
       {
         Object.values(allEvents)
           .map(event => (
             <EventLine key={event.id} event={event} allCommunities={allCommunities}/>
           ))
         }
-    </div>
+    </>
   )
 }

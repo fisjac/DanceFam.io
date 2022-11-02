@@ -22,7 +22,6 @@ export default function CommunityPage() {
 
   return (
     <>
-      <LeftBar/>
       <div>{params.community}</div>
     </>
   )
