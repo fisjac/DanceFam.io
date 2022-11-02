@@ -12,7 +12,7 @@ export default function LeftBar() {
 
   return (
     <div className='left-bar'>
-      <div className='left-bar-logo-container' onClick={history.push('/')}>
+      <div className='left-bar-logo-container' onClick={()=>history.push('/')}>
         <img className='left-bar-logo' src={logo} alt='logo'/>
         <img className='left-bar-logo-title' src={title} alt='title'/>
       </div>
