@@ -10,8 +10,8 @@ class Membership(db.Model):
   owner_status = db.Column(db.Boolean)
   # role_id = db.Column(db.Integer, db.ForeignKey("roles.id"))
 
-  user = db.relationship('User', back_populates='communities')
-  community = db.relationship('Community', back_populates='users')
+  user = db.relationship('User', back_populates='memberships')
+  community = db.relationship('Community', back_populates='memberships')
 
   def to_dict(self):
     return {

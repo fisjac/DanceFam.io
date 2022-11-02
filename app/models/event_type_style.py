@@ -1,4 +1,5 @@
 from .db import db
+from .registration import Registration
 
 # event_styles = db.Table(
 #   "event_styles",
@@ -42,11 +43,16 @@ class Event(db.Model):
   # Relationships
   community = db.relationship("Community", back_populates="events")
 
-  users = db.relationship("Registration", back_populates="event")
+  registrations = db.relationship("Registration", back_populates="event")
+
 
   # styles = db.relationship("Style", secondary=event_styles, back_populates="events")
 
   # types = db.relationship("Type", secondary=event_types, back_populates="events")
+
+  def get_user_events(user_id):
+    events = db.session.query(Event).join(Registration).filter(Registration.user_id == user_id)
+    return [event.name for event in events]
 
   def to_dict(self):
     return {
@@ -61,7 +67,7 @@ class Event(db.Model):
       "country": self.country,
       "community": self.community.name,
       "organiserId": self.organiser_id,
-      "attendeeCount": len(self.users)
+      "attendeeCount": len(self.registrations)
     }
 
 # class Style(db.Model):

@@ -1,4 +1,7 @@
+from flask import jsonify
 from .db import db
+from .community import Community
+from .event_type_style import Event
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 
@@ -14,8 +17,8 @@ class User(db.Model, UserMixin):
     last_name = db.Column(db.String(255))
 
     # Relationships
-    communities = db.relationship("Membership", back_populates="user")
-    events = db.relationship("Registration", back_populates="user")
+    memberships = db.relationship("Membership", back_populates="user")
+    registrations = db.relationship("Registration", back_populates="user")
 
     @property
     def password(self):
@@ -34,5 +37,7 @@ class User(db.Model, UserMixin):
             'username': self.username,
             'email': self.email,
             'first_name': self.first_name,
-            'last_name': self.last_name
+            'last_name': self.last_name,
+            'communities': Community.get_user_communities(self.id),
+            'events': Event.get_user_events(self.id)
         }
