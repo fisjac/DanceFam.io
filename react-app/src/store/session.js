@@ -45,7 +45,7 @@ export const login = (credential, password) => async (dispatch) => {
   if (response.ok) {
     const data = await response.json();
     dispatch(setUser(data))
-    return null;
+    return response;
   } else if (response.status < 500) {
     const data = await response.json();
     if (data.errors) {
