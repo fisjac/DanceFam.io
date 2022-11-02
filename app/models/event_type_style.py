@@ -59,7 +59,7 @@ class Event(db.Model):
       "state": self.state,
       "address": self.address,
       "country": self.country,
-      "communityId": self.community_id,
+      "community": self.community.name,
       "organiserId": self.organiser_id,
       "attendeeCount": len(self.users)
     }

@@ -54,6 +54,11 @@
   font-size: 18px;
 }
 
+.event-box-date {
+  margin-top: 5px;
+  border-top: 1px solid var(--shadow);
+}
+
 /* Main portion */
 .event-scroll {
   display: flex;

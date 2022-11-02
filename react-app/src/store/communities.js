@@ -88,7 +88,7 @@ export default function communitiesReducer(state = initialState, action) {
   switch (action.type) {
     case LOAD_COMMUNITIES:
       const allCommunities = action.payload.reduce((obj, community)=>{
-        obj[community.id]= community
+        obj[community.name]= community
         return obj
       },{})
       return {...state, allCommunities};
