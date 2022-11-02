@@ -39,19 +39,19 @@
   border-radius: 5px;
 }
 
-.app-button {
+.join-button {
   display: flex;
   justify-content: center;
   align-items: center;
   color: var(--theme-background-grey);
   text-decoration: none;
+  font-size: 18px;
   font-weight: 600;
   width: 250px;
   height: 40px;
   background-color: red;
   border-radius: 12px;
   border: none;
-
 }
 
 .dancers-img {
@@ -59,12 +59,12 @@
   transition: .5s
 }
 
-.app-button:hover + .dancers-img {
+.join-button:hover + .dancers-img {
   -webkit-transform: scaleX(-1);
   transform: scaleX(-1);
   transition: .5s
 }
 
-.app-button:hover {
+.join-button:hover {
   box-shadow: 2px 2px 2px 2px var(--shadow);
 }

@@ -1,11 +1,34 @@
-import React from 'react'
-import { NavLink } from 'react-router-dom'
+import React from 'react';
+
+import ModalWrapper from '../../context/Modal';
+import SignUpForm from '../auth/SignUpForm';
+import LoginForm from '../auth/LoginForm';
 
 import logo from '../../static/DanceFamBrushNoText.svg'
 import title from '../../static/DanceFamTitle.svg'
 import dancers from '../../static/dancing_couple1.svg'
 
+
+
 import './Splash.css'
+
+export function AuthForm() {
+  return (
+    <div className='auth-form'>
+      <ModalWrapper form={<LoginForm/>}>
+        <div className='dropdown-button'>
+          Log In
+        </div>
+      </ModalWrapper>
+      <ModalWrapper form={<SignUpForm/>} header='Sign Up'>
+        <div className='dropdown-button'>
+          Sign Up
+        </div>
+      </ModalWrapper>
+    </div>
+  )
+}
+
 
 export default function Splash() {
   return (
@@ -13,7 +36,9 @@ export default function Splash() {
       <div className='splash-top'>
       </div>
       <div className='splash-main'>
-        <NavLink className='app-button' to='/home'>Join the Fam</NavLink>
+        <ModalWrapper form={<AuthForm/>}>
+          <button className='join-button'>Join the Fam</button>
+        </ModalWrapper>
         <img className='dancers-img' src={dancers} alt='dancers'/>
       <div className='logo-container'>
           <img className='logo' src={logo} alt='logo'/>

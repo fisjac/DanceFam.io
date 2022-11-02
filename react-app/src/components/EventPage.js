@@ -1,7 +1,11 @@
 import React from 'react'
+import LeftBar from './Browser/LeftBar'
 
 export default function EventPage() {
   return (
-    <div>EventPage</div>
+    <>
+      <LeftBar/>
+      <div>EventPage</div>
+    </>
   )
 }

@@ -64,7 +64,7 @@ const LoginForm = () => {
       <button onClick={async ()=> {
         const response = await dispatch(login('Demo', 'password'));
         if (response.ok) {
-          history.push('/home');
+          history.push('/');
         };
       }}>Log in as Demo User</button>
     </form>

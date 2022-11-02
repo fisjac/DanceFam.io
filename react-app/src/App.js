@@ -8,6 +8,7 @@ import Browser from './components/Browser';
 import Footer from './components/Footer';
 import CommunityPage from './components/CommunityPage';
 import EventPage from './components/EventPage';
+import ProtectedRoute from './components/auth/ProtectedRoute';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -27,26 +28,17 @@ function App() {
   return (
     <BrowserRouter>
       <Switch>
-        <Route exact path='/'>
+        <Route exact path='/welcome'>
           <Splash />
           <Footer />
         </Route>
-
-        <Route exact path='/home'>
-          <NavBar/>
-          <Browser/>
-          <Footer/>
-        </Route>
-
-        <Route exact path='/:community'>
-          <NavBar/>
-          <CommunityPage/>
-        </Route>
-
-        <Route path='/:community/events/:eventId'>
-          <NavBar/>
-          <EventPage/>
-        </Route>
+        <ProtectedRoute>
+          <Route exact path='/'>
+            <NavBar/>
+            <Browser/>
+            <Footer/>
+          </Route>
+        </ProtectedRoute>
       </Switch>
     </BrowserRouter>
 
