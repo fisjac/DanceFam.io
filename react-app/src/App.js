@@ -6,8 +6,6 @@ import Splash from './components/splash/Splash';
 import { authenticate } from './store/session';
 import Browser from './components/Browser';
 import Footer from './components/Footer';
-import CommunityPage from './components/CommunityPage';
-import EventPage from './components/EventPage';
 import ProtectedRoute from './components/auth/ProtectedRoute';
 
 function App() {

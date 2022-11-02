@@ -1,17 +1,18 @@
-import React from 'react'
+import React from 'react';
 import { useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
-import logo from '../../static/DanceFamBrushNoText.svg'
-import title from '../../static/DanceFamTitle.svg'
-
+import logo from '../../static/DanceFamBrushNoText.svg';
+import title from '../../static/DanceFamTitle.svg';
 
 export default function LeftBar() {
+  const history = useHistory()
   const allEvents = useSelector(state=> state.events.allEvents)
   const allCommunities = useSelector(state=> state.communities.allCommunities)
 
   return (
     <div className='left-bar'>
-      <div className='left-bar-logo-container'>
+      <div className='left-bar-logo-container' onClick={history.push('/')}>
         <img className='left-bar-logo' src={logo} alt='logo'/>
         <img className='left-bar-logo-title' src={title} alt='title'/>
       </div>

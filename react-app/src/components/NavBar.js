@@ -13,9 +13,9 @@ const NavBar = () => {
   const user = useSelector(state=>state.session.user)
   return (
     <div className='navbar'>
-        <NavLink className='navbar-button' exact to='/'>
+        <div className='navbar-button'>
           <i className="fa-solid fa-bars"></i>
-        </NavLink>
+        </div>
         <div className='search-area'>
           <div className='mag-glass'>
             <i className="fa-solid fa-magnifying-glass"></i>

@@ -1,5 +1,5 @@
 import React from 'react'
-import LeftBar from './Browser/LeftBar'
+import LeftBar from './LeftBar'
 
 export default function EventPage() {
   return (
