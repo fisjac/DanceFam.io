@@ -28,7 +28,7 @@ export default function Browser() {
         <LeftBar/>
         <div className='center-container'>
           <Route exact path='/'>
-            <EventScroll/>
+            <EventScroll events={allEvents}/>
           </Route>
           <Route exact path='/:community'>
             <CommunityPage/>
