@@ -7,11 +7,26 @@ export default function LeftBar() {
 
   return (
     <div className='left-bar'>
-      <div>Your Next Event</div>
-      <div>
-
+      <div className='planner'>
+        <div className='planner-title'>Your Next Event</div>
+        <div className='event-box'>
+          <div className='event-box-header'>
+            <div className='event-box-image'>IMG</div>
+            <div className='event-box-title'>Community Name</div>
+          </div>
+          <div className='event-box-date'>Some date</div>
+          <div className='event-box-Name'>Event Title</div>
+          <div className='event-box-Community'>Community Name</div>
+          <div className='event-box-address'>Address Info</div>
+        </div>
+        <div className='planner-title'>Your Communities</div>
+        <div className='event-box'>
+          <div className='event-box-header'>
+            <div className='event-box-image'>IMG</div>
+            <div className='event-box-title'>Community Name</div>
+          </div>
+        </div>
       </div>
-      <div>Your Communities</div>
     </div>
   );
 };
