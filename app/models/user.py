@@ -37,7 +37,7 @@ class User(db.Model, UserMixin):
             'email': self.email,
             'firstName': self.first_name,
             'lastName': self.last_name,
-            'communities':  {membership.community.id: membership.community.id for membership in self.memberships} if len(list(self.memberships)) else {} ,
+            'communities':  {membership.community.name: membership.community.id for membership in self.memberships} if len(list(self.memberships)) else {} ,
             'events': {registration.event.id: registration.event.id for registration in self.registrations} if len(list(self.registrations)) else {}
         }
     def safe_info(self):

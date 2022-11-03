@@ -12,26 +12,26 @@ const setUser = (user) => ({
   payload: user
 });
 
-const removeUser = () => ({
+export const removeUser = () => ({
   type: REMOVE_USER,
 })
 
-const addCommunity = (communityId) => ({
+export const addCommunity = (communityId) => ({
   type: ADD_COMMUNITY,
   payload: communityId
 });
 
-const removeCommunity = (communityId) => ({
+export const removeCommunity = (communityId) => ({
   type: REMOVE_COMMUNITY,
   payload: communityId
 });
 
-const addEvent = (eventId) => ({
+export const addEvent = (eventId) => ({
   type: ADD_EVENT,
   payload: eventId
 });
 
-const removeEvent = (eventId) => ({
+export const removeEvent = (eventId) => ({
   type: REMOVE_EVENT,
   payload: eventId
 });
@@ -132,7 +132,19 @@ export default function sessionReducer(state = initialState, action) {
     case REMOVE_USER:
       return { user: null }
     case ADD_COMMUNITY:
-      return {user : {...state.user, communities: {...state.user.communities,  [action.payload]: action.payload}}}
+      return {user : {...state.user, communities: {...state.user.communities,  [action.payload]: action.payload}}};
+    case REMOVE_COMMUNITY:
+      let newCommunities = {...state.user.communities};
+      delete newCommunities[action.payload]
+      return {user : {...state.user, communities: newCommunities}}
+    case ADD_EVENT:
+      return {user : {...state.user, events: {...state.user.events,  [action.payload]: action.payload}}};
+    case REMOVE_EVENT:
+      let newEvents = {...state.user.events};
+      delete newEvents[action.payload]
+      return {user : {...state.user, events: newEvents}}
+
+
     default:
       return state;
   }

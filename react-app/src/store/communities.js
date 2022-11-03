@@ -1,3 +1,5 @@
+import * as sessionActions from './session';
+
 const LOAD_COMMUNITIES = 'communities/LOAD_ALL';
 const LOAD_COMMUNITY = 'communities/LOAD_ONE';
 const EDIT = 'communities/EDIT';
@@ -64,7 +66,7 @@ export const createCommunity = (community) => async dispatch => {
   if (response.ok) {
     const community = await response.json();
     dispatch(loadCommunity(community.id));
-    dispatch(getCommunities());
+    dispatch(sessionActions.addCommunity(community.id))
     return response;
   } else {
     return response;
