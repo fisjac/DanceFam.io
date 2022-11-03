@@ -57,7 +57,6 @@ export const getEvent = (eventId) => async dispatch => {
 };
 
 export const createEvent = ({communityId, event}) => async dispatch => {
-  console.log(JSON.stringify(event))
   const response = await fetch(`/api/communities/${communityId}/events`, {
     method: 'POST',
     headers: {'Content-Type': 'application/json'},

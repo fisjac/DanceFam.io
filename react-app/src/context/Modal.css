@@ -18,9 +18,13 @@
   align-items: center;
 }
 
+.hidden {
+  display: none !important;
+}
 
 #modal-container {
   position: absolute;
+  z-index: 99;
   padding: 29px 37px;
   display: flex;
   flex-flow:column;
