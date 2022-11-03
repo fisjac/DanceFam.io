@@ -1,0 +1,40 @@
+.community-page-main {
+
+}
+
+.community-page-header {
+  display: flex;
+
+}
+
+.community-page-title {
+  font-weight: 800;
+  font-size: 28px;
+}
+
+.community-page-image {
+  background-color: var(--icon-grey);
+  width: 40%;
+  aspect-ratio: 2/1;
+  border-radius: 5px;
+}
+
+.community-page-right-icons {
+  justify-self: flex-end;
+}
+
+.add-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--icon-grey);
+  border-radius: 5px;
+  background-color: var(--theme-default);
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+}
+
+.add-button:hover {
+  box-shadow: 1px 1px 1px 1px var(--shadow);
+}

@@ -64,3 +64,36 @@
 .input-field {
   display: flex;
 }
+
+.error {
+  color: red;
+  font-style: italic;
+}
+
+form {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+}
+
+label {
+  position: absolute;
+  font-size: 10px;
+  left: 10%;
+  transform: translateY(-50%);
+  background-color: white;
+  padding: 0 2px;
+}
+
+input {
+  flex-grow: 1;
+  /* margin: 2px; */
+}
+
+button {
+  margin: 2px;
+}
+
+form div {
+  width: 100%;
+}

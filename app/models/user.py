@@ -44,5 +44,5 @@ class User(db.Model, UserMixin):
         return {
             'firstName': self.first_name,
             'lastName': self.last_name,
-
+            'id': self.id
         }

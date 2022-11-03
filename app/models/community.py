@@ -18,7 +18,7 @@ class Community(db.Model):
       'id': self.id,
       'name': self.name,
       'memberCount': len(list(self.memberships)),
-      'ownerId': Membership.get_owner_id(self.id),
+      'owner': Membership.get_owner(self.id)
     }
 
   def to_dict_detailed(self):
@@ -29,5 +29,5 @@ class Community(db.Model):
       'memberCount': len(list(self.memberships)),
       'members': [membership.user.safe_info() for membership in self.memberships],
       'events': [event.id for event in self.events],
-      'ownerId': Membership.get_owner_id(self.id),
+      'owner': Membership.get_owner(self.id),
     }

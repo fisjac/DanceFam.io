@@ -17,6 +17,7 @@ export default function Browser() {
   const dispatch = useDispatch()
   const allEvents = useSelector(state=>state.events.allEvents);
   const allCommunities = useSelector(state=>state.communities.allCommunities);
+  const user = useSelector(state=>state.session.user)
 
   useEffect(()=>{
     dispatch(eventActions.getEvents())
@@ -27,6 +28,7 @@ export default function Browser() {
       <div className='main-page'>
         <LeftBar/>
         <div className='center-container'>
+          <div className='welcome-user'>{`Welcome ${user.firstName}`}</div>
           <Route exact path='/'>
             <EventScroll showCommunity={true} events={allEvents}/>
           </Route>
