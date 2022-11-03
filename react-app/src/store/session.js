@@ -30,6 +30,7 @@ export const authenticate = () => async (dispatch) => {
 }
 
 export const login = (credential, password) => async (dispatch) => {
+  console.log(credential, password)
   const response = await fetch('/api/auth/login', {
     method: 'POST',
     headers: {
@@ -44,18 +45,17 @@ export const login = (credential, password) => async (dispatch) => {
 
   if (response.ok) {
     const data = await response.json();
-    dispatch(setUser(data))
+    dispatch(setUser(data));
     return response;
   } else if (response.status < 500) {
     const data = await response.json();
     if (data.errors) {
       return data.errors;
-    }
+    };
   } else {
     return ['An error occurred. Please try again.']
-  }
-
-}
+  };
+};
 
 export const logout = () => async (dispatch) => {
   const response = await fetch('/api/auth/logout', {
@@ -77,8 +77,8 @@ export const signUp = (firstName, lastName, username, email, password) => async 
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      firstName,
-      lastName,
+      'first_name': firstName,
+      'last_name': lastName,
       username,
       email,
       password,

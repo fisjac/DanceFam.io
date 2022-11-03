@@ -28,21 +28,24 @@ export function ModalProvider({children}) {
 
 export default function ModalWrapper(props) {
   const [showModal, setShowModal] = useState(false);
+  const handleClick = (stopProp) => {
+    if (stopProp) return (e)=>{
+      setShowModal(true);
+      e.stopPropagation();
+    }
+    else return ()=>setShowModal(true);
+  }
   return (
     <>
     {React.cloneElement(
       props.children,
       {
-        onClick: ()=> {
-          if (props.clickEvent) {
-          props.clickEvent()};
-          setShowModal(true);
-        },
+        onClick: handleClick(props.stopProp),
         style: {'cursor': 'pointer'}
       },
       )}
     {showModal && (
-      <Modal {...props} setShowModal={setShowModal} showModal={showModal}>
+      <Modal {...props} setShowModal={setShowModal}>
         {React.cloneElement(props.form, props)}
       </Modal>
     )}
@@ -57,7 +60,8 @@ export function Modal (props) {
 
   return ReactDom.createPortal(
     <div id="modal">
-      <div id="modal-background" onClick={()=>props.setShowModal(false)} />
+      <div id="modal-background" onClick={()=>{
+        props.setShowModal(false)}} />
         <div id="modal-container">
           <div id='modal-header'>
             <img id='modal-logo' alt='logo' src={logo}/>

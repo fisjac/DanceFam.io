@@ -36,7 +36,6 @@ export function removeEvent (payload) {
 // Thunks
 
 export const getEvents = () => async dispatch => {
-  console.log('running thunk')
   const response = await fetch('/api/events');
   if (response.ok) {
     const events = await response.json();
