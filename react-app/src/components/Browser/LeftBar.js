@@ -4,6 +4,7 @@ import { useHistory } from 'react-router-dom';
 
 import logo from '../../static/DanceFamBrushNoText.svg';
 import title from '../../static/DanceFamTitle.svg';
+import Communities from './Communities';
 
 export default function LeftBar() {
   const history = useHistory()
@@ -29,13 +30,7 @@ export default function LeftBar() {
           <div className='event-box-Community'>Community Name</div>
           <div className='event-box-address'>Address Info</div>
         </div>
-        <div className='planner-title'>Your Communities</div>
-        <div className='event-box'>
-          <div className='event-box-header'>
-            <div className='event-box-image'>IMG</div>
-            <div className='event-box-title'>Community Name</div>
-          </div>
-        </div>
+        <Communities/>
       </div>
     </div>
   );

@@ -1,3 +1,5 @@
+import * as sessionActions from './session';
+
 const LOAD_COMMUNITIES = 'communities/LOAD_ALL';
 const LOAD_COMMUNITY = 'communities/LOAD_ONE';
 const EDIT = 'communities/EDIT';
@@ -55,10 +57,26 @@ export const getCommunity = (communityId) => async dispatch => {
   return response;
 };
 
+export const createCommunity = (community) => async dispatch => {
+  const response = await fetch('/api/communities/', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify(community)
+  });
+  if (response.ok) {
+    const community = await response.json();
+    dispatch(loadCommunity(community.id));
+    dispatch(sessionActions.addCommunity(community.id))
+    return response;
+  } else {
+    return response;
+  };
+};
+
 export const updateCommunity = (community) => async dispatch => {
   const response = await fetch(`/api/communities/${community.id}`,{
     method: 'PUT',
-    header: {'Content-Type': 'application/json'},
+    headers: {'Content-Type': 'application/json'},
     body: community
   });
   if (response.ok) {
