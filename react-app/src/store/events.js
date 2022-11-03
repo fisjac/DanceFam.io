@@ -5,6 +5,7 @@ const DELETE = 'events/DELETE';
 
 
 // Actions
+
 export function loadEvents (payload) {
   return {
     type: LOAD_EVENTS,
@@ -36,7 +37,6 @@ export function removeEvent (payload) {
 // Thunks
 
 export const getEvents = () => async dispatch => {
-  console.log('running thunk')
   const response = await fetch('/api/events');
   if (response.ok) {
     const events = await response.json();
@@ -56,10 +56,26 @@ export const getEvent = (eventId) => async dispatch => {
   return response;
 };
 
+export const createEvent = ({communityId, event}) => async dispatch => {
+  console.log(JSON.stringify(event))
+  const response = await fetch(`/api/communities/${communityId}/events`, {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify(event)
+  });
+  if (response.ok) {
+    const event = await response.json();
+    dispatch(loadEvent(event))
+    dispatch(getEvents())
+    return response;
+  }
+  return response;
+}
+
 export const updateEvent = (event) => async dispatch => {
   const response = await fetch(`/api/events/${event.id}`,{
     method: 'PUT',
-    header: {'Content-Type': 'application/json'},
+    headers: {'Content-Type': 'application/json'},
     body: event
   });
   if (response.ok) {

@@ -1,8 +1,8 @@
 """create-tables
 
-Revision ID: 95d6f9f57376
+Revision ID: 5da280e424bf
 Revises: 
-Create Date: 2022-10-28 11:38:40.046956
+Create Date: 2022-11-02 19:56:26.247255
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '95d6f9f57376'
+revision = '5da280e424bf'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -21,6 +21,7 @@ def upgrade():
     op.create_table('communities',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('name', sa.String(length=255), nullable=False),
+    sa.Column('details', sa.String(length=255), nullable=True),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('roles',
@@ -49,7 +50,7 @@ def upgrade():
     sa.Column('state', sa.String(length=255), nullable=True),
     sa.Column('address', sa.String(length=255), nullable=True),
     sa.Column('country', sa.String(length=255), nullable=True),
-    sa.Column('community_id', sa.Integer(), nullable=False),
+    sa.Column('community_id', sa.Integer(), nullable=True),
     sa.Column('organiser_id', sa.Integer(), nullable=False),
     sa.ForeignKeyConstraint(['community_id'], ['communities.id'], ),
     sa.ForeignKeyConstraint(['organiser_id'], ['users.id'], ),

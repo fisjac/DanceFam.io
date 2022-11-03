@@ -23,9 +23,10 @@ class Membership(db.Model):
       # 'role': Role.query.get(self.role_id).name
     }
 
-  def get_owner_id(community_id):
+
+  def get_owner(community_id):
     membership = db.session.query(Membership).\
       filter_by(community_id= community_id, owner_status=True).first()
     if membership is None:
       return None
-    return membership.user_id
+    return membership.user.safe_info()

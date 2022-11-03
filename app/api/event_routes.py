@@ -28,7 +28,7 @@ def event(id):
         return {
         "message": "Event couldn't be found",
         "statusCode": 404}, 404
-    return event.to_dict()
+    return event.to_dict_detailed()
 
 # DELETE by Id
 @event_routes.route('/<int:id>', methods=['DELETE'])
