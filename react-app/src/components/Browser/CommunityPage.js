@@ -22,8 +22,10 @@ export default function CommunityPage() {
 
   const communityId = allCommunities[communityName].id;
   useEffect(()=> {
+    console.log('in communityPage useEffect')
     dispatch(communityActions.getCommunity(communityId));
-  },[dispatch])
+    console.log('loaded singleCommunity')
+  },[dispatch, communityId, allEvents])
 
   return singleCommunity && (
     <div className='community-page-main'>

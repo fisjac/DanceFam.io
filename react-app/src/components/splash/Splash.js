@@ -12,15 +12,19 @@ import dancers from '../../static/dancing_couple1.svg'
 
 import './Splash.css'
 
-export function AuthForm() {
+export function AuthForm(props) {
   return (
     <div className='auth-form'>
-      <ModalWrapper form={<LoginForm/>}>
+      <ModalWrapper form={<LoginForm/>} closePrev={props.setShowModal} header='Log In'>
         <div className='dropdown-button'>
           Log In
         </div>
       </ModalWrapper>
-      <ModalWrapper form={<SignUpForm/>} header='Sign Up'>
+      <ModalWrapper
+        form={<SignUpForm/>}
+        // closePrev={props.setShowModal}
+        header='Sign Up'
+        >
         <div className='dropdown-button'>
           Sign Up
         </div>

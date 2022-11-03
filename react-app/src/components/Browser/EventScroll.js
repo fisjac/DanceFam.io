@@ -8,9 +8,11 @@ export default function EventScroll({events, showCommunity}) {
       <div className='event-section-title'>Events</div>
       {
         Object.values(events)
-          .map(event => (
-            <EventLine key={event.id} showCommunity={showCommunity} event={event}/>
-          ))
+          .map(event =>{
+            console.log(event)
+            return <EventLine key={event.id} showCommunity={showCommunity} event={event}/>
+          }
+          )
         }
     </div>
   )

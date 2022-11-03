@@ -61,8 +61,8 @@ const LoginForm = () => {
         />
       </div>
       <button type='submit'>Login</button>
-      <button onClick={async ()=> {
-        console.log('clicked')
+      <button onClick={async (e)=> {
+        e.preventDefault()
         const response = await dispatch(login('Demo', 'password'));
         if (response.ok) {
           history.push('/');

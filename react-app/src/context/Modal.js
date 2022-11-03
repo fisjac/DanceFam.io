@@ -28,27 +28,31 @@ export function ModalProvider({children}) {
 
 export default function ModalWrapper(props) {
   const [showModal, setShowModal] = useState(false);
-  const handleClick = (stopProp) => {
-    if (stopProp) return (e)=>{
+  const handleClick = (stopProp, closePrev) => {
+    return (e)=> {
+      if (stopProp) e.stopPropagation();
+      console.log('opening')
       setShowModal(true);
-      e.stopPropagation();
-    }
-    else return ()=>setShowModal(true);
-  }
+      if (closePrev) {
+        console.log('closing previous')
+        closePrev(false)
+      };
+    };
+  };
+
+  const {form, children, newProps} = {...props}
   return (
     <>
     {React.cloneElement(
       props.children,
-      {
-        onClick: handleClick(props.stopProp),
+      { ...newProps,
+        onClick: handleClick(props.stopProp, props.closePrev? props.closePrev: null),
         style: {'cursor': 'pointer'}
       },
       )}
-    {showModal && (
-      <Modal {...props} setShowModal={setShowModal}>
+      <Modal {...props} setShowModal={setShowModal} className={`${showModal ? '' : 'hidden' }`}>
         {React.cloneElement(props.form, props)}
       </Modal>
-    )}
     </>
   );
 };
@@ -59,7 +63,7 @@ export function Modal (props) {
   if (!modalNode) return null;
 
   return ReactDom.createPortal(
-    <div id="modal">
+    <div id="modal" className={props.className}>
       <div id="modal-background" onClick={()=>{
         props.setShowModal(false)}} />
         <div id="modal-container">

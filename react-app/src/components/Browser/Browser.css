@@ -98,8 +98,8 @@
   flex-direction: column;
   flex-grow: 1;
   overflow-y: scroll;
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
+  /* -ms-overflow-style: none; */
+  /* scrollbar-width: none;  */
 }
 .center-container::-webkit-scrollbar {
   display: none;
@@ -110,7 +110,22 @@
 
 .event-scroll {
   position: relative;
-  height: 100%;
+  height: calc(100% - 164px);
+  overflow-y: scroll;
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+.event-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.event-section-title {
+  font-weight: 800;
+  font-size: 30px;
+  position: relative;
+  top:0;
+  /* height: 100%; */
 }
 
 .eventline-container {
@@ -120,6 +135,7 @@
 
 .eventline-header {
   position: sticky;
+  background-color: white;
   top: 0;
   z-index: 0;
   font-weight: 600;
@@ -131,6 +147,8 @@
 .eventline-body {
   display: flex;
   justify-content: space-between;
+  margin-right: 5px;
+  margin-bottom: 5px;
   border-radius: 5px;
 }
 

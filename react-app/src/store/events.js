@@ -1,3 +1,5 @@
+import * as communityActions from './communities';
+
 const LOAD_EVENTS = 'events/LOAD_ALL';
 const LOAD_EVENT = 'events/LOAD_ONE';
 const EDIT = 'events/EDIT';
@@ -57,7 +59,6 @@ export const getEvent = (eventId) => async dispatch => {
 };
 
 export const createEvent = ({communityId, event}) => async dispatch => {
-  console.log(JSON.stringify(event))
   const response = await fetch(`/api/communities/${communityId}/events`, {
     method: 'POST',
     headers: {'Content-Type': 'application/json'},
@@ -81,18 +82,23 @@ export const updateEvent = (event) => async dispatch => {
   if (response.ok) {
     const event = await response.json();
     dispatch(editEvent(event));
-    dispatch(loadEvents())
+    await dispatch(loadEvents())
     return response;
   };
   return response;
 };
 
-export const deleteEvent = (eventId) => async dispatch => {
+export const deleteEvent = (eventId, communityId) => async dispatch => {
+  console.log('deleting event in thunk')
   const response = await fetch (`api/events/${eventId}`,{
     method: 'DELETE'
   });
   if (response.ok) {
+    console.log('event deleted')
+    console.log(communityId)
+    if (communityId) dispatch(communityActions.getCommunity(communityId))
     dispatch(removeEvent(eventId))
+    console.log('event removed from state.events')
     return response;
   };
   return response;
@@ -114,7 +120,9 @@ export default function eventsReducer(state = initialState, action) {
     case EDIT:
       return {...state, singleEvent: {...action.payload}};
     case DELETE:
-      return {allEvents: {...state.allEvents, [action.payload]: null}, singleEvent: null};
+      let newEvents = {...state.allEvents};
+      delete newEvents[action.payload];
+      return {allEvents: {...newEvents}, singleEvent: null};
     default:
       return state;
   }

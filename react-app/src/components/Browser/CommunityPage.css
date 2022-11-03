@@ -5,7 +5,7 @@ height: 100%;
 
 .community-page-top-section {
   position: sticky;
-  z-index: 1;
+  /* z-index: 1; */
   top: 0;
   background-color: white;
 }

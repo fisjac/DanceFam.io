@@ -1,8 +1,8 @@
 """create-tables
 
-Revision ID: 5da280e424bf
+Revision ID: 7fb150ac8322
 Revises: 
-Create Date: 2022-11-02 19:56:26.247255
+Create Date: 2022-11-03 16:35:23.627711
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '5da280e424bf'
+revision = '7fb150ac8322'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -31,11 +31,11 @@ def upgrade():
     )
     op.create_table('users',
     sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('first_name', sa.String(length=255), nullable=True),
+    sa.Column('last_name', sa.String(length=255), nullable=True),
     sa.Column('username', sa.String(length=40), nullable=False),
     sa.Column('email', sa.String(length=255), nullable=False),
     sa.Column('hashed_password', sa.String(length=255), nullable=False),
-    sa.Column('first_name', sa.String(length=255), nullable=True),
-    sa.Column('last_name', sa.String(length=255), nullable=True),
     sa.PrimaryKeyConstraint('id'),
     sa.UniqueConstraint('email'),
     sa.UniqueConstraint('username')
@@ -69,8 +69,8 @@ def upgrade():
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('user_id', sa.Integer(), nullable=True),
     sa.Column('event_id', sa.Integer(), nullable=True),
-    sa.ForeignKeyConstraint(['event_id'], ['events.id'], ),
-    sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
+    sa.ForeignKeyConstraint(['event_id'], ['events.id'], ondelete='CASCADE'),
+    sa.ForeignKeyConstraint(['user_id'], ['users.id'], ondelete='CASCADE'),
     sa.PrimaryKeyConstraint('id')
     )
     # ### end Alembic commands ###
