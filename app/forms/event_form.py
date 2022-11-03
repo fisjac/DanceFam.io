@@ -1,8 +1,6 @@
-from xmlrpc.client import DateTime
 from flask_wtf import FlaskForm
-from wtforms import StringField, IntegerField, DateTimeField
+from wtforms import StringField, DateTimeField
 from wtforms.validators import DataRequired, ValidationError
-from app.models import Event
 
 
 class EventForm(FlaskForm):

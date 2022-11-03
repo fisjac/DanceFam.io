@@ -4,6 +4,7 @@
   position: relative;
   padding: 0 10px;
   flex-grow: 1;
+  height: calc(100vh - 80px)
 }
 
 .welcome-user {
@@ -93,6 +94,7 @@
 .center-container {
   display: flex;
   margin: 0 20px;
+  padding: 0 5px;
   flex-direction: column;
   flex-grow: 1;
   overflow-y: scroll;
@@ -106,12 +108,20 @@
 
 /* EventLine */
 
+.event-scroll {
+  position: relative;
+  height: 100%;
+}
+
 .eventline-container {
   display: flex;
   flex-direction: column;
 }
 
 .eventline-header {
+  position: sticky;
+  top: 0;
+  z-index: 0;
   font-weight: 600;
   font-size: 20px;
   border-bottom: 1px solid var(--shadow);
@@ -163,7 +173,7 @@
 
 
 .eventline-body:hover {
-  box-shadow: 1px 2px 2px var(--shadow);
+  box-shadow: 1px 2px 2px 2px var(--shadow);
   cursor: pointer;
   /* transition: .1s; */
 }

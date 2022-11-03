@@ -18,12 +18,28 @@ export default function CreateEventForm({communityId, setShowModal}) {
   const [description, setDescription] = useState('');
 
   const dispatch = useDispatch();
+  const dateToBackendFormat = (date) => {
+    let dateString = date.toISOString();
+    return dateString.replace('T', ' ').substring(0,dateString.length - 5)
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const start = new Date(startDate + 'T' + startTime);
     const end = new Date(startDate + 'T' + startTime);
-    const response = await dispatch(eventActions.createEvent({communityId, name,start, end,address, city, state, country, description}));
+    const response = await dispatch(
+      eventActions.createEvent({
+        communityId,
+        event: {
+          name,
+          start: dateToBackendFormat(start),
+          end: dateToBackendFormat(end),
+          address,
+          city,
+          state,
+          country,
+          description}
+        }));
     if (response.ok) {
       setShowModal(false)
     } else {
@@ -35,6 +51,11 @@ export default function CreateEventForm({communityId, setShowModal}) {
   return (
 
     <form method='POST' onSubmit={handleSubmit}>
+      <div className='errors'>
+        {errors.map((error, idx) => (
+          <div key={idx}>{error}</div>
+        ))}
+      </div>
       <div>
         <label>Event Name</label>
         <input

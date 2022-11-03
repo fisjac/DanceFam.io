@@ -77,6 +77,7 @@ def delete_community(id):
 @community_routes.route('/<int:community_id>/events', methods=['POST'])
 @login_required
 def create_event(community_id):
+    print(request.headers, request.get_data())
     community = Community.query.get(community_id)
     if community is None:
         return {
@@ -89,6 +90,7 @@ def create_event(community_id):
     else:
         form = EventForm()
         form['csrf_token'].data = request.cookies['csrf_token']
+        print(form.data)
         if form.validate_on_submit():
             event = Event(
                 organiser_id = current_user.id,

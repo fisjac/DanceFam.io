@@ -56,17 +56,17 @@ export const getEvent = (eventId) => async dispatch => {
   return response;
 };
 
-export const createEvent = (event) => async dispatch => {
+export const createEvent = ({communityId, event}) => async dispatch => {
   console.log(JSON.stringify(event))
-  const response = await fetch(`/api/communities/${event.communityId}/events`, {
+  const response = await fetch(`/api/communities/${communityId}/events`, {
     method: 'POST',
-    header: {'Content-Type': 'application/json'},
+    headers: {'Content-Type': 'application/json'},
     body: JSON.stringify(event)
   });
   if (response.ok) {
     const event = await response.json();
     dispatch(loadEvent(event))
-    dispatch(loadEvents)
+    dispatch(getEvents())
     return response;
   }
   return response;
@@ -75,7 +75,7 @@ export const createEvent = (event) => async dispatch => {
 export const updateEvent = (event) => async dispatch => {
   const response = await fetch(`/api/events/${event.id}`,{
     method: 'PUT',
-    header: {'Content-Type': 'application/json'},
+    headers: {'Content-Type': 'application/json'},
     body: event
   });
   if (response.ok) {

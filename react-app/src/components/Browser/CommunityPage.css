@@ -1,15 +1,27 @@
 .community-page-main {
+height: 100%;
+}
 
+
+.community-page-top-section {
+  position: sticky;
+  z-index: 1;
+  top: 0;
+  background-color: white;
 }
 
 .community-page-header {
   display: flex;
+  padding: 5px 0;
+  border-bottom: 1px solid var(--shadow);
 
 }
 
 .community-page-title {
   font-weight: 800;
   font-size: 28px;
+  position: sticky;
+  top: 0;
 }
 
 .community-page-image {

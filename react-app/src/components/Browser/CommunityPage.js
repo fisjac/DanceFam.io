@@ -27,23 +27,25 @@ export default function CommunityPage() {
 
   return singleCommunity && (
     <div className='community-page-main'>
+      <div className='community-page-top-section'>
         <div className='community-page-title'>{singleCommunity.name}</div>
-      <div className='community-page-header'>
-        <div className='community-page-image'></div>
-        <div className='community-page-details'>
-          <div className='community-page-membercount'>
-              {singleCommunity.memberCount} Members
+        <div className='community-page-header'>
+          <div className='community-page-image'></div>
+          <div className='community-page-details'>
+            <div className='community-page-membercount'>
+                {singleCommunity.memberCount} Members
+            </div>
+            <div>
+              Owner: {`${singleCommunity.owner.firstName} ${singleCommunity.owner.lastName}`}
+            </div>
           </div>
-          <div>
-            Owner: {`${singleCommunity.owner.firstName} ${singleCommunity.owner.lastName}`}
+          <div className='community-page-right-icons'>
+          {userId === singleCommunity.owner.id && (
+              <ModalWrapper form={<CreateEventForm communityId={communityId}/>}>
+                <div className='add-button'><i className="fa-solid fa-plus"></i></div>
+              </ModalWrapper>
+            )}
           </div>
-        </div>
-        <div className='community-page-right-icons'>
-        {userId === singleCommunity.owner.id && (
-            <ModalWrapper form={<CreateEventForm communityId={communityId}/>}>
-              <div className='add-button'><i className="fa-solid fa-plus"></i></div>
-            </ModalWrapper>
-          )}
         </div>
       </div>
       <EventScroll showCommunity={false} events={singleCommunity.events.map(id=>allEvents[id])}/>
