@@ -8,7 +8,7 @@ class Community(db.Model):
 
   id = db.Column(db.Integer, primary_key=True)
   name = db.Column(db.String(255), nullable=False)
-  details = db.Column(db.String(255))
+  description = db.Column(db.String(255))
 
   memberships = db.relationship("Membership", back_populates="community")
   events = db.relationship('Event', back_populates='community')
@@ -25,9 +25,10 @@ class Community(db.Model):
     return {
       'id': self.id,
       'name': self.name,
-      'details': self.details,
+      'description': self.description,
       'memberCount': len(list(self.memberships)),
       'members': [membership.user.safe_info() for membership in self.memberships],
       'events': [event.id for event in self.events],
       'owner': Membership.get_owner(self.id),
+
     }

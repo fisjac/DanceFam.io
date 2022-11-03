@@ -8,14 +8,31 @@ import DropDownWrapper from '../context/Dropdown';
 // import logo from '../static/DanceFamBrushNoText.svg'
 
 import './NavBar.css'
+import ModalWrapper from '../context/Modal';
+import CreateCommunityForm from './Browser/forms/CreateCommunityForm';
+
+
+const CreateMenu = () => {
+  return (
+    <div>
+      <ModalWrapper form={<CreateCommunityForm/>}>
+        <div>Create Community</div>
+      </ModalWrapper>
+      <div>Create Event</div>
+    </div>
+  )
+}
+
 
 const NavBar = () => {
   const user = useSelector(state=>state.session.user)
   return (
     <div className='navbar'>
+      <DropDownWrapper menu={<CreateMenu/>}>
         <div className='navbar-button'>
-          <i className="fa-solid fa-bars"></i>
+          <i className="fa-solid fa-plus"></i>
         </div>
+      </DropDownWrapper>
         <div className='search-area'>
           <div className='mag-glass'>
             <i className="fa-solid fa-magnifying-glass"></i>
