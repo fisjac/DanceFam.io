@@ -3,6 +3,7 @@ from flask_login import login_required, current_user
 from app.forms.community_form import CommunityForm
 from app.forms.event_form import EventForm
 from app.models import Community, db, Membership, Event
+from app.models.registration import Registration
 
 community_routes = Blueprint('communities', __name__)
 
@@ -106,7 +107,10 @@ def create_event(community_id):
             )
 
             event.community = community
-            db.session.add_all([event])
+            registration = Registration()
+            registration.user = current_user
+            registration.event = event
+            db.session.add_all([registration])
             db.session.commit()
             return event.to_dict()
         return {'errors': validation_errors_to_error_messages(form.errors)}, 401

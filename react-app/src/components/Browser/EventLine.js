@@ -41,7 +41,7 @@ export default function EventLine({event, showCommunity}) {
                     .replace(' ','-')}`)
                   }
                 }
-                >{event.community}</div>
+                >Hosted by: {event.community}</div>
                 )}
             <div className='eventline-attendees'>
               {event.attendeeCount} attendees

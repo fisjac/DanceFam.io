@@ -65,7 +65,7 @@ export const createCommunity = (community) => async dispatch => {
   });
   if (response.ok) {
     const community = await response.json();
-    dispatch(loadCommunity(community.id));
+    dispatch(loadCommunity(community));
     dispatch(sessionActions.addCommunity(community.id))
     return response;
   } else {

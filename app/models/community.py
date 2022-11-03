@@ -27,8 +27,7 @@ class Community(db.Model):
       'name': self.name,
       'description': self.description,
       'memberCount': len(list(self.memberships)),
-      'members': [membership.user.safe_info() for membership in self.memberships],
-      'events': [event.id for event in self.events],
+      'members': {membership.user.id: membership.user.safe_info() for membership in self.memberships},
+      'events': {event.id: event.id for event in self.events} if len(list(self.events)) else {},
       'owner': Membership.get_owner(self.id),
-
     }

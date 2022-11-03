@@ -50,7 +50,7 @@ export default function CommunityPage() {
           </div>
         </div>
       </div>
-      <EventScroll showCommunity={false} events={singleCommunity.events.map(id=>allEvents[id])}/>
+      <EventScroll showCommunity={false} events={Object.keys(singleCommunity.events).map(id=>allEvents[id])}/>
     </div>
   )
 }
