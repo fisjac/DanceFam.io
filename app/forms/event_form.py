@@ -7,8 +7,8 @@ from app.models import Event
 
 class EventForm(FlaskForm):
     name = StringField('Name', validators=[DataRequired()])
-    start_date = DateTimeField('Start Date', validators=[DataRequired()])
-    end_date = DateTimeField('Start Date', validators=[DataRequired()])
+    start = DateTimeField('Start', validators=[DataRequired()])
+    end = DateTimeField('End', validators=[DataRequired()])
     description = StringField('Description', validators=[DataRequired()])
     city = StringField('City', validators=[DataRequired()])
     state = StringField('State', validators=[DataRequired()])

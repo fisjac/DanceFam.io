@@ -5,6 +5,7 @@ const DELETE = 'events/DELETE';
 
 
 // Actions
+
 export function loadEvents (payload) {
   return {
     type: LOAD_EVENTS,
@@ -54,6 +55,22 @@ export const getEvent = (eventId) => async dispatch => {
   };
   return response;
 };
+
+export const createEvent = (event) => async dispatch => {
+  console.log(JSON.stringify(event))
+  const response = await fetch(`/api/communities/${event.communityId}/events`, {
+    method: 'POST',
+    header: {'Content-Type': 'application/json'},
+    body: JSON.stringify(event)
+  });
+  if (response.ok) {
+    const event = await response.json();
+    dispatch(loadEvent(event))
+    dispatch(loadEvents)
+    return response;
+  }
+  return response;
+}
 
 export const updateEvent = (event) => async dispatch => {
   const response = await fetch(`/api/events/${event.id}`,{

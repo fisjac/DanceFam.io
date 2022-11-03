@@ -40,8 +40,8 @@ export default function CommunityPage() {
         </div>
         <div className='community-page-right-icons'>
         {userId === singleCommunity.owner.id && (
-            <ModalWrapper form={<CreateEventForm/>}>
-              <div className='add-button'><i class="fa-solid fa-plus"></i></div>
+            <ModalWrapper form={<CreateEventForm communityId={communityId}/>}>
+              <div className='add-button'><i className="fa-solid fa-plus"></i></div>
             </ModalWrapper>
           )}
         </div>

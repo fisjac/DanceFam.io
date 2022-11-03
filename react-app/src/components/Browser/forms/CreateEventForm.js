@@ -1,24 +1,39 @@
 import React, {useState} from 'react'
+import { useDispatch } from 'react-redux';
 
 
-export default function CreateEventForm() {
+import * as eventActions from '../../../store/events';
 
+export default function CreateEventForm({communityId, setShowModal}) {
+  const [errors, setErrors] = useState([]);
   const [name, setName] = useState('');
   const [startDate, setStartDate] = useState('');
   const [startTime, setStartTime] = useState('');
   const [endDate, setEndDate] = useState('');
   const [endTime, setEndTime] = useState('');
+  const [address, setAddress] = useState('');
   const [city, setCity] = useState('');
   const [state, setState] = useState('');
-  const [address, setAddress] = useState('');
   const [country, setCountry] = useState('');
   const [description, setDescription] = useState('');
 
-  const handleSubmit = (e) => {
+  const dispatch = useDispatch();
 
-  }
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const start = new Date(startDate + 'T' + startTime);
+    const end = new Date(startDate + 'T' + startTime);
+    const response = await dispatch(eventActions.createEvent({communityId, name,start, end,address, city, state, country, description}));
+    if (response.ok) {
+      setShowModal(false)
+    } else {
+      const data = await response.json()
+      setErrors(data)
+    };
+  };
 
   return (
+
     <form method='POST' onSubmit={handleSubmit}>
       <div>
         <label>Event Name</label>
@@ -94,6 +109,14 @@ export default function CreateEventForm() {
           onChange={(e)=>setCountry(e.target.value)}
           value={country}
           required
+          />
+      </div>
+      <div>
+        <label>Description</label>
+        <input
+          type='textarea'
+          onChange={(e)=>setDescription(e.target.value)}
+          value={description}
           />
       </div>
 

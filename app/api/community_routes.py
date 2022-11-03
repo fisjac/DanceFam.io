@@ -77,24 +77,34 @@ def delete_community(id):
 @community_routes.route('/<int:community_id>/events', methods=['POST'])
 @login_required
 def create_event(community_id):
-    form = EventForm()
-    form['csrf_token'].data = request.cookies['csrf_token']
-    if form.validate_on_submit():
-        event = Event(
-            organiser_id = current_user.id,
-            community_id = community_id,
-            name = form.data['name'],
-            start = form.data['start'],
-            end = form.data['end'],
-            description = form.data['description'],
-            city = form.data['city'],
-            state = form.data['state'],
-            address = form.data['address'],
-            country = form.data['country'],
-        )
+    community = Community.query.get(community_id)
+    if community is None:
+        return {
+            "message": "Community couldn't be found",
+            "statusCode": 404}, 404
+    elif Membership.get_owner(community_id)['id'] != current_user.id:
+        return {
+            "message": "User not authorized to delete this community",
+            "statusCode": 401}, 401
+    else:
+        form = EventForm()
+        form['csrf_token'].data = request.cookies['csrf_token']
+        if form.validate_on_submit():
+            event = Event(
+                organiser_id = current_user.id,
+                community_id = community_id,
+                name = form.data['name'],
+                start = form.data['start'],
+                end = form.data['end'],
+                description = form.data['description'],
+                city = form.data['city'],
+                state = form.data['state'],
+                address = form.data['address'],
+                country = form.data['country'],
+            )
 
-        event.community = Community.query.get(community_id)
-        db.session.add_all([event])
-        db.session.commit()
-        return event.to_dict()
-    return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+            event.community = community
+            db.session.add_all([event])
+            db.session.commit()
+            return event.to_dict()
+        return {'errors': validation_errors_to_error_messages(form.errors)}, 401
