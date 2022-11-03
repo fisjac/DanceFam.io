@@ -81,7 +81,7 @@ export const updateEvent = (event) => async dispatch => {
   if (response.ok) {
     const event = await response.json();
     dispatch(editEvent(event));
-    dispatch(loadEvents())
+    await dispatch(loadEvents())
     return response;
   };
   return response;
@@ -93,6 +93,7 @@ export const deleteEvent = (eventId) => async dispatch => {
   });
   if (response.ok) {
     dispatch(removeEvent(eventId))
+    dispatch(getEvents())
     return response;
   };
   return response;
@@ -114,7 +115,9 @@ export default function eventsReducer(state = initialState, action) {
     case EDIT:
       return {...state, singleEvent: {...action.payload}};
     case DELETE:
-      return {allEvents: {...state.allEvents, [action.payload]: null}, singleEvent: null};
+      let newEvents = {...state.allEvents};
+      delete newEvents[action.payload];
+      return {allEvents: {...newEvents}, singleEvent: null};
     default:
       return state;
   }

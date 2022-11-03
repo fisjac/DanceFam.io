@@ -23,7 +23,7 @@ export default function CommunityPage() {
   const communityId = allCommunities[communityName].id;
   useEffect(()=> {
     dispatch(communityActions.getCommunity(communityId));
-  },[dispatch])
+  },[dispatch, communityId, allEvents])
 
   return singleCommunity && (
     <div className='community-page-main'>

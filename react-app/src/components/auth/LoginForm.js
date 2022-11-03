@@ -61,7 +61,8 @@ const LoginForm = () => {
         />
       </div>
       <button type='submit'>Login</button>
-      <button onClick={async ()=> {
+      <button onClick={async (e)=> {
+        e.preventDefault()
         console.log('clicked')
         const response = await dispatch(login('Demo', 'password'));
         if (response.ok) {
