@@ -11,9 +11,9 @@ export default function EventLine({event, showCommunity}) {
   const start = new Date(event.start);
   const userId = useSelector(state=>state.session.user.id);
   const allCommunities = useSelector(state=>state.communities.allCommunities);
-  const communityId = allCommunities[event.community].id;
+  const communityId = allCommunities? allCommunities[event.community].id : null;
 
-  return (
+  return allCommunities && (
     <div
       className='eventline-container'
       onClick={(e)=>{

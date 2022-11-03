@@ -24,13 +24,13 @@ export default function Browser() {
     dispatch(communityActions.getCommunities())
   },[dispatch])
 
-  return allEvents && allCommunities && (
+  return (
       <div className='main-page'>
         <LeftBar/>
         <div className='center-container'>
           <div className='welcome-user'>{`Welcome ${user.firstName}`}</div>
           <Route exact path='/'>
-            <EventScroll showCommunity={true} events={allEvents}/>
+            {allEvents && <EventScroll showCommunity={true} events={allEvents}/>}
           </Route>
           <Route exact path='/:community'>
             <CommunityPage/>
