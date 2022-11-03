@@ -31,14 +31,16 @@ class User(db.Model, UserMixin):
         return check_password_hash(self.password, password)
 
     def to_dict(self):
+        print(self.memberships)
+        print(self.registrations)
         return {
             'id': self.id,
             'username': self.username,
             'email': self.email,
             'firstName': self.first_name,
             'lastName': self.last_name,
-            'communities': [membership.community.name for membership in self.memberships],
-            'events': [registration.event.id for registration in self.registrations]
+            'communities': [] if len(list(self.memberships)) else [membership.community.name for membership in self.memberships if membership],
+            'events': [] if len(list(self.registrations)) else [registration.event.id for registration in self.registrations]
         }
     def safe_info(self):
         return {

@@ -23,7 +23,8 @@ function App() {
     return null;
   }
 
-  return (
+  console.log(loaded)
+  return loaded && (
     <BrowserRouter>
       <Switch>
         <Route exact path='/welcome'>
