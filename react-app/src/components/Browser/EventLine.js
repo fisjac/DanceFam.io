@@ -6,10 +6,12 @@ import * as eventActions from '../../store/events';
 import ModalWrapper from '../../context/Modal'
 
 export default function EventLine({event, showCommunity}) {
-  const history = useHistory()
+  const history = useHistory();
   const dispatch = useDispatch();
-  const start = new Date(event.start)
-  const userId = useSelector(state=>state.session.user.id)
+  const start = new Date(event.start);
+  const userId = useSelector(state=>state.session.user.id);
+  const allCommunities = useSelector(state=>state.communities.allCommunities);
+  const communityId = allCommunities[event.community].id;
 
   return (
     <div
@@ -55,7 +57,10 @@ export default function EventLine({event, showCommunity}) {
             <div className='clickable-icon' onClick={async (e)=>{
               e.stopPropagation()
                if (window.confirm(`Are you sure you want to delete ${event.name}?`)) {
-                const response = await dispatch(eventActions.deleteEvent(event.id));
+                const response = await dispatch(
+                  eventActions.deleteEvent(
+                    event.id,
+                    !showCommunity? communityId: null));
                 if (response.ok) alert(`${event.name} successfully deleted.`);
                }
                }}

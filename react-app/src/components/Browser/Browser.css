@@ -110,7 +110,7 @@
 
 .event-scroll {
   position: relative;
-  height: calc(100% - 244px);
+  height: calc(100% - 164px);
   overflow-y: scroll;
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;  /* Firefox */

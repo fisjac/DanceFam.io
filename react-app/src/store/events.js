@@ -1,3 +1,5 @@
+import * as communityActions from './communities';
+
 const LOAD_EVENTS = 'events/LOAD_ALL';
 const LOAD_EVENT = 'events/LOAD_ONE';
 const EDIT = 'events/EDIT';
@@ -86,13 +88,17 @@ export const updateEvent = (event) => async dispatch => {
   return response;
 };
 
-export const deleteEvent = (eventId) => async dispatch => {
+export const deleteEvent = (eventId, communityId) => async dispatch => {
+  console.log('deleting event in thunk')
   const response = await fetch (`api/events/${eventId}`,{
     method: 'DELETE'
   });
   if (response.ok) {
+    console.log('event deleted')
+    console.log(communityId)
+    if (communityId) dispatch(communityActions.getCommunity(communityId))
     dispatch(removeEvent(eventId))
-    dispatch(getEvents())
+    console.log('event removed from state.events')
     return response;
   };
   return response;
