@@ -111,9 +111,31 @@ export default function communitiesReducer(state = initialState, action) {
       },{})
       return {...state, allCommunities};
     case LOAD_COMMUNITY:
-      return {...state, singleCommunity: {...action.payload}};
+      return {
+        allCommunities: {
+          ...state.allCommunities,
+          [action.payload.name]: {
+            id: action.payload.id,
+            memberCount: action.payload.memberCount,
+            name: action.payload.name,
+            owner: action.payload.owner
+          }
+        },
+        singleCommunity: {...action.payload}
+      };
     case EDIT:
-      return {...state, singleCommunity: {...action.payload}};
+      return {
+        allCommunities: {
+          ...state.allCommunities,
+          [action.payload.name]: {
+            id: action.payload.id,
+            memberCount: action.payload.memberCount,
+            name: action.payload.name,
+            owner: action.payload.owner
+          }
+        },
+        singleCommunity: {...action.payload}
+      };
     case DELETE:
       return {allCommunities: {...state.allCommunities, [action.payload]: null}, singleCommunity: null};
     default:
