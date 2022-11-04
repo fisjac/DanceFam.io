@@ -18,8 +18,6 @@ function App() {
   useEffect(() => {
     (async() => {
       await dispatch(authenticate());
-      await dispatch(communityActions.getCommunities())
-      await dispatch(eventActions.getEvents())
       setLoaded(true);
     })();
   }, [dispatch]);
@@ -28,7 +26,6 @@ function App() {
     return null;
   }
 
-  console.log(loaded)
   return loaded && (
     <BrowserRouter>
       <Switch>
