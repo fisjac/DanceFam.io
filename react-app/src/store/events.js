@@ -1,4 +1,5 @@
 import * as communityActions from './communities';
+import * as sessionActions from './session';
 
 const LOAD_EVENTS = 'events/LOAD_ALL';
 const LOAD_EVENT = 'events/LOAD_ONE';
@@ -66,8 +67,9 @@ export const createEvent = ({communityId, event}) => async dispatch => {
   });
   if (response.ok) {
     const event = await response.json();
-    dispatch(loadEvent(event))
-    dispatch(communityActions.getCommunity(communityId))
+    await dispatch(loadEvent(event))
+    await dispatch(communityActions.getCommunity(communityId))
+    await dispatch(sessionActions.addEvent(event.id))
     return response;
   }
   return response;
@@ -81,23 +83,21 @@ export const updateEvent = (event) => async dispatch => {
   });
   if (response.ok) {
     const event = await response.json();
-    dispatch(editEvent(event));
+    await dispatch(sessionActions.addEvent(event.id))
+    await dispatch(editEvent(event));
     return response;
   };
   return response;
 };
 
 export const deleteEvent = (eventId, communityId) => async dispatch => {
-  console.log('deleting event in thunk')
   const response = await fetch (`api/events/${eventId}`,{
     method: 'DELETE'
   });
   if (response.ok) {
-    console.log('event deleted from db')
-    console.log(communityId)
     if (communityId) await dispatch(communityActions.getCommunity(communityId))
-    dispatch(removeEvent(eventId))
-    console.log('event removed from state.events')
+    await dispatch(sessionActions.removeEvent(eventId))
+    await dispatch(removeEvent(eventId))
     return response;
   };
   return response;
