@@ -40,7 +40,7 @@ export const removeEvent = (eventId) => ({
 const initialState = { user: null };
 
 export const authenticate = () => async (dispatch) => {
-  const response = await fetch('/api/auth', {
+  const response = await fetch('/api/auth/', {
     headers: {
       'Content-Type': 'application/json'
     }
