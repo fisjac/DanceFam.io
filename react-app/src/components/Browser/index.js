@@ -25,7 +25,7 @@ export default function Browser() {
     dispatch(communityActions.getCommunities())
   },[dispatch])
 
-  return (
+  return events && communities && (
       <div className='main-page'>
         <LeftBar/>
         <div className='center-container'>
@@ -35,10 +35,10 @@ export default function Browser() {
             {events && <EventScroll showCommunity={true} events={events}/>}
           </Route>
           <Route exact path='/:community'>
-            <CommunityPage/>
+            <CommunityPage communities={communities} events={events}/>
           </Route>
           <Route exact path='/:community/events/:eventId'>
-            <EventPage/>
+            <EventPage communities={communities} events={events}/>
           </Route>
         </div>
         <RightBar/>

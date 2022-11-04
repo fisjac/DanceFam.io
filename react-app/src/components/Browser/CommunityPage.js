@@ -11,24 +11,15 @@ import EventScroll from './EventScroll';
 
 import './CommunityPage.css'
 
-export default function CommunityPage() {
+export default function CommunityPage({events, communities}) {
   const dispatch = useDispatch();
   const history = useHistory();
   const params = useParams();
   const communityName = params.community.replace('-', ' ');
-
-  const allEvents = useSelector(state=>state.events.allEvents);
-  const allCommunities = useSelector(state=>state.communities.allCommunities);
-  const singleCommunity = useSelector(state=>state.communities.singleCommunity);
   const userId = useSelector(state=>state.session.user.id)
+  const singleCommunity = communities[communityName]
 
-  let communityId;
-  if (allCommunities) communityId = allCommunities[communityName].id;
-  useEffect(()=> {
-    dispatch(communityActions.getCommunity(communityId));
-  },[dispatch, communityId, allEvents])
-
-  return allCommunities && singleCommunity && (
+  return singleCommunity && (
     <div className='community-page-main'>
       <div className='community-page-top-section'>
         <div className='community-page-title'>{singleCommunity.name}</div>
@@ -45,7 +36,7 @@ export default function CommunityPage() {
           <div className='community-page-right-icons'>
           {userId === singleCommunity.owner.id && (
               <>
-              <ModalWrapper form={<CreateEventForm communityId={communityId}/>}>
+              <ModalWrapper form={<CreateEventForm communityId={singleCommunity.id}/>}>
                 <div className='add-button'><i className="fa-solid fa-plus"></i></div>
               </ModalWrapper>
               <ModalWrapper form={<EditCommunityForm community={singleCommunity}/>}>
@@ -69,7 +60,7 @@ export default function CommunityPage() {
           </div>
         </div>
       </div>
-      <EventScroll showCommunity={false} events={Object.keys(singleCommunity.events).map(id=>allEvents[id])}/>
+      <EventScroll showCommunity={false} events={Object.keys(singleCommunity.events).map(id=>events[id])}/>
     </div>
   )
 }
