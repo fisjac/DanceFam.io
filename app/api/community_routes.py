@@ -41,7 +41,7 @@ def create_community():
         membership.community = community
         db.session.add_all([community,membership])
         db.session.commit()
-        return community.to_dict_detailed()
+        return community.to_dict()
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
 
@@ -53,7 +53,7 @@ def community(id):
         return {
             "message": "Community couldn't be found",
             "statusCode": 404}, 404
-    return community.to_dict_detailed()
+    return community.to_dict()
 
 # PUT by Id
 @community_routes.route('/<int:id>', methods=['PUT'])
@@ -76,7 +76,7 @@ def edit_community(id):
             if form.data['description']:
                 community.description = form.data['description']
             db.session.commit()
-            return community.to_dict_detailed()
+            return community.to_dict()
         else:
             return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 

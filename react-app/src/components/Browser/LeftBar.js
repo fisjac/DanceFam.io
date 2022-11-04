@@ -8,8 +8,8 @@ import Communities from './Communities';
 
 export default function LeftBar() {
   const history = useHistory()
-  const allEvents = useSelector(state=> state.events.allEvents)
-  const allCommunities = useSelector(state=> state.communities.allCommunities)
+  const events = useSelector(state=> state.events)
+  const communities = useSelector(state=> state.communities)
 
   return (
     <div className='left-bar'>

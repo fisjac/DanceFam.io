@@ -28,13 +28,14 @@ export function ModalProvider({children}) {
 
 export default function ModalWrapper(props) {
   const [showModal, setShowModal] = useState(false);
-  const handleClick = (stopProp, closePrev) => {
+  const handleClick = (stopProp, closePrev, addClickFunc) => {
     return (e)=> {
       if (stopProp) e.stopPropagation();
       setShowModal(true);
       if (closePrev) {
         closePrev(false)
       };
+      if (addClickFunc) addClickFunc();
     };
   };
 

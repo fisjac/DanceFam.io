@@ -11,10 +11,10 @@ export default function EventLine({event, showCommunity}) {
   const dispatch = useDispatch();
   const start = new Date(event.start);
   const userId = useSelector(state=>state.session.user.id);
-  const allCommunities = useSelector(state=>state.communities.allCommunities);
-  const communityId = allCommunities? allCommunities[event.community].id : null;
+  const communities = useSelector(state=>state.communities);
+  const communityId = communities? communities[event.community].id : null;
 
-  return allCommunities && (
+  return communities && (
     <div
       className='eventline-container'
       onClick={(e)=>{
@@ -50,7 +50,7 @@ export default function EventLine({event, showCommunity}) {
           </div>
         </div>
         {userId === event.organiserId && (<div className='eventline-body-right'>
-          <ModalWrapper stopProp={true} form={<EditEventForm event={event}/>}>
+          <ModalWrapper stopProp={true} addClickFunc={async ()=> await dispatch(eventActions.loadEvent(event.id))} form={<EditEventForm event={event}/>}>
             <div className='clickable-icon'>
               <i className="fa-solid fa-pen"></i>
             </div>

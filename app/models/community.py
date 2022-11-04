@@ -14,15 +14,8 @@ class Community(db.Model):
   memberships = db.relationship("Membership", back_populates="community",cascade='delete')
   events = db.relationship('Event', back_populates='community', cascade='delete')
 
-  def to_dict(self):
-    return {
-      'id': self.id,
-      'name': self.name,
-      'memberCount': len(list(self.memberships)),
-      'owner': Membership.get_owner(self.id)
-    }
 
-  def to_dict_detailed(self):
+  def to_dict(self):
     return {
       'id': self.id,
       'name': self.name,
