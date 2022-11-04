@@ -6,6 +6,7 @@ import { useHistory, useParams } from 'react-router-dom';
 import ModalWrapper from '../../context/Modal'
 import * as communityActions from '../../store/communities';
 import CreateEventForm from './forms/CreateEventForm';
+import EditCommunityForm from './forms/EditCommunityForm';
 import EventScroll from './EventScroll';
 
 import './CommunityPage.css'
@@ -21,12 +22,13 @@ export default function CommunityPage() {
   const singleCommunity = useSelector(state=>state.communities.singleCommunity);
   const userId = useSelector(state=>state.session.user.id)
 
-  const communityId = allCommunities[communityName].id;
+  let communityId;
+  if (allCommunities) communityId = allCommunities[communityName].id;
   useEffect(()=> {
     dispatch(communityActions.getCommunity(communityId));
   },[dispatch, communityId, allEvents])
 
-  return singleCommunity && (
+  return allCommunities && singleCommunity && (
     <div className='community-page-main'>
       <div className='community-page-top-section'>
         <div className='community-page-title'>{singleCommunity.name}</div>
@@ -45,6 +47,9 @@ export default function CommunityPage() {
               <>
               <ModalWrapper form={<CreateEventForm communityId={communityId}/>}>
                 <div className='add-button'><i className="fa-solid fa-plus"></i></div>
+              </ModalWrapper>
+              <ModalWrapper form={<EditCommunityForm community={singleCommunity}/>}>
+                <div className='add-button'><i className="fa-solid fa-pen"></i></div>
               </ModalWrapper>
               <div className='add-button' onClick={
                 async (e)=>{

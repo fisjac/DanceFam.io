@@ -1,6 +1,7 @@
 from flask import Blueprint, jsonify, request
 from flask_login import login_required, current_user
 from app.forms.community_form import CommunityForm
+from app.forms.edit_community_form import EditCommunityForm
 from app.forms.event_form import EventForm
 from app.models import Community, db, Membership, Event
 from app.models.registration import Registration
@@ -32,7 +33,8 @@ def create_community():
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         community = Community(
-            name=form.data['name']
+            name=form.data['name'],
+            description=form.data['description']
         )
         membership = Membership(owner_status=True)
         membership.user = current_user
@@ -52,6 +54,33 @@ def community(id):
             "message": "Community couldn't be found",
             "statusCode": 404}, 404
     return community.to_dict_detailed()
+
+# PUT by Id
+@community_routes.route('/<int:id>', methods=['PUT'])
+def edit_community(id):
+    community = Community.query.get(id)
+    if community is None:
+        return {
+            "message": "Community couldn't be found",
+            "statusCode": 404}, 404
+    elif Membership.get_owner(id)['id'] != current_user.id:
+        return {
+            "message": "User not authorized to delete this community",
+            "statusCode": 401}, 401
+    else:
+        form = EditCommunityForm()
+        form['csrf_token'].data = request.cookies['csrf_token']
+        if form.validate_on_submit():
+            if form.data['name']:
+                community.name = form.data['name']
+            if form.data['description']:
+                community.description = form.data['description']
+            db.session.commit()
+            return community.to_dict_detailed()
+        else:
+            return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+
+
 
 
 # DELETE by Id

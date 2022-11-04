@@ -75,15 +75,16 @@ export const createCommunity = (community) => async dispatch => {
 };
 
 export const updateCommunity = (community) => async dispatch => {
+  const body = {name: community.name, description: community.description};
+  console.log(body);
   const response = await fetch(`/api/communities/${community.id}`,{
     method: 'PUT',
     headers: {'Content-Type': 'application/json'},
-    body: community
+    body: JSON.stringify(body)
   });
   if (response.ok) {
     const community = await response.json();
     dispatch(editCommunity(community));
-    dispatch(loadCommunities())
     return response;
   };
   return response;
