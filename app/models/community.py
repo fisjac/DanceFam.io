@@ -1,3 +1,4 @@
+from flask import jsonify
 from .db import db
 from .storage.role import Role
 from .membership import Membership
@@ -10,8 +11,8 @@ class Community(db.Model):
   name = db.Column(db.String(255), nullable=False)
   description = db.Column(db.String(255))
 
-  memberships = db.relationship("Membership", back_populates="community")
-  events = db.relationship('Event', back_populates='community')
+  memberships = db.relationship("Membership", back_populates="community",cascade='delete')
+  events = db.relationship('Event', back_populates='community', cascade='delete')
 
   def to_dict(self):
     return {
@@ -27,8 +28,7 @@ class Community(db.Model):
       'name': self.name,
       'description': self.description,
       'memberCount': len(list(self.memberships)),
-      'members': [membership.user.safe_info() for membership in self.memberships],
-      'events': [event.id for event in self.events],
+      'members': {membership.user.id: membership.user.safe_info() for membership in self.memberships},
+      'events': {} if len(list(self.events)) == 0 else {event.id: event.id for event in self.events},
       'owner': Membership.get_owner(self.id),
-
     }

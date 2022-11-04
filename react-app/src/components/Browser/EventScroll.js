@@ -9,7 +9,6 @@ export default function EventScroll({events, showCommunity}) {
       {
         Object.values(events)
           .map(event =>{
-            console.log(event)
             return <EventLine key={event.id} showCommunity={showCommunity} event={event}/>
           }
           )

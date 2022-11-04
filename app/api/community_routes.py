@@ -3,6 +3,7 @@ from flask_login import login_required, current_user
 from app.forms.community_form import CommunityForm
 from app.forms.event_form import EventForm
 from app.models import Community, db, Membership, Event
+from app.models.registration import Registration
 
 community_routes = Blueprint('communities', __name__)
 
@@ -38,7 +39,7 @@ def create_community():
         membership.community = community
         db.session.add_all([community,membership])
         db.session.commit()
-        return community.to_dict()
+        return community.to_dict_detailed()
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
 
@@ -61,7 +62,7 @@ def delete_community(id):
         return {
             "message": "Community couldn't be found",
             "statusCode": 404}, 404
-    elif Membership.get_owner_id(id) != current_user.id:
+    elif Membership.get_owner(id)['id'] != current_user.id:
         return {
             "message": "User not authorized to delete this community",
             "statusCode": 401}, 401
@@ -90,7 +91,6 @@ def create_event(community_id):
     else:
         form = EventForm()
         form['csrf_token'].data = request.cookies['csrf_token']
-        print(form.data)
         if form.validate_on_submit():
             event = Event(
                 organiser_id = current_user.id,
@@ -106,7 +106,10 @@ def create_event(community_id):
             )
 
             event.community = community
-            db.session.add_all([event])
+            registration = Registration()
+            registration.user = current_user
+            registration.event = event
+            db.session.add_all([registration])
             db.session.commit()
             return event.to_dict()
         return {'errors': validation_errors_to_error_messages(form.errors)}, 401

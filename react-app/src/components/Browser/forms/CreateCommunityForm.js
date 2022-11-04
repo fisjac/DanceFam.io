@@ -1,10 +1,13 @@
 import React, {useState} from 'react'
 import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
 
 import * as communityActions from '../../../store/communities';
 
 export default function CreateCommunityForm({setShowModal}) {
+  const history = useHistory();
+
   const [errors, setErrors] = useState([]);
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
@@ -18,12 +21,12 @@ export default function CreateCommunityForm({setShowModal}) {
       );
     if (response.ok) {
       setShowModal(false)
+      history.push(`/${name.replace(' ', '-')}`)
     } else {
       const data = await response.json()
-      setErrors(data)
+      setErrors(data.errors)
     };
   };
-
   return (
     <form method='POST' onSubmit={handleSubmit}>
       <div className='errors'>

@@ -94,9 +94,9 @@ export const deleteEvent = (eventId, communityId) => async dispatch => {
     method: 'DELETE'
   });
   if (response.ok) {
-    console.log('event deleted')
+    console.log('event deleted from db')
     console.log(communityId)
-    if (communityId) dispatch(communityActions.getCommunity(communityId))
+    if (communityId) await dispatch(communityActions.getCommunity(communityId))
     dispatch(removeEvent(eventId))
     console.log('event removed from state.events')
     return response;

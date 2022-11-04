@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 
 
 import ModalWrapper from '../../context/Modal'
@@ -12,6 +12,7 @@ import './CommunityPage.css'
 
 export default function CommunityPage() {
   const dispatch = useDispatch();
+  const history = useHistory();
   const params = useParams();
   const communityName = params.community.replace('-', ' ');
 
@@ -22,9 +23,7 @@ export default function CommunityPage() {
 
   const communityId = allCommunities[communityName].id;
   useEffect(()=> {
-    console.log('in communityPage useEffect')
     dispatch(communityActions.getCommunity(communityId));
-    console.log('loaded singleCommunity')
   },[dispatch, communityId, allEvents])
 
   return singleCommunity && (
@@ -43,14 +42,29 @@ export default function CommunityPage() {
           </div>
           <div className='community-page-right-icons'>
           {userId === singleCommunity.owner.id && (
+              <>
               <ModalWrapper form={<CreateEventForm communityId={communityId}/>}>
                 <div className='add-button'><i className="fa-solid fa-plus"></i></div>
               </ModalWrapper>
+              <div className='add-button' onClick={
+                async (e)=>{
+                  e.stopPropagation()
+                  if (window.confirm(`Are you sure you want to delete ${singleCommunity.name}?`)) {
+                  const response = await dispatch(
+                    communityActions.deleteCommunity(singleCommunity.id, singleCommunity.name)
+                  );
+                  if (response.ok) {
+                    history.push('/')
+                    alert(`${singleCommunity.name} successfully deleted.`)
+                  };
+                }}
+              } ><i className="fa-solid fa-trash"></i></div>
+              </>
             )}
           </div>
         </div>
       </div>
-      <EventScroll showCommunity={false} events={singleCommunity.events.map(id=>allEvents[id])}/>
+      <EventScroll showCommunity={false} events={Object.keys(singleCommunity.events).map(id=>allEvents[id])}/>
     </div>
   )
 }
