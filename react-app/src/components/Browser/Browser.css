@@ -108,7 +108,7 @@
 
 /* EventLine */
 
-.event-scroll {
+.scroll {
   position: relative;
   height: calc(100% - 164px);
   overflow-y: scroll;
@@ -116,11 +116,11 @@
   scrollbar-width: none;  /* Firefox */
 }
 
-.event-scroll::-webkit-scrollbar {
+.scroll::-webkit-scrollbar {
   display: none;
 }
 
-.event-section-title {
+.scroll-section-title {
   font-weight: 800;
   font-size: 30px;
   position: relative;

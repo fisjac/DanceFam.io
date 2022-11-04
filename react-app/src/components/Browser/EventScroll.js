@@ -4,8 +4,8 @@ import EventLine from './EventLine'
 export default function EventScroll({events, showCommunity}) {
 
   return (
-    <div className='event-scroll'>
-      <div className='event-section-title'>Events</div>
+    <div className='scroll'>
+      <div className='scroll-section-title'>Events</div>
       {
         Object.values(events)
           .map(event =>{
