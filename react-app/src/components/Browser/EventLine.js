@@ -4,6 +4,7 @@ import {useHistory} from 'react-router-dom'
 
 import * as eventActions from '../../store/events';
 import ModalWrapper from '../../context/Modal'
+import EditEventForm from './forms/EditEventForm';
 
 export default function EventLine({event, showCommunity}) {
   const history = useHistory();
@@ -49,7 +50,7 @@ export default function EventLine({event, showCommunity}) {
           </div>
         </div>
         {userId === event.organiserId && (<div className='eventline-body-right'>
-          <ModalWrapper stopProp={true} form={<div>New Form</div>}>
+          <ModalWrapper stopProp={true} form={<EditEventForm event={event}/>}>
             <div className='clickable-icon'>
               <i className="fa-solid fa-pen"></i>
             </div>
