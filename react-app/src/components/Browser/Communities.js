@@ -5,7 +5,6 @@ import { useHistory } from 'react-router-dom'
 export default function Communities() {
   const history = useHistory();
   const userCommunities = useSelector(state=>state.session.user.communities);
-  console.log('user Communities', Object.keys(userCommunities)[0].replace(' ', '-'))
   return (
     <>
       <div className='planner-title'>Your Communities</div>
