@@ -27,7 +27,7 @@ export default function Browser() {
 
   return events && communities && (
       <div className='main-page'>
-        <LeftBar/>
+        <LeftBar events={events} communities={communities} />
         <div className='center-container'>
           <div className='welcome-user'>{`Welcome ${user.firstName}`}</div>
           <Route exact path='/'>

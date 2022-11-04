@@ -6,10 +6,41 @@ import logo from '../../static/DanceFamBrushNoText.svg';
 import title from '../../static/DanceFamTitle.svg';
 import Communities from './Communities';
 
-export default function LeftBar() {
-  const history = useHistory()
-  const events = useSelector(state=> state.events)
-  const communities = useSelector(state=> state.communities)
+
+function NextEvent ({user, events}) {
+
+  const userEvents = Object.keys(user.events).map(eventId=>events[eventId]);
+
+  if (Object.keys(userEvents).length) {
+    const nextEvent = userEvents.reduce((accum,event)=> {
+      const currentEventDate = new Date(event.start);
+      const currentMinDate = new Date (accum.start);
+      return currentEventDate < currentMinDate ? event : accum
+    })
+    return (
+      <div className='event-box'>
+          <div className='event-box-header'>
+            <div className='event-box-image'>IMG</div>
+            <div className='event-box-title'>{nextEvent.community}</div>
+          </div>
+          <div className='event-box-date'>{nextEvent.start}</div>
+          <div className='event-box-Name'>{nextEvent.name}</div>
+          <div className='event-box-address'>{nextEvent.address}</div>
+          <div className='event-box-city'>{nextEvent.city}</div>
+          <div className='event-box-state'>{nextEvent.state}</div>
+      </div>
+    )
+  } else {
+    return (
+      <div className='event-box'>you have no events</div>
+    )
+  }
+}
+
+
+export default function LeftBar({events, communities}) {
+  const history = useHistory();
+  const user = useSelector(state=>state.session.user);
 
   return (
     <div className='left-bar'>
@@ -20,16 +51,7 @@ export default function LeftBar() {
 
       <div className='planner'>
         <div className='planner-title'>Your Next Event</div>
-        <div className='event-box'>
-          <div className='event-box-header'>
-            <div className='event-box-image'>IMG</div>
-            <div className='event-box-title'>Community Name</div>
-          </div>
-          <div className='event-box-date'>Some date</div>
-          <div className='event-box-Name'>Event Title</div>
-          <div className='event-box-Community'>Community Name</div>
-          <div className='event-box-address'>Address Info</div>
-        </div>
+        <NextEvent user={user} events={events}/>
         <Communities/>
       </div>
     </div>

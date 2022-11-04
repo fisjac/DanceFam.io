@@ -104,7 +104,6 @@ def delete_community(id):
 @community_routes.route('/<int:community_id>/events', methods=['POST'])
 @login_required
 def create_event(community_id):
-    print(request.headers, request.get_data())
     community = Community.query.get(community_id)
     if community is None:
         return {
