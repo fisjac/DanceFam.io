@@ -67,7 +67,7 @@ export const createEvent = ({communityId, event}) => async dispatch => {
   if (response.ok) {
     const event = await response.json();
     dispatch(loadEvent(event))
-    dispatch(getEvents())
+    dispatch(communityActions.getCommunity(communityId))
     return response;
   }
   return response;

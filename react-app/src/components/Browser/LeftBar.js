@@ -6,10 +6,17 @@ import logo from '../../static/DanceFamBrushNoText.svg';
 import title from '../../static/DanceFamTitle.svg';
 import Communities from './Communities';
 
-export default function LeftBar() {
-  const history = useHistory()
-  const events = useSelector(state=> state.events)
-  const communities = useSelector(state=> state.communities)
+export default function LeftBar({events, communities}) {
+  const history = useHistory();
+  const user = useSelector(state=>state.session.user);
+  const userEvents = Object.keys(user.events).map(eventId=>events[eventId]);
+
+  console.log('sorted', userEvents.sort((a,b)=> {
+    const dateA = new Date(a.start);
+    const dateB = new Date(b.start);
+    return dateA > dateB
+  }))
+
 
   return (
     <div className='left-bar'>

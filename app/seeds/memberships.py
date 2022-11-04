@@ -9,7 +9,6 @@ def seed_memberships():
     membership.user=demo
     # membership.role=role
     membership.community = dallas
-    print(membership, membership.community, membership.user)
     db.session.add_all([membership])
 
     db.session.commit()

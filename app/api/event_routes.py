@@ -46,9 +46,6 @@ def edit_event(id):
             "statusCode": 401}, 401
     else:
         form = EventForm()
-        print('------------------------')
-        print('start',type(form.data['start']))
-        print('event.start',type(event.start))
         form['csrf_token'].data = request.cookies['csrf_token']
         if form.validate_on_submit():
             event.name = form.data['name']
