@@ -35,6 +35,7 @@ export function AuthForm(props) {
 
 
 export default function Splash() {
+  console.log('On splash page')
   return (
     <div className='splash-page'>
       <div className='splash-top'>
