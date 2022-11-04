@@ -13,7 +13,6 @@ function splitDatetime (dateString) {
 
 export default function EditEventForm({event, setShowModal}) {
   const dispatch = useDispatch();
-  console.log(event)
 
   let [startDateString, startTimeString] = splitDatetime(event.start);
   let [endDateString, endTimeString] = splitDatetime(event.end);
@@ -40,22 +39,25 @@ export default function EditEventForm({event, setShowModal}) {
       e.preventDefault();
       const start = new Date(startDate + 'T' + startTime);
       const end = new Date(startDate + 'T' + startTime);
+      const body = {
+        id: event.id,
+        name,
+        start: dateToBackendFormat(start),
+        end: dateToBackendFormat(end),
+        address,
+        city,
+        state,
+        country,
+        description
+      };
+      console.log(body)
       const response = await dispatch(
-        eventActions.updateEvent({
-            name,
-            start: dateToBackendFormat(start),
-            end: dateToBackendFormat(end),
-            address,
-            city,
-            state,
-            country,
-            description
-          }));
+        eventActions.updateEvent(body));
       if (response.ok) {
         setShowModal(false)
       } else {
         const data = await response.json()
-        setErrors(data)
+        setErrors(data.errors)
       };
     };
 

@@ -1,5 +1,7 @@
 from flask import Blueprint, jsonify, request
 from flask_login import login_required, current_user
+from datetime import datetime
+
 from app.models import Event, db
 from app.forms.event_form import EventForm
 event_routes = Blueprint('events', __name__)
@@ -29,6 +31,40 @@ def event(id):
         "message": "Event couldn't be found",
         "statusCode": 404}, 404
     return event.to_dict()
+
+# EDIT by Id
+@event_routes.route('/<int:id>', methods=['PUT'])
+def edit_event(id):
+    event = Event.query.get(id)
+    if event is None:
+        return {
+            "message": "Event couldn't be found",
+            "statusCode": 404}, 404
+    elif event.organiser_id != current_user.id:
+        return {
+            "message": "User not authorized to delete this community",
+            "statusCode": 401}, 401
+    else:
+        form = EventForm()
+        print('------------------------')
+        print('start',type(form.data['start']))
+        print('event.start',type(event.start))
+        form['csrf_token'].data = request.cookies['csrf_token']
+        if form.validate_on_submit():
+            event.name = form.data['name']
+            event.start = form.data['start']
+            event.end = form.data['end']
+            event.description = form.data['description']
+            event.city = form.data['city']
+            event.state = form.data['state']
+            event.address = form.data['address']
+            event.country = form.data['country']
+
+            # db.session.commit()
+            return event.to_dict()
+        else:
+            return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+
 
 # DELETE by Id
 @event_routes.route('/<int:id>', methods=['DELETE'])

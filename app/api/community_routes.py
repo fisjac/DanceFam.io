@@ -80,9 +80,6 @@ def edit_community(id):
         else:
             return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
-
-
-
 # DELETE by Id
 @community_routes.route('/<int:id>', methods=['DELETE'])
 def delete_community(id):
