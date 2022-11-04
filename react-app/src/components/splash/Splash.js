@@ -22,7 +22,7 @@ export function AuthForm(props) {
       </ModalWrapper>
       <ModalWrapper
         form={<SignUpForm/>}
-        // closePrev={props.setShowModal}
+        closePrev={props.setShowModal}
         header='Sign Up'
         >
         <div className='dropdown-button'>

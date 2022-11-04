@@ -43,7 +43,7 @@ class Event(db.Model):
   # Relationships
   community = db.relationship("Community", back_populates="events")
 
-  registrations = db.relationship("Registration", back_populates="event")
+  registrations = db.relationship("Registration", back_populates="event", cascade='delete')
 
 
   # styles = db.relationship("Style", secondary=event_styles, back_populates="events")
@@ -83,7 +83,8 @@ class Event(db.Model):
       "community": self.community.name,
       "organiserId": self.organiser_id,
       "attendeeCount": len(self.registrations),
-      "attendees": [registration.user.safe_info() for registration in self.registrations]
+      "attendees": {} if len(list(self.registrations)) == 0\
+        else {registration.user.id: registration.user.safe_info() for registration in self.registrations},
     }
 
 # class Style(db.Model):
