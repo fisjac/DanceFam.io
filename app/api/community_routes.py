@@ -39,7 +39,7 @@ def create_community():
         membership.community = community
         db.session.add_all([community,membership])
         db.session.commit()
-        return community.to_dict()
+        return community.to_dict_detailed()
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
 
@@ -62,7 +62,7 @@ def delete_community(id):
         return {
             "message": "Community couldn't be found",
             "statusCode": 404}, 404
-    elif Membership.get_owner_id(id) != current_user.id:
+    elif Membership.get_owner(id)['id'] != current_user.id:
         return {
             "message": "User not authorized to delete this community",
             "statusCode": 401}, 401
@@ -91,7 +91,6 @@ def create_event(community_id):
     else:
         form = EventForm()
         form['csrf_token'].data = request.cookies['csrf_token']
-        print(form.data)
         if form.validate_on_submit():
             event = Event(
                 organiser_id = current_user.id,

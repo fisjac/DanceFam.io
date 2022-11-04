@@ -50,7 +50,7 @@ export default function EventLine({event, showCommunity}) {
         </div>
         {userId === event.organiserId && (<div className='eventline-body-right'>
           <ModalWrapper stopProp={true} form={<div>New Form</div>}>
-            <div className='clickable-icon' onClick={(e)=>console.log('stopprop')}>
+            <div className='clickable-icon'>
               <i className="fa-solid fa-pen"></i>
             </div>
           </ModalWrapper>

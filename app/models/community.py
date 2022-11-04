@@ -1,3 +1,4 @@
+from flask import jsonify
 from .db import db
 from .storage.role import Role
 from .membership import Membership
@@ -28,7 +29,6 @@ class Community(db.Model):
       'description': self.description,
       'memberCount': len(list(self.memberships)),
       'members': {membership.user.id: membership.user.safe_info() for membership in self.memberships},
-      'events': {} if len(list(self.events)) == 0\
-        else {event.id: event.id for event in self.events},
+      'events': {} if len(list(self.events)) == 0 else {event.id: event.id for event in self.events},
       'owner': Membership.get_owner(self.id),
     }
