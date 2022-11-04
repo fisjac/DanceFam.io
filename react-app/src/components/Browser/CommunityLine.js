@@ -15,7 +15,7 @@ export default function EventLine({community}) {
       className='eventline-container'
       onClick={(e)=>{
         if(e.target.className.includes('eventline')) {
-          history.push(`/${community.name.replace(' ','-')}`)
+          history.push(`/${community.name.replaceAll(' ','-')}`)
         }
 
       }}

@@ -15,7 +15,7 @@ export default function CommunityPage({events, communities}) {
   const dispatch = useDispatch();
   const history = useHistory();
   const params = useParams();
-  const communityName = params.community.replace('-', ' ');
+  const communityName = params.community.replaceAll('-', ' ');
   const userId = useSelector(state=>state.session.user.id)
   const singleCommunity = communities[communityName]
 

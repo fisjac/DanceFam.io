@@ -19,7 +19,7 @@ export default function EventLine({event, showCommunity}) {
       className='eventline-container'
       onClick={(e)=>{
         if(e.target.className.includes('eventline')) {
-          history.push(`/${event.community.replace(' ','-')}/events/${event.id}`)
+          history.push(`/${event.community.replaceAll(' ','-')}/events/${event.id}`)
         }
 
       }}
@@ -39,7 +39,7 @@ export default function EventLine({event, showCommunity}) {
                 onClick={(e)=>{
                   e.stopPropagation();
                   history.push(`/${event.community
-                    .replace(' ','-')}`)
+                    .replaceAll(' ','-')}`)
                   }
                 }
                 >Hosted by: {event.community}</div>
