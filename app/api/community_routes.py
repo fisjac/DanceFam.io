@@ -18,7 +18,7 @@ def validation_errors_to_error_messages(validation_errors):
     return errorMessages
 
 # GET all
-@community_routes.route('/')
+@community_routes.route('')
 def communities():
     communities = Community.query.all()
     return jsonify([community.to_dict() for community in communities])
