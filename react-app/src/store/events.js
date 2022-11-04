@@ -77,12 +77,11 @@ export const updateEvent = (event) => async dispatch => {
   const response = await fetch(`/api/events/${event.id}`,{
     method: 'PUT',
     headers: {'Content-Type': 'application/json'},
-    body: event
+    body: JSON.stringify(event)
   });
   if (response.ok) {
     const event = await response.json();
     dispatch(editEvent(event));
-    await dispatch(loadEvents())
     return response;
   };
   return response;
@@ -105,24 +104,26 @@ export const deleteEvent = (eventId, communityId) => async dispatch => {
 };
 
 
-const initialState = {allEvents: null, singleEvent: null};
+const initialState = null;
 
 export default function eventsReducer(state = initialState, action) {
   switch (action.type) {
     case LOAD_EVENTS:
-      const allEvents = action.payload.reduce((obj, event)=>{
+      return action.payload.reduce((obj, event)=>{
         obj[event.id]= event
         return obj
       },{})
-      return {...state, allEvents};
     case LOAD_EVENT:
-      return {...state, singleEvent: {...action.payload}};
+      return {...state, [action.payload.id]: action.payload}
     case EDIT:
-      return {...state, singleEvent: {...action.payload}};
+      return {
+        ...state,
+        [action.payload.id]: {...action.payload}
+      };
     case DELETE:
-      let newEvents = {...state.allEvents};
+      let newEvents = {...state};
       delete newEvents[action.payload];
-      return {allEvents: {...newEvents}, singleEvent: null};
+      return {...newEvents};
     default:
       return state;
   }

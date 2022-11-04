@@ -44,7 +44,7 @@ export default function CreateEventForm({communityId, setShowModal}) {
       setShowModal(false)
     } else {
       const data = await response.json()
-      setErrors(data)
+      setErrors(data.errors)
     };
   };
 

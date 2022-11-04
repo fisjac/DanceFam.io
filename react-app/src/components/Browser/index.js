@@ -16,8 +16,8 @@ import CommunityScroll from './CommunityScroll';
 
 export default function Browser() {
   const dispatch = useDispatch()
-  const allEvents = useSelector(state=>state.events.allEvents);
-  const allCommunities = useSelector(state=>state.communities.allCommunities);
+  const events = useSelector(state=>state.events);
+  const communities = useSelector(state=>state.communities);
   const user = useSelector(state=>state.session.user)
 
   useEffect(()=>{
@@ -25,20 +25,20 @@ export default function Browser() {
     dispatch(communityActions.getCommunities())
   },[dispatch])
 
-  return (
+  return events && communities && (
       <div className='main-page'>
         <LeftBar/>
         <div className='center-container'>
           <div className='welcome-user'>{`Welcome ${user.firstName}`}</div>
           <Route exact path='/'>
-            {allCommunities && <CommunityScroll communities={allCommunities}/>}
-            {allEvents && <EventScroll showCommunity={true} events={allEvents}/>}
+            {communities && <CommunityScroll communities={communities}/>}
+            {events && <EventScroll showCommunity={true} events={events}/>}
           </Route>
           <Route exact path='/:community'>
-            <CommunityPage/>
+            <CommunityPage communities={communities} events={events}/>
           </Route>
           <Route exact path='/:community/events/:eventId'>
-            <EventPage/>
+            <EventPage communities={communities} events={events}/>
           </Route>
         </div>
         <RightBar/>

@@ -6,25 +6,18 @@ import { useHistory, useParams } from 'react-router-dom';
 import ModalWrapper from '../../context/Modal'
 import * as communityActions from '../../store/communities';
 import CreateEventForm from './forms/CreateEventForm';
+import EditCommunityForm from './forms/EditCommunityForm';
 import EventScroll from './EventScroll';
 
 import './CommunityPage.css'
 
-export default function CommunityPage() {
+export default function CommunityPage({events, communities}) {
   const dispatch = useDispatch();
   const history = useHistory();
   const params = useParams();
   const communityName = params.community.replace('-', ' ');
-
-  const allEvents = useSelector(state=>state.events.allEvents);
-  const allCommunities = useSelector(state=>state.communities.allCommunities);
-  const singleCommunity = useSelector(state=>state.communities.singleCommunity);
   const userId = useSelector(state=>state.session.user.id)
-
-  const communityId = allCommunities[communityName].id;
-  useEffect(()=> {
-    dispatch(communityActions.getCommunity(communityId));
-  },[dispatch, communityId, allEvents])
+  const singleCommunity = communities[communityName]
 
   return singleCommunity && (
     <div className='community-page-main'>
@@ -43,8 +36,11 @@ export default function CommunityPage() {
           <div className='community-page-right-icons'>
           {userId === singleCommunity.owner.id && (
               <>
-              <ModalWrapper form={<CreateEventForm communityId={communityId}/>}>
+              <ModalWrapper form={<CreateEventForm communityId={singleCommunity.id}/>}>
                 <div className='add-button'><i className="fa-solid fa-plus"></i></div>
+              </ModalWrapper>
+              <ModalWrapper form={<EditCommunityForm community={singleCommunity}/>}>
+                <div className='add-button'><i className="fa-solid fa-pen"></i></div>
               </ModalWrapper>
               <div className='add-button' onClick={
                 async (e)=>{
@@ -64,7 +60,7 @@ export default function CommunityPage() {
           </div>
         </div>
       </div>
-      <EventScroll showCommunity={false} events={Object.keys(singleCommunity.events).map(id=>allEvents[id])}/>
+      <EventScroll showCommunity={false} events={Object.keys(singleCommunity.events).map(id=>events[id])}/>
     </div>
   )
 }

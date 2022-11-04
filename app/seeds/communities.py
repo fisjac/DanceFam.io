@@ -6,7 +6,7 @@ def seed_communities():
     austin = Community(name='Austin WCS')
 
 
-    db.session.add_all([houston, dallas, austin])
+    db.session.add_all([dallas])
     db.session.commit()
 
 

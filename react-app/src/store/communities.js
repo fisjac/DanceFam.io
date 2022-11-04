@@ -75,15 +75,16 @@ export const createCommunity = (community) => async dispatch => {
 };
 
 export const updateCommunity = (community) => async dispatch => {
+  const body = {name: community.name, description: community.description};
+  console.log(body);
   const response = await fetch(`/api/communities/${community.id}`,{
     method: 'PUT',
     headers: {'Content-Type': 'application/json'},
-    body: community
+    body: JSON.stringify(body)
   });
   if (response.ok) {
     const community = await response.json();
     dispatch(editCommunity(community));
-    dispatch(loadCommunities())
     return response;
   };
   return response;
@@ -102,46 +103,29 @@ export const deleteCommunity = (communityId, communityName) => async dispatch =>
 };
 
 
-const initialState = {allCommunities: null, singleCommunity: null};
+const initialState = null;
 
 export default function communitiesReducer(state = initialState, action) {
   switch (action.type) {
     case LOAD_COMMUNITIES:
-      const allCommunities = action.payload.reduce((obj, community)=>{
+      return action.payload.reduce((obj, community)=>{
         obj[community.name]= community
         return obj
-      },{})
-      return {...state, allCommunities};
+      },{});
     case LOAD_COMMUNITY:
       return {
-        allCommunities: {
-          ...state.allCommunities,
-          [action.payload.name]: {
-            id: action.payload.id,
-            memberCount: action.payload.memberCount,
-            name: action.payload.name,
-            owner: action.payload.owner
-          }
-        },
-        singleCommunity: {...action.payload}
+          ...state,
+          [action.payload.name]: {...action.payload}
       };
     case EDIT:
       return {
-        allCommunities: {
-          ...state.allCommunities,
-          [action.payload.name]: {
-            id: action.payload.id,
-            memberCount: action.payload.memberCount,
-            name: action.payload.name,
-            owner: action.payload.owner
-          }
-        },
-        singleCommunity: {...action.payload}
+        ...state,
+          [action.payload.name]: {...action.payload}
       };
     case DELETE:
-      const newCommunities = {...state.allCommunities}
-      delete allCommunities[action.payload]
-      return {allCommunities: newCommunities, singleCommunity: null};
+      const newCommunities = {...state}
+      delete newCommunities[action.payload]
+      return {...newCommunities};
     default:
       return state;
   }

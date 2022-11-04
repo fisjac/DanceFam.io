@@ -1,7 +1,7 @@
 .navbar {
   padding: 0 10px;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
   position: relative;
   top: 0;
@@ -68,6 +68,7 @@
 .navbar-rhs {
   display: flex;
   align-items: center;
+  justify-self: flex-end;
   justify-content: space-evenly;
 }
 

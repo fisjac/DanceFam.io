@@ -28,12 +28,7 @@ const NavBar = () => {
   const user = useSelector(state=>state.session.user)
   return (
     <div className='navbar'>
-      <DropDownWrapper menu={<CreateMenu/>}>
-        <div className='navbar-button'>
-          <i className="fa-solid fa-plus"></i>
-        </div>
-      </DropDownWrapper>
-        <div className='search-area'>
+        {/* <div className='search-area'>
           <div className='mag-glass'>
             <i className="fa-solid fa-magnifying-glass"></i>
           </div>
@@ -41,8 +36,13 @@ const NavBar = () => {
             type='text'
             className='search-input'
             />
-        </div>
+        </div> */}
       <div className='navbar-rhs'>
+        <DropDownWrapper menu={<CreateMenu/>}>
+          <div className='navbar-button'>
+            <i className="fa-solid fa-plus"></i>
+          </div>
+        </DropDownWrapper>
         <DropDownWrapper menu={
           <div className='user-dropdown'>
             {user && <LogoutButton />}

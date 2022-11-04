@@ -5,19 +5,19 @@ import { useHistory } from 'react-router-dom';
 
 import * as communityActions from '../../../store/communities';
 
-export default function CreateCommunityForm({setShowModal}) {
+export default function EditCommunityForm({community, setShowModal}) {
   const history = useHistory();
 
   const [errors, setErrors] = useState([]);
-  const [name, setName] = useState('');
-  const [description, setDescription] = useState('');
+  const [name, setName] = useState(community.name);
+  const [description, setDescription] = useState(community.description);
 
   const dispatch = useDispatch();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const response = await dispatch(
-      communityActions.createCommunity({name, description})
+      communityActions.updateCommunity({id: community.id, name, description})
       );
     if (response.ok) {
       setShowModal(false)
