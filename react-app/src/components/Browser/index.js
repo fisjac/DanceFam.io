@@ -12,6 +12,7 @@ import EventPage from './EventPage';
 import RightBar from './RightBar';
 
 import './Browser.css'
+import CommunityScroll from './CommunityScroll';
 
 export default function Browser() {
   const dispatch = useDispatch()
@@ -30,6 +31,7 @@ export default function Browser() {
         <div className='center-container'>
           <div className='welcome-user'>{`Welcome ${user.firstName}`}</div>
           <Route exact path='/'>
+            {allCommunities && <CommunityScroll communities={allCommunities}/>}
             {allEvents && <EventScroll showCommunity={true} events={allEvents}/>}
           </Route>
           <Route exact path='/:community'>

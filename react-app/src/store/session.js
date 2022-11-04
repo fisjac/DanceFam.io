@@ -16,14 +16,14 @@ export const removeUser = () => ({
   type: REMOVE_USER,
 })
 
-export const addCommunity = (communityId) => ({
+export const addCommunity = (communityName) => ({
   type: ADD_COMMUNITY,
-  payload: communityId
+  payload: communityName
 });
 
-export const removeCommunity = (communityId) => ({
+export const removeCommunity = (communityName) => ({
   type: REMOVE_COMMUNITY,
-  payload: communityId
+  payload: communityName
 });
 
 export const addEvent = (eventId) => ({
@@ -56,7 +56,6 @@ export const authenticate = () => async (dispatch) => {
 }
 
 export const login = (credential, password) => async (dispatch) => {
-  console.log(credential, password)
   const response = await fetch('/api/auth/login', {
     method: 'POST',
     headers: {
