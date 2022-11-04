@@ -31,10 +31,8 @@ export default function ModalWrapper(props) {
   const handleClick = (stopProp, closePrev) => {
     return (e)=> {
       if (stopProp) e.stopPropagation();
-      console.log('opening')
       setShowModal(true);
       if (closePrev) {
-        console.log('closing previous')
         closePrev(false)
       };
     };
