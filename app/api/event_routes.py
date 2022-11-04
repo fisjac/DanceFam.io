@@ -15,7 +15,7 @@ def validation_errors_to_error_messages(validation_errors):
     return errorMessages
 
 # GET all
-@event_routes.route('/')
+@event_routes.route('')
 def events():
     events = Event.query.all()
     return jsonify([event.to_dict() for event in events])
