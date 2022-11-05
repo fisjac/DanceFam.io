@@ -1,7 +1,7 @@
 from app.models import db, Community
 
 def seed_communities():
-    dallas = Community(name='Dallas WCS', image_url='https://img1.wsimg.com/isteam/ip/0879c21b-987b-4263-844c-d14ccfae383b/Gary%20Susan%20provided.jpg/:/cr=t:8.27%25,l:0%25,w:100%25,h:49.73%25/rs=w:600,h:300,cg:true')
+    dallas = Community(name='Dallas WCS', image_url='https://assets3.thrillist.com/v1/image/3095612/1584x1056/crop;webp=auto;jpeg_quality=60;progressive.jpg')
 
 
     db.session.add_all([dallas])

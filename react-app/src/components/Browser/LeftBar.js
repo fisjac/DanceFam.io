@@ -8,6 +8,7 @@ import Communities from './Communities';
 
 
 function NextEvent ({user, events}) {
+  const history = useHistory();
 
   const userEvents = Object.keys(user.events).map(eventId=>events[eventId]);
 
@@ -20,11 +21,11 @@ function NextEvent ({user, events}) {
     return (
       <div className='event-box'>
           <div className='event-box-header'>
-            <div className='event-box-image'>IMG</div>
-            <div className='event-box-title'>{nextEvent.community}</div>
+            <div className='event-box-image' style={{backgroundImage: `url(${nextEvent.imageUrl})`}}></div>
+            <div className='event-box-title'>{nextEvent.name}</div>
           </div>
           <div className='event-box-date'>{nextEvent.start}</div>
-          <div className='event-box-Name'>{nextEvent.name}</div>
+          <div className='event-box-community-name' onClick={()=>history.push(`/${nextEvent.community.replaceAll(' ','-')}`)}>{nextEvent.community}</div>
           <div className='event-box-address'>{nextEvent.address}</div>
           <div className='event-box-city'>{nextEvent.city}</div>
           <div className='event-box-state'>{nextEvent.state}</div>
@@ -52,7 +53,7 @@ export default function LeftBar({events, communities}) {
       <div className='planner'>
         <div className='planner-title'>Your Next Event</div>
         <NextEvent user={user} events={events}/>
-        <Communities/>
+        <Communities communities={communities}/>
       </div>
     </div>
   );
