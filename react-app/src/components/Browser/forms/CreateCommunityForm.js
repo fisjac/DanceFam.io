@@ -52,6 +52,7 @@ export default function CreateCommunityForm({setShowModal}) {
           type='textarea'
           onChange={(e)=>setDescription(e.target.value)}
           value={description}
+          placeholder='Description'
           />
       </div>
 

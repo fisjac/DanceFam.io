@@ -42,10 +42,13 @@
   display: flex;
   flex-direction: column;
   font-size: 1.125rem;
+  margin-bottom: 4px;
+  font-weight: 600;
+  align-items: center;
 }
 
 #modal-logo {
-  height: 80px;
+  height: 50px;
 }
 
 #modal-close-button {
@@ -69,10 +72,14 @@
   display: flex;
 }
 
+.errors {
+  height: fit-content;
+}
 .error {
   color: red;
   font-style: italic;
 }
+
 
 form {
   display: flex;
@@ -89,13 +96,36 @@ label {
   padding: 0 2px;
 }
 
+form > div {
+  width: 100%;
+  height: 30px;
+  margin: 2px 0;
+  padding-top: 5px;
+}
+
 input {
   flex-grow: 1;
+  width: 100%;
   /* margin: 2px; */
+  outline: none;
 }
 
 button {
+  height: 25px;
   margin: 2px;
+  padding: 2px;
+  background-color: var(--theme-default);
+  color: var(--theme-background-grey);
+  font-weight: 600;
+  border: none;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: .3s;
+}
+
+button:hover {
+  box-shadow: 2px 2px 2px var(--shadow);
+  background-color: var(--theme-dark);
 }
 
 form div {

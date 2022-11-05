@@ -14,7 +14,7 @@ import CreateCommunityForm from './Browser/forms/CreateCommunityForm';
 
 const CreateMenu = () => {
   return (
-    <div>
+    <div className='create-dropdown'>
       <ModalWrapper form={<CreateCommunityForm/>}>
         <div>Create Community</div>
       </ModalWrapper>
