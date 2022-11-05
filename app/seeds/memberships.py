@@ -1,7 +1,7 @@
 from app.models import db, User, Community, Membership #, Role
 
 def seed_memberships():
-    dallas = db.session.query(Community).get(2)
+    dallas = db.session.query(Community).get(1)
     # role = db.session.query(Role).get(1)
     demo = db.session.query(User).get(1)
 
