@@ -48,7 +48,8 @@ export default function EditCommunityForm({community, setShowModal}) {
 
       <div>
         <label>Description</label>
-        <input
+        <textarea
+          className='textarea-input'
           type='textarea'
           onChange={(e)=>setDescription(e.target.value)}
           value={description}

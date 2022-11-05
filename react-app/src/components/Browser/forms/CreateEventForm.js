@@ -66,37 +66,40 @@ export default function CreateEventForm({communityId, setShowModal}) {
           value={name}
           placeholder='Name'
           required
-          />
+        />
       </div>
-      <div>
+      <div className='datetime-input'>
         <label>Start</label>
         <input
           type='Date'
           onChange={(e)=>setStartDate(e.target.value)}
           value={startDate}
           required
-          />
+        />
         <input
           type='Time'
+          className='time-input'
           onChange={(e)=>setStartTime(e.target.value)}
           value={startTime}
           required
-          />
+        />
       </div>
-      <div>
-      <label>End</label>
+
+      <div className='datetime-input'>
+        <label>End</label>
         <input
             type='Date'
             onChange={(e)=>setEndDate(e.target.value)}
             value={endDate}
             required
-            />
-          <input
-            type='Time'
-            onChange={(e)=>setEndTime(e.target.value)}
-            value={endTime}
-            required
-            />
+          />
+        <input
+          className='time-input'
+          type='Time'
+          onChange={(e)=>setEndTime(e.target.value)}
+          value={endTime}
+          required
+        />
       </div>
       <div>
         <label>Address</label>
@@ -105,7 +108,7 @@ export default function CreateEventForm({communityId, setShowModal}) {
           onChange={(e)=>setAddress(e.target.value)}
           value={address}
           required
-          />
+        />
       </div>
       <div>
         <label>City</label>
@@ -114,7 +117,7 @@ export default function CreateEventForm({communityId, setShowModal}) {
           onChange={(e)=>setCity(e.target.value)}
           value={city}
           required
-          />
+        />
       </div>
       <div>
         <label>State</label>
@@ -123,7 +126,7 @@ export default function CreateEventForm({communityId, setShowModal}) {
           onChange={(e)=>setState(e.target.value)}
           value={state}
           required
-          />
+        />
       </div>
       <div>
         <label>Country</label>
@@ -132,15 +135,16 @@ export default function CreateEventForm({communityId, setShowModal}) {
           onChange={(e)=>setCountry(e.target.value)}
           value={country}
           required
-          />
+        />
       </div>
       <div>
         <label>Description</label>
-        <input
+        <textarea
+          className='textarea-input'
           type='textarea'
           onChange={(e)=>setDescription(e.target.value)}
           value={description}
-          />
+        />
       </div>
 
       <div>
@@ -150,7 +154,7 @@ export default function CreateEventForm({communityId, setShowModal}) {
           onChange={(e)=>setImageUrl(e.target.value)}
           value={imageUrl}
           placeholder='Image Url'
-          />
+        />
       </div>
 
       <button type='submit'>Confirm</button>
