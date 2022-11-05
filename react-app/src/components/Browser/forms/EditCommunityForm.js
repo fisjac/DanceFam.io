@@ -11,13 +11,14 @@ export default function EditCommunityForm({community, setShowModal}) {
   const [errors, setErrors] = useState([]);
   const [name, setName] = useState(community.name);
   const [description, setDescription] = useState(community.description);
+  const [imageUrl, setImageUrl] = useState(community.imageUrl);
 
   const dispatch = useDispatch();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const response = await dispatch(
-      communityActions.updateCommunity({id: community.id, name, description})
+      communityActions.updateCommunity({id: community.id, name, description, image_url: imageUrl})
       );
     if (response.ok) {
       setShowModal(false)
@@ -51,6 +52,15 @@ export default function EditCommunityForm({community, setShowModal}) {
           type='textarea'
           onChange={(e)=>setDescription(e.target.value)}
           value={description}
+          />
+      </div>
+      <div>
+        <label>Image Url</label>
+        <input
+          type='text'
+          onChange={(e)=>setImageUrl(e.target.value)}
+          value={imageUrl}
+          placeholder='Image Url'
           />
       </div>
 

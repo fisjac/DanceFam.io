@@ -28,6 +28,7 @@ export default function EditEventForm({event, setShowModal}) {
   const [state, setState] = useState(event.state);
   const [country, setCountry] = useState(event.country);
   const [description, setDescription] = useState(event.description);
+  const [imageUrl, setImageUrl] = useState(event.imageUrl);
   if (event) {
 
     const dateToBackendFormat = (date) => {
@@ -48,7 +49,8 @@ export default function EditEventForm({event, setShowModal}) {
         city,
         state,
         country,
-        description
+        description,
+        image_url: imageUrl,
       };
       console.log(body)
       const response = await dispatch(
@@ -153,7 +155,15 @@ export default function EditEventForm({event, setShowModal}) {
             value={description}
             />
         </div>
-
+        <div>
+        <label>Image Url</label>
+        <input
+          type='text'
+          onChange={(e)=>setImageUrl(e.target.value)}
+          value={imageUrl}
+          placeholder='Image Url'
+          />
+      </div>
 
         <button type='submit'>Confirm</button>
       </form>

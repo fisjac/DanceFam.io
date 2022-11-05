@@ -32,9 +32,13 @@ def create_community():
     form = CommunityForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
+        if form.data['image_url']:
+            image_url = form.data['image_url']
+        else: image_url = None
         community = Community(
             name=form.data['name'],
-            description=form.data['description']
+            description=form.data['description'],
+            image_url = image_url,
         )
         membership = Membership(owner_status=True)
         membership.user = current_user
@@ -75,6 +79,8 @@ def edit_community(id):
                 community.name = form.data['name']
             if form.data['description']:
                 community.description = form.data['description']
+            if form.data['image_url']:
+                community.image_url = form.data['image_url']
             db.session.commit()
             return community.to_dict()
         else:
@@ -117,6 +123,9 @@ def create_event(community_id):
         form = EventForm()
         form['csrf_token'].data = request.cookies['csrf_token']
         if form.validate_on_submit():
+            if form.data['image_url']:
+                image_url = form.data['image_url']
+            else: image_url = None
             event = Event(
                 organiser_id = current_user.id,
                 community_id = community_id,
@@ -128,6 +137,8 @@ def create_event(community_id):
                 state = form.data['state'],
                 address = form.data['address'],
                 country = form.data['country'],
+                image_url = image_url,
+
             )
 
             event.community = community

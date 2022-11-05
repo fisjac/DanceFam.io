@@ -6,3 +6,4 @@ from app.models import Community
 class EditCommunityForm(FlaskForm):
     name = StringField('Name', validators=[DataRequired()])
     description = StringField('Description')
+    image_url = StringField('Image Url')

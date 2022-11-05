@@ -16,6 +16,7 @@ export default function CreateEventForm({communityId, setShowModal}) {
   const [state, setState] = useState('');
   const [country, setCountry] = useState('');
   const [description, setDescription] = useState('');
+  const [imageUrl, setImageUrl] = useState('');
 
   const dispatch = useDispatch();
   const dateToBackendFormat = (date) => {
@@ -38,7 +39,8 @@ export default function CreateEventForm({communityId, setShowModal}) {
           city,
           state,
           country,
-          description}
+          description,
+          image_url: imageUrl,}
         }));
     if (response.ok) {
       setShowModal(false)
@@ -141,6 +143,15 @@ export default function CreateEventForm({communityId, setShowModal}) {
           />
       </div>
 
+      <div>
+        <label>Image Url</label>
+        <input
+          type='text'
+          onChange={(e)=>setImageUrl(e.target.value)}
+          value={imageUrl}
+          placeholder='Image Url'
+          />
+      </div>
 
       <button type='submit'>Confirm</button>
     </form>

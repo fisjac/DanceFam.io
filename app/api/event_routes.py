@@ -56,8 +56,9 @@ def edit_event(id):
             event.state = form.data['state']
             event.address = form.data['address']
             event.country = form.data['country']
-
-            # db.session.commit()
+            if form.data['image_url']:
+                event.image_url = form.data['image_url']
+            db.session.commit()
             return event.to_dict()
         else:
             return {'errors': validation_errors_to_error_messages(form.errors)}, 401
