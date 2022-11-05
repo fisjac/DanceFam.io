@@ -122,7 +122,7 @@
 .eventscroll {
   position: relative;
   background-color: white;
-  height: calc(100% - 37.6px);
+  height: calc(100% - 39.6px);
   overflow-y: scroll;
   -ms-overflow-style: none;
   scrollbar-width: none;
