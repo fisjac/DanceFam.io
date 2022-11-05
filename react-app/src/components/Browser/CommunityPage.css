@@ -39,7 +39,7 @@ height: 100%;
   justify-self: flex-end;
 }
 
-.add-button {
+.icon-button {
   display: flex;
   justify-content: center;
   align-items: center;

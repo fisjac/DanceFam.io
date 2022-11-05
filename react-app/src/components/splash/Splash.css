@@ -54,6 +54,10 @@
   border: none;
 }
 
+.join-button:hover {
+  background-color: red;
+}
+
 .dancers-img {
   width: 250px;
   transition: .5s

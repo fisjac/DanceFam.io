@@ -19,7 +19,9 @@ function NextEvent ({user, events}) {
       return currentEventDate < currentMinDate ? event : accum
     })
     return (
-      <div className='event-box'>
+      <div
+        className='event-box'
+        onClick={()=>history.push(`/${nextEvent.community.replaceAll(' ','-')}/events/${nextEvent.id}`)}>
           <div className='event-box-header'>
             <div className='event-box-image' style={{backgroundImage: `url(${nextEvent.imageUrl})`}}></div>
             <div className='event-box-title'>{nextEvent.name}</div>

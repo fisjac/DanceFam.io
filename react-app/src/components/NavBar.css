@@ -96,7 +96,7 @@
 
 .create-dropdown {
   background-color: white;
-  transform: translateY(50%) translateX(-100%);
+  transform: translateY(100%) translateX(-100%);
   box-shadow: 1px 1px 1px 1px var(--shadow);
   border-radius: 5px;
   width: 150px;

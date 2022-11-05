@@ -62,6 +62,11 @@
   border-radius: 5px;
   padding: 5px;
   margin: 5px;
+  cursor: pointer;
+}
+
+.event-box:hover {
+  box-shadow: 1px 2px 2px var(--shadow);
 }
 
 .event-box-header {
@@ -103,8 +108,8 @@
   flex-direction: column;
   flex-grow: 1;
   overflow-y: scroll;
-  /* -ms-overflow-style: none; */
-  /* scrollbar-width: none;  */
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 .center-container::-webkit-scrollbar {
   display: none;

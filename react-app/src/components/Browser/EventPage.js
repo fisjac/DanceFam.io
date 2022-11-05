@@ -22,12 +22,13 @@ export default function EventPage({communities, events}) {
         <div className='eventpage-title'>{event.name}</div>
         {userId === event.organiserId && <div className='eventpage-rhs-icons'>
           <ModalWrapper
+            header='Edit this event'
             form={<EditEventForm event={event}/>}
             >
-            <div className='add-button'><i className="fa-solid fa-pen"></i></div>
+            <div className='icon-button'><i className="fa-solid fa-pen"></i></div>
           </ModalWrapper>
           <div
-            className='add-button'
+            className='icon-button'
             onClick={
               async (e)=>{
                 e.stopPropagation()

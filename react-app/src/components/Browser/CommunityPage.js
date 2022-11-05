@@ -28,12 +28,12 @@ export default function CommunityPage({events, communities}) {
           {userId === singleCommunity.owner.id && (
               <>
               <ModalWrapper form={<CreateEventForm communityId={singleCommunity.id}/>}>
-                <div className='add-button'><i className="fa-solid fa-plus"></i></div>
+                <div className='icon-button'><i className="fa-solid fa-plus"></i></div>
               </ModalWrapper>
               <ModalWrapper form={<EditCommunityForm community={singleCommunity}/>}>
-                <div className='add-button'><i className="fa-solid fa-pen"></i></div>
+                <div className='icon-button'><i className="fa-solid fa-pen"></i></div>
               </ModalWrapper>
-              <div className='add-button' onClick={
+              <div className='icon-button' onClick={
                 async (e)=>{
                   e.stopPropagation()
                   if (window.confirm(`Are you sure you want to delete ${singleCommunity.name}?`)) {
