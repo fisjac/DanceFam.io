@@ -1,0 +1,26 @@
+.eventpage-header {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px 0;
+  border-bottom: 1px solid var(--shadow);
+}
+
+.eventpage-title {
+  font-weight: 800;
+  font-size: 28px;
+  position: sticky;
+  top: 0;
+}
+
+.eventpage-rhs-icons {
+  display: flex;
+}
+
+.eventpage-image {
+  width: 100%;
+  height: 250px;
+  background-size: cover;
+  resize:both;
+  background-position: 50%;
+  border-radius: 10px;
+}

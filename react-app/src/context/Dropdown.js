@@ -43,7 +43,7 @@ export function Dropdown (props) {
 
   return (
     <div
-      className={`dropdown_container ${props.showMenu ? undefined : 'hidden' }`}
+      className={`dropdown_container ${props.showMenu ? '' : 'hidden' }`}
       >
       {newMenu}
     </div>

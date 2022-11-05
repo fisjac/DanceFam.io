@@ -15,7 +15,10 @@ import './Splash.css'
 export function AuthForm(props) {
   return (
     <div className='auth-form'>
-      <ModalWrapper form={<LoginForm/>} closePrev={props.setShowModal} header='Log In'>
+      <ModalWrapper
+        form={<LoginForm/>}
+        closePrev={props.setShowModal}
+        header='Log In'>
         <div className='dropdown-button'>
           Log In
         </div>

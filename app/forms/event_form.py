@@ -12,3 +12,4 @@ class EventForm(FlaskForm):
     state = StringField('State', validators=[DataRequired()])
     address = StringField('Address', validators=[DataRequired()])
     country = StringField('Country', validators=[DataRequired()])
+    image_url = StringField('Image Url')

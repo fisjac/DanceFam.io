@@ -10,6 +10,7 @@ class Community(db.Model):
   id = db.Column(db.Integer, primary_key=True)
   name = db.Column(db.String(255), nullable=False)
   description = db.Column(db.String(255))
+  image_url = db.Column(db.String(255))
 
   memberships = db.relationship("Membership", back_populates="community",cascade='delete')
   events = db.relationship('Event', back_populates='community', cascade='delete')
@@ -24,4 +25,5 @@ class Community(db.Model):
       'members': {membership.user.id: membership.user.safe_info() for membership in self.memberships},
       'events': {} if len(list(self.events)) == 0 else {event.id: event.id for event in self.events},
       'owner': Membership.get_owner(self.id),
+      'imageUrl': self.image_url,
     }

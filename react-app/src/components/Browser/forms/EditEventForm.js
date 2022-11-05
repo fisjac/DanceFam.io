@@ -28,6 +28,7 @@ export default function EditEventForm({event, setShowModal}) {
   const [state, setState] = useState(event.state);
   const [country, setCountry] = useState(event.country);
   const [description, setDescription] = useState(event.description);
+  const [imageUrl, setImageUrl] = useState(event.imageUrl);
   if (event) {
 
     const dateToBackendFormat = (date) => {
@@ -48,9 +49,9 @@ export default function EditEventForm({event, setShowModal}) {
         city,
         state,
         country,
-        description
+        description,
+        image_url: imageUrl,
       };
-      console.log(body)
       const response = await dispatch(
         eventActions.updateEvent(body));
       if (response.ok) {
@@ -79,7 +80,7 @@ export default function EditEventForm({event, setShowModal}) {
             required
             />
         </div>
-        <div>
+        <div className='datetime-input'>
           <label>Start</label>
           <input
             type='Date'
@@ -88,13 +89,14 @@ export default function EditEventForm({event, setShowModal}) {
             required
             />
           <input
+            className='time-input'
             type='Time'
             onChange={(e)=>setStartTime(e.target.value)}
             value={startTime}
             required
             />
         </div>
-        <div>
+        <div className='datetime-input'>
         <label>End</label>
           <input
               type='Date'
@@ -104,6 +106,7 @@ export default function EditEventForm({event, setShowModal}) {
               />
             <input
               type='Time'
+              className='time-input'
               onChange={(e)=>setEndTime(e.target.value)}
               value={endTime}
               required
@@ -147,13 +150,22 @@ export default function EditEventForm({event, setShowModal}) {
         </div>
         <div>
           <label>Description</label>
-          <input
-            type='textarea'
+          <textarea
+            className='textarea-input'
+
             onChange={(e)=>setDescription(e.target.value)}
             value={description}
             />
         </div>
-
+        <div>
+        <label>Image Url</label>
+        <input
+          type='text'
+          onChange={(e)=>setImageUrl(e.target.value)}
+          value={imageUrl}
+          placeholder='Image Url'
+          />
+      </div>
 
         <button type='submit'>Confirm</button>
       </form>

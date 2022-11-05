@@ -75,10 +75,47 @@
 
 .user-dropdown {
   background-color: white;
-  transform: translateY(100%) translateX(-50%);
+  transform: translateY(100%) translateX(-100%);
   box-shadow: 1px 1px 1px 1px var(--shadow);
   border-radius: 5px;
   width: 150px;
+}
+.user-dropdown div {
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px;
+  cursor: pointer;
+}
+.user-dropdown div:hover {
+  background-color: var(--theme-background-grey);
+  font-weight: bold;
+  color: var(--theme-dark);
+}
+
+.create-dropdown {
+  background-color: white;
+  transform: translateY(100%) translateX(-100%);
+  box-shadow: 1px 1px 1px 1px var(--shadow);
+  border-radius: 5px;
+  width: 150px;
+}
+
+.create-dropdown div {
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px;
+  cursor: pointer;
+  color: black;
+}
+
+.create-dropdown div:hover {
+  background-color: var(--theme-background-grey);
+  font-weight: bold;
+  color: var(--theme-dark);
 }
 
 .user-dropdown * {

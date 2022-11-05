@@ -37,6 +37,7 @@ class Event(db.Model):
   state = db.Column(db.String(255))
   address = db.Column(db.String(255))
   country = db.Column(db.String(255))
+  image_url = db.Column(db.String(255))
   community_id = db.Column(db.Integer, db.ForeignKey("communities.id"))
   organiser_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
 
@@ -67,6 +68,7 @@ class Event(db.Model):
       "country": self.country,
       "community": self.community.name,
       "organiserId": self.organiser_id,
+      "imageUrl": self.image_url,
       "attendeeCount": len(self.registrations),
       "attendees": {} if len(list(self.registrations)) == 0\
         else {registration.user.id: registration.user.safe_info() for registration in self.registrations},

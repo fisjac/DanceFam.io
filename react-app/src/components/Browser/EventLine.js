@@ -29,7 +29,7 @@ export default function EventLine({event, showCommunity}) {
       </div>
       <div className='eventline-body'>
         <div className='eventline-body-left'>
-          <div className='eventline-img'></div>
+          <div className='eventline-img' style={{backgroundImage: `url(${event.imageUrl})`}}></div>
           <div className='eventline-details'>
             <div className='eventline-date'>{start.toLocaleDateString(undefined, {weekday: 'short', month: 'short', day: 'numeric',})} ⋅ {start.toLocaleTimeString(undefined, {timeStyle: 'short'})}</div>
             <div className='eventline-name'>{event.name}</div>

@@ -12,9 +12,9 @@ height: 100%;
 
 .community-page-header {
   display: flex;
+  justify-content: space-between;
   padding: 5px 0;
   border-bottom: 1px solid var(--shadow);
-
 }
 
 .community-page-title {
@@ -26,16 +26,20 @@ height: 100%;
 
 .community-page-image {
   background-color: var(--icon-grey);
-  width: 40%;
-  aspect-ratio: 2/1;
-  border-radius: 5px;
+  width: 100%;
+  height: 250px;
+  border-radius: 10px;
+  background-position: 50%;
+  background-size: cover;
+  resize: both;
 }
 
 .community-page-right-icons {
+  display: flex;
   justify-self: flex-end;
 }
 
-.add-button {
+.icon-button {
   display: flex;
   justify-content: center;
   align-items: center;
