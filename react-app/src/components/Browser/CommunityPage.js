@@ -27,10 +27,16 @@ export default function CommunityPage({events, communities}) {
           <div className='community-page-right-icons'>
           {userId === singleCommunity.owner.id && (
               <>
-              <ModalWrapper form={<CreateEventForm communityId={singleCommunity.id}/>}>
+              <ModalWrapper
+                form={<CreateEventForm communityId={singleCommunity.id}/>}
+                header='Create a new Event'
+                >
                 <div className='icon-button'><i className="fa-solid fa-plus"></i></div>
               </ModalWrapper>
-              <ModalWrapper form={<EditCommunityForm community={singleCommunity}/>}>
+              <ModalWrapper
+                form={<EditCommunityForm community={singleCommunity}/>}
+                header='Edit this Community'
+                >
                 <div className='icon-button'><i className="fa-solid fa-pen"></i></div>
               </ModalWrapper>
               <div className='icon-button' onClick={
