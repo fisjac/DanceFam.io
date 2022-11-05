@@ -107,12 +107,6 @@
   padding: 0 5px;
   flex-direction: column;
   flex-grow: 1;
-  overflow-y: scroll;
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
-.center-container::-webkit-scrollbar {
-  display: none;
 }
 
 
@@ -259,7 +253,7 @@
 }
 
 .banner-ad {
-  height: 50%;
+  height: 70%;
   /* min-width: px; */
   background-repeat: no-repeat;
   background-position: 80%;
@@ -289,4 +283,14 @@
 .linkedin-text {
   padding-left: 10px;
   font-size: 12px;
+}
+
+.scroll {
+  overflow-y: scroll;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scroll::-webkit-scrollbar {
+  display: none;
 }
