@@ -70,12 +70,14 @@
 
 .event-box-image {
   background-color: var(--theme-grey);
-  height: 60px;
-  width: 150px;
+  height: 80px;
+  width: 100px;
   display: flex;
   justify-content: center;
   align-items: center;
   background-size: cover;
+  resize: width;
+  background-repeat: no-repeat;
   background-position: 50%;
   border-radius: 5px;
 }

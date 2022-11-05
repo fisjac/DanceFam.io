@@ -22,17 +22,8 @@ export default function CommunityPage({events, communities}) {
   return singleCommunity && (
     <div className='community-page-main'>
       <div className='community-page-top-section'>
-        <div className='community-page-title'>{singleCommunity.name}</div>
         <div className='community-page-header'>
-          <div className='community-page-image'></div>
-          <div className='community-page-details'>
-            <div className='community-page-membercount'>
-                {singleCommunity.memberCount} Members
-            </div>
-            <div>
-              Owner: {`${singleCommunity.owner.firstName} ${singleCommunity.owner.lastName}`}
-            </div>
-          </div>
+          <div className='community-page-title'>{singleCommunity.name}</div>
           <div className='community-page-right-icons'>
           {userId === singleCommunity.owner.id && (
               <>
@@ -57,6 +48,15 @@ export default function CommunityPage({events, communities}) {
               } ><i className="fa-solid fa-trash"></i></div>
               </>
             )}
+          </div>
+        </div>
+        <div className='community-page-image' style={{backgroundImage: `url(${singleCommunity.imageUrl})`}}></div>
+        <div className='community-page-details'>
+          <div className='community-page-membercount'>
+              {singleCommunity.memberCount} Members
+          </div>
+          <div>
+            Owner: {`${singleCommunity.owner.firstName} ${singleCommunity.owner.lastName}`}
           </div>
         </div>
       </div>

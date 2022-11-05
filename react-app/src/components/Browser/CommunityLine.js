@@ -22,7 +22,7 @@ export default function EventLine({community}) {
       >
       <div className='eventline-body'>
         <div className='eventline-body-left'>
-          <div className='eventline-img'></div>
+          <div className='eventline-img' style={{backgroundImage: `url(${community.imageUrl})`}}></div>
             <div className='eventline-name'>{community.name}</div>
             <div className='eventline-attendees'>
               {community.memberCount} members
