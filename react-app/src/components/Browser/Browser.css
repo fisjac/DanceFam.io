@@ -4,6 +4,7 @@
   position: relative;
   padding: 0 10px;
   flex-grow: 1;
+  justify-items: stretch;
   height: calc(100vh - 80px)
 }
 
@@ -102,33 +103,54 @@
 
 /* Main portion */
 .center-container {
+  /* position: relative; */
   display: flex;
   margin: 0 20px;
   padding: 0 5px;
   flex-direction: column;
   flex-grow: 1;
+  height: 100%;
 }
 
+.communityscroll {
+  position: sticky;
+  background-color: white;
+  top: 47;
+  height: max-content;
+}
 
-/* EventLine */
-
-.scroll {
+.eventscroll {
   position: relative;
-  height: calc(100% - 164px);
+  background-color: white;
+  height: calc(100% - 37.6px);
   overflow-y: scroll;
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
-.scroll::-webkit-scrollbar {
+.eventscroll::-webkit-scrollbar {
   display: none;
 }
 
-.scroll-section-title {
+/* EventLine */
+
+.communityscroll-title {
   font-weight: 800;
   font-size: 30px;
-  position: relative;
-  top:0;
+  position: sticky;
+  top: 0px;
+  background-color: white;
+  /* height: 100%; */
+  border-bottom: 1px solid var(--shadow);
+}
+
+.eventscroll-title {
+  font-weight: 800;
+  font-size: 30px;
+  position: sticky;
+  top: 0;
+  background-color: white;
+  border-bottom: 1px solid var(--shadow);
   /* height: 100%; */
 }
 
@@ -138,10 +160,9 @@
 }
 
 .eventline-header {
-  position: sticky;
   background-color: white;
+  position: sticky;
   top: 0;
-  z-index: 0;
   font-weight: 600;
   font-size: 20px;
   border-bottom: 1px solid var(--shadow);
@@ -293,4 +314,9 @@
 
 .scroll::-webkit-scrollbar {
   display: none;
+}
+
+.sticky {
+  position: sticky;
+  top: 0;
 }

@@ -1,11 +1,13 @@
 import React from 'react'
 import CommunityLine from './CommunityLine'
+import EventScroll from './EventScroll'
 
-export default function CommunityScroll({communities}) {
+export default function CommunityScroll({communities, events}) {
 
   return (
+    <>
+    <div className='communityscroll-title'>Communities</div>
     <div className='scroll'>
-      <div className='scroll-section-title'>Communities</div>
       {
         Object.values(communities)
           .map(community =>(
@@ -13,6 +15,8 @@ export default function CommunityScroll({communities}) {
             )
           )
       }
+    {<EventScroll showCommunity={true} events={events}/>}
     </div>
+    </>
   )
 };

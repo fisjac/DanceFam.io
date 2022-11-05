@@ -22,8 +22,8 @@ export default function CommunityPage({events, communities}) {
   return singleCommunity && (
     <div className='community-page-main'>
       <div className='community-page-top-section'>
-        <div className='community-page-header'>
-          <div className='community-page-title sticky'>{singleCommunity.name}</div>
+        <div className='community-page-header sticky'>
+          <div className='community-page-title'>{singleCommunity.name}</div>
           <div className='community-page-right-icons'>
           {userId === singleCommunity.owner.id && (
               <>

@@ -9,6 +9,7 @@ height: 100%;
 
 .community-page-header {
   display: flex;
+  background-color: white;
   justify-content: space-between;
   padding: 5px 0;
   border-bottom: 1px solid var(--shadow);
@@ -27,6 +28,7 @@ height: 100%;
   background-position: 50%;
   background-size: cover;
   resize: both;
+  margin-top: 4px ;
 }
 
 .community-page-right-icons {
@@ -48,13 +50,4 @@ height: 100%;
 
 .add-button:hover {
   box-shadow: 1px 1px 1px 1px var(--shadow);
-}
-
-.sticky {
-  position: sticky;
-  top: 0;
-}
-
-.scroll {
-
 }
