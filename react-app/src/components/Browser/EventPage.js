@@ -12,6 +12,7 @@ export default function EventPage({communities, events}) {
   const event = events[params.eventId]
   const history = useHistory();
   const dispatch = useDispatch();
+  const userId = useSelector(state=>state.session.user.id)
 
   const start = new Date(event.start);
   const end = new Date(event.end);
@@ -19,7 +20,7 @@ export default function EventPage({communities, events}) {
     <>
       <div className='eventpage-header'>
         <div className='eventpage-title'>{event.name}</div>
-        <div className='eventpage-rhs-icons'>
+        {userId === event.organiserId && <div className='eventpage-rhs-icons'>
           <ModalWrapper
             form={<EditEventForm event={event}/>}
             >
@@ -43,7 +44,7 @@ export default function EventPage({communities, events}) {
             >
             <i className="fa-solid fa-trash"></i>
           </div>
-        </div>
+        </div>}
       </div>
       <div className = 'eventpage-image' style={{backgroundImage: `url(${event.imageUrl})`}}></div>
       <div className='eventline-date'>Start: {start.toLocaleDateString(undefined, {weekday: 'short', month: 'short', day: 'numeric',})} ⋅ {start.toLocaleTimeString(undefined, {timeStyle: 'short'})}</div>
