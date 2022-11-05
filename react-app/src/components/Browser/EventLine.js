@@ -15,6 +15,11 @@ export default function EventLine({event, showCommunity}) {
   const communityId = communities? communities[event.community].id : null;
 
   return communities && (
+    <>
+
+    <div className='eventline-header'>
+      {start.toLocaleDateString(undefined, {weekday: 'long',month: 'long', day: 'numeric'})}
+    </div>
     <div
       className='eventline-container'
       onClick={(e)=>{
@@ -24,9 +29,6 @@ export default function EventLine({event, showCommunity}) {
 
       }}
       >
-      <div className='eventline-header'>
-        {start.toLocaleDateString(undefined, {weekday: 'long',month: 'long', day: 'numeric'})}
-      </div>
       <div className='eventline-body'>
         <div className='eventline-body-left'>
           <div className='eventline-img' style={{backgroundImage: `url(${event.imageUrl})`}}></div>
@@ -72,5 +74,6 @@ export default function EventLine({event, showCommunity}) {
 
       </div>
     </div>
+    </>
   )
 }

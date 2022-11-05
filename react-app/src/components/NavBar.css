@@ -17,14 +17,19 @@
   color: var(--icon-grey)
 }
 
-.navbar-button {
+.icon-button {
   display: flex;
+  width: 32px;
+  height: 32px;
   text-decoration: none;
   align-items: center;
+  justify-content: center;
   cursor: pointer;
   padding: 4px;
   border-radius: 4px;
   transition: .5s;
+  color: var(--icon-grey);
+  margin: 2px;
 }
 
 .navbar-button:hover {

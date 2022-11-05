@@ -40,7 +40,7 @@ const NavBar = () => {
         </div> */}
       <div className='navbar-rhs'>
         <DropDownWrapper menu={<CreateMenu/>}>
-          <div className='navbar-button'>
+          <div className='icon-button'>
             <i className="fa-solid fa-plus"></i>
           </div>
         </DropDownWrapper>
@@ -49,7 +49,7 @@ const NavBar = () => {
             {user && <LogoutButton />}
           </div>
         }>
-          <div className='navbar-button'>
+          <div className='icon-button'>
             <i className="fa-solid fa-user"></i>
             <i className="fa-solid fa-caret-down"></i>
           </div>

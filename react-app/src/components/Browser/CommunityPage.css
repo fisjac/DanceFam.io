@@ -4,14 +4,12 @@ height: 100%;
 
 
 .community-page-top-section {
-  position: sticky;
-  /* z-index: 1; */
-  top: 0;
   background-color: white;
 }
 
 .community-page-header {
   display: flex;
+  background-color: white;
   justify-content: space-between;
   padding: 5px 0;
   border-bottom: 1px solid var(--shadow);
@@ -20,8 +18,6 @@ height: 100%;
 .community-page-title {
   font-weight: 800;
   font-size: 28px;
-  position: sticky;
-  top: 0;
 }
 
 .community-page-image {
@@ -32,6 +28,7 @@ height: 100%;
   background-position: 50%;
   background-size: cover;
   resize: both;
+  margin-top: 4px ;
 }
 
 .community-page-right-icons {
