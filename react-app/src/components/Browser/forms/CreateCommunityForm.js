@@ -32,7 +32,7 @@ export default function CreateCommunityForm({setShowModal}) {
     <form method='POST' onSubmit={handleSubmit}>
       <div className='errors'>
         {errors.map((error, idx) => (
-          <div key={idx}>{error}</div>
+          <div className='error' key={idx}>{error}</div>
         ))}
       </div>
       <div>
@@ -48,7 +48,8 @@ export default function CreateCommunityForm({setShowModal}) {
 
       <div>
         <label>Description</label>
-        <input
+        <textarea
+          className='textarea-input'
           type='textarea'
           onChange={(e)=>setDescription(e.target.value)}
           value={description}

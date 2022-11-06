@@ -67,7 +67,7 @@ export default function EditEventForm({event, setShowModal}) {
       <form method='POST' onSubmit={handleSubmit}>
         <div className='errors'>
           {errors.map((error, idx) => (
-            <div key={idx}>{error}</div>
+            <div className='error' key={idx}>{error}</div>
           ))}
         </div>
         <div>

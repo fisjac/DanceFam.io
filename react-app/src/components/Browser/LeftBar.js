@@ -20,8 +20,8 @@ function NextEvent ({user, events}) {
     })
 
     const start = new Date(nextEvent.start);
-    const end = new Date(nextEvent.end);
 
+    console.log('in LeftBar Component')
     return (
       <div
         className='event-box'

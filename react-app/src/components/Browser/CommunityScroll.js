@@ -3,6 +3,7 @@ import CommunityLine from './CommunityLine'
 import EventScroll from './EventScroll'
 
 export default function CommunityScroll({communities, events}) {
+  console.log('in Main/CommunityScroll Component')
 
   return (
     <>

@@ -20,11 +20,13 @@ export default function Browser() {
   const communities = useSelector(state=>state.communities);
   const user = useSelector(state=>state.session.user)
 
-  useEffect(()=>{
-    dispatch(eventActions.getEvents())
-    dispatch(communityActions.getCommunities())
+  useEffect(async ()=>{
+    console.log('in useEffect index component')
+    await dispatch(eventActions.getEvents())
+    await dispatch(communityActions.getCommunities())
   },[dispatch])
 
+  console.log('in index component')
   return events && communities && (
       <div className='main-page'>
         <LeftBar events={events} communities={communities} />

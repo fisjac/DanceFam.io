@@ -65,8 +65,8 @@ export const createCommunity = (community) => async dispatch => {
   });
   if (response.ok) {
     const community = await response.json();
-    await dispatch(sessionActions.addCommunity(community.name))
     await dispatch(loadCommunity(community));
+    await dispatch(sessionActions.addCommunity(community.name))
     return response;
   } else {
     return response;
@@ -83,7 +83,7 @@ export const updateCommunity = (community) => async dispatch => {
   });
   if (response.ok) {
     const community = await response.json();
-    dispatch(editCommunity(community));
+    await dispatch(editCommunity(community));
     return response;
   };
   return response;
@@ -95,7 +95,9 @@ export const deleteCommunity = (communityId, communityName) => async dispatch =>
   });
   if (response.ok) {
     await dispatch(sessionActions.removeCommunity(communityName))
-    await dispatch(deleteCommunity(communityId))
+    console.log('removed community from state.session')
+    await dispatch(removeCommunity(communityName))
+    console.log('removed community from state.communities')
     return response;
   };
   return response;
