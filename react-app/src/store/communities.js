@@ -1,4 +1,7 @@
+import * as eventActions from './events';
 import * as sessionActions from './session';
+
+import {batch} from 'react-redux';
 
 const LOAD_COMMUNITIES = 'communities/LOAD_ALL';
 const LOAD_COMMUNITY = 'communities/LOAD_ONE';
@@ -89,15 +92,16 @@ export const updateCommunity = (community) => async dispatch => {
   return response;
 };
 
-export const deleteCommunity = (communityId, communityName) => async dispatch => {
+export const deleteCommunity = (communityId) => async dispatch => {
   const response = await fetch (`/api/communities/${communityId}`,{
     method: 'DELETE'
   });
   if (response.ok) {
-    await dispatch(sessionActions.removeCommunity(communityName))
-    console.log('removed community from state.session')
-    await dispatch(removeCommunity(communityName))
-    console.log('removed community from state.communities')
+    await dispatch(sessionActions.authenticate())
+    batch(async()=>{
+      await dispatch(eventActions.getEvents())
+      await dispatch(removeCommunity(communityId))
+    })
     return response;
   };
   return response;

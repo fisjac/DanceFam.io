@@ -96,7 +96,7 @@ export const deleteEvent = (eventId, communityId) => async dispatch => {
   });
   if (response.ok) {
     await dispatch(communityActions.getCommunity(communityId))
-    await dispatch(sessionActions.removeEvent(eventId))
+    await dispatch(sessionActions.authenticate())
     await dispatch(removeEvent(eventId))
     return response;
   };

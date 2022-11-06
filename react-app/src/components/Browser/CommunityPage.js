@@ -20,9 +20,7 @@ export default function CommunityPage() {
   const history = useHistory();
   const params = useParams();
   const communityId = params.communityId;
-  console.log(params)
   const singleCommunity = communities[communityId]
-  console.log(singleCommunity)
 
   if (!singleCommunity) {
     return <Redirect to='/'/>

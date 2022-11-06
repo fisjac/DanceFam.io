@@ -8,6 +8,9 @@ export default function CommunityScroll() {
   const communities = useSelector(state=>state.communities);
   const events = useSelector(state=>state.events);
 
+  console.log('communities',communities)
+  console.log('events',events)
+
   return (
     <>
     <div className='communityscroll-title'>Communities</div>

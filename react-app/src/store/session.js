@@ -143,7 +143,6 @@ export default function sessionReducer(state = initialState, action) {
       delete newEvents[action.payload]
       return {user : {...state.user, events: newEvents}}
     default:
-      console.log('hitting default case')
       return state;
   }
 }
