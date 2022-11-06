@@ -18,6 +18,10 @@ function NextEvent ({user, events}) {
       const currentMinDate = new Date (accum.start);
       return currentEventDate < currentMinDate ? event : accum
     })
+
+    const start = new Date(nextEvent.start);
+    const end = new Date(nextEvent.end);
+
     return (
       <div
         className='event-box'
@@ -26,11 +30,20 @@ function NextEvent ({user, events}) {
             <div className='event-box-image' style={{backgroundImage: `url(${nextEvent.imageUrl})`}}></div>
             <div className='event-box-title'>{nextEvent.name}</div>
           </div>
-          <div className='event-box-date'>{nextEvent.start}</div>
+          <div className='event-box-date'>{start.toLocaleDateString(undefined, {weekday: 'short', month: 'short', day: 'numeric',})} ⋅ {start.toLocaleTimeString(undefined, {timeStyle: 'short'})}</div>
           <div className='event-box-community-name' onClick={()=>history.push(`/${nextEvent.community.replaceAll(' ','-')}`)}>{nextEvent.community}</div>
-          <div className='event-box-address'>{nextEvent.address}</div>
-          <div className='event-box-city'>{nextEvent.city}</div>
-          <div className='event-box-state'>{nextEvent.state}</div>
+          <div className='event-box-address-line'>
+            <div className='address-section'>
+            <div className='event-box-address'>{nextEvent.address}</div>
+              <div className='city-state'>
+                <div className='event-box-city'>{nextEvent.city}</div>,
+                <div className='event-box-state'>{nextEvent.state}</div>
+              </div>
+            </div>
+            <div className='location-icon'>
+              <i className="fa-solid fa-location-dot"></i>
+            </div>
+          </div>
       </div>
     )
   } else {

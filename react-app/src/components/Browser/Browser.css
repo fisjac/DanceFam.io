@@ -44,6 +44,21 @@
 
 }
 
+.event-box-date {
+
+}
+
+.event-box-community-name  {
+  color: grey;
+  cursor: pointer;
+}
+.event-box-community-name:hover {
+  font-weight: 600;
+  font-size: 18px;
+  color: var(--theme-dark);
+  transition: font-size .3s;
+}
+
 
 .planner {
   width: 100%;
@@ -99,6 +114,33 @@
 .event-box-date {
   margin-top: 5px;
   border-top: 1px solid var(--shadow);
+}
+
+.event-box-date {
+  font-weight: 800;
+  /* font-size: 16px; */
+  color: var(--theme-dark);
+}
+
+.event-box-address-line {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: grey;
+}
+
+.address-section {
+  display: flex;
+  flex-direction: column;
+}
+
+.city-state {
+display: flex;
+}
+
+.location-icon {
+color: grey;
+font-size: 25px;
 }
 
 /* Main portion */

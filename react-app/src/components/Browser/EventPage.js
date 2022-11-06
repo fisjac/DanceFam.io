@@ -14,6 +14,7 @@ export default function EventPage({communities, events}) {
   const dispatch = useDispatch();
   const userId = useSelector(state=>state.session.user.id)
 
+  if (!event) {history.push(`/${params.community}`)}
   const start = new Date(event.start);
   const end = new Date(event.end);
   return (
@@ -33,14 +34,15 @@ export default function EventPage({communities, events}) {
               async (e)=>{
                 e.stopPropagation()
                 if (window.confirm(`Are you sure you want to delete ${event.name}?`)) {
-                const response = await dispatch(
-                  eventActions.deleteEvent(event.id, event.community)
-                );
-                if (response.ok) {
-                  history.push('/')
-                  alert(`${event.name} successfully deleted.`)
-                };
-              }}
+                  history.push(`/${event.community.replaceAll(' ','-')}`)
+                  const response = await dispatch(
+                    eventActions.deleteEvent(event.id, communities[event.community])
+                    );
+                  if (response.ok) {
+                    alert(`${event.name} successfully deleted.`)
+                  };
+                }
+              }
             }
             >
             <i className="fa-solid fa-trash"></i>
