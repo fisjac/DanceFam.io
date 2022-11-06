@@ -32,7 +32,7 @@
   margin: 2px;
 }
 
-.navbar-button:hover {
+.icon-button:hover {
   background-color: var(--theme-dark);
 }
 

@@ -1,4 +1,7 @@
+import * as eventActions from './events';
 import * as sessionActions from './session';
+
+import {batch} from 'react-redux';
 
 const LOAD_COMMUNITIES = 'communities/LOAD_ALL';
 const LOAD_COMMUNITY = 'communities/LOAD_ONE';
@@ -65,8 +68,8 @@ export const createCommunity = (community) => async dispatch => {
   });
   if (response.ok) {
     const community = await response.json();
-    await dispatch(sessionActions.addCommunity(community.name))
     await dispatch(loadCommunity(community));
+    await dispatch(sessionActions.addCommunity(community.id))
     return response;
   } else {
     return response;
@@ -83,19 +86,22 @@ export const updateCommunity = (community) => async dispatch => {
   });
   if (response.ok) {
     const community = await response.json();
-    dispatch(editCommunity(community));
+    await dispatch(editCommunity(community));
     return response;
   };
   return response;
 };
 
-export const deleteCommunity = (communityId, communityName) => async dispatch => {
+export const deleteCommunity = (communityId) => async dispatch => {
   const response = await fetch (`/api/communities/${communityId}`,{
     method: 'DELETE'
   });
   if (response.ok) {
-    await dispatch(sessionActions.removeCommunity(communityName))
-    await dispatch(deleteCommunity(communityId))
+    await dispatch(sessionActions.authenticate())
+    batch(async()=>{
+      await dispatch(eventActions.getEvents())
+      await dispatch(removeCommunity(communityId))
+    })
     return response;
   };
   return response;
@@ -108,18 +114,18 @@ export default function communitiesReducer(state = initialState, action) {
   switch (action.type) {
     case LOAD_COMMUNITIES:
       return action.payload.reduce((obj, community)=>{
-        obj[community.name]= community
+        obj[community.id]= community
         return obj
       },{});
     case LOAD_COMMUNITY:
       return {
           ...state,
-          [action.payload.name]: {...action.payload}
+          [action.payload.id]: {...action.payload}
       };
     case EDIT:
       return {
         ...state,
-          [action.payload.name]: {...action.payload}
+          [action.payload.id]: {...action.payload}
       };
     case DELETE:
       const newCommunities = {...state}

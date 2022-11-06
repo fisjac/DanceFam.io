@@ -9,13 +9,13 @@ export default function EventLine({community}) {
   const history = useHistory();
   const dispatch = useDispatch();
   const userId = useSelector(state=>state.session.user.id);
-
+  console.log(community)
   return (
     <div
       className='eventline-container'
       onClick={(e)=>{
         if(e.target.className.includes('eventline')) {
-          history.push(`/${community.name.replaceAll(' ','-')}`)
+          history.push(`/${community.id}`)
         }
 
       }}

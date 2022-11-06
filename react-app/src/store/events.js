@@ -91,12 +91,12 @@ export const updateEvent = (event) => async dispatch => {
 };
 
 export const deleteEvent = (eventId, communityId) => async dispatch => {
-  const response = await fetch (`api/events/${eventId}`,{
+  const response = await fetch (`/api/events/${eventId}`,{
     method: 'DELETE'
   });
   if (response.ok) {
-    if (communityId) await dispatch(communityActions.getCommunity(communityId))
-    await dispatch(sessionActions.removeEvent(eventId))
+    await dispatch(communityActions.getCommunity(communityId))
+    await dispatch(sessionActions.authenticate())
     await dispatch(removeEvent(eventId))
     return response;
   };

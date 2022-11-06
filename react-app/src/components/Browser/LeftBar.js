@@ -7,7 +7,7 @@ import title from '../../static/DanceFamTitle.svg';
 import Communities from './Communities';
 
 
-function NextEvent ({user, events}) {
+function NextEvent ({user, events, communities}) {
   const history = useHistory();
 
   const userEvents = Object.keys(user.events).map(eventId=>events[eventId]);
@@ -18,19 +18,38 @@ function NextEvent ({user, events}) {
       const currentMinDate = new Date (accum.start);
       return currentEventDate < currentMinDate ? event : accum
     })
+
+    const start = new Date(nextEvent.start);
+
+    console.log('in LeftBar Component')
     return (
       <div
         className='event-box'
-        onClick={()=>history.push(`/${nextEvent.community.replaceAll(' ','-')}/events/${nextEvent.id}`)}>
+        onClick={()=>history.push(`/${nextEvent.communityId}/events/${nextEvent.id}`)}>
           <div className='event-box-header'>
             <div className='event-box-image' style={{backgroundImage: `url(${nextEvent.imageUrl})`}}></div>
             <div className='event-box-title'>{nextEvent.name}</div>
           </div>
-          <div className='event-box-date'>{nextEvent.start}</div>
-          <div className='event-box-community-name' onClick={()=>history.push(`/${nextEvent.community.replaceAll(' ','-')}`)}>{nextEvent.community}</div>
-          <div className='event-box-address'>{nextEvent.address}</div>
-          <div className='event-box-city'>{nextEvent.city}</div>
-          <div className='event-box-state'>{nextEvent.state}</div>
+          <div className='event-box-date'>{start.toLocaleDateString(undefined, {weekday: 'short', month: 'short', day: 'numeric',})} ⋅ {start.toLocaleTimeString(undefined, {timeStyle: 'short'})}</div>
+          <div
+            className='event-box-community-name'
+            onClick={(e)=>{
+              e.stopPropagation();
+              history.push(`/${nextEvent.communityId}`)
+              }}
+            >{communities[nextEvent.communityId].name}</div>
+          <div className='event-box-address-line'>
+            <div className='address-section'>
+            <div className='event-box-address'>{nextEvent.address}</div>
+              <div className='city-state'>
+                <div className='event-box-city'>{nextEvent.city}</div>,
+                <div className='event-box-state'>{nextEvent.state}</div>
+              </div>
+            </div>
+            <div className='location-icon'>
+              <i className="fa-solid fa-location-dot"></i>
+            </div>
+          </div>
       </div>
     )
   } else {
@@ -41,9 +60,11 @@ function NextEvent ({user, events}) {
 }
 
 
-export default function LeftBar({events, communities}) {
+export default function LeftBar() {
   const history = useHistory();
   const user = useSelector(state=>state.session.user);
+  const communities = useSelector(state=>state.communities);
+  const events = useSelector(state=>state.events);
 
   return (
     <div className='left-bar'>
@@ -54,7 +75,7 @@ export default function LeftBar({events, communities}) {
 
       <div className='planner'>
         <div className='planner-title'>Your Next Event</div>
-        <NextEvent user={user} events={events}/>
+        <NextEvent user={user} events={events} communities={communities}/>
         <Communities communities={communities}/>
       </div>
     </div>

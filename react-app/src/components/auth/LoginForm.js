@@ -35,29 +35,31 @@ const LoginForm = () => {
 
   return (
     <form onSubmit={onLogin}>
-      {+errors > 0  && <div>
-        {errors.map((error, ind) => (
-          <div className='error' key={ind}>{error}</div>
+      {<div className='errors'>
+        {errors.map((error, idx) => (
+          <div className='error' key={idx}>{error}</div>
         ))}
       </div>}
       <div className='input-field'>
-        <label htmlFor='credential'>Credential</label>
+        <label htmlFor='credential'>Credential *</label>
         <input
           name='credential'
           type='text'
           placeholder='Username/Email'
           value={credential}
           onChange={updateCredential}
+          required
         />
       </div>
       <div className='input-field'>
-        <label htmlFor='password'>Password</label>
+        <label htmlFor='password'>Password *</label>
         <input
           name='password'
           type='password'
           placeholder='Password'
           value={password}
           onChange={updatePassword}
+          required
         />
       </div>
       <button type='submit'>Login</button>

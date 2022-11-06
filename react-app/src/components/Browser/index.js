@@ -27,17 +27,17 @@ export default function Browser() {
 
   return events && communities && (
       <div className='main-page'>
-        <LeftBar events={events} communities={communities} />
+        <LeftBar/>
         <div className='center-container scroll'>
           <div className='welcome-user'>{`Welcome ${user.firstName}`}</div>
           <Route exact path='/'>
-            {communities && <CommunityScroll communities={communities} events={events}/>}
+            {communities && <CommunityScroll/>}
           </Route>
-          <Route exact path='/:community'>
-            <CommunityPage communities={communities} events={events}/>
+          <Route exact path='/:communityId'>
+            <CommunityPage/>
           </Route>
-          <Route exact path='/:community/events/:eventId'>
-            <EventPage communities={communities} events={events}/>
+          <Route exact path='/:communityId/events/:eventId'>
+            <EventPage/>
           </Route>
         </div>
         <RightBar/>
