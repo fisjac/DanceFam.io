@@ -7,7 +7,9 @@ import * as eventActions from '../../store/events';
 import EditEventForm from './forms/EditEventForm';
 import './EventPage.css'
 
-export default function EventPage({communities, events}) {
+export default function EventPage() {
+  const communities = useSelector(state=>state.communities);
+  const events = useSelector(state=>state.events);
   const params = useParams();
   const event = events[params.eventId]
   const history = useHistory();

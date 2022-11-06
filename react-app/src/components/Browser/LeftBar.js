@@ -60,9 +60,11 @@ function NextEvent ({user, events, communities}) {
 }
 
 
-export default function LeftBar({events, communities}) {
+export default function LeftBar() {
   const history = useHistory();
   const user = useSelector(state=>state.session.user);
+  const communities = useSelector(state=>state.communities);
+  const events = useSelector(state=>state.events);
 
   return (
     <div className='left-bar'>

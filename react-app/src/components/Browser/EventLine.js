@@ -43,7 +43,7 @@ export default function EventLine({event, showCommunity}) {
                   history.push(`/${event.communityId}`)
                   }
                 }
-                >Hosted by: {event.community}</div>
+                >Hosted by: {communities[event.communityId].name}</div>
                 )}
             <div className='eventline-attendees'>
               {event.attendeeCount} attendees

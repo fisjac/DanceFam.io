@@ -11,13 +11,18 @@ import EventScroll from './EventScroll';
 
 import './CommunityPage.css'
 
-export default function CommunityPage({events, communities}) {
+export default function CommunityPage() {
+  const communities = useSelector(state=>state.communities);
+  const events = useSelector(state=>state.events);
+  const userId = useSelector(state=>state.session.user.id);
+
   const dispatch = useDispatch();
   const history = useHistory();
   const params = useParams();
   const communityId = params.communityId;
-  const userId = useSelector(state=>state.session.user.id)
+  console.log(params)
   const singleCommunity = communities[communityId]
+  console.log(singleCommunity)
 
   if (!singleCommunity) {
     return <Redirect to='/'/>

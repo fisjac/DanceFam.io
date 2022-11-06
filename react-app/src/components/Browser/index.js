@@ -20,26 +20,24 @@ export default function Browser() {
   const communities = useSelector(state=>state.communities);
   const user = useSelector(state=>state.session.user)
 
-  useEffect(async ()=>{
-    console.log('in useEffect index component')
-    await dispatch(eventActions.getEvents())
-    await dispatch(communityActions.getCommunities())
+  useEffect(()=>{
+    dispatch(eventActions.getEvents())
+    dispatch(communityActions.getCommunities())
   },[dispatch])
 
-  console.log('in index component')
   return events && communities && (
       <div className='main-page'>
-        <LeftBar events={events} communities={communities} />
+        <LeftBar/>
         <div className='center-container scroll'>
           <div className='welcome-user'>{`Welcome ${user.firstName}`}</div>
           <Route exact path='/'>
-            {communities && <CommunityScroll communities={communities} events={events}/>}
+            {communities && <CommunityScroll/>}
           </Route>
           <Route exact path='/:communityId'>
-            <CommunityPage communities={communities} events={events}/>
+            <CommunityPage/>
           </Route>
           <Route exact path='/:communityId/events/:eventId'>
-            <EventPage communities={communities} events={events}/>
+            <EventPage/>
           </Route>
         </div>
         <RightBar/>
