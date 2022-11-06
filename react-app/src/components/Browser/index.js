@@ -35,10 +35,10 @@ export default function Browser() {
           <Route exact path='/'>
             {communities && <CommunityScroll communities={communities} events={events}/>}
           </Route>
-          <Route exact path='/:community'>
+          <Route exact path='/:communityId'>
             <CommunityPage communities={communities} events={events}/>
           </Route>
-          <Route exact path='/:community/events/:eventId'>
+          <Route exact path='/:communityId/events/:eventId'>
             <EventPage communities={communities} events={events}/>
           </Route>
         </div>

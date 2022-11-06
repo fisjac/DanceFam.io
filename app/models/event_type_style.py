@@ -66,7 +66,7 @@ class Event(db.Model):
       "state": self.state,
       "address": self.address,
       "country": self.country,
-      "community": self.community.name,
+      "communityId": self.community_id,
       "organiserId": self.organiser_id,
       "imageUrl": self.image_url,
       "attendeeCount": len(self.registrations),

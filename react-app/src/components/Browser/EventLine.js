@@ -12,7 +12,7 @@ export default function EventLine({event, showCommunity}) {
   const start = new Date(event.start);
   const userId = useSelector(state=>state.session.user.id);
   const communities = useSelector(state=>state.communities);
-  const communityId = communities? communities[event.community].id : null;
+  const communityId = event.communityId;
 
   return communities && (
     <>
@@ -24,7 +24,7 @@ export default function EventLine({event, showCommunity}) {
       className='eventline-container'
       onClick={(e)=>{
         if(e.target.className.includes('eventline')) {
-          history.push(`/${event.community.replaceAll(' ','-')}/events/${event.id}`)
+          history.push(`/${event.communityId}/events/${event.id}`)
         }
 
       }}
@@ -40,8 +40,7 @@ export default function EventLine({event, showCommunity}) {
                 className='eventline-community'
                 onClick={(e)=>{
                   e.stopPropagation();
-                  history.push(`/${event.community
-                    .replaceAll(' ','-')}`)
+                  history.push(`/${event.communityId}`)
                   }
                 }
                 >Hosted by: {event.community}</div>

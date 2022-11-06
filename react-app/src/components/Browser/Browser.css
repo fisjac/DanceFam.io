@@ -266,7 +266,7 @@ font-size: 25px;
 .eventline-img {
   width: 150px;
   height: 100px;
-  background-color: var(--icon-grey);
+  background-color: var(--theme-grey);
   border-radius: 5px;
   background-position: 50%;
   background-size: cover;

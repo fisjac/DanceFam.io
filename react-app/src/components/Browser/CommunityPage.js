@@ -15,9 +15,9 @@ export default function CommunityPage({events, communities}) {
   const dispatch = useDispatch();
   const history = useHistory();
   const params = useParams();
-  const communityName = params.community.replaceAll('-', ' ');
+  const communityId = params.communityId;
   const userId = useSelector(state=>state.session.user.id)
-  const singleCommunity = communities[communityName]
+  const singleCommunity = communities[communityId]
 
   if (!singleCommunity) {
     return <Redirect to='/'/>

@@ -66,7 +66,7 @@ export const createCommunity = (community) => async dispatch => {
   if (response.ok) {
     const community = await response.json();
     await dispatch(loadCommunity(community));
-    await dispatch(sessionActions.addCommunity(community.name))
+    await dispatch(sessionActions.addCommunity(community.id))
     return response;
   } else {
     return response;
@@ -110,18 +110,18 @@ export default function communitiesReducer(state = initialState, action) {
   switch (action.type) {
     case LOAD_COMMUNITIES:
       return action.payload.reduce((obj, community)=>{
-        obj[community.name]= community
+        obj[community.id]= community
         return obj
       },{});
     case LOAD_COMMUNITY:
       return {
           ...state,
-          [action.payload.name]: {...action.payload}
+          [action.payload.id]: {...action.payload}
       };
     case EDIT:
       return {
         ...state,
-          [action.payload.name]: {...action.payload}
+          [action.payload.id]: {...action.payload}
       };
     case DELETE:
       const newCommunities = {...state}
