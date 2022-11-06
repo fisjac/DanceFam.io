@@ -41,23 +41,25 @@ const LoginForm = () => {
         ))}
       </div>}
       <div className='input-field'>
-        <label htmlFor='credential'>Credential</label>
+        <label htmlFor='credential'>Credential *</label>
         <input
           name='credential'
           type='text'
           placeholder='Username/Email'
           value={credential}
           onChange={updateCredential}
+          required
         />
       </div>
       <div className='input-field'>
-        <label htmlFor='password'>Password</label>
+        <label htmlFor='password'>Password *</label>
         <input
           name='password'
           type='password'
           placeholder='Password'
           value={password}
           onChange={updatePassword}
+          required
         />
       </div>
       <button type='submit'>Login</button>

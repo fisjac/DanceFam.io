@@ -141,10 +141,11 @@ input {
   width: 100%;
   /* margin: 2px; */
   outline: none;
+  height: 30px;
 }
 
 button {
-  height: 25px;
+  height: 30px;
   margin-top: 4px;
   padding: 2px;
   background-color: var(--theme-default);

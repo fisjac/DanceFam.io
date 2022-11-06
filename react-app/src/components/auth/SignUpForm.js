@@ -56,62 +56,67 @@ const SignUpForm = () => {
     <form onSubmit={onSignUp}>
       <div className='errors'>
         {errors.map((error, ind) => (
-          <div key={ind}>{error}</div>
+          <div className='error' key={ind}>{error}</div>
         ))}
       </div>
       <div>
-        <label>First Name</label>
+        <label>First Name *</label>
         <input
           type='text'
           name='firstName'
           onChange={updateFirstName}
           value={firstName}
+          required
         ></input>
       </div>
       <div>
-        <label>Last Name</label>
+        <label>Last Name *</label>
         <input
           type='text'
           name='lastName'
           onChange={updateLastName}
           value={lastName}
+          required
         ></input>
       </div>
       <div>
-        <label>User Name</label>
+        <label>User Name*</label>
         <input
           type='text'
           name='username'
           onChange={updateUsername}
           value={username}
+          required
         ></input>
       </div>
       <div>
-        <label>Email</label>
+        <label>Email *</label>
         <input
           type='text'
           name='email'
           onChange={updateEmail}
           value={email}
+          required
         ></input>
       </div>
       <div>
-        <label>Password</label>
+        <label>Password *</label>
         <input
           type='password'
           name='password'
           onChange={updatePassword}
           value={password}
+          required
         ></input>
       </div>
       <div>
-        <label>Confirm Password</label>
+        <label>Confirm Password *</label>
         <input
           type='password'
           name='repeat_password'
           onChange={updateRepeatPassword}
           value={repeatPassword}
-          required={true}
+          required
         ></input>
       </div>
       <button type='submit'>Sign Up</button>
