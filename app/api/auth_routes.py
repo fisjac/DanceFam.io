@@ -41,13 +41,11 @@ def login():
         # Add the user to the session, we are logged in!
         if '@' in form.data['credential']:
             user = User.query.filter(User.email == form.data['credential']).first()
-            if user == None:
-                return {'errors': 'Login information was invalid'}, 401
         else:
             user = User.query.filter(User.username == form.data['credential']).first()
         login_user(user)
         return user.to_dict()
-    return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+    return {'errors': ['Invalid login credentials']}, 401
 
 
 @auth_routes.route('/logout')
