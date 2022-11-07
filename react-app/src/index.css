@@ -28,3 +28,10 @@ body {
   --shadow: rgb(0,0,0,.1);
   --theme-background-grey: #EFEFEF;
 }
+
+img {
+  object-fit: contain;
+  object-position: 50%;
+  resize: vertical;
+  border-radius: 5px;
+}

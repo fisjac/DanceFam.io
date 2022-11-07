@@ -6,6 +6,8 @@ import * as eventActions from '../../store/events';
 import ModalWrapper from '../../context/Modal'
 import EditEventForm from './forms/EditEventForm';
 
+import defaultImage from '../../static/dancing_couple1.svg'
+
 export default function EventLine({event, showCommunity}) {
   const history = useHistory();
   const dispatch = useDispatch();
@@ -31,6 +33,12 @@ export default function EventLine({event, showCommunity}) {
       >
       <div className='eventline-body'>
         <div className='eventline-body-left'>
+          <img
+            className='eventline-img'
+            src={event.imageUrl}
+            alt="community_img"
+            onError={e =>e.currentTarget.src = defaultImage}
+            />
           <div className='eventline-img' style={{backgroundImage: `url(${event.imageUrl})`}}></div>
           <div className='eventline-details'>
             <div className='eventline-date'>{start.toLocaleDateString(undefined, {weekday: 'short', month: 'short', day: 'numeric',})} ⋅ {start.toLocaleTimeString(undefined, {timeStyle: 'short'})}</div>

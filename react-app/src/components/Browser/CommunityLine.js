@@ -4,6 +4,7 @@ import {useHistory} from 'react-router-dom'
 
 import * as communityActions from '../../store/communities';
 import ModalWrapper from '../../context/Modal'
+import defaultImage from '../../static/dancing_couple1.svg'
 
 export default function EventLine({community}) {
   const history = useHistory();
@@ -22,7 +23,13 @@ export default function EventLine({community}) {
       >
       <div className='eventline-body'>
         <div className='eventline-body-left'>
-          <div className='eventline-img' style={{backgroundImage: `url(${community.imageUrl})`}}></div>
+          <img
+              className='eventline-img'
+              src={community.imageUrl}
+              alt="community_img"
+              onError={e =>e.currentTarget.src = defaultImage}
+              />
+
           <div className='eventline-details'>
             <div className='eventline-name'>{community.name}</div>
             <div className='eventline-attendees'>

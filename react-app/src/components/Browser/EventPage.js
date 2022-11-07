@@ -5,6 +5,8 @@ import { useHistory, useParams } from 'react-router-dom';
 import ModalWrapper from '../../context/Modal';
 import * as eventActions from '../../store/events';
 import EditEventForm from './forms/EditEventForm';
+import defaultImage from '../../static/dancing_couple1.svg'
+
 import './EventPage.css'
 
 export default function EventPage() {
@@ -51,7 +53,12 @@ export default function EventPage() {
           </div>
         </div>}
       </div>
-      <div className = 'eventpage-image' style={{backgroundImage: `url(${event.imageUrl})`}}></div>
+      <img
+            className='eventpage-image'
+            src={event.imageUrl}
+            alt="event_img"
+            onError={e =>e.currentTarget.src = defaultImage}
+            />
 
       <div className='flex between'>
         <div className='column-flex'>
