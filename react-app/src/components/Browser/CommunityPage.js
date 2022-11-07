@@ -9,6 +9,8 @@ import CreateEventForm from './forms/CreateEventForm';
 import EditCommunityForm from './forms/EditCommunityForm';
 import EventScroll from './EventScroll';
 
+import defaultImage from '../../static/dancing_couple1.svg'
+
 import './CommunityPage.css'
 
 export default function CommunityPage() {
@@ -62,7 +64,12 @@ export default function CommunityPage() {
               )}
             </div>
           </div>
-          <div className='community-page-image' style={{backgroundImage: `url(${singleCommunity.imageUrl})`}}></div>
+          <img
+            className='community-page-image'
+            src={singleCommunity.imageUrl}
+            alt="community_img"
+            onError={e =>e.currentTarget.src = defaultImage}
+            />
           <div className='community-page-details'>
             <div>
               Owner: {`${singleCommunity.owner.firstName} ${singleCommunity.owner.lastName}`}

@@ -2,6 +2,7 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 
+import defaultImage from '../../static/dancing_couple1.svg'
 
 export default function Communities({communities}) {
   const history = useHistory();
@@ -17,7 +18,12 @@ export default function Communities({communities}) {
       {Object.keys(userCommunities).map(communityId=>(
         <div key={communityId} className='event-box' onClick={()=>history.push(`/${communityId}`)}>
           <div className='event-box-header'>
-            <div className='event-box-image' style={{backgroundImage: `url(${communities[communityId].imageUrl})`}}></div>
+          <img
+            className='event-box-image'
+            src={communities[communityId].imageUrl}
+            alt="community_img"
+            onError={e =>e.currentTarget.src = defaultImage}
+            />
             <div className='event-box-title'>{communities[communityId].name}</div>
           </div>
         </div>

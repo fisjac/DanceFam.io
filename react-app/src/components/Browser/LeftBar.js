@@ -6,6 +6,8 @@ import logo from '../../static/DanceFamBrushNoText.svg';
 import title from '../../static/DanceFamTitle.svg';
 import Communities from './Communities';
 
+import defaultImage from '../../static/dancing_couple1.svg'
+
 
 function NextEvent ({user, events, communities}) {
   const history = useHistory();
@@ -27,6 +29,12 @@ function NextEvent ({user, events, communities}) {
         className='event-box'
         onClick={()=>history.push(`/${nextEvent.communityId}/events/${nextEvent.id}`)}>
           <div className='event-box-header'>
+            <img
+              className='event-box-image'
+              src={nextEvent.imageUrl}
+              alt="event_image"
+              onError={e =>e.currentTarget.src = defaultImage}
+              />
             <div className='event-box-image' style={{backgroundImage: `url(${nextEvent.imageUrl})`}}></div>
             <div className='event-box-title'>{nextEvent.name}</div>
           </div>

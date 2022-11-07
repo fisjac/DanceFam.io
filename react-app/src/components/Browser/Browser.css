@@ -111,6 +111,11 @@
   align-items: center;
 }
 
+/* img {
+  object-fit: cover;
+  border-radius: 5px;
+} */
+
 .event-box-image {
   /* background-color: var(--theme-light); */
   height: 80px;
