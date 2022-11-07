@@ -12,6 +12,6 @@ def community_exists(form, field):
         raise ValidationError('This community already exists.')
 
 class CommunityForm(FlaskForm):
-    name = StringField('Name', validators=[DataRequired(), community_exists, Length(max=50)])
+    name = StringField('Name', validators=[DataRequired(), community_exists, Length(min=3,max=50)])
     description = StringField('Description', validators=[Length(max=200)])
     image_url = StringField('Image Url')

@@ -1,5 +1,7 @@
 from flask import Blueprint, jsonify, request
 from flask_login import login_required, current_user
+from wtforms.validators import ValidationError
+
 from app.forms.community_form import CommunityForm
 from app.forms.edit_community_form import EditCommunityForm
 from app.forms.event_form import EventForm
@@ -73,6 +75,10 @@ def edit_community(id):
             "statusCode": 401}, 401
     else:
         form = EditCommunityForm()
+        existing_community = Community.query.filter(Community.name == form.data['name']).first()
+        if existing_community is not None:
+             if existing_community.id != id:
+                return {'errors': ['Name: This community already exists.']}, 401
         form['csrf_token'].data = request.cookies['csrf_token']
         if form.validate_on_submit():
             if form.data['name']:
