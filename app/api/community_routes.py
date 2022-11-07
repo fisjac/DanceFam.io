@@ -78,12 +78,9 @@ def edit_community(id):
                 return {'errors': ['Name: This community already exists.']}, 401
         form['csrf_token'].data = request.cookies['csrf_token']
         if form.validate_on_submit():
-            if form.data['name']:
-                community.name = form.data['name']
-            if form.data['description']:
-                community.description = form.data['description']
-            if form.data['image_url']:
-                community.image_url = form.data['image_url']
+            community.name = form.data['name']
+            community.description = form.data['description']
+            community.image_url = form.data['image_url']
             db.session.commit()
             return community.to_dict()
         else:

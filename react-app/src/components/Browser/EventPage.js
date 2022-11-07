@@ -86,7 +86,7 @@ export default function EventPage() {
         </div>
       </div>
       <div>Attendees: {event.attendeeCount}</div>
-      <div>Description: {event.description}</div>
+      <div>Description: {event.description?event.description:'This event has no details'}</div>
     </>
   )
 }

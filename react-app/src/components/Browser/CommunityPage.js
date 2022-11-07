@@ -79,7 +79,7 @@ export default function CommunityPage() {
             </div>
           </div>
         </div>
-        <div>Description: {singleCommunity.description}</div>
+        <div>Description: {singleCommunity.description?singleCommunity.description: 'This Community has no information yet.'}</div>
         {singleCommunity.events && <EventScroll showCommunity={false} events={Object.keys(singleCommunity.events).map(id=>events[id])}/>}
       </div>
     )
