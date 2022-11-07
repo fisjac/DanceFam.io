@@ -73,9 +73,7 @@ export default function EventPage() {
           <div className='address-section'>
             <div>{event.address}</div>
             <div className='city-state'>
-              <div>{`${event.city}, `}</div>
-              <div>{`${event.state}, `}</div>
-              <div>{`${event.country}`}</div>
+              <div>{`${event.city}, ${event.state}, ${event.country}`}</div>
             </div>
           </div>
         </div>
