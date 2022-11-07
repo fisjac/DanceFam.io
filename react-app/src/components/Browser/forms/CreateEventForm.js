@@ -59,7 +59,7 @@ export default function CreateEventForm({communityId, setShowModal}) {
         ))}
       </div>
       <div>
-        <label>Event Name</label>
+        <label>Event Name *</label>
         <input
           type='text'
           onChange={(e)=>setName(e.target.value)}
@@ -69,7 +69,7 @@ export default function CreateEventForm({communityId, setShowModal}) {
         />
       </div>
       <div className='datetime-input'>
-        <label>Start</label>
+        <label>Start *</label>
         <input
           type='Date'
           onChange={(e)=>setStartDate(e.target.value)}
@@ -86,7 +86,7 @@ export default function CreateEventForm({communityId, setShowModal}) {
       </div>
 
       <div className='datetime-input'>
-        <label>End</label>
+        <label>End *</label>
         <input
             type='Date'
             onChange={(e)=>setEndDate(e.target.value)}
@@ -102,7 +102,7 @@ export default function CreateEventForm({communityId, setShowModal}) {
         />
       </div>
       <div>
-        <label>Address</label>
+        <label>Address *</label>
         <input
           type='text'
           onChange={(e)=>setAddress(e.target.value)}
@@ -111,7 +111,7 @@ export default function CreateEventForm({communityId, setShowModal}) {
         />
       </div>
       <div>
-        <label>City</label>
+        <label>City *</label>
         <input
           type='text'
           onChange={(e)=>setCity(e.target.value)}
@@ -129,7 +129,7 @@ export default function CreateEventForm({communityId, setShowModal}) {
         />
       </div>
       <div>
-        <label>Country</label>
+        <label>Country *</label>
         <input
           type='text'
           onChange={(e)=>setCountry(e.target.value)}
@@ -138,12 +138,13 @@ export default function CreateEventForm({communityId, setShowModal}) {
         />
       </div>
       <div>
-        <label>Description</label>
+        <label>Description *</label>
         <textarea
           className='textarea-input'
           type='textarea'
           onChange={(e)=>setDescription(e.target.value)}
           value={description}
+          required
         />
       </div>
 

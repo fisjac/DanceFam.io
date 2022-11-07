@@ -30,24 +30,26 @@ function NextEvent ({user, events, communities}) {
             <div className='event-box-image' style={{backgroundImage: `url(${nextEvent.imageUrl})`}}></div>
             <div className='event-box-title'>{nextEvent.name}</div>
           </div>
-          <div className='event-box-date'>{start.toLocaleDateString(undefined, {weekday: 'short', month: 'short', day: 'numeric',})} ⋅ {start.toLocaleTimeString(undefined, {timeStyle: 'short'})}</div>
-          <div
-            className='event-box-community-name'
-            onClick={(e)=>{
-              e.stopPropagation();
-              history.push(`/${nextEvent.communityId}`)
-              }}
-            >{communities[nextEvent.communityId].name}</div>
-          <div className='event-box-address-line'>
-            <div className='address-section'>
-            <div className='event-box-address'>{nextEvent.address}</div>
-              <div className='city-state'>
-                <div className='event-box-city'>{nextEvent.city}</div>,
-                <div className='event-box-state'>{nextEvent.state}</div>
+          <div className='event-box-details'>
+            <div className='event-box-date'>{start.toLocaleDateString(undefined, {weekday: 'short', month: 'short', day: 'numeric',})} ⋅ {start.toLocaleTimeString(undefined, {timeStyle: 'short'})}</div>
+            <div
+              className='event-box-community-name'
+              onClick={(e)=>{
+                e.stopPropagation();
+                history.push(`/${nextEvent.communityId}`)
+                }}
+              >Host: {communities[nextEvent.communityId].name}</div>
+            <div className='event-box-address-line'>
+              <div className='address-section'>
+              <div className='event-box-address'>{nextEvent.address}</div>
+                <div className='city-state'>
+                  <div className='event-box-city'>{nextEvent.city}</div>,
+                  <div className='event-box-state'>{nextEvent.state}</div>
+                </div>
               </div>
-            </div>
-            <div className='location-icon'>
-              <i className="fa-solid fa-location-dot"></i>
+              <div className='location-icon'>
+                <i className="fa-solid fa-location-dot"></i>
+              </div>
             </div>
           </div>
       </div>
@@ -73,7 +75,7 @@ export default function LeftBar() {
         <img className='left-bar-logo-title' src={title} alt='title'/>
       </div>
 
-      <div className='planner'>
+      <div className='planner scroll'>
         <div className='planner-title'>Your Next Event</div>
         <NextEvent user={user} events={events} communities={communities}/>
         <Communities communities={communities}/>

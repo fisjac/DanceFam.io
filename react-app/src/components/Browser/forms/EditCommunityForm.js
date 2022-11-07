@@ -36,7 +36,7 @@ export default function EditCommunityForm({community, setShowModal}) {
         ))}
       </div>
       <div>
-        <label>Community Name</label>
+        <label>Community Name *</label>
         <input
           type='text'
           onChange={(e)=>setName(e.target.value)}
