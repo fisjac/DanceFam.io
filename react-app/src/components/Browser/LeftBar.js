@@ -22,8 +22,6 @@ function NextEvent ({user, events, communities}) {
     })
 
     const start = new Date(nextEvent.start);
-    console.log('equality',nextEvent.imageUrl===null)
-    console.log('in LeftBar Component')
     return (
       <div
         className='event-box'
