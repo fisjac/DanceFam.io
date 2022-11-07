@@ -10,6 +10,8 @@
   font-size: 28px;
   position: sticky;
   top: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .eventpage-rhs-icons {
@@ -25,4 +27,23 @@
   background-position: 50%;
   border-radius: 10px;
   margin-top: 4px;
+}
+
+.location-dot {
+  font-size: 24px;
+  color: grey;
+  width: 30px
+}
+
+.address-section {
+  color: grey
+}
+
+.column-flex {
+  display: flex;
+  flex-direction: column;
+}
+
+.between {
+  justify-content: space-between;
 }

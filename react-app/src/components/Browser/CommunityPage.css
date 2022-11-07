@@ -18,6 +18,9 @@ height: 100%;
 .community-page-title {
   font-weight: 800;
   font-size: 28px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
 }
 
 .community-page-image {
@@ -46,6 +49,12 @@ height: 100%;
   width: 32px;
   height: 32px;
   cursor: pointer;
+}
+
+
+.community-page-details {
+  display: flex;
+  justify-content: space-between;
 }
 
 .add-button:hover {

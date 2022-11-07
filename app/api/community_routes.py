@@ -117,7 +117,7 @@ def create_event(community_id):
             "statusCode": 404}, 404
     elif Membership.get_owner(community_id)['id'] != current_user.id:
         return {
-            "message": "User not authorized to delete this community",
+            "message": "User not authorized to add events to this community",
             "statusCode": 401}, 401
     else:
         form = EventForm()

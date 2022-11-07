@@ -38,21 +38,21 @@ function NextEvent ({user, events, communities}) {
                 e.stopPropagation();
                 history.push(`/${nextEvent.communityId}`)
                 }}
-              >Host: {communities[nextEvent.communityId].name}</div>
+              >{communities[nextEvent.communityId].name}</div>
             <div className='event-box-address-line'>
-              <div className='address-section'>
-              <div className='event-box-address'>{nextEvent.address}</div>
-                <div className='city-state'>
-                  <div className='event-box-city'>{nextEvent.city}</div>,
-                  <div className='event-box-state'>{nextEvent.state}</div>
-                </div>
-              </div>
               <div className='location-icon'>
                 <i className="fa-solid fa-location-dot"></i>
               </div>
+              <div className='address-section'>
+                <div className='event-box-address'>{nextEvent.address}</div>
+                  <div className='city-state'>
+                    <div className='event-box-city'>{nextEvent.city}</div>,
+                    <div className='event-box-state'>{nextEvent.state}</div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
-      </div>
     )
   } else {
     return (

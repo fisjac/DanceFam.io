@@ -141,7 +141,7 @@
 }
 .event-box-address-line {
   display: flex;
-  justify-content: space-between;
+  /* justify-content: space-between; */
   align-items: center;
   color: grey;
 }
@@ -158,6 +158,7 @@ display: flex;
 .location-icon {
 color: grey;
 font-size: 25px;
+width:30px;
 }
 
 /* Main portion */
@@ -384,4 +385,9 @@ font-size: 25px;
 .sticky {
   position: sticky;
   top: 0;
+}
+
+.flex {
+  display: flex;
+  align-items: center;
 }

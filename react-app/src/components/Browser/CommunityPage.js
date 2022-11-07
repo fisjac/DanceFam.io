@@ -64,11 +64,11 @@ export default function CommunityPage() {
           </div>
           <div className='community-page-image' style={{backgroundImage: `url(${singleCommunity.imageUrl})`}}></div>
           <div className='community-page-details'>
-            <div className='community-page-membercount'>
-                {singleCommunity.memberCount} Members
-            </div>
             <div>
               Owner: {`${singleCommunity.owner.firstName} ${singleCommunity.owner.lastName}`}
+            </div>
+            <div className='community-page-membercount'>
+                {singleCommunity.memberCount} Members
             </div>
           </div>
         </div>

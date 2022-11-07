@@ -24,10 +24,18 @@ export default function CreateEventForm({communityId, setShowModal}) {
     return dateString.replace('T', ' ').substring(0,dateString.length - 5)
   }
 
+  const dateToday = (date = new Date()) => {
+    return [
+        date.getFullYear(),
+        String(date.getMonth() + 1).padStart(2,0),
+        String(date.getDate()).padStart(2,0),
+    ].join('-');
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const start = new Date(startDate + 'T' + startTime);
-    const end = new Date(startDate + 'T' + startTime);
+    const end = new Date(endDate + 'T' + endTime);
     const response = await dispatch(
       eventActions.createEvent({
         communityId,
@@ -43,7 +51,8 @@ export default function CreateEventForm({communityId, setShowModal}) {
           image_url: imageUrl,}
         }));
     if (response.ok) {
-      setShowModal(false)
+      setShowModal(false);
+      setErrors([]);
     } else {
       const data = await response.json()
       setErrors(data.errors)
@@ -72,12 +81,15 @@ export default function CreateEventForm({communityId, setShowModal}) {
         <label>Start *</label>
         <input
           type='Date'
+          min={dateToday()}
+          max={endDate}
           onChange={(e)=>setStartDate(e.target.value)}
           value={startDate}
           required
         />
         <input
           type='Time'
+          max={startTime}
           className='time-input'
           onChange={(e)=>setStartTime(e.target.value)}
           value={startTime}
@@ -89,6 +101,7 @@ export default function CreateEventForm({communityId, setShowModal}) {
         <label>End *</label>
         <input
             type='Date'
+            min={startDate}
             onChange={(e)=>setEndDate(e.target.value)}
             value={endDate}
             required
@@ -96,6 +109,7 @@ export default function CreateEventForm({communityId, setShowModal}) {
         <input
           className='time-input'
           type='Time'
+          min={startTime}
           onChange={(e)=>setEndTime(e.target.value)}
           value={endTime}
           required

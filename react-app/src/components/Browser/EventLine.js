@@ -51,7 +51,7 @@ export default function EventLine({event, showCommunity}) {
           </div>
         </div>
         {userId === event.organiserId && (<div className='eventline-body-right'>
-          <ModalWrapper stopProp={true} addClickFunc={async ()=> await dispatch(eventActions.loadEvent(event.id))} form={<EditEventForm event={event}/>}>
+          <ModalWrapper header='Edit this Event' stopProp={true} addClickFunc={async ()=> await dispatch(eventActions.loadEvent(event.id))} form={<EditEventForm event={event}/>}>
             <div className='clickable-icon'>
               <i className="fa-solid fa-pen"></i>
             </div>
