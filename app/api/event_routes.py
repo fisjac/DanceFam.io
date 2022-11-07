@@ -56,8 +56,8 @@ def edit_event(id):
             event.state = form.data['state']
             event.address = form.data['address']
             event.country = form.data['country']
-            if form.data['image_url']:
-                event.image_url = form.data['image_url']
+            event.image_url = form.data['image_url']
+
             db.session.commit()
             return event.to_dict()
         else:

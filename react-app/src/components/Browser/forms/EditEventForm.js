@@ -58,7 +58,7 @@ export default function EditEventForm({event, setShowModal}) {
         state,
         country,
         description,
-        image_url: imageUrl,
+        image_url: imageUrl?imageUrl:null,
       };
       const response = await dispatch(
         eventActions.updateEvent(body));
