@@ -46,8 +46,7 @@ function NextEvent ({user, events, communities}) {
               <div className='address-section'>
                 <div className='event-box-address'>{nextEvent.address}</div>
                   <div className='city-state'>
-                    <div className='event-box-city'>{nextEvent.city}</div>,
-                    <div className='event-box-state'>{nextEvent.state}</div>
+                    <div className='event-box-city'>{`${nextEvent.city}, ${nextEvent.state}`}</div>
                   </div>
                 </div>
               </div>
@@ -56,7 +55,7 @@ function NextEvent ({user, events, communities}) {
     )
   } else {
     return (
-      <div className='event-box'>you have no events</div>
+      <div className='event-box-none'>You have no events</div>
     )
   }
 }
@@ -78,6 +77,7 @@ export default function LeftBar() {
       <div className='planner scroll'>
         <div className='planner-title'>Your Next Event</div>
         <NextEvent user={user} events={events} communities={communities}/>
+        <div className='planner-title'>Your Communities</div>
         <Communities communities={communities}/>
       </div>
     </div>

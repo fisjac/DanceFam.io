@@ -89,6 +89,18 @@
   cursor: pointer;
 }
 
+.event-box-none {
+  display: flex;
+  flex-direction: column;
+  width: calc(100% - 12px);
+  align-items: center;
+  background-color: white;
+  border: 1px solid var(--shadow);
+  border-radius: 5px;
+  padding: 5px;
+  margin: 5px;
+}
+
 .event-box:hover {
   box-shadow: 1px 2px 2px var(--shadow);
 }

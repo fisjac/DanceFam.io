@@ -26,7 +26,7 @@ height: 100%;
 .community-page-image {
   background-color: var(--theme-grey);
   width: 100%;
-  height: 250px;
+  height: 350px;
   border-radius: 10px;
   background-position: 50%;
   background-size: cover;

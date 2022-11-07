@@ -38,13 +38,12 @@ export function AuthForm(props) {
 
 
 export default function Splash() {
-  console.log('On splash page')
   return (
     <div className='splash-page'>
       <div className='splash-top'>
       </div>
       <div className='splash-main'>
-        <ModalWrapper form={<AuthForm/>}>
+        <ModalWrapper header='Log in or sign up' form={<AuthForm/>}>
           <button className='join-button'>Join the Fam</button>
         </ModalWrapper>
         <img className='dancers-img' src={dancers} alt='dancers'/>
