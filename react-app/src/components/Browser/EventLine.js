@@ -35,11 +35,10 @@ export default function EventLine({event, showCommunity}) {
         <div className='eventline-body-left'>
           <img
             className='eventline-img'
-            src={event.imageUrl}
+            src={event.imageUrl===null?defaultImage:event.imageUrl}
             alt="community_img"
             onError={e =>e.currentTarget.src = defaultImage}
             />
-          <div className='eventline-img' style={{backgroundImage: `url(${event.imageUrl})`}}></div>
           <div className='eventline-details'>
             <div className='eventline-date'>{start.toLocaleDateString(undefined, {weekday: 'short', month: 'short', day: 'numeric',})} ⋅ {start.toLocaleTimeString(undefined, {timeStyle: 'short'})}</div>
             <div className='eventline-name'>{event.name}</div>

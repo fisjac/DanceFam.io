@@ -89,7 +89,6 @@ export default function CreateEventForm({communityId, setShowModal}) {
         />
         <input
           type='Time'
-          max={startTime}
           className='time-input'
           onChange={(e)=>setStartTime(e.target.value)}
           value={startTime}
@@ -109,7 +108,6 @@ export default function CreateEventForm({communityId, setShowModal}) {
         <input
           className='time-input'
           type='Time'
-          min={startTime}
           onChange={(e)=>setEndTime(e.target.value)}
           value={endTime}
           required

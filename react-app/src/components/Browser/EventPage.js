@@ -55,7 +55,7 @@ export default function EventPage() {
       </div>
       <img
             className='eventpage-image'
-            src={event.imageUrl}
+            src={event.imageUrl===null?defaultImage:event.imageUrl}
             alt="event_img"
             onError={e =>e.currentTarget.src = defaultImage}
             />
