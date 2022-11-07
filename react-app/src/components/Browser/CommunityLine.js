@@ -10,7 +10,6 @@ export default function EventLine({community}) {
   const history = useHistory();
   const dispatch = useDispatch();
   const userId = useSelector(state=>state.session.user.id);
-  console.log(community)
   return (
     <div
       className='eventline-container'
@@ -25,7 +24,7 @@ export default function EventLine({community}) {
         <div className='eventline-body-left'>
           <img
               className='eventline-img'
-              src={community.imageUrl}
+              src={community.imageUrl===null?defaultImage:community.imageUrl}
               alt="community_img"
               onError={e =>e.currentTarget.src = defaultImage}
               />

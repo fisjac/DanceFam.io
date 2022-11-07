@@ -66,7 +66,7 @@ export default function CommunityPage() {
           </div>
           <img
             className='community-page-image'
-            src={singleCommunity.imageUrl}
+            src={singleCommunity.imageUrl===null?defaultImage:singleCommunity.imageUrl}
             alt="community_img"
             onError={e =>e.currentTarget.src = defaultImage}
             />

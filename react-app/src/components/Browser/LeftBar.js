@@ -22,7 +22,7 @@ function NextEvent ({user, events, communities}) {
     })
 
     const start = new Date(nextEvent.start);
-
+    console.log('equality',nextEvent.imageUrl===null)
     console.log('in LeftBar Component')
     return (
       <div
@@ -31,11 +31,10 @@ function NextEvent ({user, events, communities}) {
           <div className='event-box-header'>
             <img
               className='event-box-image'
-              src={nextEvent.imageUrl}
+              src={nextEvent.imageUrl===null? defaultImage :nextEvent.imageUrl}
               alt="event_image"
               onError={e =>e.currentTarget.src = defaultImage}
               />
-            <div className='event-box-image' style={{backgroundImage: `url(${nextEvent.imageUrl})`}}></div>
             <div className='event-box-title'>{nextEvent.name}</div>
           </div>
           <div className='event-box-details'>

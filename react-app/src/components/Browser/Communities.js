@@ -20,7 +20,7 @@ export default function Communities({communities}) {
           <div className='event-box-header'>
           <img
             className='event-box-image'
-            src={communities[communityId].imageUrl}
+            src={communities[communityId].imageUrl===null?defaultImage:communities[communityId].imageUrl}
             alt="community_img"
             onError={e =>e.currentTarget.src = defaultImage}
             />
