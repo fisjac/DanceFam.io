@@ -112,7 +112,7 @@
 }
 
 .event-box-image {
-  background-color: var(--theme-grey);
+  /* background-color: var(--theme-light); */
   height: 80px;
   width: 100px;
   display: flex;
@@ -296,7 +296,7 @@ width:30px;
 .eventline-img {
   width: 150px;
   height: 100px;
-  background-color: var(--theme-grey);
+  /* background-color: var(--theme-light); */
   border-radius: 5px;
   background-position: 50%;
   background-size: cover;
