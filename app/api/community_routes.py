@@ -34,13 +34,10 @@ def create_community():
     form = CommunityForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
-        if form.data['image_url']:
-            image_url = form.data['image_url']
-        else: image_url = None
         community = Community(
             name=form.data['name'],
             description=form.data['description'],
-            image_url = image_url,
+            image_url = form.data['image_url'],
         )
         membership = Membership(owner_status=True)
         membership.user = current_user

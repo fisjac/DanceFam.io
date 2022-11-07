@@ -16,7 +16,7 @@ export default function CreateEventForm({communityId, setShowModal}) {
   const [state, setState] = useState('');
   const [country, setCountry] = useState('');
   const [description, setDescription] = useState('');
-  const [imageUrl, setImageUrl] = useState('');
+  const [imageUrl, setImageUrl] = useState(null);
 
   const dispatch = useDispatch();
   const dateToBackendFormat = (date) => {
@@ -48,7 +48,7 @@ export default function CreateEventForm({communityId, setShowModal}) {
           state,
           country,
           description,
-          image_url: imageUrl,}
+          image_url: imageUrl?imageUrl:null,}
         }));
     if (response.ok) {
       setShowModal(false);

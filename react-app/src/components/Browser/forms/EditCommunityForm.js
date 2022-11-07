@@ -17,8 +17,9 @@ export default function EditCommunityForm({community, setShowModal}) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log(imageUrl)
     const response = await dispatch(
-      communityActions.updateCommunity({id: community.id, name, description, image_url: imageUrl})
+      communityActions.updateCommunity({id: community.id, name, description, image_url: imageUrl?imageUrl:null})
       );
     if (response.ok) {
       setShowModal(false);

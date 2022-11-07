@@ -11,14 +11,14 @@ export default function CreateCommunityForm({setShowModal}) {
   const [errors, setErrors] = useState([]);
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
-  const [imageUrl, setImageUrl] = useState('');
+  const [imageUrl, setImageUrl] = useState(null);
 
   const dispatch = useDispatch();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const response = await dispatch(
-      communityActions.createCommunity({name, description, image_url: imageUrl})
+      communityActions.createCommunity({name, description, image_url: imageUrl?imageUrl:null})
       );
     if (response.ok) {
       setShowModal(false);
