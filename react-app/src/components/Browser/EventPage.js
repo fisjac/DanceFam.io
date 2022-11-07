@@ -36,7 +36,7 @@ export default function EventPage() {
               async (e)=>{
                 e.stopPropagation()
                 if (window.confirm(`Are you sure you want to delete ${event.name}?`)) {
-                  history.push(`/${event.community.replaceAll(' ','-')}`)
+                  history.push(`/${event.communityId}`)
                   const response = await dispatch(
                     eventActions.deleteEvent(event.id, communities[event.community])
                     );
@@ -52,16 +52,36 @@ export default function EventPage() {
         </div>}
       </div>
       <div className = 'eventpage-image' style={{backgroundImage: `url(${event.imageUrl})`}}></div>
-      <div className='eventline-date'>Start: {start.toLocaleDateString(undefined, {weekday: 'short', month: 'short', day: 'numeric',})} ⋅ {start.toLocaleTimeString(undefined, {timeStyle: 'short'})}</div>
-      <div className='eventline-date'>End: {end.toLocaleDateString(undefined, {weekday: 'short', month: 'short', day: 'numeric',})} ⋅ {end.toLocaleTimeString(undefined, {timeStyle: 'short'})}</div>
 
-      <div>{event.address}</div>
-      <div>
-        <div>{event.city}</div>, <div>{event.state}</div>
+      <div className='flex between'>
+        <div className='column-flex'>
+          <div
+            className='eventline-date'
+            >
+            Start: {start.toLocaleDateString(undefined, {weekday: 'short', month: 'short', day: 'numeric',})} ⋅ {start.toLocaleTimeString(undefined, {timeStyle: 'short'})}
+          </div>
+          <div
+            className='eventline-date'
+            >
+            End: {end.toLocaleDateString(undefined, {weekday: 'short', month: 'short', day: 'numeric',})} ⋅ {end.toLocaleTimeString(undefined, {timeStyle: 'short'})}
+          </div>
+        </div>
+
+
+        <div className='flex'>
+          <div className='location-dot'><i className="fa-solid fa-location-dot"></i></div>
+          <div className='address-section'>
+            <div>{event.address}</div>
+            <div className='city-state'>
+              <div>{`${event.city}, `}</div>
+              <div>{`${event.state}, `}</div>
+              <div>{`${event.country}`}</div>
+            </div>
+          </div>
+        </div>
       </div>
-      <div>{event.country}</div>
       <div>Attendees: {event.attendeeCount}</div>
-      <div>{event.description}</div>
+      <div>Description: {event.description}</div>
     </>
   )
 }

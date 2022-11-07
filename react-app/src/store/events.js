@@ -1,3 +1,4 @@
+import { batch } from 'react-redux';
 import * as communityActions from './communities';
 import * as sessionActions from './session';
 
@@ -83,7 +84,7 @@ export const updateEvent = (event) => async dispatch => {
   });
   if (response.ok) {
     const event = await response.json();
-    await dispatch(sessionActions.addEvent(event.id))
+    await dispatch(sessionActions.authenticate())
     await dispatch(editEvent(event));
     return response;
   };
@@ -95,9 +96,11 @@ export const deleteEvent = (eventId, communityId) => async dispatch => {
     method: 'DELETE'
   });
   if (response.ok) {
-    await dispatch(communityActions.getCommunity(communityId))
     await dispatch(sessionActions.authenticate())
-    await dispatch(removeEvent(eventId))
+    batch(async()=>{
+      await dispatch(communityActions.getCommunities())
+      await dispatch(removeEvent(eventId))
+    });
     return response;
   };
   return response;

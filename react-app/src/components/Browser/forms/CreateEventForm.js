@@ -24,10 +24,18 @@ export default function CreateEventForm({communityId, setShowModal}) {
     return dateString.replace('T', ' ').substring(0,dateString.length - 5)
   }
 
+  const dateToday = (date = new Date()) => {
+    return [
+        date.getFullYear(),
+        String(date.getMonth() + 1).padStart(2,0),
+        String(date.getDate()).padStart(2,0),
+    ].join('-');
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const start = new Date(startDate + 'T' + startTime);
-    const end = new Date(startDate + 'T' + startTime);
+    const end = new Date(endDate + 'T' + endTime);
     const response = await dispatch(
       eventActions.createEvent({
         communityId,
@@ -43,7 +51,8 @@ export default function CreateEventForm({communityId, setShowModal}) {
           image_url: imageUrl,}
         }));
     if (response.ok) {
-      setShowModal(false)
+      setShowModal(false);
+      setErrors([]);
     } else {
       const data = await response.json()
       setErrors(data.errors)
@@ -59,7 +68,7 @@ export default function CreateEventForm({communityId, setShowModal}) {
         ))}
       </div>
       <div>
-        <label>Event Name</label>
+        <label>Event Name *</label>
         <input
           type='text'
           onChange={(e)=>setName(e.target.value)}
@@ -69,15 +78,18 @@ export default function CreateEventForm({communityId, setShowModal}) {
         />
       </div>
       <div className='datetime-input'>
-        <label>Start</label>
+        <label>Start *</label>
         <input
           type='Date'
+          min={dateToday()}
+          max={endDate}
           onChange={(e)=>setStartDate(e.target.value)}
           value={startDate}
           required
         />
         <input
           type='Time'
+          max={startTime}
           className='time-input'
           onChange={(e)=>setStartTime(e.target.value)}
           value={startTime}
@@ -86,9 +98,10 @@ export default function CreateEventForm({communityId, setShowModal}) {
       </div>
 
       <div className='datetime-input'>
-        <label>End</label>
+        <label>End *</label>
         <input
             type='Date'
+            min={startDate}
             onChange={(e)=>setEndDate(e.target.value)}
             value={endDate}
             required
@@ -96,13 +109,14 @@ export default function CreateEventForm({communityId, setShowModal}) {
         <input
           className='time-input'
           type='Time'
+          min={startTime}
           onChange={(e)=>setEndTime(e.target.value)}
           value={endTime}
           required
         />
       </div>
       <div>
-        <label>Address</label>
+        <label>Address *</label>
         <input
           type='text'
           onChange={(e)=>setAddress(e.target.value)}
@@ -111,7 +125,7 @@ export default function CreateEventForm({communityId, setShowModal}) {
         />
       </div>
       <div>
-        <label>City</label>
+        <label>City *</label>
         <input
           type='text'
           onChange={(e)=>setCity(e.target.value)}
@@ -129,7 +143,7 @@ export default function CreateEventForm({communityId, setShowModal}) {
         />
       </div>
       <div>
-        <label>Country</label>
+        <label>Country *</label>
         <input
           type='text'
           onChange={(e)=>setCountry(e.target.value)}
@@ -138,12 +152,13 @@ export default function CreateEventForm({communityId, setShowModal}) {
         />
       </div>
       <div>
-        <label>Description</label>
+        <label>Description *</label>
         <textarea
           className='textarea-input'
           type='textarea'
           onChange={(e)=>setDescription(e.target.value)}
           value={description}
+          required
         />
       </div>
 

@@ -21,8 +21,8 @@ export default function EditCommunityForm({community, setShowModal}) {
       communityActions.updateCommunity({id: community.id, name, description, image_url: imageUrl})
       );
     if (response.ok) {
-      setShowModal(false)
-      history.push(`/${name.replace(' ', '-')}`)
+      setShowModal(false);
+      setErrors([]);
     } else {
       const data = await response.json()
       setErrors(data.errors)
@@ -36,7 +36,7 @@ export default function EditCommunityForm({community, setShowModal}) {
         ))}
       </div>
       <div>
-        <label>Community Name</label>
+        <label>Community Name *</label>
         <input
           type='text'
           onChange={(e)=>setName(e.target.value)}

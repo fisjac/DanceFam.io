@@ -51,6 +51,10 @@
 .event-box-community-name  {
   color: grey;
   cursor: pointer;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  word-wrap: none;
 }
 .event-box-community-name:hover {
   font-weight: 600;
@@ -73,6 +77,10 @@
 }
 
 .event-box {
+  display: flex;
+  flex-direction: column;
+  width: calc(100% - 12px);
+  align-items: center;
   background-color: white;
   border: 1px solid var(--shadow);
   border-radius: 5px;
@@ -87,6 +95,8 @@
 
 .event-box-header {
   display: flex;
+  width: 100%;
+  align-items: center;
 }
 
 .event-box-image {
@@ -104,16 +114,15 @@
 }
 
 .event-box-title {
-  display: flex;
-  align-items: center;
+  height: fit-content;
+  width: calc(100% - 100px);
   font-weight: 600;
   margin-left: 10px;
   font-size: 18px;
-}
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 
-.event-box-date {
-  margin-top: 5px;
-  border-top: 1px solid var(--shadow);
 }
 
 .event-box-date {
@@ -122,9 +131,17 @@
   color: var(--theme-dark);
 }
 
+.event-box-details {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-top: 5px;
+  border-top: 1px solid var(--shadow);
+
+}
 .event-box-address-line {
   display: flex;
-  justify-content: space-between;
+  /* justify-content: space-between; */
   align-items: center;
   color: grey;
 }
@@ -141,6 +158,7 @@ display: flex;
 .location-icon {
 color: grey;
 font-size: 25px;
+width:30px;
 }
 
 /* Main portion */
@@ -164,7 +182,7 @@ font-size: 25px;
 .eventscroll {
   position: relative;
   background-color: white;
-  height: calc(100% - 39.6px);
+  max-height: calc(100% - 39.6px);
   overflow-y: scroll;
   -ms-overflow-style: none;
   scrollbar-width: none;
@@ -289,11 +307,17 @@ font-size: 25px;
 .eventline-name {
   font-weight: 800;
   font-size: 16px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
   /* color: var(--theme-dark); */
 }
 .eventline-community  {
   color: grey;
   cursor: pointer;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 .eventline-community:hover {
   font-weight: 600;
@@ -361,4 +385,9 @@ font-size: 25px;
 .sticky {
   position: sticky;
   top: 0;
+}
+
+.flex {
+  display: flex;
+  align-items: center;
 }
