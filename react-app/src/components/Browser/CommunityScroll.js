@@ -4,12 +4,8 @@ import CommunityLine from './CommunityLine'
 import EventScroll from './EventScroll'
 
 export default function CommunityScroll() {
-  console.log('in Main/CommunityScroll Component')
   const communities = useSelector(state=>state.communities);
   const events = useSelector(state=>state.events);
-
-  console.log('communities',communities)
-  console.log('events',events)
 
   return (
     <>
