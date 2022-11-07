@@ -24,7 +24,12 @@ height: 100%;
 }
 
 .community-page-image {
-  background-color: var(--theme-grey);
+  /* background-color: var(--theme-light); */
+  display: flex;
+  color: var(--icon-grey);
+  align-items: center;
+  justify-content: center;
+  font-size: 60px;
   width: 100%;
   height: 350px;
   border-radius: 10px;
