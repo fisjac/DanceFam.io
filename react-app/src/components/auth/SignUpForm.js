@@ -3,6 +3,8 @@ import { useSelector, useDispatch } from 'react-redux'
 import { Redirect } from 'react-router-dom';
 import { signUp } from '../../store/session';
 
+import './SignUpForm.css'
+
 const SignUpForm = () => {
   const [errors, setErrors] = useState([]);
   const [username, setUsername] = useState('');
@@ -13,6 +15,8 @@ const SignUpForm = () => {
   const [repeatPassword, setRepeatPassword] = useState('');
   const user = useSelector(state => state.session.user);
   const dispatch = useDispatch();
+
+  const passwordsMatch = password === repeatPassword
 
   const onSignUp = async (e) => {
     e.preventDefault();
@@ -119,7 +123,7 @@ const SignUpForm = () => {
           required
         ></input>
       </div>
-      <button type='submit'>Sign Up</button>
+      <button type='submit' disabled={!passwordsMatch} className={`${passwordsMatch?'':'disabled'}`}>Sign Up</button>
     </form>
   );
 };

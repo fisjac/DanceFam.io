@@ -1,0 +1,8 @@
+.disabled {
+  cursor: default;
+  background-color: var(--theme-light);
+}
+
+.disabled:hover {
+  background-color: var(--theme-light);
+}
