@@ -78,7 +78,6 @@ export const createCommunity = (community) => async dispatch => {
 
 export const updateCommunity = (community) => async dispatch => {
   const body = {name: community.name, description: community.description, image_url: community.image_url};
-  console.log(body)
   const response = await fetch(`/api/communities/${community.id}`,{
     method: 'PUT',
     headers: {'Content-Type': 'application/json'},
