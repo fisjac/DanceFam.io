@@ -3,12 +3,12 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import LogoutButton from './auth/LogoutButton';
-import DropDownWrapper from '../context/Dropdown';
+import DropDownWrapper from '../context/Dropdown/Dropdown';
 
 // import logo from '../static/DanceFamBrushNoText.svg'
 
 import './NavBar.css'
-import ModalWrapper from '../context/Modal';
+import ModalWrapper from '../context/Modal/Modal';
 import CreateCommunityForm from './Browser/forms/CreateCommunityForm';
 
 

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import ModalWrapper from '../../context/Modal';
+import ModalWrapper from '../../context/Modal/Modal';
 import SignUpForm from '../auth/SignUpForm';
 import LoginForm from '../auth/LoginForm';
 

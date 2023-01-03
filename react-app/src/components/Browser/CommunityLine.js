@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import {useHistory} from 'react-router-dom'
 
 import * as communityActions from '../../store/communities';
-import ModalWrapper from '../../context/Modal'
+import ModalWrapper from '../../context/Modal/Modal'
 import defaultImage from '../../static/dancing_couple1.svg'
 
 export default function EventLine({community}) {

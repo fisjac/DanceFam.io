@@ -3,9 +3,10 @@ import thunk from 'redux-thunk';
 import session from './session'
 import communities from './communities'
 import events from './events'
+import maps from './maps'
 
 const rootReducer = combineReducers({
-  session, communities, events
+  session, communities, events, maps
 });
 
 

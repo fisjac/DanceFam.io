@@ -11,6 +11,7 @@ import CommunityPage from './CommunityPage';
 import EventPage from './EventPage';
 import RightBar from './RightBar';
 
+
 import './Browser.css'
 import CommunityScroll from './CommunityScroll';
 
@@ -26,6 +27,7 @@ export default function Browser() {
   },[dispatch])
 
   return events && communities && (
+
       <div className='main-page'>
         <LeftBar/>
         <div className='center-container scroll'>

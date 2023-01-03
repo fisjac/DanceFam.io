@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import {useHistory} from 'react-router-dom'
 
 import * as eventActions from '../../store/events';
-import ModalWrapper from '../../context/Modal'
+import ModalWrapper from '../../context/Modal/Modal'
 import EditEventForm from './forms/EditEventForm';
 
 import defaultImage from '../../static/dancing_couple1.svg'
