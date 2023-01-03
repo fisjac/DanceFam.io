@@ -18,7 +18,7 @@ const CreateMenu = () => {
       <ModalWrapper
         header='Build a Community'
         form={<CreateCommunityForm/>}>
-        <div>Create Community</div>
+        <div className='dropdown-button'>Create Community</div>
       </ModalWrapper>
     </div>
   )

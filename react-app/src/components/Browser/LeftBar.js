@@ -14,10 +14,16 @@ function NextEvent ({user, events, communities}) {
 
   const userEvents = Object.keys(user.events).map(eventId=>events[eventId]);
 
-  if (Object.keys(userEvents).length) {
-    const nextEvent = userEvents.reduce((accum,event)=> {
+  const currentUserEvents = userEvents.filter(event =>{
+    const currentEventDate = new Date(event.start);
+    const today = new Date();
+    return currentEventDate > today;
+  })
+
+  if (Object.keys(currentUserEvents).length) {
+    const nextEvent = currentUserEvents.reduce((accum,event)=> {
       const currentEventDate = new Date(event.start);
-      const currentMinDate = new Date (accum.start);
+      const currentMinDate = new Date(accum.start);
       return currentEventDate < currentMinDate ? event : accum
     })
 
@@ -60,7 +66,7 @@ function NextEvent ({user, events, communities}) {
     )
   } else {
     return (
-      <div className='event-box-none'>You have no events</div>
+      <div className='event-box-none'>You have no upcoming events</div>
     )
   }
 }
@@ -71,6 +77,7 @@ export default function LeftBar() {
   const user = useSelector(state=>state.session.user);
   const communities = useSelector(state=>state.communities);
   const events = useSelector(state=>state.events);
+
 
   return (
     <div className='left-bar'>
