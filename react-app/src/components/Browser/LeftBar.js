@@ -66,7 +66,7 @@ function NextEvent ({user, events, communities}) {
     )
   } else {
     return (
-      <div className='event-box-none'>You have no events</div>
+      <div className='event-box-none'>You have no upcoming events</div>
     )
   }
 }
