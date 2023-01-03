@@ -18,10 +18,6 @@ export default function EventLine({event, showCommunity}) {
 
   return communities && (
     <>
-
-    <div className='eventline-header'>
-      {start.toLocaleDateString(undefined, {weekday: 'long',month: 'long', day: 'numeric'})}
-    </div>
     <div
       className='eventline-container'
       onClick={(e)=>{

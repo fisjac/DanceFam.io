@@ -19,7 +19,6 @@ function NextEvent ({user, events, communities}) {
     const today = new Date();
     return currentEventDate > today;
   })
-  console.log(currentUserEvents)
 
   if (Object.keys(currentUserEvents).length) {
     const nextEvent = currentUserEvents.reduce((accum,event)=> {
