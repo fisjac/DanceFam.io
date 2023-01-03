@@ -14,15 +14,26 @@ export default function EventScroll({events, showCommunity}) {
       accum[currentDateString].push(event)
     };
     return accum;
-  },{})
+  },{});
+
+  const sortedDates = Object.values(eventDates)
+    .map(events=>{
+      let event = events[0]
+      let start = event.start;
+      let date = new Date(start);
+      return date
+    })
+    .sort();
 
   return (
     <>
-    <div className='eventscroll-title'>Events</div>
+    <div className='eventscroll-title'>Upcoming Events</div>
     <div className='eventscroll'>
       {
-        Object.keys(eventDates)
-          .map(date => (
+        sortedDates.map(date => {
+          let dateString = date.toLocaleDateString(undefined, {weekday: 'long',month: 'long', day: 'numeric'});
+          return dateString;
+        }).map(date => (
               <>
                 <div className='eventline-header'>
                 {date}
@@ -38,7 +49,7 @@ export default function EventScroll({events, showCommunity}) {
               </>
             )
           )
-        }
+      }
     </div>
     </>
   )
