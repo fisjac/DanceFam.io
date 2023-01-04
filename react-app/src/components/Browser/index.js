@@ -6,14 +6,14 @@ import * as eventActions from '../../store/events';
 import * as communityActions from '../../store/communities';
 
 import LeftBar from './LeftBar';
-import EventScroll from './EventScroll';
 import CommunityPage from './CommunityPage';
 import EventPage from './EventPage';
 import RightBar from './RightBar';
+import EventScroll from './EventScroll';
+import GMap from '../../context/Maps';
 
 
 import './Browser.css'
-import CommunityScroll from './CommunityScroll';
 
 export default function Browser() {
   const dispatch = useDispatch()
@@ -30,18 +30,19 @@ export default function Browser() {
 
       <div className='main-page'>
         <LeftBar/>
-        <div className='center-container scroll'>
-          <div className='welcome-user'>{`Welcome ${user.firstName}`}</div>
-          <Route exact path='/'>
-            {communities && <CommunityScroll/>}
-          </Route>
-          <Route exact path='/:communityId'>
-            <CommunityPage/>
-          </Route>
-          <Route exact path='/:communityId/events/:eventId'>
-            <EventPage/>
-          </Route>
-        </div>
+          <div className='center-container scroll'>
+            <div className='welcome-user'>{`Welcome ${user.firstName}`}</div>
+            <GMap/>
+            <Route exact path='/'>
+              {events && <EventScroll showCommunity={true} events={events}/>}
+            </Route>
+            <Route exact path='/:communityId'>
+              <CommunityPage/>
+            </Route>
+            <Route exact path='/:communityId/events/:eventId'>
+              <EventPage/>
+            </Route>
+          </div>
         <RightBar/>
       </div>
   )
