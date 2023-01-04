@@ -5,6 +5,7 @@ import { NavLink } from 'react-router-dom';
 import LogoutButton from './auth/LogoutButton';
 import DropDownWrapper from '../context/Dropdown/Dropdown';
 import CreateEventForm from './Browser/forms/CreateEventForm';
+import {Wrapper} from '../context/Maps'
 // import logo from '../static/DanceFamBrushNoText.svg'
 
 import './NavBar.css'
@@ -16,7 +17,11 @@ const CreateMenu = () => {
     <div className='create-dropdown'>
       <ModalWrapper
         header='Create an Event'
-        form={<CreateEventForm/>}>
+        form={
+          <div></div>
+        // <CreateEventForm/>
+        }
+        >
         <div className='dropdown-button'>Create Event</div>
       </ModalWrapper>
     </div>

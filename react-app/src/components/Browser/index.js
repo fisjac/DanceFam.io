@@ -8,7 +8,6 @@ import LeftBar from './LeftBar';
 import EventPage from './EventPage';
 import RightBar from './RightBar';
 import EventScroll from './EventScroll';
-import GMap from '../../context/Maps';
 
 
 import './Browser.css'
@@ -28,7 +27,6 @@ export default function Browser() {
         <LeftBar/>
           <div className='center-container scroll'>
             <div className='welcome-user'>{`Welcome ${user.firstName}`}</div>
-            <GMap/>
             <Route exact path='/'>
               {events && <EventScroll events={events}/>}
             </Route>

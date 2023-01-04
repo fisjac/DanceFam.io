@@ -2,7 +2,7 @@ import { React, useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Wrapper, Status } from "@googlemaps/react-wrapper";
 
-import { getKey } from '../../store/maps';
+import { getKey } from '../../store/keys';
 
 import './maps.css'
 
@@ -18,7 +18,6 @@ const Map = (props) => {
       }));
     }
   }, [mapsRef, map]);
-  console.log('current ref', mapsRef.current)
   return (
       <div id='map' ref={mapsRef}/>
   )
@@ -26,12 +25,12 @@ const Map = (props) => {
 
 
 export default function GMap () {
-  const key = useSelector((state) => state.maps.key);
+  const key = useSelector((state) => state.keys.maps);
   const dispatch = useDispatch();
 
   useEffect(() => {
     if (!key) {
-      dispatch(getKey());
+      dispatch(getKey('maps'));
     }
   }, [dispatch, key]);
 

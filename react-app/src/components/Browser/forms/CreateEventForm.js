@@ -1,10 +1,55 @@
-import React, {useState} from 'react'
-import { useDispatch } from 'react-redux';
+import React, {useState, useEffect, useRef} from 'react'
+import { useDispatch, useSelector } from 'react-redux';
 
 
 import * as eventActions from '../../../store/events';
 
-export default function CreateEventForm({communityId, setShowModal}) {
+
+// const loadScript = (url, callback) => {
+//   let script = document.createElement("script"); // create script tag
+//   script.type = "text/javascript";
+
+//   // when script state is ready and loaded or complete we will call callback
+//   if (script.readyState) {
+//     script.onreadystatechange = function() {
+//       if (script.readyState === "loaded" || script.readyState === "complete") {
+//         script.onreadystatechange = null;
+//         callback();
+//       }
+//     };
+//   } else {
+//     script.onload = () => callback();
+//   }
+
+//   script.src = url; // load by url
+//   document.getElementsByTagName("head")[0].appendChild(script); // append to head
+// };
+
+// handle when the script is loaded we will assign autoCompleteRef with google maps place autocomplete
+function handleScriptLoad(updateQuery, autoCompleteRef) {
+  // assign autoComplete with Google maps place one time
+
+}
+
+
+
+export default function CreateEventForm({setShowModal}) {
+  const dispatch = useDispatch();
+
+  // Google Maps Autocomplete
+  const autoCompleteRef = useRef(null);
+  let autoComplete;
+
+  async function handlePlaceSelect(updateQuery) {
+    const addressObject = autoComplete.getPlace();
+    const query = addressObject.formatted_address;
+    updateQuery(query);
+    console.log(addressObject);
+  }
+  // add a listener to handle when the place is selected
+
+
+
   const [errors, setErrors] = useState([]);
   const [name, setName] = useState('');
   const [startDate, setStartDate] = useState('');
@@ -18,7 +63,20 @@ export default function CreateEventForm({communityId, setShowModal}) {
   const [description, setDescription] = useState('');
   const [imageUrl, setImageUrl] = useState(null);
 
-  const dispatch = useDispatch();
+  // Google Maps autocomplete API script
+  useEffect(() => {
+    autoComplete = new window.google.maps.places.Autocomplete(
+      autoCompleteRef.current,
+      {}
+    );
+    // autoComplete.setFields(["address_components", "formatted_address"]); // specify what properties we will get from API
+    autoComplete.addListener("place_changed", () =>
+    handlePlaceSelect(setAddress)
+  );
+    }, []);
+
+
+
   const dateToBackendFormat = (date) => {
     let dateString = date.toISOString();
     return dateString.replace('T', ' ').substring(0,dateString.length - 5)
@@ -38,7 +96,6 @@ export default function CreateEventForm({communityId, setShowModal}) {
     const end = new Date(endDate + 'T' + endTime);
     const response = await dispatch(
       eventActions.createEvent({
-        communityId,
         event: {
           name,
           start: dateToBackendFormat(start),
@@ -116,6 +173,7 @@ export default function CreateEventForm({communityId, setShowModal}) {
       <div>
         <label>Address *</label>
         <input
+          ref={autoCompleteRef}
           type='text'
           onChange={(e)=>setAddress(e.target.value)}
           value={address}

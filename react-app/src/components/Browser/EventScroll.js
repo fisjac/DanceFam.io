@@ -1,5 +1,7 @@
 import React from 'react'
 import { useSelector } from 'react-redux';
+
+import GMap from '../../context/Maps';
 import EventLine from './EventLine'
 
 export default function EventScroll() {
@@ -28,21 +30,22 @@ export default function EventScroll() {
 
   return (
     <>
+    <GMap/>
     <div className='eventscroll-title'>Upcoming Events</div>
     <div className='eventscroll'>
       {
         sortedDates.map(date => {
           let dateString = date.toLocaleDateString(undefined, {weekday: 'long',month: 'long', day: 'numeric'});
           return dateString;
-        }).map(date => (
+        }).map((date, idx) => (
               <>
-                <div className='eventline-header'>
+                <div key={date} className='eventline-header'>
                 {date}
                 </div>
                 {eventDates[date]
                   .map(event => (
                   <EventLine
-                    key={event.id}
+                    key={event.name + event.id}
                     event={event}/>
                   )
                 )}

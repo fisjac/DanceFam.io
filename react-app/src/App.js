@@ -7,7 +7,7 @@ import { authenticate } from './store/session';
 import Browser from './components/Browser';
 import Footer from './components/Footer';
 import ProtectedRoute from './components/auth/ProtectedRoute';
-
+import {getKey} from './store/keys'
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -16,6 +16,7 @@ function App() {
   useEffect(() => {
     (async() => {
       await dispatch(authenticate());
+      dispatch(getKey())
       setLoaded(true);
     })();
   }, [dispatch]);
