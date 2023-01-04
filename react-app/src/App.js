@@ -7,8 +7,6 @@ import { authenticate } from './store/session';
 import Browser from './components/Browser';
 import Footer from './components/Footer';
 import ProtectedRoute from './components/auth/ProtectedRoute';
-import * as communityActions from './store/communities';
-import * as eventActions from './store/events';
 
 
 function App() {

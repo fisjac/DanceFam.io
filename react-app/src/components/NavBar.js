@@ -4,21 +4,20 @@ import { useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import LogoutButton from './auth/LogoutButton';
 import DropDownWrapper from '../context/Dropdown/Dropdown';
-
+import CreateEventForm from './Browser/forms/CreateEventForm';
 // import logo from '../static/DanceFamBrushNoText.svg'
 
 import './NavBar.css'
 import ModalWrapper from '../context/Modal/Modal';
-import CreateCommunityForm from './Browser/forms/CreateCommunityForm';
 
 
 const CreateMenu = () => {
   return (
     <div className='create-dropdown'>
       <ModalWrapper
-        header='Build a Community'
-        form={<CreateCommunityForm/>}>
-        <div className='dropdown-button'>Create Community</div>
+        header='Create an Event'
+        form={<CreateEventForm/>}>
+        <div className='dropdown-button'>Create Event</div>
       </ModalWrapper>
     </div>
   )

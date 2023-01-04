@@ -1,8 +1,9 @@
 import React from 'react'
+import { useSelector } from 'react-redux';
 import EventLine from './EventLine'
 
-export default function EventScroll({events, showCommunity}) {
-
+export default function EventScroll() {
+  const events = useSelector(state=>state.events)
   const eventsList = Object.values(events);
 
   const eventDates = eventsList.reduce((accum, event) => {
@@ -42,7 +43,6 @@ export default function EventScroll({events, showCommunity}) {
                   .map(event => (
                   <EventLine
                     key={event.id}
-                    showCommunity={showCommunity}
                     event={event}/>
                   )
                 )}
