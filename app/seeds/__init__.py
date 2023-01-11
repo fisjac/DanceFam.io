@@ -4,10 +4,10 @@ from .users import seed_users, undo_users
 # from .styles import seed_styles, undo_styles
 # from .roles import seed_roles, undo_roles
 # from .statuses import seed_statuses, undo_statuses
-from .communities import seed_communities, undo_communities
+# from .communities import seed_communities, undo_communities
 from .events import seed_events, undo_events
 from .registrations import seed_registrations, undo_registrations
-from .memberships import seed_memberships, undo_memberships
+# from .memberships import seed_memberships, undo_memberships
 
 
 # Creates a seed group to hold our commands
@@ -23,10 +23,10 @@ def seed():
     # seed_styles()
     # seed_roles()
     # seed_statuses()
-    seed_communities()
+    # seed_communities()
     seed_events()
     seed_registrations()
-    seed_memberships()
+    # seed_memberships()
 
 
 # Creates the `flask seed undo` command
@@ -37,8 +37,8 @@ def undo():
     # undo_styles()
     # undo_roles()
     # undo_statuses()
-    undo_communities()
+    # undo_communities()
     undo_events()
     undo_registrations()
-    undo_memberships()
+    # undo_memberships()
     # Add other undo functions here

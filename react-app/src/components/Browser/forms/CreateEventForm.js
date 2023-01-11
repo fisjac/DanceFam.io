@@ -3,51 +3,55 @@ import { useDispatch, useSelector } from 'react-redux';
 
 
 import * as eventActions from '../../../store/events';
+import { getKey } from '../../../store/keys';
 
+let autoComplete;
 
-// const loadScript = (url, callback) => {
-//   let script = document.createElement("script"); // create script tag
-//   script.type = "text/javascript";
+const loadScript = (url, callback) => {
+  let script = document.createElement("script"); // create script tag
+  script.type = "text/javascript";
 
-//   // when script state is ready and loaded or complete we will call callback
-//   if (script.readyState) {
-//     script.onreadystatechange = function() {
-//       if (script.readyState === "loaded" || script.readyState === "complete") {
-//         script.onreadystatechange = null;
-//         callback();
-//       }
-//     };
-//   } else {
-//     script.onload = () => callback();
-//   }
+  // when script state is ready and loaded or complete we will call callback
+  if (script.readyState) {
+    script.onreadystatechange = function() {
+      if (script.readyState === "loaded" || script.readyState === "complete") {
+        script.onreadystatechange = null;
+        callback();
+      }
+    };
+  } else {
+    script.onload = () => callback();
+  }
 
-//   script.src = url; // load by url
-//   document.getElementsByTagName("head")[0].appendChild(script); // append to head
-// };
+  script.src = url; // load by url
+  document.getElementsByTagName("head")[0].appendChild(script); // append to head
+};
 
 // handle when the script is loaded we will assign autoCompleteRef with google maps place autocomplete
 function handleScriptLoad(updateQuery, autoCompleteRef) {
   // assign autoComplete with Google maps place one time
-
+  autoComplete = new window.google.maps.places.Autocomplete(
+    autoCompleteRef.current,
+    {}
+  );
+  autoComplete.setFields(["address_components", "formatted_address"]); // specify what properties we will get from API
+  // add a listener to handle when the place is selected
+  autoComplete.addListener("place_changed", () =>
+    handlePlaceSelect(updateQuery)
+  );
 }
 
-
+async function handlePlaceSelect(updateQuery) {
+  const addressObject = autoComplete.getPlace();
+  const query = addressObject.formatted_address;
+  updateQuery(query);
+  console.log(addressObject);
+}
 
 export default function CreateEventForm({setShowModal}) {
   const dispatch = useDispatch();
 
-  // Google Maps Autocomplete
   const autoCompleteRef = useRef(null);
-  let autoComplete;
-
-  async function handlePlaceSelect(updateQuery) {
-    const addressObject = autoComplete.getPlace();
-    const query = addressObject.formatted_address;
-    updateQuery(query);
-    console.log(addressObject);
-  }
-  // add a listener to handle when the place is selected
-
 
 
   const [errors, setErrors] = useState([]);
@@ -62,18 +66,18 @@ export default function CreateEventForm({setShowModal}) {
   const [country, setCountry] = useState('');
   const [description, setDescription] = useState('');
   const [imageUrl, setImageUrl] = useState(null);
+  const key = useSelector(state => state.keys.places);
 
+  console.log('places key', key)
   // Google Maps autocomplete API script
-  useEffect(() => {
-    autoComplete = new window.google.maps.places.Autocomplete(
-      autoCompleteRef.current,
-      {}
-    );
-    // autoComplete.setFields(["address_components", "formatted_address"]); // specify what properties we will get from API
-    autoComplete.addListener("place_changed", () =>
-    handlePlaceSelect(setAddress)
-  );
-    }, []);
+  useEffect(async () => {
+      await dispatch(getKey('places'))
+      console.log('places key in useEffect', key)
+      loadScript(
+        `https://maps.googleapis.com/maps/api/js?key=${key}&libraries=places`,
+        () => handleScriptLoad(setAddress, autoCompleteRef)
+      );
+    }, [dispatch, key]);
 
 
 
@@ -116,7 +120,7 @@ export default function CreateEventForm({setShowModal}) {
     };
   };
 
-  return (
+  return key && (
 
     <form method='POST' onSubmit={handleSubmit}>
       <div className='errors'>

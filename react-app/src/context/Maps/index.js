@@ -38,6 +38,7 @@ export default function GMap () {
     return <h1>{status}</h1>;
   };
 
+  console.log('maps key', key)
   return key && (
     <Wrapper apiKey={key} render={render}>
       <Map/>

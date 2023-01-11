@@ -1,16 +1,16 @@
 import os
-from flask import Flask, render_template, request, session, redirect
+from flask import Flask, request, redirect
 from flask_cors import CORS
 from flask_migrate import Migrate
-from flask_wtf.csrf import CSRFProtect, generate_csrf
+from flask_wtf.csrf import generate_csrf
 from flask_login import LoginManager
 
 from .models import db, User
 from .api.user_routes import user_routes
 from .api.auth_routes import auth_routes
-from .api.community_routes import community_routes
+# from .api.community_routes import community_routes
 from .api.event_routes import event_routes
-from .api.maps import map_routes
+from .api.keys import key_routes
 
 from .seeds import seed_commands
 
@@ -34,9 +34,9 @@ app.cli.add_command(seed_commands)
 app.config.from_object(Config)
 app.register_blueprint(user_routes, url_prefix='/api/users')
 app.register_blueprint(auth_routes, url_prefix='/api/auth')
-app.register_blueprint(community_routes, url_prefix='/api/communities')
+# app.register_blueprint(community_routes, url_prefix='/api/communities')
 app.register_blueprint(event_routes, url_prefix='/api/events')
-app.register_blueprint(map_routes, url_prefix='/api/maps')
+app.register_blueprint(key_routes, url_prefix='/api/keys')
 db.init_app(app)
 Migrate(app, db)
 

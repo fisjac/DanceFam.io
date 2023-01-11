@@ -17,10 +17,7 @@ const CreateMenu = () => {
     <div className='create-dropdown'>
       <ModalWrapper
         header='Create an Event'
-        form={
-          <div></div>
-        // <CreateEventForm/>
-        }
+        form={<CreateEventForm/>}
         >
         <div className='dropdown-button'>Create Event</div>
       </ModalWrapper>
