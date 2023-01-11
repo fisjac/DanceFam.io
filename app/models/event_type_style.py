@@ -37,6 +37,8 @@ class Event(db.Model):
   state = db.Column(db.String(255))
   address = db.Column(db.String(255))
   country = db.Column(db.String(255))
+  lat = db.Column(db.Float())
+  lng = db.Column(db.Float())
   image_url = db.Column(db.String(255),nullable=True)
   organiser_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
 
@@ -65,6 +67,8 @@ class Event(db.Model):
       "state": self.state,
       "address": self.address,
       "country": self.country,
+      "lat": self.lat,
+      "lng": self.lng,
       # "communityId": self.community_id,
       "organiserId": self.organiser_id,
       "imageUrl": self.image_url,
