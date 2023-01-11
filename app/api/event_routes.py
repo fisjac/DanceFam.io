@@ -51,6 +51,8 @@ def create_event():
             state = form.data['state'],
             address = form.data['address'],
             country = form.data['country'],
+            lat = form.data['lat'],
+            lng = form.data['lng'],
             image_url = image_url,
         )
 
@@ -91,6 +93,8 @@ def edit_event(id):
                 state = form.data['state'],
                 address = form.data['address'],
                 country = form.data['country'],
+                lat = form.data['lat'],
+                lng = form.data['lng'],
                 image_url = image_url,
             )
 
