@@ -18,6 +18,10 @@ const loadApiKey = (key, keyType) => {
 };
 
 export const getKey = (keyType) => async dispatch => {
+  if (!keyType) {
+    console.log('no keyType provided')
+    return
+  };
   const res = await fetch(`/api/keys/${keyType}`, {
     method: 'POST'
   });

@@ -1,7 +1,7 @@
 import React from 'react'
 import { useSelector } from 'react-redux';
 
-import GMap from '../../context/Maps';
+import MapContainer from '../../context/Maps/index';
 import EventLine from './EventLine'
 
 export default function EventScroll() {
@@ -30,7 +30,7 @@ export default function EventScroll() {
 
   return (
     <>
-    <GMap/>
+    <MapContainer center ={{lat: 29.76, lng: -95.41}} zoom={10} events={events}/>
     <div className='eventscroll-title'>Upcoming Events</div>
     <div className='eventscroll'>
       {

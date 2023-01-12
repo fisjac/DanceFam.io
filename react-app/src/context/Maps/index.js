@@ -1,47 +1,25 @@
-import { React, useEffect, useRef, useState } from 'react';
+import {useEffect} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Wrapper, Status } from "@googlemaps/react-wrapper";
 
-import { getKey } from '../../store/keys';
+import {getKey} from '../../store/keys'
+import Maps from './Maps';
 
 import './maps.css'
 
-const Map = (props) => {
-  const mapsRef = useRef();
-  const [map, setMap] = useState(null);
-
-  useEffect(() => {
-    if (mapsRef.current && !map) {
-      setMap(new window.google.maps.Map(mapsRef.current, {
-        zoom: 3,
-        center: {lat: 0, lng: 0}
-      }));
-    }
-  }, [mapsRef, map]);
-  return (
-      <div id='map' ref={mapsRef}/>
-  )
-};
-
-
-export default function GMap () {
-  const key = useSelector((state) => state.keys.maps);
+const MapContainer = ({center, zoom, events}) => {
+  const key = useSelector(state=>state.keys.maps);
   const dispatch = useDispatch();
 
-  useEffect(() => {
+  useEffect(()=> {
     if (!key) {
-      dispatch(getKey('maps'));
+      dispatch(getKey('maps'))
     }
-  }, [dispatch, key]);
+  }, [dispatch,key]);
 
-  const render = (status= Status) => {
-    return <h1>{status}</h1>;
-  };
-
-  console.log('maps key', key)
-  return key && (
-    <Wrapper apiKey={key} render={render}>
-      <Map/>
-    </Wrapper>
+  if (!key) return null;
+  return (
+      <Maps id = 'map' apiKey={key} zoom={zoom} center={center} events={events} />
   );
 };
+
+export default MapContainer;
