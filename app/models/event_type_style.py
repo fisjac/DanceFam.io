@@ -37,12 +37,13 @@ class Event(db.Model):
   state = db.Column(db.String(255))
   address = db.Column(db.String(255))
   country = db.Column(db.String(255))
+  lat = db.Column(db.Float())
+  lng = db.Column(db.Float())
   image_url = db.Column(db.String(255),nullable=True)
-  community_id = db.Column(db.Integer, db.ForeignKey("communities.id"))
   organiser_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
 
   # Relationships
-  community = db.relationship("Community", back_populates="events")
+  # community = db.relationship("Community", back_populates="events")
 
   registrations = db.relationship("Registration", back_populates="event", cascade='delete')
 
@@ -66,7 +67,9 @@ class Event(db.Model):
       "state": self.state,
       "address": self.address,
       "country": self.country,
-      "communityId": self.community_id,
+      "lat": self.lat,
+      "lng": self.lng,
+      # "communityId": self.community_id,
       "organiserId": self.organiser_id,
       "imageUrl": self.image_url,
       "attendeeCount": len(self.registrations),

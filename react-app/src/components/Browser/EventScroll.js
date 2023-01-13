@@ -1,8 +1,15 @@
-import React from 'react'
+import React, {useContext} from 'react'
+import { useSelector } from 'react-redux';
+
+import { GoogleMapsContext } from '../../context/Maps/MapsLoader';
+
+import Map from '../../context/Maps/Map';
+
 import EventLine from './EventLine'
 
-export default function EventScroll({events, showCommunity}) {
-
+export default function EventScroll() {
+  const isLoaded = useContext(GoogleMapsContext)
+  const events = useSelector(state=>state.events)
   const eventsList = Object.values(events);
 
   const eventDates = eventsList.reduce((accum, event) => {
@@ -27,22 +34,22 @@ export default function EventScroll({events, showCommunity}) {
 
   return (
     <>
+    {isLoaded && <Map center ={{lat: 29.76, lng: -95.41}} zoom={10} events={events}/>}
     <div className='eventscroll-title'>Upcoming Events</div>
     <div className='eventscroll'>
       {
         sortedDates.map(date => {
           let dateString = date.toLocaleDateString(undefined, {weekday: 'long',month: 'long', day: 'numeric'});
           return dateString;
-        }).map(date => (
+        }).map((date, idx) => (
               <>
-                <div className='eventline-header'>
+                <div key={date} className='eventline-header'>
                 {date}
                 </div>
                 {eventDates[date]
                   .map(event => (
                   <EventLine
-                    key={event.id}
-                    showCommunity={showCommunity}
+                    key={event.name + event.id}
                     event={event}/>
                   )
                 )}

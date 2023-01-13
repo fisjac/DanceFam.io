@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState, useContext } from "react";
 import ReactDom from 'react-dom';
 
-import logo from '../static/DanceFamBrushNoText.svg'
+import logo from '../../static/DanceFamBrushNoText.svg'
 
 
 import './Modal.css'

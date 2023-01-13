@@ -3,26 +3,24 @@ import { useDispatch, useSelector } from 'react-redux'
 import {useHistory} from 'react-router-dom'
 
 import * as eventActions from '../../store/events';
-import ModalWrapper from '../../context/Modal'
+import ModalWrapper from '../../context/Modal/Modal'
 import EditEventForm from './forms/EditEventForm';
 
 import defaultImage from '../../static/dancing_couple1.svg'
 
-export default function EventLine({event, showCommunity}) {
+export default function EventLine({event}) {
   const history = useHistory();
   const dispatch = useDispatch();
   const start = new Date(event.start);
   const userId = useSelector(state=>state.session.user.id);
-  const communities = useSelector(state=>state.communities);
-  const communityId = event.communityId;
 
-  return communities && (
+  return (
     <>
     <div
       className='eventline-container'
       onClick={(e)=>{
         if(e.target.className.includes('eventline')) {
-          history.push(`/${event.communityId}/events/${event.id}`)
+          history.push(`/events/${event.id}`)
         }
 
       }}
@@ -32,22 +30,12 @@ export default function EventLine({event, showCommunity}) {
           <img
             className='eventline-img'
             src={event.imageUrl===null?defaultImage:event.imageUrl}
-            alt="community_img"
+            alt="event_img"
             onError={e =>e.currentTarget.src = defaultImage}
             />
           <div className='eventline-details'>
             <div className='eventline-date'>{start.toLocaleDateString(undefined, {weekday: 'short', month: 'short', day: 'numeric',})} ⋅ {start.toLocaleTimeString(undefined, {timeStyle: 'short'})}</div>
             <div className='eventline-name'>{event.name}</div>
-            {showCommunity && (
-              <div
-                className='eventline-community'
-                onClick={(e)=>{
-                  e.stopPropagation();
-                  history.push(`/${event.communityId}`)
-                  }
-                }
-                >Hosted by: {communities[event.communityId].name}</div>
-                )}
             <div className='eventline-attendees'>
               {event.attendeeCount} attendees
             </div>
@@ -64,8 +52,7 @@ export default function EventLine({event, showCommunity}) {
                if (window.confirm(`Are you sure you want to delete ${event.name}?`)) {
                 const response = await dispatch(
                   eventActions.deleteEvent(
-                    event.id,
-                    !showCommunity? communityId: null));
+                    event.id));
                 if (response.ok) alert(`${event.name} successfully deleted.`);
                }
                }}

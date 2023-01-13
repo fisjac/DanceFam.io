@@ -1,10 +1,12 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect, useRef, useContext} from 'react'
 import { useDispatch } from 'react-redux';
-
 
 import * as eventActions from '../../../store/events';
 
-export default function CreateEventForm({communityId, setShowModal}) {
+export default function CreateEventForm({setShowModal}) {
+  const dispatch = useDispatch();
+
+
   const [errors, setErrors] = useState([]);
   const [name, setName] = useState('');
   const [startDate, setStartDate] = useState('');
@@ -15,10 +17,45 @@ export default function CreateEventForm({communityId, setShowModal}) {
   const [city, setCity] = useState('');
   const [state, setState] = useState('');
   const [country, setCountry] = useState('');
+  const [zip, setZip] = useState('');
+  const [lat, setLat] = useState('');
+  const [lng, setLng] = useState('');
   const [description, setDescription] = useState('');
   const [imageUrl, setImageUrl] = useState(null);
 
-  const dispatch = useDispatch();
+  const autoCompleteRef = useRef(null);
+
+
+  const [place, setPlace] = useState('')
+
+  let autoComplete;
+  useEffect(()=> {
+    autoComplete = new window.google.maps.places.Autocomplete(
+      autoCompleteRef.current,
+      {fields: ["address_components", "geometry"]}
+    );
+    autoComplete.addListener('place_changed', async function () {
+      const data = await autoComplete.getPlace();
+      const location = data.geometry.location.toJSON()
+      let components = {};
+      data.address_components.forEach((component) => {
+      component.types.forEach((type) => {
+        components[type] = component.long_name;
+      });
+    });
+      components.street_number ?
+        setAddress(components.street_number + ' ' + components.route) :
+        setAddress(components.route)
+      setCity(components.locality)
+      setState(components.administrative_area_level_1)
+      setCountry(components.country)
+      setZip(components.postal_code)
+      setLat(location.lat)
+      setLng(location.lng)
+
+    })
+  }, [])
+
   const dateToBackendFormat = (date) => {
     let dateString = date.toISOString();
     return dateString.replace('T', ' ').substring(0,dateString.length - 5)
@@ -38,7 +75,6 @@ export default function CreateEventForm({communityId, setShowModal}) {
     const end = new Date(endDate + 'T' + endTime);
     const response = await dispatch(
       eventActions.createEvent({
-        communityId,
         event: {
           name,
           start: dateToBackendFormat(start),
@@ -48,6 +84,8 @@ export default function CreateEventForm({communityId, setShowModal}) {
           state,
           country,
           description,
+          lat,
+          lng,
           image_url: imageUrl?imageUrl:null,}
         }));
     if (response.ok) {
@@ -60,117 +98,118 @@ export default function CreateEventForm({communityId, setShowModal}) {
   };
 
   return (
-
-    <form method='POST' onSubmit={handleSubmit}>
-      <div className='errors'>
-        {errors.map((error, idx) => (
-          <div className='error' key={idx}>{error}</div>
-        ))}
-      </div>
-      <div>
-        <label>Event Name *</label>
-        <input
-          type='text'
-          onChange={(e)=>setName(e.target.value)}
-          value={name}
-          placeholder='Name'
-          required
-        />
-      </div>
-      <div className='datetime-input'>
-        <label>Start *</label>
-        <input
-          type='Date'
-          min={dateToday()}
-          max={endDate}
-          onChange={(e)=>setStartDate(e.target.value)}
-          value={startDate}
-          required
-        />
-        <input
-          type='Time'
-          className='time-input'
-          onChange={(e)=>setStartTime(e.target.value)}
-          value={startTime}
-          required
-        />
-      </div>
-
-      <div className='datetime-input'>
-        <label>End *</label>
-        <input
-            type='Date'
-            min={startDate}
-            onChange={(e)=>setEndDate(e.target.value)}
-            value={endDate}
+      <form method='POST' onSubmit={handleSubmit}>
+        <div className='errors'>
+          {errors.map((error, idx) => (
+            <div className='error' key={idx}>{error}</div>
+          ))}
+        </div>
+        <div>
+          <label>Event Name *</label>
+          <input
+            type='text'
+            onChange={(e)=>setName(e.target.value)}
+            value={name}
+            placeholder='Name'
             required
           />
-        <input
-          className='time-input'
-          type='Time'
-          onChange={(e)=>setEndTime(e.target.value)}
-          value={endTime}
-          required
-        />
-      </div>
-      <div>
-        <label>Address *</label>
-        <input
-          type='text'
-          onChange={(e)=>setAddress(e.target.value)}
-          value={address}
-          required
-        />
-      </div>
-      <div>
-        <label>City *</label>
-        <input
-          type='text'
-          onChange={(e)=>setCity(e.target.value)}
-          value={city}
-          required
-        />
-      </div>
-      <div>
-        <label>State</label>
-        <input
-          type='text'
-          onChange={(e)=>setState(e.target.value)}
-          value={state}
-          required
-        />
-      </div>
-      <div>
-        <label>Country *</label>
-        <input
-          type='text'
-          onChange={(e)=>setCountry(e.target.value)}
-          value={country}
-          required
-        />
-      </div>
-      <div>
-        <label>Description *</label>
-        <textarea
-          className='textarea-input'
-          type='textarea'
-          onChange={(e)=>setDescription(e.target.value)}
-          value={description}
-          required
-        />
-      </div>
+        </div>
+        <div className='datetime-input'>
+          <label>Start *</label>
+          <input
+            type='Date'
+            min={dateToday()}
+            max={endDate}
+            onChange={(e)=>setStartDate(e.target.value)}
+            value={startDate}
+            required
+          />
+          <input
+            type='Time'
+            className='time-input'
+            onChange={(e)=>setStartTime(e.target.value)}
+            value={startTime}
+            required
+          />
+        </div>
 
-      <div>
-        <label>Image Url</label>
-        <input
-          type='text'
-          onChange={(e)=>setImageUrl(e.target.value)}
-          value={imageUrl}
-          placeholder='Image Url'
-        />
-      </div>
+        <div className='datetime-input'>
+          <label>End *</label>
+          <input
+              type='Date'
+              min={startDate}
+              onChange={(e)=>setEndDate(e.target.value)}
+              value={endDate}
+              required
+            />
+          <input
+            className='time-input'
+            type='Time'
+            onChange={(e)=>setEndTime(e.target.value)}
+            value={endTime}
+            required
+          />
+        </div>
+        <div>
+          <label>Address *</label>
+          <input
+            ref={autoCompleteRef}
+            type='text'
+            onChange={(e)=>setAddress(e.target.value)}
+            value={address}
+            required
+          />
+        </div>
+        <div>
+          <label>City *</label>
+          <input
+            type='text'
+            onChange={(e)=>setCity(e.target.value)}
+            value={city}
+            required
+          />
+        </div>
+        <div>
+          <label>State</label>
+          <input
+            type='text'
+            onChange={(e)=>setState(e.target.value)}
+            value={state}
+            required
+          />
+        </div>
+        <div>
+          <label>Country *</label>
+          <input
+            type='text'
+            onChange={(e)=>setCountry(e.target.value)}
+            value={country}
+            required
+          />
+        </div>
 
-      <button type='submit'>Confirm</button>
-    </form>
+        <div>
+          <label>Description *</label>
+          <textarea
+            className='textarea-input'
+            type='textarea'
+            onChange={(e)=>setDescription(e.target.value)}
+            value={description}
+            required
+          />
+        </div>
+
+        <div>
+          <label>Image Url</label>
+          <input
+            type='text'
+            onChange={(e)=>setImageUrl(e.target.value)}
+            value={imageUrl}
+            placeholder='Image Url'
+          />
+        </div>
+
+        <button type='submit'>Confirm</button>
+      </form>
   )
 }

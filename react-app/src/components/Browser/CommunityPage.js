@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Redirect, useHistory, useParams } from 'react-router-dom';
 
 
-import ModalWrapper from '../../context/Modal'
+import ModalWrapper from '../../context/Modal/Modal'
 import * as communityActions from '../../store/communities';
 import CreateEventForm from './forms/CreateEventForm';
 import EditCommunityForm from './forms/EditCommunityForm';

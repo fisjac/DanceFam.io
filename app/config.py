@@ -2,6 +2,8 @@ import os
 
 class Config:
     SECRET_KEY = os.environ.get('SECRET_KEY')
+    MAPS_JS_API_KEY = os.environ.get('MAPS_JS_API_KEY')
+    PLACES_API_KEY= os.environ.get('PLACES_API_KEY')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     # SQLAlchemy 1.4 no longer supports url strings that start with 'postgres'
     # (only 'postgresql') but heroku's postgres add-on automatically sets the

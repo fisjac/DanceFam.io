@@ -60,8 +60,8 @@ export const getEvent = (eventId) => async dispatch => {
   return response;
 };
 
-export const createEvent = ({communityId, event}) => async dispatch => {
-  const response = await fetch(`/api/communities/${communityId}/events`, {
+export const createEvent = ({event}) => async dispatch => {
+  const response = await fetch(`/api/events`, {
     method: 'POST',
     headers: {'Content-Type': 'application/json'},
     body: JSON.stringify(event)
@@ -69,7 +69,6 @@ export const createEvent = ({communityId, event}) => async dispatch => {
   if (response.ok) {
     const event = await response.json();
     await dispatch(loadEvent(event))
-    await dispatch(communityActions.getCommunity(communityId))
     await dispatch(sessionActions.addEvent(event.id))
     return response;
   }
@@ -91,14 +90,13 @@ export const updateEvent = (event) => async dispatch => {
   return response;
 };
 
-export const deleteEvent = (eventId, communityId) => async dispatch => {
+export const deleteEvent = (eventId) => async dispatch => {
   const response = await fetch (`/api/events/${eventId}`,{
     method: 'DELETE'
   });
   if (response.ok) {
     await dispatch(sessionActions.authenticate())
     batch(async()=>{
-      await dispatch(communityActions.getCommunities())
       await dispatch(removeEvent(eventId))
     });
     return response;

@@ -145,6 +145,12 @@ input {
   height: 30px;
 }
 
+.split-input {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+}
+
 button {
   height: 30px;
   margin-top: 4px;

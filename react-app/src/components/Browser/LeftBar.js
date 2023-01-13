@@ -4,12 +4,13 @@ import { useHistory } from 'react-router-dom';
 
 import logo from '../../static/DanceFamBrushNoText.svg';
 import title from '../../static/DanceFamTitle.svg';
-import Communities from './Communities';
 
 import defaultImage from '../../static/dancing_couple1.svg'
 
 
-function NextEvent ({user, events, communities}) {
+function NextEvent () {
+  const user = useSelector(state=>state.session.user);
+  const events = useSelector(state=>state.events)
   const history = useHistory();
 
   const userEvents = Object.keys(user.events).map(eventId=>events[eventId]);
@@ -31,7 +32,7 @@ function NextEvent ({user, events, communities}) {
     return (
       <div
         className='event-box'
-        onClick={()=>history.push(`/${nextEvent.communityId}/events/${nextEvent.id}`)}>
+        onClick={()=>history.push(`/events/${nextEvent.id}`)}>
           <div className='event-box-header'>
             <img
               className='event-box-image'
@@ -43,13 +44,6 @@ function NextEvent ({user, events, communities}) {
           </div>
           <div className='event-box-details'>
             <div className='event-box-date'>{start.toLocaleDateString(undefined, {weekday: 'short', month: 'short', day: 'numeric',})} ⋅ {start.toLocaleTimeString(undefined, {timeStyle: 'short'})}</div>
-            <div
-              className='event-box-community-name'
-              onClick={(e)=>{
-                e.stopPropagation();
-                history.push(`/${nextEvent.communityId}`)
-                }}
-              >{communities[nextEvent.communityId].name}</div>
             <div className='event-box-address-line'>
               <div className='location-icon'>
                 <i className="fa-solid fa-location-dot"></i>
@@ -75,7 +69,6 @@ function NextEvent ({user, events, communities}) {
 export default function LeftBar() {
   const history = useHistory();
   const user = useSelector(state=>state.session.user);
-  const communities = useSelector(state=>state.communities);
   const events = useSelector(state=>state.events);
 
 
@@ -88,9 +81,7 @@ export default function LeftBar() {
 
       <div className='planner scroll'>
         <div className='planner-title'>Your Next Event</div>
-        <NextEvent user={user} events={events} communities={communities}/>
-        <div className='planner-title'>Your Communities</div>
-        <Communities communities={communities}/>
+        <NextEvent user={user} events={events}/>
       </div>
     </div>
   );

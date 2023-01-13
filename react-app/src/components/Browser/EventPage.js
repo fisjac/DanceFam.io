@@ -2,7 +2,7 @@ import React from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 
-import ModalWrapper from '../../context/Modal';
+import ModalWrapper from '../../context/Modal/Modal';
 import * as eventActions from '../../store/events';
 import EditEventForm from './forms/EditEventForm';
 import defaultImage from '../../static/dancing_couple1.svg'
@@ -40,7 +40,7 @@ export default function EventPage() {
                 if (window.confirm(`Are you sure you want to delete ${event.name}?`)) {
                   history.push(`/${event.communityId}`)
                   const response = await dispatch(
-                    eventActions.deleteEvent(event.id, communities[event.community])
+                    eventActions.deleteEvent(event.id)
                     );
                   if (response.ok) {
                     alert(`${event.name} successfully deleted.`)
