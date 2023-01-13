@@ -32,7 +32,7 @@ def event(id):
         "statusCode": 404}, 404
     return event.to_dict()
 
-@event_routes.route('/', methods=['POST'])
+@event_routes.route('', methods=['POST'])
 @login_required
 def create_event():
     form = EventForm()
@@ -41,6 +41,7 @@ def create_event():
         if form.data['image_url']:
             image_url = form.data['image_url']
         else: image_url = None
+        print(form.data['lat'])
         event = Event(
             organiser_id = current_user.id,
             name = form.data['name'],
