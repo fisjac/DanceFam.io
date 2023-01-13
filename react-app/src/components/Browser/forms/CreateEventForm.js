@@ -47,7 +47,7 @@ export default function CreateEventForm({setShowModal}) {
         setAddress(components.street_number + ' ' + components.route) :
         setAddress(components.route)
       setCity(components.locality)
-      setState(components.adminstrative_area_level_1)
+      setState(components.administrative_area_level_1)
       setCountry(components.country)
       setZip(components.postal_code)
       setLat(location.lat)
