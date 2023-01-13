@@ -40,7 +40,7 @@ export default function EventPage() {
                 if (window.confirm(`Are you sure you want to delete ${event.name}?`)) {
                   history.push(`/${event.communityId}`)
                   const response = await dispatch(
-                    eventActions.deleteEvent(event.id, communities[event.community])
+                    eventActions.deleteEvent(event.id)
                     );
                   if (response.ok) {
                     alert(`${event.name} successfully deleted.`)

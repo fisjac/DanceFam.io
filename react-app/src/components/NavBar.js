@@ -1,11 +1,11 @@
 
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { NavLink } from 'react-router-dom';
+
+import Places from '../context/Places';
 import LogoutButton from './auth/LogoutButton';
 import DropDownWrapper from '../context/Dropdown/Dropdown';
 import CreateEventForm from './Browser/forms/CreateEventForm';
-import {Wrapper} from '../context/Maps'
 // import logo from '../static/DanceFamBrushNoText.svg'
 
 import './NavBar.css'

@@ -1,10 +1,14 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import { useSelector } from 'react-redux';
 
-import MapContainer from '../../context/Maps/index';
+import { GoogleMapsContext } from '../../context/Maps/MapsLoader';
+
+import Map from '../../context/Maps/Map';
+
 import EventLine from './EventLine'
 
 export default function EventScroll() {
+  const isLoaded = useContext(GoogleMapsContext)
   const events = useSelector(state=>state.events)
   const eventsList = Object.values(events);
 
@@ -30,7 +34,7 @@ export default function EventScroll() {
 
   return (
     <>
-    <MapContainer center ={{lat: 29.76, lng: -95.41}} zoom={10} events={events}/>
+    {isLoaded && <Map center ={{lat: 29.76, lng: -95.41}} zoom={10} events={events}/>}
     <div className='eventscroll-title'>Upcoming Events</div>
     <div className='eventscroll'>
       {
