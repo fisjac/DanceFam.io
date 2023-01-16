@@ -2,11 +2,12 @@ from app.models import db, Type
 
 def seed_types():
     convention = Type(name='Convention')
-    workshop = Type(name='Workshop')
+    weekend_workshop = Type(name='Weekend Workshop')
     solo_class = Type(name='Class')
+    social = Type(name='social')
 
 
-    db.session.add_all([convention, workshop, solo_class])
+    db.session.add_all([convention, weekend_workshop, solo_class, social])
 
     db.session.commit()
 

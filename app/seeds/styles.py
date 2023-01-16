@@ -3,11 +3,13 @@ from app.models import db, Style
 def seed_styles():
     wcs = Style(name='West Coast Swing')
     zouk = Style(name='Zouk')
-    tango = Style(name='Tango')
+    salsa = Style(name='Salsa')
+    bachata = Style(name='Bachata')
+    kizomba = Style(name='Kizomba')
+    country = Style(name='Country Swing')
+    ballroom = Style(name='Ballroom')
 
-
-    db.session.add_all([wcs, zouk, tango])
-
+    db.session.add_all([wcs, zouk, country, ballroom, salsa, bachata, kizomba])
     db.session.commit()
 
 
