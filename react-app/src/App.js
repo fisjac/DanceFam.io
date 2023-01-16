@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+
+
+import LoadMaps from './context/Maps/MapsLoader';
 import NavBar from './components/NavBar';
 import Splash from './components/splash/Splash';
 import { authenticate } from './store/session';
@@ -34,9 +37,11 @@ function App() {
         </Route>
         <ProtectedRoute>
           <Route path='/'>
-            <NavBar/>
-            <Browser/>
-            <Footer/>
+            <LoadMaps>
+              <NavBar/>
+              <Browser/>
+              <Footer/>
+            </LoadMaps>
           </Route>
         </ProtectedRoute>
       </Switch>
