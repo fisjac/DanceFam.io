@@ -84,25 +84,17 @@ def edit_event(id):
             if form.data['image_url']:
                 image_url = form.data['image_url']
             else: image_url = None
-            event = Event(
-                organiser_id = current_user.id,
-                name = form.data['name'],
-                start = form.data['start'],
-                end = form.data['end'],
-                description = form.data['description'],
-                city = form.data['city'],
-                state = form.data['state'],
-                address = form.data['address'],
-                country = form.data['country'],
-                lat = form.data['lat'],
-                lng = form.data['lng'],
-                image_url = image_url,
-            )
-
-            registration = Registration()
-            registration.user = current_user
-            registration.event = event
-            db.session.add_all([registration])
+            event.name = form.data['name']
+            event.start = form.data['start']
+            event.end = form.data['end']
+            event.description = form.data['description']
+            event.city = form.data['city']
+            event.state = form.data['state']
+            event.address = form.data['address']
+            event.country = form.data['country']
+            event.lat = form.data['lat']
+            event.lng = form.data['lng']
+            event.image_url = image_url
             db.session.commit()
             return event.to_dict()
         return {'errors': validation_errors_to_error_messages(form.errors)}, 401

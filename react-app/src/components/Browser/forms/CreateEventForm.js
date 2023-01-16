@@ -17,22 +17,20 @@ export default function CreateEventForm({setShowModal}) {
   const [city, setCity] = useState('');
   const [state, setState] = useState('');
   const [country, setCountry] = useState('');
-  const [_zip, setZip] = useState('');
   const [lat, setLat] = useState('');
   const [lng, setLng] = useState('');
   const [description, setDescription] = useState('');
-  const [imageUrl, setImageUrl] = useState(undefined);
+  const [imageUrl, setImageUrl] = useState('');
 
   const inputRef = useRef(null);
   const autoCompleteRef = useRef(null)
-  let autoComplete;
   useEffect(()=> {
     autoCompleteRef.current = new window.google.maps.places.Autocomplete(
       inputRef.current,
       {fields: ["address_components", "geometry"]}
     );
     autoCompleteRef.current.addListener('place_changed', async function () {
-      const data = await autoComplete.getPlace();
+      const data = await autoCompleteRef.current.getPlace();
       const location = data.geometry.location.toJSON()
       let components = {};
       data.address_components.forEach((component) => {
@@ -46,10 +44,8 @@ export default function CreateEventForm({setShowModal}) {
       setCity(components.locality)
       setState(components.administrative_area_level_1)
       setCountry(components.country)
-      setZip(components.postal_code)
       setLat(location.lat)
       setLng(location.lng)
-
     })
   }, [])
 

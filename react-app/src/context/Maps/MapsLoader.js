@@ -55,7 +55,6 @@ export function GoogleMapsProvider ({children, apiKey}) {
       libraries
     });
 
-    console.log(isLoaded, location)
   if (!isLoaded) return <div>Loading...</div>
 
   return (

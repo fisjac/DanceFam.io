@@ -32,8 +32,6 @@ export default function EventScroll() {
     })
     .sort();
 
-
-  console.log(location)
   return (
     <>
     {isLoaded && <Map center ={location} zoom={10} events={events}/>}
@@ -45,8 +43,8 @@ export default function EventScroll() {
           return dateString;
         }).map((date, idx) => (
               <>
-                <div key={date} className='eventline-header'>
-                {date}
+                <div key={date + '-' + idx} className='eventline-header'>
+                  {date}
                 </div>
                 {eventDates[date]
                   .map(event => (

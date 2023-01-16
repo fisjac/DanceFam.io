@@ -13,9 +13,8 @@ const Map = ({center, zoom, events}) => {
         disableDefaultUI: true
       }}
       >
-      {Object.values(events).map((event, id)=> {
-        id={id}
-        return <Marker position={{'lat': event.lat, 'lng':event.lng}}/>
+      {Object.values(events).map((event)=> {
+        return <Marker key={event.id} position={{'lat': event.lat, 'lng':event.lng}}/>
       })}
     </GoogleMap>
   )

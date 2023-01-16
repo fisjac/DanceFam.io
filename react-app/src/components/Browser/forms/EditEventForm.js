@@ -1,4 +1,4 @@
-import React, { useState} from 'react'
+import React, { useState, useEffect, useRef} from 'react'
 import { useDispatch } from 'react-redux';
 
 
@@ -27,8 +27,38 @@ export default function EditEventForm({event, setShowModal}) {
   const [city, setCity] = useState(event.city);
   const [state, setState] = useState(event.state);
   const [country, setCountry] = useState(event.country);
+  const [lat, setLat] = useState(event.lat);
+  const [lng, setLng] = useState(event.lng);
   const [description, setDescription] = useState(event.description);
   const [imageUrl, setImageUrl] = useState(event.imageUrl);
+
+  const inputRef = useRef(null);
+  const autoCompleteRef = useRef(null)
+  useEffect(()=> {
+    autoCompleteRef.current = new window.google.maps.places.Autocomplete(
+      inputRef.current,
+      {fields: ["address_components", "geometry"]}
+    );
+    autoCompleteRef.current.addListener('place_changed', async function () {
+      const data = await autoCompleteRef.current.getPlace();
+      const location = data.geometry.location.toJSON()
+      let components = {};
+      data.address_components.forEach((component) => {
+      component.types.forEach((type) => {
+        components[type] = component.long_name;
+      });
+    });
+      components.street_number ?
+        setAddress(components.street_number + ' ' + components.route) :
+        setAddress(components.route)
+      setCity(components.locality)
+      setState(components.administrative_area_level_1)
+      setCountry(components.country)
+      setLat(location.lat)
+      setLng(location.lng)
+    })
+  }, [])
+
   if (event) {
 
     const dateToBackendFormat = (date) => {
@@ -57,6 +87,8 @@ export default function EditEventForm({event, setShowModal}) {
         city,
         state,
         country,
+        lat,
+        lng,
         description,
         image_url: imageUrl?imageUrl:null,
       };
@@ -130,6 +162,7 @@ export default function EditEventForm({event, setShowModal}) {
             type='text'
             onChange={(e)=>setAddress(e.target.value)}
             value={address}
+            ref={inputRef}
             required
             />
         </div>
