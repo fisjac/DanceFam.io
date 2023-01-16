@@ -1,5 +1,4 @@
 import { batch } from 'react-redux';
-import * as communityActions from './communities';
 import * as sessionActions from './session';
 
 const LOAD_EVENTS = 'events/LOAD_ALL';

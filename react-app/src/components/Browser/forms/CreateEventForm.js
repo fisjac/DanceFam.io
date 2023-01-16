@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useRef, useContext} from 'react'
+import React, {useState, useEffect, useRef} from 'react'
 import { useDispatch } from 'react-redux';
 
 import * as eventActions from '../../../store/events';
@@ -17,25 +17,20 @@ export default function CreateEventForm({setShowModal}) {
   const [city, setCity] = useState('');
   const [state, setState] = useState('');
   const [country, setCountry] = useState('');
-  const [zip, setZip] = useState('');
   const [lat, setLat] = useState('');
   const [lng, setLng] = useState('');
   const [description, setDescription] = useState('');
-  const [imageUrl, setImageUrl] = useState(undefined);
+  const [imageUrl, setImageUrl] = useState('');
 
-  const autoCompleteRef = useRef(null);
-
-
-  const [place, setPlace] = useState('')
-
-  let autoComplete;
+  const inputRef = useRef(null);
+  const autoCompleteRef = useRef(null)
   useEffect(()=> {
-    autoComplete = new window.google.maps.places.Autocomplete(
-      autoCompleteRef.current,
+    autoCompleteRef.current = new window.google.maps.places.Autocomplete(
+      inputRef.current,
       {fields: ["address_components", "geometry"]}
     );
-    autoComplete.addListener('place_changed', async function () {
-      const data = await autoComplete.getPlace();
+    autoCompleteRef.current.addListener('place_changed', async function () {
+      const data = await autoCompleteRef.current.getPlace();
       const location = data.geometry.location.toJSON()
       let components = {};
       data.address_components.forEach((component) => {
@@ -49,10 +44,8 @@ export default function CreateEventForm({setShowModal}) {
       setCity(components.locality)
       setState(components.administrative_area_level_1)
       setCountry(components.country)
-      setZip(components.postal_code)
       setLat(location.lat)
       setLng(location.lng)
-
     })
   }, [])
 
@@ -153,7 +146,7 @@ export default function CreateEventForm({setShowModal}) {
         <div>
           <label>Address *</label>
           <input
-            ref={autoCompleteRef}
+            ref={inputRef}
             type='text'
             onChange={(e)=>setAddress(e.target.value)}
             value={address}

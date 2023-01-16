@@ -1,21 +1,39 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import {GoogleMap, Marker} from '@react-google-maps/api';
 
-const Map = ({center, zoom, events}) => {
 
+function getLocation (setLocation) {
+  const geoLocationApi = navigator.geolocation;
+  if (!geoLocationApi) {
+    alert('Geolocation API is not available in your browser!')
+  } else {
+    geoLocationApi.getCurrentPosition((position)=> {
+      const {coords} = position;
+      setLocation({lat: coords.latitude, lng: coords.longitude});
+    }, (error) => alert(`There was a problem getting the user's location: ${error.message}`))
+  }
+};
+
+
+const Map = ({zoom, events}) => {
+  const [location, setLocation] = useState('')
+  useEffect(()=> {
+    if (!location) {
+      getLocation(setLocation)
+    }
+  },[]);
 
   return (
     <GoogleMap
       mapContainerClassName='map'
-      center={center}
+      center={location}
       zoom={zoom}
       options={{
         disableDefaultUI: true
       }}
       >
-      {Object.values(events).map((event, id)=> {
-        id={id}
-        return <Marker position={{'lat': event.lat, 'lng':event.lng}}/>
+      {Object.values(events).map((event)=> {
+        return <Marker key={event.id} position={{'lat': event.lat, 'lng':event.lng}}/>
       })}
     </GoogleMap>
   )

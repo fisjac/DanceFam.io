@@ -1,4 +1,3 @@
-const LOAD_MAPS_KEY = 'keys/LOAD_MAPS';
 const LOAD_PLACES_KEY = 'keys/LOAD_PLACES';
 
 const loadApiKey = (key) => {
@@ -19,7 +18,7 @@ export const getKey = () => async dispatch => {
 }
 
 
-const initialState = {maps: null, places: null};
+const initialState = { places: null };
 const  mapsReducer = (state = initialState, action) => {
   switch (action.type) {
     case LOAD_PLACES_KEY:

@@ -8,7 +8,7 @@ import Map from '../../context/Maps/Map';
 import EventLine from './EventLine'
 
 export default function EventScroll() {
-  const isLoaded = useContext(GoogleMapsContext)
+  const {isLoaded, location} = useContext(GoogleMapsContext)
   const events = useSelector(state=>state.events)
   const eventsList = Object.values(events);
 
@@ -34,7 +34,7 @@ export default function EventScroll() {
 
   return (
     <>
-    {isLoaded && <Map center ={{lat: 29.76, lng: -95.41}} zoom={10} events={events}/>}
+    {isLoaded && <Map center ={location} zoom={10} events={events}/>}
     <div className='eventscroll-title'>Upcoming Events</div>
     <div className='eventscroll'>
       {
@@ -43,8 +43,8 @@ export default function EventScroll() {
           return dateString;
         }).map((date, idx) => (
               <>
-                <div key={date} className='eventline-header'>
-                {date}
+                <div key={date + '-' + idx} className='eventline-header'>
+                  {date}
                 </div>
                 {eventDates[date]
                   .map(event => (

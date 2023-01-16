@@ -39,18 +39,18 @@ export default function ModalWrapper(props) {
     };
   };
 
-  const {form, children, newProps} = {...props}
+  const {form, children, stopProp, closePrev, newProps} = {...props}
   return (
     <>
     {React.cloneElement(
-      props.children,
+      children,
       { ...newProps,
-        onClick: handleClick(props.stopProp, props.closePrev? props.closePrev: null),
+        onClick: handleClick(stopProp, closePrev? props.closePrev: null),
         style: {'cursor': 'pointer'}
       },
       )}
       <Modal {...props} setShowModal={setShowModal} className={`${showModal ? '' : 'hidden' }`}>
-        {React.cloneElement(props.form, props)}
+        {React.cloneElement(form, props)}
       </Modal>
     </>
   );
