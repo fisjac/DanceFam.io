@@ -1,4 +1,3 @@
-const LOAD_MAPS_KEY = 'keys/LOAD_MAPS';
 const LOAD_PLACES_KEY = 'keys/LOAD_PLACES';
 
 const loadApiKey = (key) => {

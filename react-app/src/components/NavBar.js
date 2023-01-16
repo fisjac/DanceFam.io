@@ -2,7 +2,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 
-import Places from '../context/Places';
 import LogoutButton from './auth/LogoutButton';
 import DropDownWrapper from '../context/Dropdown/Dropdown';
 import CreateEventForm from './Browser/forms/CreateEventForm';

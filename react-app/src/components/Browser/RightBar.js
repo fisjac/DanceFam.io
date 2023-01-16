@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import profPic from '../../static/prof_pic.jpg';
 import linkedin from '../../static/linkedin.png';
 export default function RightBar() {
