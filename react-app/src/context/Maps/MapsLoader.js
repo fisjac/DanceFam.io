@@ -31,8 +31,6 @@ export default function LoadMaps({children}) {
     }
   }, [dispatch, key]);
 
-  console.log('key in LoadMaps', key)
-
   if (!key) {
     return null;
   }
