@@ -7,15 +7,15 @@ import {getKey} from '../../store/keys'
 import './map.css'
 
 
-function getLocation (location, setLocation) {
+function getLocation (setLocation) {
   const geoLocationApi = navigator.geolocation;
   if (!geoLocationApi) {
-    return 'Geolocation API is not available in your browser!'
+    alert('Geolocation API is not available in your browser!')
   } else {
     geoLocationApi.getCurrentPosition((position)=> {
       const {coords} = position;
       setLocation({lat: coords.latitude, lng: coords.longitude});
-    }, (error) => 'Something went wrong getting your position!')
+    }, (error) => alert(`There was a problem getting the user's location: ${error.message}`))
   }
 };
 
@@ -47,7 +47,7 @@ export function GoogleMapsProvider ({children, apiKey}) {
 
   const [location, setLocation] = useState({lat: 29.76, lng: -95.41})
   useEffect(()=> {
-    getLocation(location, setLocation)
+    getLocation(setLocation)
   },[]);
 
   const { isLoaded } = useLoadScript({
@@ -55,6 +55,7 @@ export function GoogleMapsProvider ({children, apiKey}) {
       libraries
     });
 
+    console.log(isLoaded, location)
   if (!isLoaded) return <div>Loading...</div>
 
   return (
