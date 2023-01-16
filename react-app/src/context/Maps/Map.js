@@ -6,9 +6,12 @@ const Map = ({center, zoom, events}) => {
 
   return (
     <GoogleMap
-      id='map'
+      mapContainerClassName='map'
       center={center}
       zoom={zoom}
+      options={{
+        disableDefaultUI: true
+      }}
       >
       {Object.values(events).map((event, id)=> {
         id={id}

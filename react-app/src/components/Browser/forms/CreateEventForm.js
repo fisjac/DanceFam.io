@@ -21,7 +21,7 @@ export default function CreateEventForm({setShowModal}) {
   const [lat, setLat] = useState('');
   const [lng, setLng] = useState('');
   const [description, setDescription] = useState('');
-  const [imageUrl, setImageUrl] = useState(null);
+  const [imageUrl, setImageUrl] = useState(undefined);
 
   const autoCompleteRef = useRef(null);
 

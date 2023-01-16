@@ -5,7 +5,6 @@ import { Provider } from 'react-redux';
 import App from './App';
 import configureStore from './store';
 import { ModalProvider } from './context/Modal/Modal';
-import { GoogleMapsProvider } from './context/Maps/MapsLoader';
 
 import './index.css';
 
@@ -15,9 +14,7 @@ ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <ModalProvider>
-        <GoogleMapsProvider>
           <App />
-        </GoogleMapsProvider>
       </ModalProvider>
     </Provider>
   </React.StrictMode>,
