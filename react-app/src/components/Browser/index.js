@@ -5,10 +5,10 @@ import { Route } from 'react-router-dom';
 import * as eventActions from '../../store/events';
 
 import LeftBar from './LeftBar/';
-import FilterBar from './FilterBar';
 import EventPage from './EventPage';
 import RightBar from './RightBar';
 import EventScroll from './EventScroll';
+import EventsMap from './EventsMap';
 
 
 import './Browser.css'
@@ -26,15 +26,22 @@ export default function Browser() {
 
       <div className='main-page'>
         <LeftBar/>
-          <div className='center-container scroll'>
-            <FilterBar/>
-            <Route exact path='/'>
-              {events && <EventScroll events={events}/>}
-            </Route>
-            <Route exact path='/events/:eventId'>
-              <EventPage/>
-            </Route>
-          </div>
+        <div className='center-container'>
+          <Route exact path='/'>
+            {events && (
+              <>
+                <div className='eventscroll-title'>Upcoming Events</div>
+                <div className='center-split'>
+                  <EventScroll events={events}/>
+                  <EventsMap events={events}/>
+                </div>
+              </>
+            )}
+          </Route>
+          <Route exact path='/events/:eventId'>
+            <EventPage/>
+          </Route>
+        </div>
         <RightBar/>
       </div>
   )
