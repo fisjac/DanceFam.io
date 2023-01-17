@@ -5,6 +5,7 @@ import { Route } from 'react-router-dom';
 import * as eventActions from '../../store/events';
 
 import LeftBar from './LeftBar';
+import FilterBar from './FilterBar';
 import EventPage from './EventPage';
 import RightBar from './RightBar';
 import EventScroll from './EventScroll';
@@ -26,7 +27,7 @@ export default function Browser() {
       <div className='main-page'>
         <LeftBar/>
           <div className='center-container scroll'>
-            <div className='welcome-user'>{`Welcome ${user.firstName}`}</div>
+            <FilterBar/>
             <Route exact path='/'>
               {events && <EventScroll events={events}/>}
             </Route>
