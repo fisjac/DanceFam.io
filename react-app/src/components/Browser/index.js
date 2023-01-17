@@ -28,15 +28,11 @@ export default function Browser() {
         <LeftBar/>
         <div className='center-container'>
           <Route exact path='/'>
-            {events && (
-              <>
-                <div className='eventscroll-title'>Upcoming Events</div>
-                <div className='center-split'>
-                  <EventScroll events={events}/>
-                  <EventsMap events={events}/>
-                </div>
-              </>
-            )}
+            <div className='eventscroll-title'>Upcoming Events</div>
+            <div className='center-split'>
+              {events && <EventScroll events={events}/>}
+              <EventsMap events={events}/>
+            </div>
           </Route>
           <Route exact path='/events/:eventId'>
             <EventPage/>
