@@ -4,7 +4,7 @@ import { Route } from 'react-router-dom';
 
 import * as eventActions from '../../store/events';
 
-import LeftBar from './LeftBar';
+import LeftBar from './LeftBar/';
 import FilterBar from './FilterBar';
 import EventPage from './EventPage';
 import RightBar from './RightBar';
