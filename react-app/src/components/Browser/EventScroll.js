@@ -30,12 +30,13 @@ export default function EventScroll() {
       let date = new Date(start);
       return date
     })
-    .sort();
+    .sort((a,b)=> {
+      return a.start > b.start
+    });
 
   return (
     <>
-    {isLoaded && <Map center ={location} zoom={10} events={events}/>}
-    <div className='eventscroll-title'>Upcoming Events</div>
+
     <div className='eventscroll'>
       {
         sortedDates.map(date => {

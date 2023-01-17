@@ -11,15 +11,17 @@ import Browser from './components/Browser';
 import Footer from './components/Footer';
 import ProtectedRoute from './components/auth/ProtectedRoute';
 import {getKey} from './store/keys'
+import { getStyles } from './store/styles';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    (async() => {
+    (async () => {
       await dispatch(authenticate());
-      dispatch(getKey())
+      await dispatch(getStyles())
+      await dispatch(getKey())
       setLoaded(true);
     })();
   }, [dispatch]);

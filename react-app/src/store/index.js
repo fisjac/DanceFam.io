@@ -4,9 +4,10 @@ import session from './session'
 // import communities from './communities'
 import events from './events'
 import keys from './keys'
+import styles from './styles'
 
 const rootReducer = combineReducers({
-  session, events, keys
+  session, events, keys, styles
 });
 
 

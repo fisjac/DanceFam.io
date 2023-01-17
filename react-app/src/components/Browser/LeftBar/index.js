@@ -2,10 +2,10 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
-import logo from '../../static/DanceFamBrushNoText.svg';
-import title from '../../static/DanceFamTitle.svg';
+import logo from '../../../static/DanceFamBrushNoText.svg';
+import title from '../../../static/DanceFamTitle.svg';
 
-import defaultImage from '../../static/dancing_couple1.svg'
+import defaultImage from '../../../static/dancing_couple1.svg'
 
 
 function NextEvent () {

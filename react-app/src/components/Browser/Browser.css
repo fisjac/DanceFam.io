@@ -188,18 +188,18 @@ width:30px;
   flex-grow: 1;
   height: 100%;
 }
+.center-split {
+  display: flex;
+  width: 100%;
+  max-height: calc(100% - 38.4px);
 
-.communityscroll {
-  position: sticky;
-  background-color: white;
-  top: 47;
-  height: max-content;
 }
 
 .eventscroll {
   position: relative;
   background-color: white;
-  max-height: calc(100% - 39.6px);
+  width: 60%;
+  height: 100%;
   overflow-y: scroll;
   -ms-overflow-style: none;
   scrollbar-width: none;
@@ -293,7 +293,7 @@ width:30px;
 
 
 .eventline-body:hover {
-  box-shadow: 1px 2px 2px 2px var(--shadow);
+  box-shadow: 1px 1px 3px 1px var(--shadow);
   cursor: pointer;
   /* transition: .1s; */
 }
@@ -407,4 +407,37 @@ width:30px;
 .flex {
   display: flex;
   align-items: center;
+}
+
+
+.filter-container {
+  background-color: var(--theme-background-grey);
+  height: 30px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+
+.dropdown-menu {
+  background-color: white;
+  border-radius: 5px;
+}
+
+fieldset {
+  background-color: white;
+  border: none;
+  box-shadow: 1px 1px 1px 1px var(--shadow);
+  border-radius: 5px;
+  padding: 0;
+  margin: 0;
+}
+
+.checkbox-line {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
 }
