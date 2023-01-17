@@ -191,7 +191,7 @@ width:30px;
 .center-split {
   display: flex;
   width: 100%;
-  max-height: calc(100% - 59px);
+  max-height: calc(100% - 38.4px);
 
 }
 
