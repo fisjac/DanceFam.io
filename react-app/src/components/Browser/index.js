@@ -16,7 +16,6 @@ import './Browser.css'
 export default function Browser() {
   const dispatch = useDispatch()
   const events = useSelector(state=>state.events);
-  const user = useSelector(state=>state.session.user)
 
   useEffect(()=>{
     dispatch(eventActions.getEvents())
@@ -27,7 +26,7 @@ export default function Browser() {
       <div className='main-page'>
         <LeftBar/>
         <div className='center-container'>
-          <Route exact path='/'>
+          <Route exact path='/app'>
             <div className='eventscroll-title'>Upcoming Events</div>
             <div className='center-split'>
               {events && <EventScroll events={events}/>}

@@ -1,14 +1,10 @@
-import React, {useContext} from 'react'
+import React from 'react'
 import { useSelector } from 'react-redux';
 
-import { GoogleMapsContext } from '../../context/Maps/MapsLoader';
-
-import Map from '../../context/Maps/Map';
 
 import EventLine from './EventLine'
 
 export default function EventScroll() {
-  const {isLoaded, location} = useContext(GoogleMapsContext)
   const events = useSelector(state=>state.events)
   const eventsList = Object.values(events);
 
