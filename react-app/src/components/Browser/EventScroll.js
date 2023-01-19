@@ -54,6 +54,7 @@ export default function EventScroll() {
             )
           )
       }
+      {!Object.keys(events).length && <div className='no-events'>No upcoming events in this area</div>}
     </div>
     </>
   )
