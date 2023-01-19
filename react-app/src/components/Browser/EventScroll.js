@@ -32,7 +32,6 @@ export default function EventScroll() {
 
   return (
     <>
-
     <div className='eventscroll'>
       {
         sortedDates.map(date => {
