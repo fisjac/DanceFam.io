@@ -1,6 +1,5 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import {useHistory} from 'react-router-dom'
 
 import * as eventActions from '../../store/events';
 import ModalWrapper from '../../context/Modal/Modal'
@@ -9,7 +8,6 @@ import EditEventForm from './forms/EditEventForm';
 import defaultImage from '../../static/dancing_couple1.svg'
 
 export default function EventLine({event}) {
-  const history = useHistory();
   const dispatch = useDispatch();
   const start = new Date(event.start);
   const user = useSelector(state=>state.session.user);
@@ -20,7 +18,7 @@ export default function EventLine({event}) {
         className='eventline-container'
         onClick={(e)=>{
           if(e.target.className.includes('eventline')) {
-            history.push(`/events/${event.id}`)
+            // empty for now
           }
 
         }}

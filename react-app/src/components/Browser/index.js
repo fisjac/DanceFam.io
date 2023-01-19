@@ -26,7 +26,7 @@ export default function Browser() {
     if (mapIsLoaded) {
       setFilteredEvents(filterEventsByBounds(events, bounds))
     }
-  }, [bounds])
+  }, [bounds, events])
 
   return (
       <div className='main-page'>
