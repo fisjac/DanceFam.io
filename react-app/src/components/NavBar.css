@@ -77,10 +77,9 @@
   justify-content: space-evenly;
 }
 
-
 .user-dropdown {
   background-color: white;
-  transform: translateY(100%) translateX(-100%);
+  transform: translateY(30px) translateX(-100%);
   box-shadow: 1px 1px 1px 1px var(--shadow);
   border-radius: 5px;
   width: 150px;
@@ -101,7 +100,7 @@
 
 .create-dropdown {
   background-color: white;
-  transform: translateY(100%) translateX(-100%);
+  transform: translateY(30px) translateX(-100%);
   box-shadow: 1px 1px 1px 1px var(--shadow);
   border-radius: 5px;
   width: 150px;

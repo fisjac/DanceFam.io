@@ -16,6 +16,7 @@ function getLocation (setLocation) {
 
 
 const Map = ({zoom, events}) => {
+  const [map, setMap] = useState();
   const [location, setLocation] = useState('')
   useEffect(()=> {
     if (!location) {
@@ -24,18 +25,22 @@ const Map = ({zoom, events}) => {
   },[]);
 
   return (
-    <GoogleMap
-      mapContainerClassName='map'
-      center={location}
-      zoom={zoom}
-      options={{
-        disableDefaultUI: true
-      }}
-      >
-      {Object.values(events).map((event)=> {
-        return <Marker key={event.id} position={{'lat': event.lat, 'lng':event.lng}}/>
-      })}
-    </GoogleMap>
+      <GoogleMap
+        mapContainerClassName='map'
+        center={location}
+        zoom={zoom}
+        onLoad={(map)=>setMap(map)}
+        onDragEnd={()=>{
+          console.log(map.getBounds())
+        }}
+        options={{
+          disableDefaultUI: true
+        }}
+        >
+        {events && Object.values(events).map((event)=> {
+          return <Marker key={event.id} position={{'lat': event.lat, 'lng':event.lng}}/>
+        })}
+      </GoogleMap>
   )
 };
 

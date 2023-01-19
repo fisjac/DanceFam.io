@@ -68,9 +68,7 @@ function NextEvent () {
 
 export default function LeftBar() {
   const history = useHistory();
-  const user = useSelector(state=>state.session.user);
-  const events = useSelector(state=>state.events);
-
+  const styles = useSelector(state=>state.styles)
 
   return (
     <div className='left-bar'>
@@ -80,8 +78,11 @@ export default function LeftBar() {
       </div>
 
       <div className='planner scroll'>
-        <div className='planner-title'>Your Next Event</div>
-        <NextEvent user={user} events={events}/>
+        <div>Calendar Selector</div>
+        <div>Dance Styles</div>
+        <div>Event Types</div>
+        {/* <div className='planner-title'>Your Next Event</div>
+        <NextEvent user={user} events={events}/> */}
       </div>
     </div>
   );

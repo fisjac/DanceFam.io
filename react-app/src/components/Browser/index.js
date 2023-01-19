@@ -22,12 +22,11 @@ export default function Browser() {
     dispatch(eventActions.getEvents())
   },[dispatch])
 
-  return events && (
-
+  return (
       <div className='main-page'>
         <LeftBar/>
         <div className='center-container'>
-          <Route exact path='/'>
+          <Route exact path='/app'>
             <div className='eventscroll-title'>Upcoming Events</div>
             <div className='center-split'>
               {events && <EventScroll events={events}/>}

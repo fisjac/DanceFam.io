@@ -9,7 +9,6 @@ import Splash from './components/splash/Splash';
 import { authenticate } from './store/session';
 import Browser from './components/Browser';
 import Footer from './components/Footer';
-import ProtectedRoute from './components/auth/ProtectedRoute';
 import {getKey} from './store/keys'
 import { getStyles } from './store/styles';
 
@@ -33,19 +32,17 @@ function App() {
   return loaded && (
     <BrowserRouter>
       <Switch>
-        <Route exact path='/welcome'>
+        <Route exact path='/'>
           <Splash />
           <Footer />
         </Route>
-        <ProtectedRoute>
-          <Route path='/'>
+          <Route path='/app'>
             <LoadMaps>
               <NavBar/>
               <Browser/>
-              <Footer/>
             </LoadMaps>
+            <Footer/>
           </Route>
-        </ProtectedRoute>
       </Switch>
     </BrowserRouter>
 

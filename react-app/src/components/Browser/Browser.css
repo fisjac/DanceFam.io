@@ -19,7 +19,7 @@
 .left-bar {
   display: flex;
   flex-direction: column;
-  width: 25%;
+  width: 20%;
 }
 
 .left-bar-logo, .left-bar-logo-title{
@@ -39,7 +39,7 @@
 }
 
 .left-bar-logo-container:hover {
-  box-shadow: 2px 2px 2px 2px var(--shadow);
+  box-shadow: 1px 1px 3px 1px var(--shadow);
   transition: .3s;
 
 }
@@ -47,22 +47,6 @@
 .event-box-date {
 
 }
-
-.event-box-community-name  {
-  color: grey;
-  cursor: pointer;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  word-wrap: none;
-}
-.event-box-community-name:hover {
-  font-weight: 600;
-  font-size: 18px;
-  color: var(--theme-dark);
-  transition: font-size .3s;
-}
-
 
 .planner {
   width: 100%;
@@ -102,7 +86,7 @@
 }
 
 .event-box:hover {
-  box-shadow: 1px 2px 2px var(--shadow);
+  box-shadow: 1px 1px 3px 1px var(--shadow);
 }
 
 .event-box-header {
@@ -198,7 +182,7 @@ width:30px;
 .eventscroll {
   position: relative;
   background-color: white;
-  width: 60%;
+  width: 50%;
   height: 100%;
   overflow-y: scroll;
   -ms-overflow-style: none;
@@ -440,4 +424,14 @@ fieldset {
   align-items: center;
   justify-content: space-between;
   width: 100%;
+}
+
+.no-events {
+  display: flex;
+  background-color: var(--icon-grey);
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
 }

@@ -67,7 +67,7 @@ const LoginForm = () => {
         e.preventDefault()
         const response = await dispatch(login('Demo', 'password'));
         if (response.ok) {
-          history.push('/');
+          history.push('/app');
         };
       }}>Log in as Demo User</button>
     </form>

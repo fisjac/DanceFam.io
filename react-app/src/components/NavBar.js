@@ -6,9 +6,11 @@ import LogoutButton from './auth/LogoutButton';
 import DropDownWrapper from '../context/Dropdown/Dropdown';
 import CreateEventForm from './Browser/forms/CreateEventForm';
 // import logo from '../static/DanceFamBrushNoText.svg'
+import ModalWrapper from '../context/Modal/Modal';
+import LoginForm from './auth/LoginForm'
+import SignUpForm from './auth/SignUpForm'
 
 import './NavBar.css'
-import ModalWrapper from '../context/Modal/Modal';
 
 
 const CreateMenu = () => {
@@ -25,6 +27,36 @@ const CreateMenu = () => {
 }
 
 
+const LoginButton = (props) => {
+  return (
+    <ModalWrapper
+        form={<LoginForm/>}
+        closePrev={props.setShowModal}
+        header='Log In'>
+        <div className='dropdown-button'>
+          Log In
+        </div>
+      </ModalWrapper>
+  )
+};
+
+const SignupButton = (props) => {
+  return (
+    <ModalWrapper
+    form={<SignUpForm/>}
+    closePrev={props.setShowModal}
+    header='Sign Up'
+    >
+    <div className='dropdown-button'>
+      Sign Up
+    </div>
+  </ModalWrapper>
+  )
+};
+
+
+
+
 const NavBar = () => {
   const user = useSelector(state=>state.session.user)
   return (
@@ -39,14 +71,20 @@ const NavBar = () => {
             />
         </div> */}
       <div className='navbar-rhs'>
-        <DropDownWrapper menu={<CreateMenu/>}>
+        {user && (<DropDownWrapper menu={<CreateMenu/>}>
           <div className='icon-button'>
             <i className="fa-solid fa-plus"></i>
           </div>
-        </DropDownWrapper>
+        </DropDownWrapper>)}
         <DropDownWrapper menu={
           <div className='user-dropdown'>
             {user && <LogoutButton />}
+            {!user && (
+            <>
+              <LoginButton/>
+              <SignupButton/>
+            </>
+            )}
           </div>
         }>
           <div className='icon-button'>

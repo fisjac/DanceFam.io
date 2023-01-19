@@ -1,14 +1,10 @@
-import React, {useContext} from 'react'
+import React from 'react'
 import { useSelector } from 'react-redux';
 
-import { GoogleMapsContext } from '../../context/Maps/MapsLoader';
-
-import Map from '../../context/Maps/Map';
 
 import EventLine from './EventLine'
 
 export default function EventScroll() {
-  const {isLoaded, location} = useContext(GoogleMapsContext)
   const events = useSelector(state=>state.events)
   const eventsList = Object.values(events);
 
@@ -36,7 +32,6 @@ export default function EventScroll() {
 
   return (
     <>
-
     <div className='eventscroll'>
       {
         sortedDates.map(date => {
@@ -58,6 +53,7 @@ export default function EventScroll() {
             )
           )
       }
+      {!Object.keys(events).length && <div className='no-events'>No upcoming events in this area</div>}
     </div>
     </>
   )

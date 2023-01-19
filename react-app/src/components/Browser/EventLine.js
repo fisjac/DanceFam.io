@@ -12,7 +12,7 @@ export default function EventLine({event}) {
   const history = useHistory();
   const dispatch = useDispatch();
   const start = new Date(event.start);
-  const userId = useSelector(state=>state.session.user.id);
+  const user = useSelector(state=>state.session.user);
 
   return (
     <>
@@ -41,7 +41,7 @@ export default function EventLine({event}) {
               </div>
             </div>
           </div>
-          {userId === event.organiserId && (<div className='eventline-body-right'>
+          {user && user.id === event.organiserId && (<div className='eventline-body-right'>
             <ModalWrapper header='Edit this Event' stopProp={true} addClickFunc={async ()=> await dispatch(eventActions.loadEvent(event.id))} form={<EditEventForm event={event}/>}>
               <div className='clickable-icon'>
                 <i className="fa-solid fa-pen"></i>
