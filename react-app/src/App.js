@@ -40,8 +40,8 @@ function App() {
             <LoadMaps>
               <NavBar/>
               <Browser/>
-              <Footer/>
             </LoadMaps>
+            <Footer/>
           </Route>
       </Switch>
     </BrowserRouter>

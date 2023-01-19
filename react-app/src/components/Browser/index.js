@@ -16,13 +16,13 @@ import './Browser.css'
 export default function Browser() {
   const dispatch = useDispatch()
   const events = useSelector(state=>state.events);
+  const user = useSelector(state=>state.session.user)
 
   useEffect(()=>{
     dispatch(eventActions.getEvents())
   },[dispatch])
 
-  return events && (
-
+  return (
       <div className='main-page'>
         <LeftBar/>
         <div className='center-container'>

@@ -33,14 +33,11 @@ const Map = ({zoom, events}) => {
         onDragEnd={()=>{
           console.log(map.getBounds())
         }}
-        // onZoomChanged={()=>{
-        //   console.log(map.getBounds())
-        // }}
         options={{
           disableDefaultUI: true
         }}
         >
-        {Object.values(events).map((event)=> {
+        {events && Object.values(events).map((event)=> {
           return <Marker key={event.id} position={{'lat': event.lat, 'lng':event.lng}}/>
         })}
       </GoogleMap>
