@@ -42,9 +42,10 @@ def create_event():
     if form.validate_on_submit():
         if form.data['image_url']:
             image_url = form.data['image_url']
+        else: image_url = None
         if form.data['external_url']:
             external_url = form.data['external_url']
-        else: image_url = None
+        else: external_url = None
         print(form.data['lat'])
         event = Event(
             organiser_id = current_user.id,
@@ -87,9 +88,10 @@ def edit_event(id):
         if form.validate_on_submit():
             if form.data['image_url']:
                 image_url = form.data['image_url']
+            else: image_url = None
             if form.data['external_url']:
                 external_url = form.data['external_url']
-            else: image_url = None
+            else: external_url = None
             event.name = form.data['name']
             event.start = form.data['start']
             event.end = form.data['end']

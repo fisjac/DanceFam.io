@@ -34,8 +34,9 @@ export default function EventLine({event}) {
             <div className='eventline-details'>
               <div className='eventline-date'>{start.toLocaleTimeString(undefined, {timeStyle: 'short'})}</div>
               <div className='eventline-name'>{event.name}</div>
-              <div className='eventline-attendees'>
-                {event.attendeeCount} attendees
+              <div className='eventline-website-link'>
+
+                {event.externalUrl}
               </div>
             </div>
           </div>

@@ -78,7 +78,7 @@ export default function CreateEventForm({setShowModal}) {
           country,
           lat,
           lng,
-          externalUrl: externalUrl?externalUrl:null,
+          external_url: externalUrl?externalUrl:null,
           image_url: imageUrl?imageUrl:null,}
         }));
     if (response.ok) {
@@ -187,6 +187,7 @@ export default function CreateEventForm({setShowModal}) {
             type='text'
             onChange={(e)=>setExternalUrl(e.target.value)}
             value={externalUrl}
+            placeholder= 'Event Page Url'
           />
         </div>
 

@@ -89,7 +89,7 @@ export default function EditEventForm({event, setShowModal}) {
         country,
         lat,
         lng,
-        externalUrl: externalUrl?externalUrl:null,
+        external_url: externalUrl?externalUrl:null,
         image_url: imageUrl?imageUrl:null,
       };
       const response = await dispatch(
