@@ -18,7 +18,7 @@ export default function EventLine({event}) {
         className='eventline-container'
         onClick={(e)=>{
           if(e.target.className.includes('eventline')) {
-            // empty for now
+            if (event.externalUrl)window.open(event.externalUrl)
           }
 
         }}
@@ -34,10 +34,6 @@ export default function EventLine({event}) {
             <div className='eventline-details'>
               <div className='eventline-date'>{start.toLocaleTimeString(undefined, {timeStyle: 'short'})}</div>
               <div className='eventline-name'>{event.name}</div>
-              <div className='eventline-website-link'>
-
-                {event.externalUrl}
-              </div>
             </div>
           </div>
           {user && user.id === event.organiserId && (<div className='eventline-body-right'>
