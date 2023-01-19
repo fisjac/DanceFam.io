@@ -19,7 +19,7 @@ export default function CreateEventForm({setShowModal}) {
   const [country, setCountry] = useState('');
   const [lat, setLat] = useState('');
   const [lng, setLng] = useState('');
-  const [description, setDescription] = useState('');
+  const [externalUrl, setExternalUrl] = useState('');
   const [imageUrl, setImageUrl] = useState('');
 
   const inputRef = useRef(null);
@@ -76,9 +76,9 @@ export default function CreateEventForm({setShowModal}) {
           city,
           state,
           country,
-          description,
           lat,
           lng,
+          externalUrl: externalUrl?externalUrl:null,
           image_url: imageUrl?imageUrl:null,}
         }));
     if (response.ok) {
@@ -182,13 +182,11 @@ export default function CreateEventForm({setShowModal}) {
         </div>
 
         <div>
-          <label>Description *</label>
-          <textarea
-            className='textarea-input'
-            type='textarea'
-            onChange={(e)=>setDescription(e.target.value)}
-            value={description}
-            required
+          <label>Event Page</label>
+          <input
+            type='text'
+            onChange={(e)=>setExternalUrl(e.target.value)}
+            value={externalUrl}
           />
         </div>
 

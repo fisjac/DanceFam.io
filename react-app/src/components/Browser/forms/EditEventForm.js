@@ -29,7 +29,7 @@ export default function EditEventForm({event, setShowModal}) {
   const [country, setCountry] = useState(event.country);
   const [lat, setLat] = useState(event.lat);
   const [lng, setLng] = useState(event.lng);
-  const [description, setDescription] = useState(event.description);
+  const [externalUrl, setExternalUrl] = useState(event.externalUrl);
   const [imageUrl, setImageUrl] = useState(event.imageUrl);
 
   const inputRef = useRef(null);
@@ -89,7 +89,7 @@ export default function EditEventForm({event, setShowModal}) {
         country,
         lat,
         lng,
-        description,
+        externalUrl: externalUrl?externalUrl:null,
         image_url: imageUrl?imageUrl:null,
       };
       const response = await dispatch(
@@ -194,12 +194,11 @@ export default function EditEventForm({event, setShowModal}) {
             />
         </div>
         <div>
-          <label>Description *</label>
-          <textarea
-            className='textarea-input'
-            onChange={(e)=>setDescription(e.target.value)}
-            value={description}
-            required
+          <label>Event Page</label>
+          <input
+            type='text'
+            onChange={(e)=>setExternalUrl(e.target.value)}
+            value={externalUrl}
             />
         </div>
         <div>

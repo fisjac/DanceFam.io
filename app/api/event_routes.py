@@ -42,6 +42,8 @@ def create_event():
     if form.validate_on_submit():
         if form.data['image_url']:
             image_url = form.data['image_url']
+        if form.data['external_url']:
+            external_url = form.data['external_url']
         else: image_url = None
         print(form.data['lat'])
         event = Event(
@@ -49,13 +51,13 @@ def create_event():
             name = form.data['name'],
             start = form.data['start'],
             end = form.data['end'],
-            description = form.data['description'],
             city = form.data['city'],
             state = form.data['state'],
             address = form.data['address'],
             country = form.data['country'],
             lat = form.data['lat'],
             lng = form.data['lng'],
+            external_url = external_url,
             image_url = image_url,
         )
 
@@ -85,17 +87,19 @@ def edit_event(id):
         if form.validate_on_submit():
             if form.data['image_url']:
                 image_url = form.data['image_url']
+            if form.data['external_url']:
+                external_url = form.data['external_url']
             else: image_url = None
             event.name = form.data['name']
             event.start = form.data['start']
             event.end = form.data['end']
-            event.description = form.data['description']
             event.city = form.data['city']
             event.state = form.data['state']
             event.address = form.data['address']
             event.country = form.data['country']
             event.lat = form.data['lat']
             event.lng = form.data['lng']
+            event.external_url = external_url,
             event.image_url = image_url
             db.session.commit()
             return event.to_dict()
