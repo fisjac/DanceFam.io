@@ -11,6 +11,8 @@ import Browser from './components/Browser';
 import Footer from './components/Footer';
 import {getKey} from './store/keys'
 import { getStyles } from './store/styles';
+import BoundsProvider from './context/Maps/Bounds';
+import { getEvents } from './store/events';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -21,6 +23,7 @@ function App() {
       await dispatch(authenticate());
       await dispatch(getStyles())
       await dispatch(getKey())
+      await dispatch(getEvents())
       setLoaded(true);
     })();
   }, [dispatch]);
@@ -39,7 +42,9 @@ function App() {
           <Route path='/app'>
             <LoadMaps>
               <NavBar/>
-              <Browser/>
+              <BoundsProvider>
+                <Browser/>
+              </BoundsProvider>
             </LoadMaps>
             <Footer/>
           </Route>

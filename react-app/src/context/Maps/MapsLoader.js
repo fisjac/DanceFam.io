@@ -7,7 +7,17 @@ import {getKey} from '../../store/keys'
 import './map.css'
 
 
-
+function getLocation (setter) {
+  const geoLocationApi = navigator.geolocation;
+  if (!geoLocationApi) {
+    alert('Geolocation API is not available in your browser!')
+  } else {
+    geoLocationApi.getCurrentPosition((position)=> {
+      const {coords} = position;
+      setter({lat: coords.latitude, lng: coords.longitude});
+    }, (error) => alert(`There was a problem getting the user's location: ${error.message}`))
+  }
+};
 
 export const GoogleMapsContext = createContext();
 
@@ -34,8 +44,13 @@ export default function LoadMaps({children}) {
 
 const libraries = ['places']
 export function GoogleMapsProvider ({children, apiKey}) {
-
-
+  const  [mapIsLoaded, setMapIsLoaded] = useState(false)
+  const [location, setLocation] = useState('')
+  useEffect(()=>{
+    if (!location) {
+      getLocation(setLocation)
+    };
+  },[])
   const { isLoaded } = useLoadScript({
       googleMapsApiKey: apiKey,
       libraries
@@ -44,7 +59,7 @@ export function GoogleMapsProvider ({children, apiKey}) {
   if (!isLoaded) return <div>Loading...</div>
 
   return (
-    <GoogleMapsContext.Provider value={{isLoaded}}>
+    <GoogleMapsContext.Provider value={{isLoaded, location, mapIsLoaded, setMapIsLoaded}}>
       {children}
     </GoogleMapsContext.Provider>
   );

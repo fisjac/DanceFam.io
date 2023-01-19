@@ -1,37 +1,25 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import {GoogleMap, Marker} from '@react-google-maps/api';
 
-
-function getLocation (setLocation) {
-  const geoLocationApi = navigator.geolocation;
-  if (!geoLocationApi) {
-    alert('Geolocation API is not available in your browser!')
-  } else {
-    geoLocationApi.getCurrentPosition((position)=> {
-      const {coords} = position;
-      setLocation({lat: coords.latitude, lng: coords.longitude});
-    }, (error) => alert(`There was a problem getting the user's location: ${error.message}`))
-  }
-};
-
+import { boundsContext } from './Bounds';
+import { GoogleMapsContext } from './MapsLoader';
 
 const Map = ({zoom, events}) => {
+  const {location, setMapIsLoaded} = useContext(GoogleMapsContext);
+  const {bounds, setBounds} = useContext(boundsContext);
   const [map, setMap] = useState();
-  const [location, setLocation] = useState('')
-  useEffect(()=> {
-    if (!location) {
-      getLocation(setLocation)
-    }
-  },[]);
 
   return (
       <GoogleMap
         mapContainerClassName='map'
         center={location}
         zoom={zoom}
-        onLoad={(map)=>setMap(map)}
-        onDragEnd={()=>{
-          console.log(map.getBounds())
+        onLoad={(map)=>{
+          setMap(map);
+          setMapIsLoaded(true);
+        }}
+        onBoundsChanged={()=>{
+          setBounds(map.getBounds())
         }}
         options={{
           disableDefaultUI: true
