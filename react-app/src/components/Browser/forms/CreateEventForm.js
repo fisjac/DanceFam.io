@@ -2,6 +2,7 @@ import React, {useState, useEffect, useRef} from 'react'
 import { useDispatch } from 'react-redux';
 
 import * as eventActions from '../../../store/events';
+import * as dateFuncs from '../../utils/DateFuncs';
 
 export default function CreateEventForm({setShowModal}) {
   const dispatch = useDispatch();
@@ -52,19 +53,6 @@ export default function CreateEventForm({setShowModal}) {
     })
   }, [])
 
-  const dateToBackendFormat = (date) => {
-    let dateString = date.toISOString();
-    return dateString.replace('T', ' ').substring(0,dateString.length - 5)
-  }
-
-  const dateToday = (date = new Date()) => {
-    return [
-        date.getFullYear(),
-        String(date.getMonth() + 1).padStart(2,0),
-        String(date.getDate()).padStart(2,0),
-    ].join('-');
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     const start = new Date(startDate + 'T' + startTime);
@@ -73,8 +61,8 @@ export default function CreateEventForm({setShowModal}) {
       eventActions.createEvent({
         event: {
           name,
-          start: dateToBackendFormat(start),
-          end: dateToBackendFormat(end),
+          start: dateFuncs.dateToBackendFormat(start),
+          end: dateFuncs.dateToBackendFormat(end),
           address,
           city,
           state,
@@ -114,7 +102,7 @@ export default function CreateEventForm({setShowModal}) {
           <label>Start *</label>
           <input
             type='Date'
-            min={dateToday()}
+            min={dateFuncs.dateToday()}
             max={endDate}
             onChange={(e)=>setStartDate(e.target.value)}
             value={startDate}
