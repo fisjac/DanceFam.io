@@ -3,19 +3,14 @@ import { useDispatch } from 'react-redux';
 
 
 import * as eventActions from '../../../store/events';
-
-function splitDatetime (dateString) {
-  const dateTime = new Date(dateString);
-  let [date, time] = dateTime.toISOString().split('T');
-  time = time.substring(0,8)
-  return [date, time];
-};
+import * as dateFuncs from '../../utils/DateFuncs';
+import * as autocompleteFuncs from '../../utils/autocomplete';
 
 export default function EditEventForm({event, setShowModal}) {
   const dispatch = useDispatch();
 
-  let [startDateString, startTimeString] = splitDatetime(event.start);
-  let [endDateString, endTimeString] = splitDatetime(event.end);
+  let [startDateString, startTimeString] = dateFuncs.splitDatetime(event.start);
+  let [endDateString, endTimeString] = dateFuncs.splitDatetime(event.end);
 
   const [errors, setErrors] = useState([]);
   const [name, setName] = useState(event.name);
@@ -29,25 +24,17 @@ export default function EditEventForm({event, setShowModal}) {
   const [country, setCountry] = useState(event.country);
   const [lat, setLat] = useState(event.lat);
   const [lng, setLng] = useState(event.lng);
-  const [description, setDescription] = useState(event.description);
+  const [externalUrl, setExternalUrl] = useState(event.externalUrl);
   const [imageUrl, setImageUrl] = useState(event.imageUrl);
 
   const inputRef = useRef(null);
   const autoCompleteRef = useRef(null)
   useEffect(()=> {
-    autoCompleteRef.current = new window.google.maps.places.Autocomplete(
-      inputRef.current,
-      {fields: ["address_components", "geometry"]}
-    );
+    autocompleteFuncs.attachAutoComplete(autoCompleteRef, inputRef);
     autoCompleteRef.current.addListener('place_changed', async function () {
       const data = await autoCompleteRef.current.getPlace();
-      const location = data.geometry.location.toJSON()
-      let components = {};
-      data.address_components.forEach((component) => {
-      component.types.forEach((type) => {
-        components[type] = component.long_name;
-      });
-    });
+      const {location, components} = autocompleteFuncs.parsePlaceData(data)
+
       components.street_number ?
         setAddress(components.street_number + ' ' + components.route) :
         setAddress(components.route)
@@ -61,35 +48,22 @@ export default function EditEventForm({event, setShowModal}) {
 
   if (event) {
 
-    const dateToBackendFormat = (date) => {
-      let dateString = date.toISOString();
-      return dateString.replace('T', ' ').substring(0,dateString.length - 5)
-    }
-
-    const dateToday = (date = new Date()) => {
-      return [
-          date.getFullYear(),
-          String(date.getMonth() + 1).padStart(2,0),
-          String(date.getDate()).padStart(2,0),
-      ].join('-');
-    };
-
     const handleSubmit = async (e) => {
       e.preventDefault();
-      const start = new Date(startDate + 'T' + startTime);
-      const end = new Date(endDate + 'T' + endTime);
+      const start = new Date(startDate + 'T' + startTime + ':00.000Z');
+      const end = new Date(endDate + 'T' + endTime + ':00.000Z');
       const body = {
         id: event.id,
         name,
-        start: dateToBackendFormat(start),
-        end: dateToBackendFormat(end),
+        start: dateFuncs.dateToBackendFormat(start),
+        end: dateFuncs.dateToBackendFormat(end),
         address,
         city,
         state,
         country,
         lat,
         lng,
-        description,
+        external_url: externalUrl?externalUrl:null,
         image_url: imageUrl?imageUrl:null,
       };
       const response = await dispatch(
@@ -125,7 +99,7 @@ export default function EditEventForm({event, setShowModal}) {
           <label>Start *</label>
           <input
             type='Date'
-            min={dateToday()}
+            min={dateFuncs.dateToday()}
             max={endDate}
             onChange={(e)=>setStartDate(e.target.value)}
             value={startDate}
@@ -194,12 +168,11 @@ export default function EditEventForm({event, setShowModal}) {
             />
         </div>
         <div>
-          <label>Description *</label>
-          <textarea
-            className='textarea-input'
-            onChange={(e)=>setDescription(e.target.value)}
-            value={description}
-            required
+          <label>Event Page</label>
+          <input
+            type='text'
+            onChange={(e)=>setExternalUrl(e.target.value)}
+            value={externalUrl}
             />
         </div>
         <div>

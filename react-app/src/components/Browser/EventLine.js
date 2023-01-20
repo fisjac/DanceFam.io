@@ -1,15 +1,14 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import {useHistory} from 'react-router-dom'
 
 import * as eventActions from '../../store/events';
 import ModalWrapper from '../../context/Modal/Modal'
 import EditEventForm from './forms/EditEventForm';
 
 import defaultImage from '../../static/dancing_couple1.svg'
+import { getUtcTime } from '../utils/DateFuncs';
 
 export default function EventLine({event}) {
-  const history = useHistory();
   const dispatch = useDispatch();
   const start = new Date(event.start);
   const user = useSelector(state=>state.session.user);
@@ -20,7 +19,7 @@ export default function EventLine({event}) {
         className='eventline-container'
         onClick={(e)=>{
           if(e.target.className.includes('eventline')) {
-            history.push(`/events/${event.id}`)
+            if (event.externalUrl)window.open(event.externalUrl)
           }
 
         }}
@@ -34,11 +33,8 @@ export default function EventLine({event}) {
               onError={e =>e.currentTarget.src = defaultImage}
               />
             <div className='eventline-details'>
-              <div className='eventline-date'>{start.toLocaleTimeString(undefined, {timeStyle: 'short'})}</div>
               <div className='eventline-name'>{event.name}</div>
-              <div className='eventline-attendees'>
-                {event.attendeeCount} attendees
-              </div>
+              <div className='eventline-date'>{getUtcTime(start)}</div>
             </div>
           </div>
           {user && user.id === event.organiserId && (<div className='eventline-body-right'>

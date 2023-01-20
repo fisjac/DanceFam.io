@@ -1,8 +1,8 @@
 """create-tables
 
-Revision ID: e4d67ebcadb3
+Revision ID: 6159aad345de
 Revises: 
-Create Date: 2023-01-16 15:09:18.236305
+Create Date: 2023-01-19 13:26:45.639779
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'e4d67ebcadb3'
+revision = '6159aad345de'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -44,13 +44,13 @@ def upgrade():
     sa.Column('name', sa.String(length=255), nullable=False),
     sa.Column('start', sa.DateTime(), nullable=False),
     sa.Column('end', sa.DateTime(), nullable=False),
-    sa.Column('description', sa.String(length=255), nullable=True),
     sa.Column('city', sa.String(length=255), nullable=True),
     sa.Column('state', sa.String(length=255), nullable=True),
     sa.Column('address', sa.String(length=255), nullable=True),
     sa.Column('country', sa.String(length=255), nullable=True),
     sa.Column('lat', sa.Float(), nullable=True),
     sa.Column('lng', sa.Float(), nullable=True),
+    sa.Column('external_url', sa.String(length=255), nullable=True),
     sa.Column('image_url', sa.String(length=255), nullable=True),
     sa.Column('organiser_id', sa.Integer(), nullable=False),
     sa.ForeignKeyConstraint(['organiser_id'], ['users.id'], ),

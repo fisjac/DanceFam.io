@@ -1,6 +1,5 @@
-import React, { useContext } from 'react'
-import { useSelector } from 'react-redux';
-import { GoogleMapsContext } from '../../context/Maps/MapsLoader';
+import React from 'react'
+import { groupEventsByDate, sortDates } from '../utils/DateFuncs';
 
 
 import EventLine from './EventLine'
@@ -9,29 +8,9 @@ export default function EventScroll({events}) {
 
 
   if (events) {
-    const eventsList = Object.values(events);
 
-    const eventDates = eventsList.reduce((accum, event) => {
-      let currentDate = new Date(event.start);
-      let currentDateString = currentDate.toLocaleDateString(undefined, {weekday: 'long',month: 'long', day: 'numeric'})
-      if (!accum[currentDateString]) {
-        accum[currentDateString] = [event]
-      } else {
-        accum[currentDateString].push(event)
-      };
-      return accum;
-    },{});
-
-    const sortedDates = Object.values(eventDates)
-      .map(events=>{
-        let event = events[0]
-        let start = event.start;
-        let date = new Date(start);
-        return date
-      })
-      .sort((a,b)=> {
-        return a.start > b.start
-      });
+   const groupedEvents = groupEventsByDate(events);
+   const sortedDates = sortDates(groupedEvents);
 
       return (
         <div className='eventscroll'>
@@ -44,7 +23,7 @@ export default function EventScroll({events}) {
                     <div key={date + '-' + idx} className='eventline-header'>
                       {date}
                     </div>
-                    {eventDates[date]
+                    {groupedEvents[date]
                       .map(event => (
                       <EventLine
                         key={event.name + event.id}

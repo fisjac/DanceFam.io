@@ -2,6 +2,7 @@ export const filterEventsByBounds = (events, bounds) => {
   if (!bounds) {
     return null
   } else {
+
     const filteredEvents = {}
     const lngBounds = bounds.Ja;
     const latBounds = bounds.Wa;

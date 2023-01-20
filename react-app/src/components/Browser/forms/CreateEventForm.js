@@ -2,10 +2,11 @@ import React, {useState, useEffect, useRef} from 'react'
 import { useDispatch } from 'react-redux';
 
 import * as eventActions from '../../../store/events';
+import * as dateFuncs from '../../utils/DateFuncs';
+import * as autocompleteFuncs from '../../utils/autocomplete';
 
 export default function CreateEventForm({setShowModal}) {
   const dispatch = useDispatch();
-
 
   const [errors, setErrors] = useState([]);
   const [name, setName] = useState('');
@@ -19,25 +20,17 @@ export default function CreateEventForm({setShowModal}) {
   const [country, setCountry] = useState('');
   const [lat, setLat] = useState('');
   const [lng, setLng] = useState('');
-  const [description, setDescription] = useState('');
+  const [externalUrl, setExternalUrl] = useState('');
   const [imageUrl, setImageUrl] = useState('');
 
   const inputRef = useRef(null);
   const autoCompleteRef = useRef(null)
   useEffect(()=> {
-    autoCompleteRef.current = new window.google.maps.places.Autocomplete(
-      inputRef.current,
-      {fields: ["address_components", "geometry"]}
-    );
+    autocompleteFuncs.attachAutoComplete(autoCompleteRef, inputRef);
     autoCompleteRef.current.addListener('place_changed', async function () {
       const data = await autoCompleteRef.current.getPlace();
-      const location = data.geometry.location.toJSON()
-      let components = {};
-      data.address_components.forEach((component) => {
-      component.types.forEach((type) => {
-        components[type] = component.long_name;
-      });
-    });
+      const {location, components} = autocompleteFuncs.parsePlaceData(data)
+
       components.street_number ?
         setAddress(components.street_number + ' ' + components.route) :
         setAddress(components.route)
@@ -49,36 +42,23 @@ export default function CreateEventForm({setShowModal}) {
     })
   }, [])
 
-  const dateToBackendFormat = (date) => {
-    let dateString = date.toISOString();
-    return dateString.replace('T', ' ').substring(0,dateString.length - 5)
-  }
-
-  const dateToday = (date = new Date()) => {
-    return [
-        date.getFullYear(),
-        String(date.getMonth() + 1).padStart(2,0),
-        String(date.getDate()).padStart(2,0),
-    ].join('-');
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const start = new Date(startDate + 'T' + startTime);
-    const end = new Date(endDate + 'T' + endTime);
+    const start = new Date(startDate + 'T' + startTime + ':00.000Z');
+    const end = new Date(endDate + 'T' + endTime + ':00.000Z');
     const response = await dispatch(
       eventActions.createEvent({
         event: {
           name,
-          start: dateToBackendFormat(start),
-          end: dateToBackendFormat(end),
+          start: dateFuncs.dateToBackendFormat(start),
+          end: dateFuncs.dateToBackendFormat(end),
           address,
           city,
           state,
           country,
-          description,
           lat,
           lng,
+          external_url: externalUrl?externalUrl:null,
           image_url: imageUrl?imageUrl:null,}
         }));
     if (response.ok) {
@@ -111,7 +91,7 @@ export default function CreateEventForm({setShowModal}) {
           <label>Start *</label>
           <input
             type='Date'
-            min={dateToday()}
+            min={dateFuncs.dateToday()}
             max={endDate}
             onChange={(e)=>setStartDate(e.target.value)}
             value={startDate}
@@ -182,13 +162,12 @@ export default function CreateEventForm({setShowModal}) {
         </div>
 
         <div>
-          <label>Description *</label>
-          <textarea
-            className='textarea-input'
-            type='textarea'
-            onChange={(e)=>setDescription(e.target.value)}
-            value={description}
-            required
+          <label>Event Page</label>
+          <input
+            type='text'
+            onChange={(e)=>setExternalUrl(e.target.value)}
+            value={externalUrl}
+            placeholder= 'Event Page Url'
           />
         </div>
 

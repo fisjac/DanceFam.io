@@ -32,13 +32,13 @@ class Event(db.Model):
   name = db.Column(db.String(255), nullable=False)
   start= db.Column(db.DateTime, nullable=False)
   end= db.Column(db.DateTime, nullable=False)
-  description = db.Column(db.String(255))
   city = db.Column(db.String(255))
   state = db.Column(db.String(255))
   address = db.Column(db.String(255))
   country = db.Column(db.String(255))
   lat = db.Column(db.Float())
   lng = db.Column(db.Float())
+  external_url = db.Column(db.String(255), nullable=True)
   image_url = db.Column(db.String(255),nullable=True)
   organiser_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
 
@@ -60,7 +60,6 @@ class Event(db.Model):
     return {
       "id": self.id,
       "name": self.name,
-      "description": self.description,
       "start": self.start,
       "end": self.end,
       "city": self.city,
@@ -71,6 +70,7 @@ class Event(db.Model):
       "lng": self.lng,
       # "communityId": self.community_id,
       "organiserId": self.organiser_id,
+      "externalUrl": self.external_url,
       "imageUrl": self.image_url,
       "attendeeCount": len(self.registrations),
       "attendees": {} if len(list(self.registrations)) == 0\
