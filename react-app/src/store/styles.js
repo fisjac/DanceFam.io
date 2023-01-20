@@ -1,12 +1,11 @@
-
 const LOAD_STYLES = 'styles/load';
 
 const loadStyles = (payload) => {
   return {
     type: LOAD_STYLES,
     payload
-  }
-}
+  };
+};
 
 export const getStyles = () => async dispatch => {
   const res = await fetch('/api/styles');
@@ -17,7 +16,7 @@ export const getStyles = () => async dispatch => {
         return accum
       },{})
       dispatch(loadStyles(styleToggles))
-    }
+    };
 };
 
 const initialState = null
@@ -27,5 +26,5 @@ export default function stylesReducer (state = initialState, action) {
       return {...action.payload}
     default:
       return state
-  }
-}
+  };
+};

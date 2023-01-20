@@ -13,6 +13,7 @@ import {getKey} from './store/keys'
 import { getStyles } from './store/styles';
 import BoundsProvider from './context/Maps/Bounds';
 import { getEvents } from './store/events';
+import { getTypes } from './store/types';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -22,6 +23,7 @@ function App() {
     (async () => {
       await dispatch(authenticate());
       await dispatch(getStyles())
+      await dispatch(getTypes())
       await dispatch(getKey())
       await dispatch(getEvents())
       setLoaded(true);

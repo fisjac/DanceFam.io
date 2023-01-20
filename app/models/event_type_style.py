@@ -25,6 +25,12 @@ class Type(db.Model):
 
   events = db.relationship("Event", secondary=event_types, back_populates="types")
 
+  def to_dict(self):
+    return {
+      "id": self.id,
+      "name": self.name,
+    }
+
 class Event(db.Model):
   __tablename__ = "events"
 
