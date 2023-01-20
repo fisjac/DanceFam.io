@@ -23,10 +23,8 @@ def seed():
     seed_styles()
     # seed_roles()
     # seed_statuses()
-    # seed_communities()
     # seed_events()
     # seed_registrations()
-    # seed_memberships()
 
 
 # Creates the `flask seed undo` command
@@ -37,8 +35,6 @@ def undo():
     undo_styles()
     # undo_roles()
     # undo_statuses()
-    # undo_communities()
     # undo_events()
     # undo_registrations()
-    # undo_memberships()
     # Add other undo functions here

@@ -53,7 +53,6 @@ class Event(db.Model):
 
   registrations = db.relationship("Registration", back_populates="event", cascade='delete')
 
-
   styles = db.relationship("Style", secondary=event_styles, back_populates="events")
 
   types = db.relationship("Type", secondary=event_types, back_populates="events")
@@ -74,7 +73,8 @@ class Event(db.Model):
       "country": self.country,
       "lat": self.lat,
       "lng": self.lng,
-      # "communityId": self.community_id,
+      "styles": [style.to_dict() for style in self.styles],
+      "types": [type.to_dict() for type in self.types],
       "organiserId": self.organiser_id,
       "externalUrl": self.external_url,
       "imageUrl": self.image_url,
