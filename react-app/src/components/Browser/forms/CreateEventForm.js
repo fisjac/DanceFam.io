@@ -3,10 +3,10 @@ import { useDispatch } from 'react-redux';
 
 import * as eventActions from '../../../store/events';
 import * as dateFuncs from '../../utils/DateFuncs';
+import * as autocompleteFuncs from '../../utils/autocomplete';
 
 export default function CreateEventForm({setShowModal}) {
   const dispatch = useDispatch();
-
 
   const [errors, setErrors] = useState([]);
   const [name, setName] = useState('');
@@ -26,22 +26,11 @@ export default function CreateEventForm({setShowModal}) {
   const inputRef = useRef(null);
   const autoCompleteRef = useRef(null)
   useEffect(()=> {
-    autoCompleteRef.current = new window.google.maps.places.Autocomplete(
-      inputRef.current,
-      {
-        fields: ["address_components", "geometry"],
-        types: ["establishment"]
-      }
-    );
+    autocompleteFuncs.attachAutoComplete(autoCompleteRef, inputRef);
     autoCompleteRef.current.addListener('place_changed', async function () {
       const data = await autoCompleteRef.current.getPlace();
-      const location = data.geometry.location.toJSON()
-      let components = {};
-      data.address_components.forEach((component) => {
-      component.types.forEach((type) => {
-        components[type] = component.long_name;
-      });
-    });
+      const {location, components} = autocompleteFuncs.parsePlaceData(data)
+
       components.street_number ?
         setAddress(components.street_number + ' ' + components.route) :
         setAddress(components.route)

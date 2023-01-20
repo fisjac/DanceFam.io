@@ -40,3 +40,10 @@ export const sortDates = (groupedEvents) => {
       });
   return sortedDates;
 };
+
+export const splitDatetime = (dateString) => {
+  const dateTime = new Date(dateString);
+  let [date, time] = dateTime.toISOString().split('T');
+  time = time.substring(0,8)
+  return [date, time];
+};

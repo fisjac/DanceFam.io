@@ -4,20 +4,13 @@ import { useDispatch } from 'react-redux';
 
 import * as eventActions from '../../../store/events';
 import * as dateFuncs from '../../utils/DateFuncs';
-
-function splitDatetime (dateString) {
-  console.log(dateString)
-  const dateTime = new Date(dateString);
-  let [date, time] = dateTime.toISOString().split('T');
-  time = time.substring(0,8)
-  return [date, time];
-};
+import * as autocompleteFuncs from '../../utils/autocomplete';
 
 export default function EditEventForm({event, setShowModal}) {
   const dispatch = useDispatch();
 
-  let [startDateString, startTimeString] = splitDatetime(event.start);
-  let [endDateString, endTimeString] = splitDatetime(event.end);
+  let [startDateString, startTimeString] = dateFuncs.splitDatetime(event.start);
+  let [endDateString, endTimeString] = dateFuncs.splitDatetime(event.end);
 
   const [errors, setErrors] = useState([]);
   const [name, setName] = useState(event.name);
@@ -37,22 +30,11 @@ export default function EditEventForm({event, setShowModal}) {
   const inputRef = useRef(null);
   const autoCompleteRef = useRef(null)
   useEffect(()=> {
-    autoCompleteRef.current = new window.google.maps.places.Autocomplete(
-      inputRef.current,
-      {
-        fields: ["address_components", "geometry"],
-        types: ["establishment"]
-      }
-    );
+    autocompleteFuncs.attachAutoComplete(autoCompleteRef, inputRef);
     autoCompleteRef.current.addListener('place_changed', async function () {
       const data = await autoCompleteRef.current.getPlace();
-      const location = data.geometry.location.toJSON()
-      let components = {};
-      data.address_components.forEach((component) => {
-      component.types.forEach((type) => {
-        components[type] = component.long_name;
-      });
-    });
+      const {location, components} = autocompleteFuncs.parsePlaceData(data)
+
       components.street_number ?
         setAddress(components.street_number + ' ' + components.route) :
         setAddress(components.route)
