@@ -27,7 +27,10 @@ export default function CreateEventForm({setShowModal}) {
   useEffect(()=> {
     autoCompleteRef.current = new window.google.maps.places.Autocomplete(
       inputRef.current,
-      {fields: ["address_components", "geometry"]}
+      {
+        fields: ["address_components", "geometry"],
+        types: ["establishment"]
+      }
     );
     autoCompleteRef.current.addListener('place_changed', async function () {
       const data = await autoCompleteRef.current.getPlace();

@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux';
 import * as eventActions from '../../../store/events';
 
 function splitDatetime (dateString) {
+  console.log(dateString)
   const dateTime = new Date(dateString);
   let [date, time] = dateTime.toISOString().split('T');
   time = time.substring(0,8)
@@ -37,7 +38,10 @@ export default function EditEventForm({event, setShowModal}) {
   useEffect(()=> {
     autoCompleteRef.current = new window.google.maps.places.Autocomplete(
       inputRef.current,
-      {fields: ["address_components", "geometry"]}
+      {
+        fields: ["address_components", "geometry"],
+        types: ["establishment"]
+      }
     );
     autoCompleteRef.current.addListener('place_changed', async function () {
       const data = await autoCompleteRef.current.getPlace();
@@ -77,6 +81,7 @@ export default function EditEventForm({event, setShowModal}) {
     const handleSubmit = async (e) => {
       e.preventDefault();
       const start = new Date(startDate + 'T' + startTime);
+      console.log(start)
       const end = new Date(endDate + 'T' + endTime);
       const body = {
         id: event.id,

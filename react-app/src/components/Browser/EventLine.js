@@ -32,8 +32,8 @@ export default function EventLine({event}) {
               onError={e =>e.currentTarget.src = defaultImage}
               />
             <div className='eventline-details'>
-              <div className='eventline-date'>{start.toLocaleTimeString(undefined, {timeStyle: 'short'})}</div>
               <div className='eventline-name'>{event.name}</div>
+              <div className='eventline-date'>{start.toLocaleTimeString(undefined, {timeStyle: 'short'})}</div>
             </div>
           </div>
           {user && user.id === event.organiserId && (<div className='eventline-body-right'>
