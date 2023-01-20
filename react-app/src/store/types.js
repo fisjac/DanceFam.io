@@ -1,4 +1,5 @@
 const LOAD_TYPES = 'types/load';
+const TOGGLE_TYPES = 'types/toggle';
 
 const loadTypes = (payload) => {
   return {
@@ -6,6 +7,13 @@ const loadTypes = (payload) => {
     payload
   }
 }
+
+export const toggleType = (typeName) => {
+  return {
+    type: TOGGLE_TYPES,
+    payload: typeName
+  };
+};
 
 export const getTypes = () => async dispatch => {
   const res = await fetch('/api/types');
@@ -24,6 +32,8 @@ export default function typesReducer (state = initialState, action) {
   switch (action.type) {
     case LOAD_TYPES:
       return {...action.payload}
+    case TOGGLE_TYPES:
+      return {...state, [action.payload]: !state[action.payload]}
     default:
       return state
   };

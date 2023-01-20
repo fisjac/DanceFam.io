@@ -21,6 +21,8 @@ export default function Browser() {
   const {bounds} = useContext(boundsContext);
   const {mapIsLoaded} = useContext(GoogleMapsContext)
   const [filteredEvents, setFilteredEvents] = useState(null)
+  const types = useSelector(state=>state.types);
+  const styles = useSelector(state=>state.styles);
 
   useEffect(()=>{
     if (mapIsLoaded) {
@@ -30,7 +32,7 @@ export default function Browser() {
 
   return (
       <div className='main-page'>
-        <LeftBar/>
+        <LeftBar styles={styles} types={types}/>
         <div className='center-container'>
           <Route exact path='/app'>
               <div className='eventscroll-title'>Upcoming Events</div>

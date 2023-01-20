@@ -4,7 +4,7 @@ def seed_types():
     convention = Type(name='Convention')
     weekend_workshop = Type(name='Weekend Workshop')
     solo_class = Type(name='Class')
-    social = Type(name='social')
+    social = Type(name='Social')
 
 
     db.session.add_all([convention, weekend_workshop, solo_class, social])

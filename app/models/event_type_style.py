@@ -23,7 +23,7 @@ class Type(db.Model):
   id = db.Column(db.Integer, primary_key=True)
   name = db.Column(db.String(255), nullable=False)
 
-  events = db.relationship("Event", secondary=event_types, back_populates="types")
+  events = db.relationship("Event", secondary=event_types,back_populates="types")
 
   def to_dict(self):
     return {
