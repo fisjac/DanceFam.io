@@ -1,5 +1,6 @@
 export const dateToBackendFormat = (date) => {
   let dateString = date.toISOString();
+  console.log(date, dateString)
   return dateString.replace('T', ' ').substring(0,dateString.length - 5)
 }
 
@@ -47,3 +48,14 @@ export const splitDatetime = (dateString) => {
   time = time.substring(0,8)
   return [date, time];
 };
+
+export const getUtcTime = (date) => {
+  const utcString = date.toUTCString();
+  const timeStringMilitary = utcString.substring(17,22);
+  const hour = Number(timeStringMilitary.substring(0,2))
+  const nonMilitaryHour = hour % 12 === 0 ? 12 : hour % 12;
+  const nonMilitaryMinutes = timeStringMilitary.substring(3,5)
+  const amPm = Math.floor(hour/12)?'PM':'AM';
+  const nonMilitaryString = `${String(nonMilitaryHour)}:${nonMilitaryMinutes} ${amPm}`
+  return nonMilitaryString
+}

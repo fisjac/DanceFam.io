@@ -50,8 +50,8 @@ export default function EditEventForm({event, setShowModal}) {
 
     const handleSubmit = async (e) => {
       e.preventDefault();
-      const start = new Date(startDate + 'T' + startTime);
-      const end = new Date(endDate + 'T' + endTime);
+      const start = new Date(startDate + 'T' + startTime + ':00.000Z');
+      const end = new Date(endDate + 'T' + endTime + ':00.000Z');
       const body = {
         id: event.id,
         name,

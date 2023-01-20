@@ -6,6 +6,7 @@ import ModalWrapper from '../../context/Modal/Modal'
 import EditEventForm from './forms/EditEventForm';
 
 import defaultImage from '../../static/dancing_couple1.svg'
+import { getUtcTime } from '../utils/DateFuncs';
 
 export default function EventLine({event}) {
   const dispatch = useDispatch();
@@ -33,7 +34,7 @@ export default function EventLine({event}) {
               />
             <div className='eventline-details'>
               <div className='eventline-name'>{event.name}</div>
-              <div className='eventline-date'>{start.toLocaleTimeString(undefined, {timeStyle: 'short'})}</div>
+              <div className='eventline-date'>{getUtcTime(start)}</div>
             </div>
           </div>
           {user && user.id === event.organiserId && (<div className='eventline-body-right'>

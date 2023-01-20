@@ -44,8 +44,8 @@ export default function CreateEventForm({setShowModal}) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const start = new Date(startDate + 'T' + startTime);
-    const end = new Date(endDate + 'T' + endTime);
+    const start = new Date(startDate + 'T' + startTime + ':00.000Z');
+    const end = new Date(endDate + 'T' + endTime + ':00.000Z');
     const response = await dispatch(
       eventActions.createEvent({
         event: {
