@@ -94,14 +94,18 @@ export default function CreateEventForm({setShowModal}) {
           ))}
         </div>
         <div className='modal-fieldset'>
-          <label>Event Type *select at least one*</label>
+          <label>Event Type * <span style={{'font-style':'italic'}}>(Select one)</span></label>
           {Object.keys(types).map((type)=>(
             <div className='checkbox-line'>
               <div
               className={`checkbox-input ${types[type]?'checked': 'unchecked'}`}
               onClick={()=>{
-
-               }}
+                const falseTypes = Object.keys(typeCategories).reduce((accum, key)=> {
+                  accum[key] = false;
+                  return accum;
+                },{})
+                setTypes({...falseTypes, [type]:true})
+              }}
               >
                 {<i className="fa-solid fa-check"></i>}
               </div>
@@ -110,12 +114,13 @@ export default function CreateEventForm({setShowModal}) {
           ))}
         </div>
         <div className='modal-fieldset'>
-          <label>Dance Styles *select at least one*</label>
+          <label>Dance Styles * <span style={{'font-style':'italic'}}>(Select at least one)</span></label>
           {Object.keys(styles).map((style)=>(
             <div className='checkbox-line'>
               <div
                className={`checkbox-input ${styles[style]?'checked': 'unchecked'}`}
                onClick={()=>{
+                setStyles({...styles, [style]: !styles[style]})
                }}
                >
                 {<i className="fa-solid fa-check"></i>}

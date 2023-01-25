@@ -454,21 +454,15 @@ width:30px;
   cursor:pointer;
 }
 
-.checked {
-  background-color: var(--theme-default);
-  color: white;
+.unchecked:hover {
+  color: var(--icon-grey);
 }
 
-.unchecked {
-  background-color: white;
-  color: white
+.checked {
+  background-color: var(--theme-default);
 }
 
 .checked:hover {
-  background-color: var(--theme-light);
-}
-
-.unchecked:hover {
   background-color: var(--theme-light);
 }
 
