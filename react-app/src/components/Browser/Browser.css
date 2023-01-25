@@ -219,12 +219,14 @@ width:30px;
 .eventline-container {
   display: flex;
   flex-direction: column;
+  width: 100%;
 }
 
 .eventline-header {
   background-color: white;
   position: sticky;
   top: 0;
+  width: 100%;
   font-weight: 600;
   font-size: 18px;
   border-bottom: 1px solid var(--shadow);
@@ -240,18 +242,12 @@ width:30px;
   overflow: hidden;
 }
 
-.eventline-body-left {
-  display: flex;
-  padding: 5px 0;
-  cursor: pointer;
-}
-
 .eventline-body-right {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-width: 25px;
+  width: 25px;
 }
 
 .clickable-icon {
@@ -324,13 +320,13 @@ width:30px;
 .right-bar {
   display: flex;
   flex-direction: column;
-  width: 12%;
+  width: max-content;
   justify-content: center;
 }
 
 .banner-ad {
   height: 70%;
-  /* min-width: px; */
+  width: 150px;
   background-repeat: no-repeat;
   background-position: 80%;
   background-size: cover;
@@ -405,6 +401,7 @@ width:30px;
   align-items: center;
   justify-content: center;
   height: 100%;
+  width: 100%;
 }
 
 .leftBar-fieldset {
