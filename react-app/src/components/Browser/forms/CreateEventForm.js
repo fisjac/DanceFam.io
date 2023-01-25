@@ -100,7 +100,11 @@ export default function CreateEventForm({setShowModal}) {
               <div
               className={`checkbox-input ${types[type]?'checked': 'unchecked'}`}
               onClick={()=>{
-
+                const falseTypes = Object.keys(typeCategories).reduce((accum, key)=> {
+                  accum[key] = false;
+                  return accum;
+                },{})
+                setTypes({...falseTypes, [type]:true})
               }}
               >
                 {<i className="fa-solid fa-check"></i>}
