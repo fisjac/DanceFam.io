@@ -25,16 +25,16 @@ export default function EventLine({event}) {
         }}
         >
         <div className='eventline-body'>
-            <img
-              className='eventline-img'
-              src={event.imageUrl===null?defaultImage:event.imageUrl}
-              alt="event_img"
-              onError={e =>e.currentTarget.src = defaultImage}
-              />
-            <div className='eventline-details'>
-              <div className='eventline-name'>{event.name}</div>
-              <div className='eventline-date'>{getUtcTime(start)}</div>
-            </div>
+          <img
+            className='eventline-img'
+            src={event.imageUrl===null?defaultImage:event.imageUrl}
+            alt="event_img"
+            onError={e =>e.currentTarget.src = defaultImage}
+            />
+          <div className='eventline-details'>
+            <div className='eventline-name'>{event.name}</div>
+            <div className='eventline-date'>{getUtcTime(start)}</div>
+          </div>
           {user && user.id === event.organiserId && (<div className='eventline-body-right'>
             <ModalWrapper header='Edit this Event' stopProp={true} addClickFunc={async ()=> await dispatch(eventActions.loadEvent(event.id))} form={<EditEventForm event={event}/>}>
               <div className='clickable-icon'>
