@@ -34,6 +34,7 @@ def event(id):
         "statusCode": 404}, 404
     return event.to_dict()
 
+# POST event
 @event_routes.route('', methods=['POST'])
 @login_required
 def create_event():

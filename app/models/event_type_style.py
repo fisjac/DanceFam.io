@@ -79,7 +79,7 @@ class Style(db.Model):
   __tablename__ = "styles"
 
   id = db.Column(db.Integer, primary_key=True)
-  name = db.Column(db.String(255), nullable=False)
+  name = db.Column(db.String(255), nullable=False, unique=True)
 
   events = db.relationship("Event", secondary=event_styles, back_populates="styles")
 
