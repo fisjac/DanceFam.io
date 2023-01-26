@@ -26,6 +26,8 @@ export default function EditEventForm({event, setShowModal}) {
   const [lng, setLng] = useState(event.lng);
   const [externalUrl, setExternalUrl] = useState(event.externalUrl);
   const [imageUrl, setImageUrl] = useState(event.imageUrl);
+  const [types, setTypes] = useState(event.types);
+  const [styles, setStyles] = useState(event.styles);
 
   const inputRef = useRef(null);
   const autoCompleteRef = useRef(null)

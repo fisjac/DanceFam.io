@@ -2,7 +2,7 @@ from flask import Blueprint, jsonify, request
 from flask_login import login_required, current_user
 from datetime import datetime
 
-from app.models import Event, Registration, db
+from app.models import Event, Registration, db, Type, Style
 from app.forms.event_form import EventForm
 event_routes = Blueprint('events', __name__)
 
@@ -46,7 +46,7 @@ def create_event():
         if form.data['external_url']:
             external_url = form.data['external_url']
         else: external_url = None
-        print(form.data['lat'])
+
         event = Event(
             organiser_id = current_user.id,
             name = form.data['name'],
@@ -60,7 +60,13 @@ def create_event():
             lng = form.data['lng'],
             external_url = external_url,
             image_url = image_url,
+            type_id = Type.query.filter(Type.name == form.data['type'])[0].id
         )
+
+        print(form.data['styles'])
+        for style in form.data['styles']:
+            style_instance = Style.query.filter(Style.name == style)[0]
+            event.styles.append(style_instance)
 
         new_registration = Registration()
         new_registration.user = current_user

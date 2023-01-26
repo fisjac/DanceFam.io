@@ -8,7 +8,8 @@ import * as autocompleteFuncs from '../../utils/autocomplete';
 export default function CreateEventForm({setShowModal}) {
   const dispatch = useDispatch();
   const styleCategories = useSelector(state=>state.styles);
-  const typeCategories = useSelector(state=>state.types);
+  const types = useSelector(state=>state.types);
+  const typesList = Object.keys(types);
   const [errors, setErrors] = useState([]);
   const [name, setName] = useState('');
   const [startDate, setStartDate] = useState('');
@@ -21,12 +22,7 @@ export default function CreateEventForm({setShowModal}) {
   const [country, setCountry] = useState('');
   const [lat, setLat] = useState('');
   const [lng, setLng] = useState('');
-  const [types, setTypes] = useState(
-    Object.keys(typeCategories).reduce((accum, key)=> {
-      accum[key] = false;
-      return accum;
-    },{})
-  );
+  const [type, setType] = useState('');
   const [styles, setStyles] = useState(
     Object.keys(styleCategories).reduce((accum, key)=> {
       accum[key] = false;
@@ -74,7 +70,7 @@ export default function CreateEventForm({setShowModal}) {
           external_url: externalUrl?externalUrl:null,
           image_url: imageUrl?imageUrl:null,
           styles,
-          types
+          type
         }
         }));
     if (response.ok) {
@@ -95,21 +91,17 @@ export default function CreateEventForm({setShowModal}) {
         </div>
         <div className='modal-fieldset'>
           <label>Event Type * <span style={{'font-style':'italic'}}>(Select one)</span></label>
-          {Object.keys(types).map((type)=>(
+          {typesList.map((typeName)=>(
             <div className='checkbox-line'>
               <div
-              className={`checkbox-input ${types[type]?'checked': 'unchecked'}`}
+              className={`checkbox-input ${typeName===type?'checked': 'unchecked'}`}
               onClick={()=>{
-                const falseTypes = Object.keys(typeCategories).reduce((accum, key)=> {
-                  accum[key] = false;
-                  return accum;
-                },{})
-                setTypes({...falseTypes, [type]:true})
+                setType(typeName)
               }}
               >
                 {<i className="fa-solid fa-check"></i>}
               </div>
-              <div className='checkbox-label'>{type}</div>
+              <div className='checkbox-label'>{typeName}</div>
             </div>
           ))}
         </div>
