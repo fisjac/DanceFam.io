@@ -21,9 +21,8 @@ export const filterEventsByBounds = (events, bounds) => {
 };
 
 export const filterEventsByTypes = (events, types) => {
-  const activeTypes = new Set(Object.keys(types).filter(type=>types[type]))
-  console.log(activeTypes)
-  const filteredEvents = {}
+  const activeTypes = new Set(Object.keys(types).filter(type=>types[type]));
+  const filteredEvents = {};
 
   for (let eventId in events) {
     if (activeTypes.has(events[eventId].type)) filteredEvents[eventId] = events[eventId]
@@ -32,5 +31,17 @@ export const filterEventsByTypes = (events, types) => {
 };
 
 export const filterEventsByStyles = (events, styles) => {
+  const activeStyles = new Set(Object.keys(styles).filter(style=>styles[style]));
+  const filteredEvents = {};
 
+  for (let eventId in events) {
+    for (let eventStyle of events[eventId].styles) {
+      if (activeStyles.has(eventStyle.name)) {
+        filteredEvents[eventId] = events[eventId];
+        break;
+      };
+    };
+  };
+
+  return filteredEvents;
 }

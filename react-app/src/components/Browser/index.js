@@ -11,7 +11,7 @@ import EventScroll from './EventScroll';
 import EventsMap from './EventsMap';
 
 import { boundsContext } from '../../context/Maps/Bounds';
-import { filterEventsByBounds, filterEventsByTypes } from '../utils/EventsFilter';
+import { filterEventsByBounds, filterEventsByStyles, filterEventsByTypes } from '../utils/EventsFilter';
 import { GoogleMapsContext } from '../../context/Maps/MapsLoader';
 
 import './Browser.css'
@@ -28,6 +28,7 @@ export default function Browser() {
     if (mapIsLoaded) {
       let filteredEventsTemp = filterEventsByBounds(events, bounds)
       filteredEventsTemp = filterEventsByTypes(filteredEventsTemp, types)
+      filteredEventsTemp = filterEventsByStyles(filteredEventsTemp, styles)
       setFilteredEvents(filteredEventsTemp);
     }
   }, [bounds, styles, types, events])
