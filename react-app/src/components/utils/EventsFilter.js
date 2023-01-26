@@ -4,12 +4,14 @@ export const filterEventsByBounds = (events, bounds) => {
   } else {
 
     const filteredEvents = {}
-    const lngBounds = bounds.Ja;
-    const latBounds = bounds.Wa;
+    const ne = bounds.getNorthEast();
+    const sw = bounds.getSouthWest();
+    const latBounds = [ne.lat(), sw.lat()]
+    const lngBounds = [ne.lng(), sw.lng()]
     for (let eventId in events) {
       const event = events[eventId];
-      if (event.lat >= latBounds.lo && event.lat <= latBounds.hi &&
-          event.lng >= lngBounds.lo && event.lng <= lngBounds.hi
+      if (event.lat >= Math.min(...latBounds) && event.lat <= Math.max(...latBounds) &&
+        event.lng >= Math.min(...lngBounds) && event.lng <= Math.max(...lngBounds)
       ) {
         filteredEvents[eventId] = event
       }
