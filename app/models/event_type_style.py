@@ -9,21 +9,19 @@ event_styles = db.Table(
   db.Column("style_id", db.Integer, db.ForeignKey("styles.id"))
 )
 
-event_types = db.Table(
-  "event_types",
-  db.Model.metadata,
-  db.Column("id", db.Integer, primary_key=True),
-  db.Column("event_id", db.Integer, db.ForeignKey("events.id")),
-  db.Column("type_id", db.Integer, db.ForeignKey("types.id"))
-)
-
 class Type(db.Model):
   __tablename__ = "types"
 
   id = db.Column(db.Integer, primary_key=True)
   name = db.Column(db.String(255), nullable=False)
 
-  events = db.relationship("Event", secondary=event_types, back_populates="types")
+  events = db.relationship("Event")
+
+  def to_dict(self):
+    return {
+      "id": self.id,
+      "name": self.name,
+    }
 
 class Event(db.Model):
   __tablename__ = "events"
@@ -41,16 +39,15 @@ class Event(db.Model):
   external_url = db.Column(db.String(255), nullable=True)
   image_url = db.Column(db.String(255),nullable=True)
   organiser_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
+  type_id = db.Column(db.Integer, db.ForeignKey("types.id"))
 
   # Relationships
   # community = db.relationship("Community", back_populates="events")
 
   registrations = db.relationship("Registration", back_populates="event", cascade='delete')
 
-
   styles = db.relationship("Style", secondary=event_styles, back_populates="events")
 
-  types = db.relationship("Type", secondary=event_types, back_populates="events")
 
   def get_user_events(user_id):
     events = db.session.query(Event).join(Registration).filter(Registration.user_id == user_id)
@@ -68,7 +65,8 @@ class Event(db.Model):
       "country": self.country,
       "lat": self.lat,
       "lng": self.lng,
-      # "communityId": self.community_id,
+      "styles": [style.to_dict() for style in self.styles],
+      "type": Type.query.get(self.type_id).name,
       "organiserId": self.organiser_id,
       "externalUrl": self.external_url,
       "imageUrl": self.image_url,

@@ -11,7 +11,7 @@ import EventScroll from './EventScroll';
 import EventsMap from './EventsMap';
 
 import { boundsContext } from '../../context/Maps/Bounds';
-import { filterEventsByBounds } from '../utils/EventsFilter';
+import { filterEventsByBounds, filterEventsByStyles, filterEventsByTypes } from '../utils/EventsFilter';
 import { GoogleMapsContext } from '../../context/Maps/MapsLoader';
 
 import './Browser.css'
@@ -19,18 +19,23 @@ import './Browser.css'
 export default function Browser() {
   const events = useSelector(state=>state.events);
   const {bounds} = useContext(boundsContext);
-  const {mapIsLoaded} = useContext(GoogleMapsContext)
-  const [filteredEvents, setFilteredEvents] = useState(null)
+  const {mapIsLoaded} = useContext(GoogleMapsContext);
+  const [filteredEvents, setFilteredEvents] = useState(null);
+  const types = useSelector(state=>state.types);
+  const styles = useSelector(state=>state.styles);
 
   useEffect(()=>{
     if (mapIsLoaded) {
-      setFilteredEvents(filterEventsByBounds(events, bounds))
+      let filteredEventsTemp = filterEventsByBounds(events, bounds);
+      filteredEventsTemp = filterEventsByTypes(filteredEventsTemp, types);
+      filteredEventsTemp = filterEventsByStyles(filteredEventsTemp, styles);
+      setFilteredEvents(filteredEventsTemp);
     }
-  }, [bounds, events])
+  }, [bounds, styles, types, events])
 
   return (
       <div className='main-page'>
-        <LeftBar/>
+        <LeftBar styles={styles} types={types}/>
         <div className='center-container'>
           <Route exact path='/app'>
               <div className='eventscroll-title'>Upcoming Events</div>

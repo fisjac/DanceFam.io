@@ -1,5 +1,5 @@
 import React, {useState, useEffect, useRef} from 'react'
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import * as eventActions from '../../../store/events';
 import * as dateFuncs from '../../utils/DateFuncs';
@@ -7,6 +7,10 @@ import * as autocompleteFuncs from '../../utils/autocomplete';
 
 export default function CreateEventForm({setShowModal}) {
   const dispatch = useDispatch();
+
+  const styleCategories = useSelector(state=>state.styles);
+  const types = useSelector(state=>state.types);
+  const typesList = Object.keys(types);
 
   const [errors, setErrors] = useState([]);
   const [name, setName] = useState('');
@@ -20,6 +24,13 @@ export default function CreateEventForm({setShowModal}) {
   const [country, setCountry] = useState('');
   const [lat, setLat] = useState('');
   const [lng, setLng] = useState('');
+  const [type, setType] = useState('');
+  const [styles, setStyles] = useState(
+    Object.keys(styleCategories).reduce((accum, key)=> {
+      accum[key] = false;
+      return accum;
+    },{})
+  );
   const [externalUrl, setExternalUrl] = useState('');
   const [imageUrl, setImageUrl] = useState('');
 
@@ -59,7 +70,10 @@ export default function CreateEventForm({setShowModal}) {
           lat,
           lng,
           external_url: externalUrl?externalUrl:null,
-          image_url: imageUrl?imageUrl:null,}
+          image_url: imageUrl?imageUrl:null,
+          styles,
+          type
+        }
         }));
     if (response.ok) {
       setShowModal(false);
@@ -75,6 +89,38 @@ export default function CreateEventForm({setShowModal}) {
         <div className='errors'>
           {errors.map((error, idx) => (
             <div className='error' key={idx}>{error}</div>
+          ))}
+        </div>
+        <div className='modal-fieldset'>
+          <label>Event Type * <span style={{'font-style':'italic'}}>(Select one)</span></label>
+          {typesList.map((typeName)=>(
+            <div className='checkbox-line'>
+              <div
+              className={`checkbox-input ${typeName===type?'checked': 'unchecked'}`}
+              onClick={()=>{
+                setType(typeName)
+              }}
+              >
+                {<i className="fa-solid fa-check"></i>}
+              </div>
+              <div className='checkbox-label'>{typeName}</div>
+            </div>
+          ))}
+        </div>
+        <div className='modal-fieldset'>
+          <label>Dance Styles * <span style={{'font-style':'italic'}}>(Select at least one)</span></label>
+          {Object.keys(styles).map((style)=>(
+            <div className='checkbox-line'>
+              <div
+               className={`checkbox-input ${styles[style]?'checked': 'unchecked'}`}
+               onClick={()=>{
+                setStyles({...styles, [style]: !styles[style]})
+               }}
+               >
+                {<i className="fa-solid fa-check"></i>}
+              </div>
+              <div className='checkbox-label'>{style}</div>
+            </div>
           ))}
         </div>
         <div>
@@ -139,6 +185,7 @@ export default function CreateEventForm({setShowModal}) {
             type='text'
             onChange={(e)=>setCity(e.target.value)}
             value={city}
+            placeholder='City'
             required
           />
         </div>
@@ -148,6 +195,7 @@ export default function CreateEventForm({setShowModal}) {
             type='text'
             onChange={(e)=>setState(e.target.value)}
             value={state}
+            placeholder='State'
             required
           />
         </div>
@@ -157,6 +205,7 @@ export default function CreateEventForm({setShowModal}) {
             type='text'
             onChange={(e)=>setCountry(e.target.value)}
             value={country}
+            placeholder='Country'
             required
           />
         </div>
@@ -170,7 +219,6 @@ export default function CreateEventForm({setShowModal}) {
             placeholder= 'Event Page Url'
           />
         </div>
-
         <div>
           <label>Image Url</label>
           <input
@@ -181,7 +229,11 @@ export default function CreateEventForm({setShowModal}) {
           />
         </div>
 
-        <button type='submit'>Confirm</button>
+        <button
+          type='submit'
+          // className='disabled'
+          // disabled={true}
+          >Confirm</button>
       </form>
   )
 }

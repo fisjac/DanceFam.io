@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef} from 'react'
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 
 import * as eventActions from '../../../store/events';
@@ -8,6 +8,10 @@ import * as autocompleteFuncs from '../../utils/autocomplete';
 
 export default function EditEventForm({event, setShowModal}) {
   const dispatch = useDispatch();
+
+  const styleCategories = useSelector(state=>state.styles);
+  const types = useSelector(state=>state.types);
+  const typesList = Object.keys(types);
 
   let [startDateString, startTimeString] = dateFuncs.splitDatetime(event.start);
   let [endDateString, endTimeString] = dateFuncs.splitDatetime(event.end);
@@ -26,6 +30,15 @@ export default function EditEventForm({event, setShowModal}) {
   const [lng, setLng] = useState(event.lng);
   const [externalUrl, setExternalUrl] = useState(event.externalUrl);
   const [imageUrl, setImageUrl] = useState(event.imageUrl);
+  const [type, setType] = useState(event.type);
+
+  const eventStyles = new Set(event.styles.map(style=>style.name));
+  const [styles, setStyles] = useState(
+    Object.keys(styleCategories).reduce((accum, key)=> {
+      accum[key] = eventStyles.has(key)?true:false;
+      return accum;
+    },{})
+    );
 
   const inputRef = useRef(null);
   const autoCompleteRef = useRef(null)
@@ -50,8 +63,8 @@ export default function EditEventForm({event, setShowModal}) {
 
     const handleSubmit = async (e) => {
       e.preventDefault();
-      const start = new Date(startDate + 'T' + startTime + ':00.000Z');
-      const end = new Date(endDate + 'T' + endTime + ':00.000Z');
+      const start = new Date(startDate + 'T' + startTime + '.000Z');
+      const end = new Date(endDate + 'T' + endTime + '.000Z');
       const body = {
         id: event.id,
         name,
@@ -65,6 +78,8 @@ export default function EditEventForm({event, setShowModal}) {
         lng,
         external_url: externalUrl?externalUrl:null,
         image_url: imageUrl?imageUrl:null,
+        styles,
+        type
       };
       const response = await dispatch(
         eventActions.updateEvent(body));
@@ -83,6 +98,38 @@ export default function EditEventForm({event, setShowModal}) {
         <div className='errors'>
           {errors.map((error, idx) => (
             <div className='error' key={idx}>{error}</div>
+          ))}
+        </div>
+        <div className='modal-fieldset'>
+          <label>Event Type * <span style={{'font-style':'italic'}}>(Select one)</span></label>
+          {typesList.map((typeName)=>(
+            <div className='checkbox-line'>
+              <div
+              className={`checkbox-input ${typeName===type?'checked': 'unchecked'}`}
+              onClick={()=>{
+                setType(typeName)
+              }}
+              >
+                {<i className="fa-solid fa-check"></i>}
+              </div>
+              <div className='checkbox-label'>{typeName}</div>
+            </div>
+          ))}
+        </div>
+        <div className='modal-fieldset'>
+          <label>Dance Styles * <span style={{'font-style':'italic'}}>(Select at least one)</span></label>
+          {Object.keys(styles).map((style)=>(
+            <div className='checkbox-line'>
+              <div
+               className={`checkbox-input ${styles[style]?'checked': 'unchecked'}`}
+               onClick={()=>{
+                setStyles({...styles, [style]: !styles[style]})
+               }}
+               >
+                {<i className="fa-solid fa-check"></i>}
+              </div>
+              <div className='checkbox-label'>{style}</div>
+            </div>
           ))}
         </div>
         <div>

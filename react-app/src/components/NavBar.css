@@ -30,6 +30,7 @@
   transition: .5s;
   color: var(--icon-grey);
   margin: 2px;
+  position:relative;
 }
 
 .icon-button:hover {
@@ -75,6 +76,7 @@
   align-items: center;
   justify-self: flex-end;
   justify-content: space-evenly;
+  position: relative;
 }
 
 .user-dropdown {

@@ -1,12 +1,19 @@
-
 const LOAD_STYLES = 'styles/load';
+const TOGGLE_STYLE = 'style/toggle'
 
 const loadStyles = (payload) => {
   return {
     type: LOAD_STYLES,
     payload
-  }
-}
+  };
+};
+
+export const toggleStyle = (styleName) => {
+  return {
+    type: TOGGLE_STYLE,
+    payload: styleName
+  };
+};
 
 export const getStyles = () => async dispatch => {
   const res = await fetch('/api/styles');
@@ -17,7 +24,7 @@ export const getStyles = () => async dispatch => {
         return accum
       },{})
       dispatch(loadStyles(styleToggles))
-    }
+    };
 };
 
 const initialState = null
@@ -25,7 +32,9 @@ export default function stylesReducer (state = initialState, action) {
   switch (action.type) {
     case LOAD_STYLES:
       return {...action.payload}
+    case TOGGLE_STYLE:
+      return {...state, [action.payload]: !state[action.payload]}
     default:
       return state
-  }
-}
+  };
+};

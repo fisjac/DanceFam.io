@@ -1,6 +1,5 @@
 export const dateToBackendFormat = (date) => {
   let dateString = date.toISOString();
-  console.log(date, dateString)
   return dateString.replace('T', ' ').substring(0,dateString.length - 5)
 }
 
@@ -29,17 +28,17 @@ export const groupEventsByDate = (events) => {
 };
 
 export const sortDates = (groupedEvents) => {
-  const sortedDates = Object.values(groupedEvents)
-      .map(events=>{
-        let event = events[0]
-        let start = event.start;
-        let date = new Date(start);
+  const dates = Object.values(groupedEvents)
+      .map(event => {
+        const dateString = event[0].start
+        const date = new Date(dateString)
         return date
       })
-      .sort((a,b)=> {
-        return a.start > b.start
+  dates.sort((a,b) => {
+        return a - b
       });
-  return sortedDates;
+
+  return dates;
 };
 
 export const splitDatetime = (dateString) => {

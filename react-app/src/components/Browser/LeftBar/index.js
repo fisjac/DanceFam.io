@@ -1,11 +1,13 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
 import logo from '../../../static/DanceFamBrushNoText.svg';
 import title from '../../../static/DanceFamTitle.svg';
 
 import defaultImage from '../../../static/dancing_couple1.svg'
+import { toggleStyle } from '../../../store/styles';
+import { toggleType } from '../../../store/types';
 
 
 function NextEvent () {
@@ -66,9 +68,9 @@ function NextEvent () {
 }
 
 
-export default function LeftBar() {
+export default function LeftBar({types, styles}) {
   const history = useHistory();
-  const styles = useSelector(state=>state.styles)
+  const dispatch = useDispatch();
 
   return (
     <div className='left-bar'>
@@ -78,11 +80,39 @@ export default function LeftBar() {
       </div>
 
       <div className='planner scroll'>
-        <div>Calendar Selector</div>
-        <div>Dance Styles</div>
-        <div>Event Types</div>
-        {/* <div className='planner-title'>Your Next Event</div>
-        <NextEvent user={user} events={events}/> */}
+        {/* <div>Calendar Selector</div> */}
+        <div className='leftBar-fieldset'>
+          <div className='filter-header'>Event Type</div>
+          {Object.keys(types).map((type)=>(
+            <div className='checkbox-line'>
+              <div
+              className={`checkbox-input ${types[type]?'checked': 'unchecked'}`}
+              onClick={()=>{
+                dispatch(toggleType(type))
+               }}
+              >
+                {<i className="fa-solid fa-check"></i>}
+              </div>
+              <div className='checkbox-label'>{type}</div>
+            </div>
+          ))}
+        </div>
+        <div className='leftBar-fieldset'>
+          <div className='filter-header'>Dance Styles</div>
+          {Object.keys(styles).map((style)=>(
+            <div className='checkbox-line'>
+              <div
+               className={`checkbox-input ${styles[style]?'checked': 'unchecked'}`}
+               onClick={()=>{
+                dispatch(toggleStyle(style))
+               }}
+               >
+                {<i className="fa-solid fa-check"></i>}
+              </div>
+              <div className='checkbox-label'>{style}</div>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );

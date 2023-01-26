@@ -1,6 +1,16 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, DateTimeField, FloatField
+from wtforms import StringField, DateTimeField, FloatField, Field
 from wtforms.validators import DataRequired, ValidationError, Length
+
+
+class StyleField(Field):
+
+    def process_formdata(self, styles_list):
+        if styles_list:
+            styles_object = styles_list[0]
+            self.data = [key for key in styles_object.keys() if styles_object[key]]
+        else:
+            self.data = []
 
 def less_than_end(form, field):
     start = field.data
@@ -19,5 +29,7 @@ class EventForm(FlaskForm):
     country = StringField('Country', validators=[DataRequired(),Length(max=50)])
     lat = FloatField('Lattitude', validators=[DataRequired()])
     lng = FloatField('Longitude', validators=[DataRequired()])
+    type = StringField('Type', validators=[DataRequired()])
+    styles = StyleField('Styles', validators=[DataRequired()])
     external_url = StringField('Event Page')
     image_url = StringField('Image Url')
