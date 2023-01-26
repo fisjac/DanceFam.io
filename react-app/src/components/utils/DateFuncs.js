@@ -1,6 +1,5 @@
 export const dateToBackendFormat = (date) => {
   let dateString = date.toISOString();
-  console.log(date, dateString)
   return dateString.replace('T', ' ').substring(0,dateString.length - 5)
 }
 
