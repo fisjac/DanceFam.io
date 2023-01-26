@@ -26,9 +26,9 @@ export default function Browser() {
 
   useEffect(()=>{
     if (mapIsLoaded) {
-      let filteredEventsTemp = filterEventsByBounds(events, bounds)
-      filteredEventsTemp = filterEventsByTypes(filteredEventsTemp, types)
-      filteredEventsTemp = filterEventsByStyles(filteredEventsTemp, styles)
+      let filteredEventsTemp = filterEventsByBounds(events, bounds);
+      filteredEventsTemp = filterEventsByTypes(filteredEventsTemp, types);
+      filteredEventsTemp = filterEventsByStyles(filteredEventsTemp, styles);
       setFilteredEvents(filteredEventsTemp);
     }
   }, [bounds, styles, types, events])

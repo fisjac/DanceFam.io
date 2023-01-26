@@ -7,9 +7,11 @@ import * as autocompleteFuncs from '../../utils/autocomplete';
 
 export default function CreateEventForm({setShowModal}) {
   const dispatch = useDispatch();
+
   const styleCategories = useSelector(state=>state.styles);
   const types = useSelector(state=>state.types);
   const typesList = Object.keys(types);
+
   const [errors, setErrors] = useState([]);
   const [name, setName] = useState('');
   const [startDate, setStartDate] = useState('');
