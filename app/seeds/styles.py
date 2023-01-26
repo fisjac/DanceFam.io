@@ -8,8 +8,9 @@ def seed_styles():
     kizomba = Style(name='Kizomba')
     country = Style(name='Country Swing')
     ballroom = Style(name='Ballroom')
+    fusion = Style(name='Fusion')
 
-    db.session.add_all([wcs, zouk, country, ballroom, salsa, bachata, kizomba])
+    db.session.add_all([wcs, zouk, country, ballroom, salsa, bachata, kizomba, fusion])
     db.session.commit()
 
 
