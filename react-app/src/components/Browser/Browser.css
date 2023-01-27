@@ -459,3 +459,10 @@ width:30px;
 .checkbox-label {
   flex-grow: 1;
 }
+
+
+@media screen and (max-width: 900px) {
+  .eventscroll {
+    z-index: 1;
+  }
+}
