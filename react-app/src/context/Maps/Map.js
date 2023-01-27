@@ -1,12 +1,13 @@
 import React, {useState, useEffect, useContext} from 'react';
-import {GoogleMap, Marker} from '@react-google-maps/api';
+import {GoogleMap} from '@react-google-maps/api';
 
 import { boundsContext } from './Bounds';
+import EventMarker from './EventMarker';
 import { GoogleMapsContext } from './MapsLoader';
 
 const Map = ({zoom, events}) => {
   const {location, setMapIsLoaded} = useContext(GoogleMapsContext);
-  const {bounds, setBounds} = useContext(boundsContext);
+  const {setBounds} = useContext(boundsContext);
   const [map, setMap] = useState();
 
   return (
@@ -26,7 +27,7 @@ const Map = ({zoom, events}) => {
         }}
         >
         {events && Object.values(events).map((event)=> {
-          return <Marker key={event.id} position={{'lat': event.lat, 'lng':event.lng}}/>
+          return <EventMarker event={event}/>
         })}
       </GoogleMap>
   )

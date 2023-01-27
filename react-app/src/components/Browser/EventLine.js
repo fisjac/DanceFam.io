@@ -1,14 +1,17 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 import * as eventActions from '../../store/events';
 import ModalWrapper from '../../context/Modal/Modal'
 import EditEventForm from './forms/EditEventForm';
-
-import defaultImage from '../../static/dancing_couple1.svg'
 import { getUtcTime } from '../utils/DateFuncs';
 
+import { GoogleMapsContext } from '../../context/Maps/MapsLoader';
+import defaultImage from '../../static/dancing_couple1.svg'
+
+
 export default function EventLine({event}) {
+  const {selectedEvent, setSelectedEvent, setShowInfoWindow} = useContext(GoogleMapsContext)
   const dispatch = useDispatch();
   const start = new Date(event.start);
   const user = useSelector(state=>state.session.user);
