@@ -61,7 +61,7 @@ const NavBar = () => {
   const user = useSelector(state=>state.session.user)
   return (
     <div className='navbar'>
-        <div className='search-area'>
+        {/* <div className='search-area'>
           <div className='mag-glass'>
             <i className="fa-solid fa-magnifying-glass"></i>
           </div>
@@ -69,7 +69,7 @@ const NavBar = () => {
             type='text'
             className='search-input'
             />
-        </div>
+        </div> */}
       <div className='navbar-rhs'>
         {user && (<DropDownWrapper menu={<CreateMenu/>}>
           <div className='icon-button'>
