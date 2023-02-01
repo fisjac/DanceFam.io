@@ -11,7 +11,7 @@ import defaultImage from '../../static/dancing_couple1.svg'
 
 
 export default function EventLine({event}) {
-  const {selectedEvent, setSelectedEvent, setShowInfoWindow} = useContext(GoogleMapsContext)
+  const {setHoveredEvent, setSelectedEvent, setShowInfoWindow, map} = useContext(GoogleMapsContext)
   const dispatch = useDispatch();
   const start = new Date(event.start);
   const user = useSelector(state=>state.session.user);
@@ -22,9 +22,18 @@ export default function EventLine({event}) {
         className='eventline-container'
         onClick={(e)=>{
           if(e.target.className.includes('eventline')) {
-            if (event.externalUrl)window.open(event.externalUrl)
-          }
+            // if (event.externalUrl)window.open(event.externalUrl)
+            setSelectedEvent(event);
+            map.panTo({lat: event.lat, lng: event.lng});
+            setShowInfoWindow(true);
 
+          }
+        }}
+        onMouseEnter={()=> {
+          setHoveredEvent(event)
+        }}
+        onMouseLeave={()=> {
+          setHoveredEvent(null)
         }}
         >
         <div className='eventline-body'>

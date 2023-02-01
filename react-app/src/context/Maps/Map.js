@@ -6,9 +6,9 @@ import EventMarker from './EventMarker';
 import { GoogleMapsContext } from './MapsLoader';
 
 const Map = ({zoom, events}) => {
-  const {location, setMapIsLoaded} = useContext(GoogleMapsContext);
+  const {location, setMapIsLoaded, map, setMap} = useContext(GoogleMapsContext);
   const {setBounds} = useContext(boundsContext);
-  const [map, setMap] = useState();
+
 
   return (
       <GoogleMap

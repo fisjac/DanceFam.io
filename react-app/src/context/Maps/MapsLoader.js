@@ -44,9 +44,11 @@ export default function LoadMaps({children}) {
 
 const libraries = ['places']
 export function GoogleMapsProvider ({children, apiKey}) {
-  const  [mapIsLoaded, setMapIsLoaded] = useState(false);
-  const  [showInfoWindow, setShowInfoWindow] = useState(false);
-  const [selectedEvent, setSelectedEvent] = useState('');
+  const [mapIsLoaded, setMapIsLoaded] = useState(false);
+  const [map, setMap] = useState(null);
+  const [showInfoWindow, setShowInfoWindow] = useState(false);
+  const [hoveredEvent, setHoveredEvent] = useState(false)
+  const [selectedEvent, setSelectedEvent] = useState(null);
   const [location, setLocation] = useState('');
 
   useEffect(()=>{
@@ -62,7 +64,7 @@ export function GoogleMapsProvider ({children, apiKey}) {
   if (!isLoaded) return <div>Loading...</div>
 
   return (
-    <GoogleMapsContext.Provider value={{isLoaded, location, mapIsLoaded, setMapIsLoaded, selectedEvent, setSelectedEvent, showInfoWindow, setShowInfoWindow}}>
+    <GoogleMapsContext.Provider value={{isLoaded, location, mapIsLoaded, setMapIsLoaded, selectedEvent, setSelectedEvent, hoveredEvent, setHoveredEvent, showInfoWindow, setShowInfoWindow, map, setMap}}>
       {children}
     </GoogleMapsContext.Provider>
   );
