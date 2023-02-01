@@ -28,13 +28,10 @@ export function ModalProvider({children}) {
 
 export default function ModalWrapper(props) {
   const [showModal, setShowModal] = useState(false);
-  const handleClick = (stopProp, closePrev, addClickFunc) => {
+  const handleClick = (stopProp, addClickFunc) => {
     return (e)=> {
       if (stopProp) e.stopPropagation();
       setShowModal(true);
-      if (closePrev) {
-        closePrev(false)
-      };
       if (addClickFunc) addClickFunc();
     };
   };
@@ -49,9 +46,9 @@ export default function ModalWrapper(props) {
         style: {'cursor': 'pointer'}
       },
       )}
-      <Modal {...props} setShowModal={setShowModal} className={`${showModal ? '' : 'hidden' }`}>
+      {showModal && <Modal {...props} setShowModal={setShowModal}>
         {React.cloneElement(form, props)}
-      </Modal>
+      </Modal>}
     </>
   );
 };

@@ -1,14 +1,19 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 import * as eventActions from '../../store/events';
 import ModalWrapper from '../../context/Modal/Modal'
 import EditEventForm from './forms/EditEventForm';
-
-import defaultImage from '../../static/dancing_couple1.svg'
 import { getUtcTime } from '../utils/DateFuncs';
 
+import { GoogleMapsContext } from '../../context/Maps/MapsLoader';
+import defaultImage from '../../static/dancing_couple1.svg'
+import { eventSelectorsContext } from '../../context/Maps/EventSelector';
+
+
 export default function EventLine({event}) {
+  const { map } = useContext(GoogleMapsContext)
+  const {hoveredEvent, setHoveredEvent, selectedEvent, setSelectedEvent} = useContext(eventSelectorsContext);
   const dispatch = useDispatch();
   const start = new Date(event.start);
   const user = useSelector(state=>state.session.user);
@@ -18,11 +23,12 @@ export default function EventLine({event}) {
       <div
         className='eventline-container'
         onClick={(e)=>{
-          if(e.target.className.includes('eventline')) {
-            if (event.externalUrl)window.open(event.externalUrl)
-          }
-
+            e.preventDefault()
+            setSelectedEvent(event);
+            map.panTo({lat: event.lat, lng: event.lng});
         }}
+        onMouseEnter={()=>setHoveredEvent(event)}
+        onMouseLeave={()=> setHoveredEvent(null)}
         >
         <div className='eventline-body'>
           <img

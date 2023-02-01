@@ -44,8 +44,10 @@ export default function LoadMaps({children}) {
 
 const libraries = ['places']
 export function GoogleMapsProvider ({children, apiKey}) {
-  const  [mapIsLoaded, setMapIsLoaded] = useState(false)
-  const [location, setLocation] = useState('')
+  const [mapIsLoaded, setMapIsLoaded] = useState(false);
+  const [map, setMap] = useState(null);
+  const [location, setLocation] = useState('');
+
   useEffect(()=>{
     if (!location) {
       getLocation(setLocation)
@@ -59,7 +61,7 @@ export function GoogleMapsProvider ({children, apiKey}) {
   if (!isLoaded) return <div>Loading...</div>
 
   return (
-    <GoogleMapsContext.Provider value={{isLoaded, location, mapIsLoaded, setMapIsLoaded}}>
+    <GoogleMapsContext.Provider value={{isLoaded, location, mapIsLoaded, setMapIsLoaded, map, setMap}}>
       {children}
     </GoogleMapsContext.Provider>
   );

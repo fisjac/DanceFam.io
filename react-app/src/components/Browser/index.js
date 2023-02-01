@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Route } from 'react-router-dom';
 
@@ -15,6 +15,7 @@ import { filterEventsByBounds, filterEventsByStyles, filterEventsByTypes } from 
 import { GoogleMapsContext } from '../../context/Maps/MapsLoader';
 
 import './Browser.css'
+import EventSelectionProvider from '../../context/Maps/EventSelector';
 
 export default function Browser() {
   const events = useSelector(state=>state.events);
@@ -24,7 +25,7 @@ export default function Browser() {
   const types = useSelector(state=>state.types);
   const styles = useSelector(state=>state.styles);
 
-  useEffect(()=>{
+  useMemo(()=>{
     if (mapIsLoaded) {
       let filteredEventsTemp = filterEventsByBounds(events, bounds);
       filteredEventsTemp = filterEventsByTypes(filteredEventsTemp, types);
@@ -37,13 +38,15 @@ export default function Browser() {
       <div className='main-page'>
         <LeftBar styles={styles} types={types}/>
         <div className='center-container'>
-          <Route exact path='/app'>
-              <div className='eventscroll-title'>Upcoming Events</div>
-              <div className='center-split'>
-                {events && <EventScroll events={filteredEvents}/>}
-                <EventsMap events={filteredEvents}/>
-              </div>
-          </Route>
+          <EventSelectionProvider>
+            <Route exact path='/app'>
+                <div className='eventscroll-title'>Upcoming Events</div>
+                <div className='center-split'>
+                  {events && <EventScroll events={filteredEvents}/>}
+                  <EventsMap events={filteredEvents}/>
+                </div>
+            </Route>
+          </EventSelectionProvider>
           <Route exact path='/events/:eventId'>
             <EventPage/>
           </Route>
