@@ -20,7 +20,8 @@ def validation_errors_to_error_messages(validation_errors):
 @event_routes.route('')
 def events():
     events = Event.query.all()
-    return jsonify([event.to_dict() for event in events])
+    new_events = Event.query.filter(Event.start >= datetime.today().date())
+    return jsonify([event.to_dict() for event in new_events])
 
 
 
