@@ -8,10 +8,12 @@ import { getUtcTime } from '../utils/DateFuncs';
 
 import { GoogleMapsContext } from '../../context/Maps/MapsLoader';
 import defaultImage from '../../static/dancing_couple1.svg'
+import { eventSelectorsContext } from '../../context/Maps/EventSelector';
 
 
 export default function EventLine({event}) {
-  const {setHoveredEvent, setSelectedEvent, setShowInfoWindow, map} = useContext(GoogleMapsContext)
+  const { map } = useContext(GoogleMapsContext)
+  const {hoveredEvent, setHoveredEvent, selectedEvent, setSelectedEvent} = useContext(eventSelectorsContext);
   const dispatch = useDispatch();
   const start = new Date(event.start);
   const user = useSelector(state=>state.session.user);
@@ -21,20 +23,12 @@ export default function EventLine({event}) {
       <div
         className='eventline-container'
         onClick={(e)=>{
-          if(e.target.className.includes('eventline')) {
-            // if (event.externalUrl)window.open(event.externalUrl)
+            e.preventDefault()
             setSelectedEvent(event);
             map.panTo({lat: event.lat, lng: event.lng});
-            setShowInfoWindow(true);
-
-          }
         }}
-        onMouseEnter={()=> {
-          setHoveredEvent(event)
-        }}
-        onMouseLeave={()=> {
-          setHoveredEvent(null)
-        }}
+        onMouseEnter={()=>setHoveredEvent(event)}
+        onMouseLeave={()=> setHoveredEvent(null)}
         >
         <div className='eventline-body'>
           <img
