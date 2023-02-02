@@ -40,7 +40,6 @@ function App() {
       <Switch>
         <Route exact path='/'>
           <Splash />
-          <Footer />
         </Route>
         <Route path='/app'>
           <LoadMaps>
