@@ -16,9 +16,8 @@ export default function Footer() {
       {/* <ModalWrapper header='About Me' form={<div>about me</div>}>
         <div className='footer-link'>About Me</div>
       </ModalWrapper> */}
-      <ModalWrapper header='Privacy Policy' form={<PrivacyPolicy/>}>
-        <div className='footer-link'>Privacy Policy</div>
-      </ModalWrapper>
+    <NavLink to='/app/privacy'>Privacy Policy</NavLink>
+
     </div>
   )
 }
