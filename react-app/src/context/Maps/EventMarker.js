@@ -24,7 +24,7 @@ export default function EventMarker({event}) {
       <Marker
         key={event.id}
         position={{'lat': event.lat, 'lng': event.lng}}
-        animation={window.google.maps.Animation.DROP}
+        // animation={window.google.maps.Animation.DROP}
         ref={anchorRef}
         onClick={()=>{
           map.panTo({'lat': event.lat, 'lng':event.lng});
