@@ -1,20 +1,40 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import profPic from '../../static/prof_pic.jpg';
 import linkedin from '../../static/linkedin.png';
 export default function RightBar() {
+  useEffect(() => {
+    const pushAd = () => {
+      try {
+        const adsbygoogle = window.adsbygoogle
+        console.log({ adsbygoogle })
+        adsbygoogle.push({})
+      } catch (e) {
+        console.error(e)
+      }
+    }
+
+    let interval = setInterval(() => {
+      // Check if Adsense script is loaded every 300ms
+      if (window.adsbygoogle) {
+        pushAd()
+        // clear the interval once the ad is pushed so that function isn't called indefinitely
+        clearInterval(interval)
+      }
+    }, 300)
+
+    return () => {
+      clearInterval(interval)
+    }
+  }, [])
+
   return (
     <div className='right-bar'>
-      {/* <a
-        className='banner-ad'
-        href='https://www.linkedin.com/in/jackson-fisher-8631a7a1/'
-        style={{backgroundImage: `url(${profPic})`}}
-        >
-        <div className='linkedin-container'>
-          <div className='linkedin-button' style={{backgroundImage: `url(${linkedin})`}}></div>
-          <div className='linkedin-text'>Looking for world-class developer to join your team?</div>
-
-        </div>
-      </a> */}
+        <ins className="adsbygoogle"
+            style={{"display":"block"}}
+            data-ad-client="ca-pub-6254698020872115"
+            data-ad-slot="6532873315"
+            data-ad-format="auto"
+            data-full-width-responsive="true"></ins>
     </div>
   )
 }
