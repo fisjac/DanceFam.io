@@ -14,6 +14,7 @@ import { getStyles } from './store/styles';
 import BoundsProvider from './context/Maps/Bounds';
 import { getEvents } from './store/events';
 import { getTypes } from './store/types';
+import PrivacyPolicy from './components/PrivacyPolicy';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
