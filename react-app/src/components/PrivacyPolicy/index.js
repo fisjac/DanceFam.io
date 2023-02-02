@@ -11,7 +11,7 @@ export default function PrivacyPolicy() {
 
   const modalNode = useContext(ModalContext);
 
-  const [htmlFileString, setHtmlFileString] = useState();
+  const [htmlFileString, setHtmlFileString] = useState(null);
 
   async function fetchHtml() {
     setHtmlFileString(await (await fetch('/privacy-policy.html')).text());
@@ -22,10 +22,7 @@ export default function PrivacyPolicy() {
 
   if (!modalNode) return null;
 
-
-
-
-  return ReactDom.createPortal(
+  return htmlFileString && ReactDom.createPortal(
     <div id="modal">
       <div id="modal-background" onClick={()=>{
         history.push('/app')}} />

@@ -30,7 +30,7 @@
   padding: 29px 37px;
   display: flex;
   flex-flow:column;
-  width: 400px;
+  max-width: 600px;
   max-height: 80%;
   background-color:white;
   transition: bottom .2s ease-out;
