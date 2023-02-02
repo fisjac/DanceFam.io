@@ -10,3 +10,7 @@
   bottom: 0;
   background-color: var(--theme-background-grey);
 }
+
+.footer-link {
+  margin: 0 4px;
+}
