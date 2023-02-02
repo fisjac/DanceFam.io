@@ -33,7 +33,6 @@ export default function EventMarker({event}) {
         onMouseOver={(e)=>setHoveredEvent(event)}
         onMouseOut={(e)=>setHoveredEvent(null)}
         onUnmount={()=>{
-          console.log('unmounting', event.id)
           if (highlightedEvent?.id === event.id) {
             setSelectedEvent(null);
             setHoveredEvent(null);
