@@ -19,12 +19,12 @@ export default function Footer() {
         >
           About the Developer
       </div>
+      <div>|</div>
       <div
         className='footer-link'
         onClick={()=>history.push('/app/privacy')}>
           Privacy Policy
       </div>
-
     </div>
   )
 }
