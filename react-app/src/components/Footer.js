@@ -2,23 +2,14 @@ import React, {useState, useEffect} from 'react'
 import { NavLink } from 'react-router-dom';
 
 import ModalWrapper from '../context/Modal/Modal'
-
+import PrivacyPolicy from './PrivacyPolicy';
 
 
 import './Footer.css'
-import PrivacyPolicy from './PrivacyPolicy';
 
 
 export default function Footer() {
 
-  const [htmlFileString, setHtmlFileString] = useState();
-
-  async function fetchHtml() {
-    setHtmlFileString(await (await fetch('./privacy-policy.html')).text());
-  }
-  useEffect(() => {
-    fetchHtml();
-  }, []);
 
   return (
     <div className='footer'>
