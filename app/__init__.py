@@ -41,6 +41,7 @@ app.register_blueprint(event_routes, url_prefix='/api/events')
 app.register_blueprint(key_routes, url_prefix='/api/keys')
 app.register_blueprint(style_routes, url_prefix='/api/styles')
 app.register_blueprint(type_routes, url_prefix='/api/types')
+
 db.init_app(app)
 Migrate(app, db)
 
