@@ -81,4 +81,6 @@ def react_root(path):
         return app.send_static_file('favicon.ico')
     if path == 'privacy-policy.html':
         return app.send_static_file('privacy-policy.html')
+    if path == 'robots.txt':
+        return app.send_static_file('robots.txt')
     return app.send_static_file('index.html')
