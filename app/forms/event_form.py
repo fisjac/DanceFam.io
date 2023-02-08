@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, DateTimeField, FloatField, Field
+from wtforms import StringField, DateTimeField, Field, IntegerField
 from wtforms.validators import DataRequired, ValidationError, Length
 
 
@@ -25,5 +25,6 @@ class EventForm(FlaskForm):
     end = DateTimeField('End', validators=[DataRequired()])
     type = StringField('Type', validators=[DataRequired()])
     styles = StyleField('Styles', validators=[DataRequired()])
+    venue_id = IntegerField('Venue Id', validators=DataRequired())
     external_url = StringField('Event Page')
     image_url = StringField('Image Url')

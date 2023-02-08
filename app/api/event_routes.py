@@ -2,7 +2,7 @@ from flask import Blueprint, jsonify, request
 from flask_login import login_required, current_user
 from datetime import datetime
 
-from app.models import Event, Registration, db, Type, Style
+from app.models import Event, Registration, db, Type, Style, Venue
 from app.forms.event_form import EventForm
 event_routes = Blueprint('events', __name__)
 
@@ -54,25 +54,20 @@ def create_event():
             name = form.data['name'],
             start = form.data['start'],
             end = form.data['end'],
-            city = form.data['city'],
-            state = form.data['state'],
-            address = form.data['address'],
-            country = form.data['country'],
-            lat = form.data['lat'],
-            lng = form.data['lng'],
             external_url = external_url,
             image_url = image_url,
             type_id = Type.query.filter(Type.name == form.data['type'])[0].id
         )
 
+        event.venue = Venue.query.get(form.data['venue_id'])
+
         for style in form.data['styles']:
             style_instance = Style.query.filter(Style.name == style)[0]
             event.styles.append(style_instance)
-
-        new_registration = Registration()
-        new_registration.user = current_user
-        new_registration.event = event
-        db.session.add_all([new_registration])
+        # new_registration = Registration()
+        # new_registration.user = current_user
+        # new_registration.event = event
+        db.session.add(event)
         db.session.commit()
         return event.to_dict()
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
