@@ -75,7 +75,8 @@ class Event(db.Model):
       "organiserId": self.organiser_id,
       "externalUrl": self.external_url,
       "imageUrl": self.image_url,
-      "attendeeCount": len(self.registrations),
-      "attendees": {} if len(list(self.registrations)) == 0\
-        else {registration.user.id: registration.user.safe_info() for registration in self.registrations},
+      "venue": self.venue.to_dict()
+      # "attendeeCount": len(self.registrations),
+      # "attendees": {} if len(list(self.registrations)) == 0\
+      #   else {registration.user.id: registration.user.safe_info() for registration in self.registrations},
     }
