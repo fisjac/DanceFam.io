@@ -24,7 +24,7 @@ export const getStyles = () => async dispatch => {
     const res = await fetch('/api/styles');
       if (res.ok) {
         const data = await res.json();
-        const styleToggles = Object.values(data).reduce((accum,obj)=> {
+        styleToggles = Object.values(data).reduce((accum,obj)=> {
           accum[obj.name] = true;
           return accum
         },{})
