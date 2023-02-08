@@ -1,0 +1,34 @@
+from .db import db
+
+class Venue(db.Model):
+  __tablename__ = 'venues'
+
+  id = db.Column(db.Integer, primary_key=True)
+  name = db.Column(db.String(255))
+  address = db.Column(db.String(255))
+  city = db.Column(db.String(255))
+  state = db.Column(db.String(255))
+  country = db.Column(db.String(255))
+  url = db.Column(db.String(255))
+  lat = db.Column(db.Float())
+  lng = db.Column(db.Float())
+
+  events = db.Relationship("Event", back_populates='venue')
+
+
+  def to_dict(self):
+    styles = {style.name for style in [event.styles for event in self.events]},
+    types =  {event.type.name for event in self.events }
+
+    return {
+      "id": self.id,
+      "city": self.city,
+      "state": self.state,
+      "address": self.address,
+      "country": self.country,
+      "lat": self.lat,
+      "lng": self.lng,
+      "url": self.url,
+      "styles": styles,
+      "types": types
+    }
