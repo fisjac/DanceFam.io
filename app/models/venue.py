@@ -13,7 +13,7 @@ class Venue(db.Model):
   lat = db.Column(db.Float())
   lng = db.Column(db.Float())
 
-  events = db.Relationship("Event", back_populates='venue')
+  events = db.relationship("Event", back_populates='venue', cascade='delete' )
 
 
   def to_dict(self):

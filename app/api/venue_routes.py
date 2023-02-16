@@ -6,7 +6,7 @@ from app.forms import venue_form
 venue_routes = Blueprint('venues', __name__)
 
 # Get all venues
-@venue_routes.route('/')
+@venue_routes.route('')
 def get_all_venues():
   venues = Venue.query.all()
   return {"venues":[venues.to_dict for venue in venues]}
@@ -22,7 +22,7 @@ def get_venue(id):
     return venue.to_dict()
 
 # POST venue
-@venue_routes.route('/', methods=['POST'])
+@venue_routes.route('', methods=['POST'])
 @login_required
 def create_venue():
   form = venue_form()

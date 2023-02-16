@@ -25,6 +25,6 @@ class EventForm(FlaskForm):
     end = DateTimeField('End', validators=[DataRequired()])
     type = StringField('Type', validators=[DataRequired()])
     styles = StyleField('Styles', validators=[DataRequired()])
-    venue_id = IntegerField('Venue Id', validators=DataRequired())
+    venue_id = IntegerField('Venue Id', validators=[DataRequired()])
     external_url = StringField('Event Page')
     image_url = StringField('Image Url')

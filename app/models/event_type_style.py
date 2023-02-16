@@ -14,8 +14,7 @@ class Type(db.Model):
 
   id = db.Column(db.Integer, primary_key=True)
   name = db.Column(db.String(255), nullable=False)
-
-  events = db.relationship("Event")
+  events = db.relationship("Event", back_populates="type")
 
   def to_dict(self):
     return {
@@ -48,7 +47,9 @@ class Event(db.Model):
   external_url = db.Column(db.String(255), nullable=True)
   image_url = db.Column(db.String(255),nullable=True)
   organiser_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
+  type_id = db.Column(db.Integer, db.ForeignKey("types.id"), nullable=False)
   type = db.relationship('Type', back_populates='events')
+  venue_id = db.Column(db.Integer, db.ForeignKey("venues.id"), nullable=False)
   venue = db.relationship('Venue', back_populates="events")
 
   # Relationships
@@ -57,8 +58,6 @@ class Event(db.Model):
   registrations = db.relationship("Registration", back_populates="event", cascade='delete')
 
   styles = db.relationship("Style", secondary=event_styles, back_populates="events")
-
-
 
   def get_user_events(user_id):
     events = db.session.query(Event).join(Registration).filter(Registration.user_id == user_id)
