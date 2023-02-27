@@ -15,11 +15,7 @@ class Venue(db.Model):
 
   events = db.relationship("Event", back_populates='venue', cascade='delete' )
 
-
   def to_dict(self):
-    styles = {style.name for style in [event.styles for event in self.events]},
-    types =  {event.type.name for event in self.events }
-
     return {
       "id": self.id,
       "city": self.city,
@@ -29,6 +25,6 @@ class Venue(db.Model):
       "lat": self.lat,
       "lng": self.lng,
       "url": self.url,
-      "styles": styles,
-      "types": types
+      "styles": list({style.name for style in [event.styles for event in self.events]}),
+      "types": list({event.type.name for event in self.events })
     }

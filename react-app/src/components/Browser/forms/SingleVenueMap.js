@@ -1,9 +1,8 @@
-import { useContext } from "react"
-import { GoogleMap } from "@react-google-maps/api"
+import React, { useContext } from "react"
+import { GoogleMap, Marker } from "@react-google-maps/api"
 import { GoogleMapsContext } from "../../../context/Maps/MapsLoader"
-import VenueMarker from "../../../context/Maps/VenueMarker"
 
-export default function SingleVenueMap({venue}) {
+function SingleVenueMap({venue}) {
   const {isLoaded, location} = useContext(GoogleMapsContext)
   let center = location
   if (venue) {
@@ -13,12 +12,15 @@ export default function SingleVenueMap({venue}) {
     isLoaded && <GoogleMap
     mapContainerClassName='map'
     center={center}
-    zoom={10.5}
+    zoom={10}
     options={{
       disableDefaultUI: true
+
     }}
     >
-    {venue && <VenueMarker venue={venue}/>}
+    {venue && <Marker position={{'lat': venue.lat, 'lng': venue.lng}}/>}
   </GoogleMap>
   )
 };
+
+export default React.memo(SingleVenueMap)

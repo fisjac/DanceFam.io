@@ -6,9 +6,10 @@ import events from './events'
 import keys from './keys'
 import styles from './styles'
 import types from './types'
+import venues from './venues'
 
 const rootReducer = combineReducers({
-  session, events, keys, styles, types
+  session, events, keys, styles, types, venues
 });
 
 

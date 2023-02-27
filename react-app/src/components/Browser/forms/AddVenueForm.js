@@ -1,16 +1,15 @@
 import React, {useState, useEffect, useRef} from 'react'
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
-import * as eventActions from '../../../store/events';
+import * as venueActions from '../../../store/venues';
 import * as autocompleteFuncs from '../../utils/autocomplete';
 import SingleVenueMap from './SingleVenueMap';
-import { GoogleMapsProvider } from '../../../context/Maps/MapsLoader';
 
 export default function CreateEventForm({setShowModal}) {
   const dispatch = useDispatch();
 
   const [errors, setErrors] = useState([]);
-  const [name, setName] = useState('');
+  const [nameSelector, setSelectedName] = useState('');
   const [venue, setVenue] = useState(null);
 
 
@@ -22,7 +21,6 @@ export default function CreateEventForm({setShowModal}) {
       const data = await autoCompleteRef.current.getPlace();
       const {name, url, location, components} = autocompleteFuncs.parsePlaceData(data)
 
-      setName(name)
       setVenue({
         name,
         url,
@@ -40,8 +38,9 @@ export default function CreateEventForm({setShowModal}) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log(venue)
     const response = await dispatch(
-      eventActions.createEvent({venue: venue}));
+      venueActions.createVenue(venue));
     if (response.ok) {
       setShowModal(false);
       setErrors([]);
@@ -59,22 +58,38 @@ export default function CreateEventForm({setShowModal}) {
           ))}
         </div>
         <div>
-          <label>Name *</label>
+          <label>Search for your venue</label>
           <input
             ref={inputRef}
             type='text'
-            onChange={(e)=>setName(e.target.value)}
-            value={name}
+            onChange={(e)=>setSelectedName(e.target.value)}
+            value={nameSelector}
             placeholder='Name'
             required
           />
         </div>
+        {venue && <div>
+          <div className='infowindow-details'>
+            <div className='infowindow-name'>{venue.name}</div>
+              <div>{venue.address},</div>
+              <div>{venue.city}, {venue.state}</div>
+
+              <div
+                className='link'
+                onClick={()=>{
+                  window.open(venue.url)
+                }}
+                >
+                {venue.url}
+              </div>
+          </div>
+        </div>}
         <div className='inline-map'>
           <SingleVenueMap venue={venue}/>
         </div>
         <button
           type='submit'
-          className='disabled'
+          className={`${!venue?'disabled':''}`}
           disabled={!venue?true:false}
           >Confirm</button>
       </form>

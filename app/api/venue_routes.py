@@ -1,15 +1,25 @@
 from flask import Blueprint, jsonify, request
 from flask_login import login_required
 from app.models import db, Venue
-from app.forms import venue_form
+from app.forms.venue_form import VenueForm
 
 venue_routes = Blueprint('venues', __name__)
+
+def validation_errors_to_error_messages(validation_errors):
+    """
+    Simple function that turns the WTForms validation errors into a simple list
+    """
+    errorMessages = []
+    for field in validation_errors:
+        for error in validation_errors[field]:
+            errorMessages.append(f'{field} : {error}')
+    return errorMessages
 
 # Get all venues
 @venue_routes.route('')
 def get_all_venues():
   venues = Venue.query.all()
-  return {"venues":[venues.to_dict for venue in venues]}
+  return jsonify([venue.to_dict() for venue in venues])
 
 # GET by id
 @venue_routes.route('/<int:id>')
@@ -19,13 +29,13 @@ def get_venue(id):
         return {
         "message": "Venue couldn't be found",
         "statusCode": 404}, 404
-    return venue.to_dict()
+    return jsonify(venue.to_dict())
 
 # POST venue
 @venue_routes.route('', methods=['POST'])
 @login_required
 def create_venue():
-  form = venue_form()
+  form = VenueForm()
   form['csrf_token'].data = request.cookies['csrf_token']
   if form.validate_on_submit():
     if form.data['url']:
@@ -42,5 +52,7 @@ def create_venue():
       lng = form.data["lng"],
       url = url
     )
-  db.session.add(venue)
-  db.session.commit()
+    db.session.add(venue)
+    db.session.commit()
+    return venue.to_dict()
+  return {'errors': validation_errors_to_error_messages(form.errors)}, 400

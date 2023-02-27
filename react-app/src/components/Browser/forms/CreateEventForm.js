@@ -18,12 +18,6 @@ export default function CreateEventForm({setShowModal}) {
   const [startTime, setStartTime] = useState('');
   const [endDate, setEndDate] = useState('');
   const [endTime, setEndTime] = useState('');
-  const [address, setAddress] = useState('');
-  const [city, setCity] = useState('');
-  const [state, setState] = useState('');
-  const [country, setCountry] = useState('');
-  const [lat, setLat] = useState('');
-  const [lng, setLng] = useState('');
   const [type, setType] = useState('');
   const [styles, setStyles] = useState(
     Object.keys(styleCategories).reduce((accum, key)=> {
@@ -33,25 +27,6 @@ export default function CreateEventForm({setShowModal}) {
   );
   const [externalUrl, setExternalUrl] = useState('');
   const [imageUrl, setImageUrl] = useState('');
-
-  const inputRef = useRef(null);
-  const autoCompleteRef = useRef(null)
-  useEffect(()=> {
-    autocompleteFuncs.attachAutoComplete(autoCompleteRef, inputRef);
-    autoCompleteRef.current.addListener('place_changed', async function () {
-      const data = await autoCompleteRef.current.getPlace();
-      const {location, components} = autocompleteFuncs.parsePlaceData(data)
-
-      components.street_number ?
-        setAddress(components.street_number + ' ' + components.route) :
-        setAddress(components.route)
-      setCity(components.locality)
-      setState(components.administrative_area_level_1)
-      setCountry(components.country)
-      setLat(location.lat)
-      setLng(location.lng)
-    })
-  }, [])
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -63,12 +38,6 @@ export default function CreateEventForm({setShowModal}) {
           name,
           start: dateFuncs.dateToBackendFormat(start),
           end: dateFuncs.dateToBackendFormat(end),
-          address,
-          city,
-          state,
-          country,
-          lat,
-          lng,
           external_url: externalUrl?externalUrl:null,
           image_url: imageUrl?imageUrl:null,
           styles,
@@ -169,47 +138,6 @@ export default function CreateEventForm({setShowModal}) {
             required
           />
         </div>
-        <div>
-          <label>Address *</label>
-          <input
-            ref={inputRef}
-            type='text'
-            onChange={(e)=>setAddress(e.target.value)}
-            value={address}
-            required
-          />
-        </div>
-        <div>
-          <label>City *</label>
-          <input
-            type='text'
-            onChange={(e)=>setCity(e.target.value)}
-            value={city}
-            placeholder='City'
-            required
-          />
-        </div>
-        <div>
-          <label>State</label>
-          <input
-            type='text'
-            onChange={(e)=>setState(e.target.value)}
-            value={state}
-            placeholder='State'
-            required
-          />
-        </div>
-        <div>
-          <label>Country *</label>
-          <input
-            type='text'
-            onChange={(e)=>setCountry(e.target.value)}
-            value={country}
-            placeholder='Country'
-            required
-          />
-        </div>
-
         <div>
           <label>Event Page</label>
           <input

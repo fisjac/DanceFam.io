@@ -44,7 +44,6 @@ export const getEvents = () => async dispatch => {
   if (response.ok) {
     const events = await response.json();
     dispatch(loadEvents(events));
-    return response;
   };
   return response;
 };
@@ -54,7 +53,6 @@ export const getEvent = (eventId) => async dispatch => {
   if (response.ok) {
     const event = await response.json();
     dispatch(loadEvent(event));
-    return response;
   };
   return response;
 };
@@ -69,7 +67,6 @@ export const createEvent = ({event}) => async dispatch => {
     const event = await response.json();
     await dispatch(loadEvent(event))
     await dispatch(sessionActions.addEvent(event.id))
-    return response;
   }
   return response;
 }
@@ -84,7 +81,6 @@ export const updateEvent = (event) => async dispatch => {
     const event = await response.json();
     await dispatch(sessionActions.authenticate())
     await dispatch(editEvent(event));
-    return response;
   };
   return response;
 };
@@ -98,7 +94,6 @@ export const deleteEvent = (eventId) => async dispatch => {
     batch(async()=>{
       await dispatch(removeEvent(eventId))
     });
-    return response;
   };
   return response;
 };
