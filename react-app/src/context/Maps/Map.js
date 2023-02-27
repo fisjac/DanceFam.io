@@ -3,12 +3,13 @@ import {GoogleMap} from '@react-google-maps/api';
 
 import { boundsContext } from './Bounds';
 import EventMarker from './EventMarker';
+import VenueMarker from './VenueMarker'
 import { GoogleMapsContext } from './MapsLoader';
 import { useSelector } from 'react-redux';
 
 import { filterEventsByStyles, filterEventsByTypes } from '../../components/utils/EventsFilter';
 
-const Map = ({zoom}) => {
+const Map = ({zoom, venues}) => {
   const events = useSelector(state=>state.events);
   const styles = useSelector(state=>state.styles);
   const types = useSelector(state=>state.types);
@@ -41,6 +42,9 @@ const Map = ({zoom}) => {
         >
         {filteredEvents && Object.values(filteredEvents).map((event)=> {
           return <EventMarker event={event}/>
+        })}
+        {venues && Object.values(venues).map(venue => {
+          return <VenueMarker venue = {venue}/>
         })}
       </GoogleMap>
   )

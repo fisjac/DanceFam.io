@@ -6,26 +6,43 @@ import LogoutButton from './auth/LogoutButton';
 import DropDownWrapper from '../context/Dropdown/Dropdown';
 import CreateEventForm from './Browser/forms/CreateEventForm';
 // import logo from '../static/DanceFamBrushNoText.svg'
-import ModalWrapper from '../context/Modal/Modal';
-import LoginForm from './auth/LoginForm'
-import SignUpForm from './auth/SignUpForm'
+import ModalWrapper, { Modal } from '../context/Modal/Modal';
+import LoginForm from './auth/LoginForm';
+import SignUpForm from './auth/SignUpForm';
+import AddVenueForm from './Browser/forms/AddVenueForm';
 
 import './NavBar.css'
 
+const AddEventButton = () => {
+  return (
+    <ModalWrapper
+      header='Create an Event'
+      form={<CreateEventForm/>}
+      >
+      <div className='dropdown-button'>Create Event</div>
+    </ModalWrapper>
+  )
+}
+
+const AddVenueButton = () => {
+  return (
+    <ModalWrapper
+    form={<AddVenueForm/>}
+    header='Add a venue'
+    >
+    <div className='dropdown-button'>Add Venue</div>
+  </ModalWrapper>
+  )
+};
 
 const CreateMenu = () => {
   return (
     <div className='create-dropdown'>
-      <ModalWrapper
-        header='Create an Event'
-        form={<CreateEventForm/>}
-        >
-        <div className='dropdown-button'>Create Event</div>
-      </ModalWrapper>
+      <AddEventButton/>
+      <AddVenueButton/>
     </div>
   )
 }
-
 
 const LoginButton = (props) => {
   return (
@@ -44,7 +61,6 @@ const SignupButton = (props) => {
   return (
     <ModalWrapper
     form={<SignUpForm/>}
-    closePrev={props.setShowModal}
     header='Sign Up'
     >
     <div className='dropdown-button'>
@@ -53,8 +69,6 @@ const SignupButton = (props) => {
   </ModalWrapper>
   )
 };
-
-
 
 
 const NavBar = () => {
