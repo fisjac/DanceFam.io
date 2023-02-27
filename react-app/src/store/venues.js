@@ -46,7 +46,6 @@ const initialState = null;
 export default function venuesReducer(state=initialState, action) {
   switch (action.type) {
     case LOAD_VENUES:
-      console.log(action.payload)
       return action.payload.reduce((obj, venue)=>{
         obj[venue.id]= venue
         return obj

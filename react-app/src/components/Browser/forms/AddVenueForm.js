@@ -38,7 +38,6 @@ export default function CreateEventForm({setShowModal}) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(venue)
     const response = await dispatch(
       venueActions.createVenue(venue));
     if (response.ok) {
