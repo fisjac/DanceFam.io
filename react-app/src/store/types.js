@@ -16,15 +16,21 @@ export const toggleType = (typeName) => {
 };
 
 export const getTypes = () => async dispatch => {
-  const res = await fetch('/api/types');
+  let typeToggles;
+  const types = JSON.parse(localStorage.getItem('types'))
+  if (types) {
+    typeToggles = types
+  } else {
+    const res = await fetch('/api/types');
     if (res.ok) {
       const data = await res.json();
-      const typeToggles = Object.values(data).reduce((accum,obj)=> {
+      typeToggles = Object.values(data).reduce((accum,obj)=> {
         accum[obj.name] = true;
         return accum
       },{})
-      dispatch(loadTypes(typeToggles))
     };
+  };
+  dispatch(loadTypes(typeToggles))
 };
 
 const initialState = null
