@@ -1,21 +1,20 @@
-import React, { useState, useRef, useContext, useEffect } from 'react'
+import React, { useRef } from 'react'
 import {Marker, InfoWindow} from '@react-google-maps/api';
 
 
 export default function VenueMarker({venue}) {
   const anchorRef = useRef(null);
   const currentMarker = anchorRef?.current;
+  {console.log(anchorRef)}
 
   return (
     <>
       <Marker
-        key={venue.name}
         position={{'lat': venue.lat, 'lng': venue.lng}}
         ref={anchorRef}
         />
         <InfoWindow
-          anchor={currentMarker.marker}
-          options={{'disableAutoPan': true}}
+          anchor={currentMarker?.marker}
 
           >
             <div className='infowindow-container'>

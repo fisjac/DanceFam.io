@@ -40,7 +40,9 @@ export default function Browser() {
             <div className='eventscroll-title'>Upcoming Events</div>
             <div className='center-split'>
               {events && <EventScroll events={filteredEvents}/>}
-              <EventsMap events={filteredEvents}/>
+              <div className='map-section'>
+                <EventsMap events={filteredEvents}/>
+              </div>
             </div>
             <Route path='/app/privacy'>
               <PrivacyPolicy/>

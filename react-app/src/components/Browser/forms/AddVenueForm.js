@@ -2,32 +2,16 @@ import React, {useState, useEffect, useRef} from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 
 import * as eventActions from '../../../store/events';
-import * as dateFuncs from '../../utils/DateFuncs';
 import * as autocompleteFuncs from '../../utils/autocomplete';
 import SingleVenueMap from './SingleVenueMap';
+import { GoogleMapsProvider } from '../../../context/Maps/MapsLoader';
 
 export default function CreateEventForm({setShowModal}) {
   const dispatch = useDispatch();
 
   const [errors, setErrors] = useState([]);
   const [name, setName] = useState('');
-  const [address, setAddress] = useState('');
-  const [city, setCity] = useState('');
-  const [state, setState] = useState('');
-  const [country, setCountry] = useState('');
-  const [lat, setLat] = useState('');
-  const [lng, setLng] = useState('');
-  const [url, setUrl] = useState('');
-  const venue = {
-    name,
-    address,
-    city,
-    state,
-    country,
-    lat,
-    lng,
-    url,
-  };
+  const [venue, setVenue] = useState(null);
 
 
   const inputRef = useRef(null);
@@ -38,16 +22,19 @@ export default function CreateEventForm({setShowModal}) {
       const data = await autoCompleteRef.current.getPlace();
       const {name, url, location, components} = autocompleteFuncs.parsePlaceData(data)
 
-      components.street_number ?
-        setAddress(components.street_number + ' ' + components.route) :
-        setAddress(components.route)
-      setCity(components.locality)
-      setState(components.administrative_area_level_1)
-      setCountry(components.country)
-      setLat(location.lat)
-      setLng(location.lng)
       setName(name)
-      setUrl(url)
+      setVenue({
+        name,
+        url,
+        address:  components.street_number ?
+          components.street_number + ' ' + components.route :
+          components.route,
+        city: components.locality,
+        state: components.administrative_area_level_1,
+        country: components.country,
+        lat: location.lat,
+        lng: location.lng,
+      })
     })
   }, [])
 
@@ -82,11 +69,13 @@ export default function CreateEventForm({setShowModal}) {
             required
           />
         </div>
-        <SingleVenueMap venues={[venue]}/>
+        <div className='inline-map'>
+          <SingleVenueMap venue={venue}/>
+        </div>
         <button
           type='submit'
-          // className='disabled'
-          // disabled={true}
+          className='disabled'
+          disabled={!venue?true:false}
           >Confirm</button>
       </form>
   )
