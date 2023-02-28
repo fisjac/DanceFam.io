@@ -1,12 +1,12 @@
 import React, {useContext, memo} from 'react'
 
 import VenuesMap from './VenuesMap'
-import { GoogleMapsContext } from './MapsLoader'
+import { GoogleMapsApiContext, GoogleMapsMapProvider } from './MapsLoader'
 
 
-function MapGenerator(filter=true) {
+function MapGenerator({filter}) {
 
-  const {isLoaded} = useContext(GoogleMapsContext)
+  const {isLoaded} = useContext(GoogleMapsApiContext)
     return (
       isLoaded && <VenuesMap zoom={10} filter={filter}/>
     )

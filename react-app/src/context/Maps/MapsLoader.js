@@ -19,7 +19,9 @@ function getLocation (setter) {
   }
 };
 
-export const GoogleMapsContext = createContext();
+// Context for loaded state of Google Maps API (happens once)
+export const GoogleMapsApiContext = createContext();
+
 
 export default function LoadMaps({children}) {
   const key = useSelector(state=>state.keys.places);
@@ -35,17 +37,15 @@ export default function LoadMaps({children}) {
     return null;
   }
   return (
-    <GoogleMapsProvider apiKey={key}>
+    <GoogleMapsApiProvider apiKey={key}>
       {children}
-    </GoogleMapsProvider>
+    </GoogleMapsApiProvider>
   );
 };
 
 
 const libraries = ['places']
-export function GoogleMapsProvider ({children, apiKey}) {
-  const [mapIsLoaded, setMapIsLoaded] = useState(false);
-  const [map, setMap] = useState(null);
+export function GoogleMapsApiProvider ({children, apiKey}) {
   const [location, setLocation] = useState('');
 
   useEffect(()=>{
@@ -61,8 +61,22 @@ export function GoogleMapsProvider ({children, apiKey}) {
   if (!isLoaded) return <div>Loading...</div>
 
   return (
-    <GoogleMapsContext.Provider value={{isLoaded, location, mapIsLoaded, setMapIsLoaded, map, setMap}}>
+    <GoogleMapsApiContext.Provider value={{isLoaded, location}}>
       {children}
-    </GoogleMapsContext.Provider>
+    </GoogleMapsApiContext.Provider>
   );
+};
+
+// Context for passing map objects (is set on creation of the individual map)
+export const GoogleMapsMapContext = createContext();
+
+export function GoogleMapsMapProvider ({children}) {
+  const [mapIsLoaded, setMapIsLoaded] = useState(false);
+  const [map, setMap] = useState(null);
+
+  return (
+    <GoogleMapsMapContext.Provider value={{mapIsLoaded, setMapIsLoaded, map,setMap}}>
+      {children}
+    </GoogleMapsMapContext.Provider>
+  )
 };

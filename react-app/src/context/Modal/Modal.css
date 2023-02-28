@@ -68,6 +68,7 @@
 }
 
 #modal-content {
+  display: flex;
   overflow-y: scroll;
   -ms-overflow-style: none;
   scrollbar-width: none;
@@ -219,4 +220,8 @@ button:hover {
 
 .checked:hover {
   background-color: var(--theme-light);
+}
+
+.modal-map-split {
+  display: flex;
 }

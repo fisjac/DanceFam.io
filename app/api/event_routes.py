@@ -92,7 +92,6 @@ def edit_event(id):
                 image_url = form.data['image_url']
             else: image_url = None
             if form.data['external_url']:
-                print('-------------',form.data['external_url'])
                 external_url = form.data['external_url']
             else: external_url = None
             event.name = form.data['name']

@@ -3,7 +3,7 @@ import {GoogleMap} from '@react-google-maps/api';
 
 import { boundsContext } from './Bounds';
 import VenueMarker from './VenueMarker';
-import { GoogleMapsContext } from './MapsLoader';
+import { GoogleMapsApiContext, GoogleMapsMapContext } from './MapsLoader';
 import { useSelector } from 'react-redux';
 
 import { filterByStyles, filterByTypes } from '../../components/utils/Filters';
@@ -13,7 +13,8 @@ const VenuesMap = ({zoom, filter}) => {
   const styles = useSelector(state=>state.styles);
   const types = useSelector(state=>state.types);
 
-  const {location, setMapIsLoaded, map, setMap} = useContext(GoogleMapsContext);
+  const {location} = useContext(GoogleMapsApiContext);
+  const {setMapIsLoaded, map, setMap} = useContext(GoogleMapsMapContext)
 
   const {setBounds} = useContext(boundsContext);
   const [filteredVenues, setFilteredVenues] = useState(null);

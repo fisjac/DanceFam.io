@@ -1,12 +1,12 @@
 import React, { useRef, useContext } from 'react'
 import {Marker, InfoWindow} from '@react-google-maps/api';
 
-import { GoogleMapsContext } from './MapsLoader';
+import { GoogleMapsMapContext } from './MapsLoader';
 import { SelectorsContext } from './Selector';
 
 export default function VenueMarker({venue}) {
   const anchorRef = useRef(null);
-  const {map} = useContext(GoogleMapsContext);
+  const {map} = useContext(GoogleMapsMapContext);
   const {hoveredId, setHoveredId, selectedId, setSelectedId} = useContext(SelectorsContext);
 
   const currentMarker = anchorRef?.current;
@@ -23,7 +23,6 @@ export default function VenueMarker({venue}) {
       <Marker
         key={venue.id}
         position={{'lat': venue.lat, 'lng': venue.lng}}
-        // animation={window.google.maps.Animation.DROP}
         ref={anchorRef}
         onClick={()=>{
           map.panTo({'lat': venue.lat, 'lng':venue.lng});

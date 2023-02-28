@@ -6,13 +6,13 @@ import ModalWrapper from '../../../context/Modal/Modal'
 import EditEventForm from '../forms/EditEventForm';
 import { getUtcTime } from '../../utils/DateFuncs';
 
-import { GoogleMapsContext } from '../../../context/Maps/MapsLoader';
+import { GoogleMapsMapContext } from '../../../context/Maps/MapsLoader';
 import defaultImage from '../../../static/dancing_couple1.svg'
 import { SelectorsContext } from '../../../context/Maps/Selector';
 
 
 export default function EventLine({event}) {
-  const { map } = useContext(GoogleMapsContext);
+  const { map } = useContext(GoogleMapsMapContext);
   const venues = useSelector(state=>state.venues);
   const { setHoveredId, setSelectedId} = useContext(SelectorsContext);
   const dispatch = useDispatch();

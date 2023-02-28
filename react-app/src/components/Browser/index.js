@@ -13,7 +13,8 @@ export default function Browser() {
       <div className='main-page'>
         <LeftBar/>
         <div className='center-container'>
-          <MapBrowser/>
+        <div className='eventscroll-title'>Upcoming Events</div>
+          <MapBrowser browserType={'events'}/>
         </div>
         <RightBar/>
       </div>

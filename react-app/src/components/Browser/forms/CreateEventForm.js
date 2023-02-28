@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import * as eventActions from '../../../store/events';
 import * as dateFuncs from '../../utils/DateFuncs';
-import * as autocompleteFuncs from '../../utils/autocomplete';
+import  ModalMapBrowser from './ModalMapBrowser';
 
 export default function CreateEventForm({setShowModal}) {
   const dispatch = useDispatch();
@@ -54,7 +54,8 @@ export default function CreateEventForm({setShowModal}) {
   };
 
   return (
-      <form method='POST' onSubmit={handleSubmit}>
+    <>
+      {/* <form method='POST' onSubmit={handleSubmit}>
         <div className='errors'>
           {errors.map((error, idx) => (
             <div className='error' key={idx}>{error}</div>
@@ -162,6 +163,8 @@ export default function CreateEventForm({setShowModal}) {
           // className='disabled'
           // disabled={true}
           >Confirm</button>
-      </form>
+      </form> */}
+      <ModalMapBrowser browserType='venues' filter={false}/>
+    </>
   )
 }

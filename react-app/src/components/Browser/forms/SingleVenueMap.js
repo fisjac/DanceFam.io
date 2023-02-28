@@ -1,9 +1,9 @@
 import React, { useContext } from "react"
 import { GoogleMap, Marker } from "@react-google-maps/api"
-import { GoogleMapsContext } from "../../../context/Maps/MapsLoader"
+import { GoogleMapsApiContext } from "../../../context/Maps/MapsLoader"
 
 function SingleVenueMap({venue}) {
-  const {isLoaded, location} = useContext(GoogleMapsContext)
+  const {isLoaded, location} = useContext(GoogleMapsApiContext)
   let center = location
   if (venue) {
   center = {"lat": venue.lat, "lng": venue.lng}

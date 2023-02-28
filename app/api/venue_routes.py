@@ -42,8 +42,7 @@ def create_venue():
       url = form.data['url']
     else: url = None
 
-    existing_venue = Venue.query.filter_by(name=form.data['name'], address=form.data['address'])
-    print(existing_venue)
+    existing_venue = Venue.query.filter_by(name=form.data['name'], address=form.data['address']).first()
     if existing_venue:
       return {'errors':
         ["Venue already exists"],
