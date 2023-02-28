@@ -11,7 +11,6 @@ import Browser from './components/Browser';
 import Footer from './components/Footer';
 import {getKey} from './store/keys'
 import { getStyles } from './store/styles';
-import BoundsProvider from './context/Maps/Bounds';
 import { getEvents } from './store/events';
 import { getTypes } from './store/types';
 import PrivacyPolicy from './components/PrivacyPolicy';
@@ -46,12 +45,14 @@ function App() {
         <Route path='/app'>
           <LoadMaps>
             <NavBar/>
-            <BoundsProvider>
-              <Browser/>
-            </BoundsProvider>
+            <Browser/>
           </LoadMaps>
           <Footer/>
+          <Route path='/app/privacy'>
+            <PrivacyPolicy/>
+          </Route>
         </Route>
+
       </Switch>
     </BrowserRouter>
 

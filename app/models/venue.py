@@ -18,6 +18,7 @@ class Venue(db.Model):
   def to_dict(self):
     return {
       "id": self.id,
+      "name": self.name,
       "city": self.city,
       "state": self.state,
       "address": self.address,
@@ -26,5 +27,6 @@ class Venue(db.Model):
       "lng": self.lng,
       "url": self.url,
       "styles": list({style.name for style in [event.styles for event in self.events]}),
-      "types": list({event.type.name for event in self.events })
+      "types": list({event.type.name for event in self.events }),
+      "events": [event.id for event in self.events]
     }

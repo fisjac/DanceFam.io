@@ -5,13 +5,14 @@ import { useHistory } from 'react-router-dom';
 import logo from '../../../static/DanceFamBrushNoText.svg';
 import title from '../../../static/DanceFamTitle.svg';
 
-import defaultImage from '../../../static/dancing_couple1.svg'
 import { toggleStyle } from '../../../store/styles';
 import { toggleType } from '../../../store/types';
 
-export default function LeftBar({types, styles}) {
+export default function LeftBar() {
   const history = useHistory();
   const dispatch = useDispatch();
+  const types = useSelector(state=>state.types);
+  const styles = useSelector(state=>state.styles);
 
   useEffect(()=> {
     localStorage.setItem('types',JSON.stringify(types))

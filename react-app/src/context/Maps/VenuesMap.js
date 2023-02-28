@@ -2,28 +2,33 @@ import React, {useState, useEffect, useContext, useMemo} from 'react';
 import {GoogleMap} from '@react-google-maps/api';
 
 import { boundsContext } from './Bounds';
-import EventMarker from './EventMarker';
+import VenueMarker from './VenueMarker';
 import { GoogleMapsContext } from './MapsLoader';
 import { useSelector } from 'react-redux';
 
-import { filterEventsByStyles, filterEventsByTypes } from '../../components/utils/EventsFilter';
+import { filterByStyles, filterByTypes } from '../../components/utils/Filters';
 
-const Map = ({zoom, venues}) => {
-  const events = useSelector(state=>state.events);
+const VenuesMap = ({zoom, filter}) => {
+  const venues = useSelector(state=>state.venues);
   const styles = useSelector(state=>state.styles);
   const types = useSelector(state=>state.types);
+
   const {location, setMapIsLoaded, map, setMap} = useContext(GoogleMapsContext);
 
   const {setBounds} = useContext(boundsContext);
-  const [filteredEvents, setFilteredEvents] = useState(null);
+  const [filteredVenues, setFilteredVenues] = useState(null);
 
   useMemo(()=>{
-      let filteredEventsTemp = filterEventsByTypes(events, types);
-      filteredEventsTemp = filterEventsByStyles(filteredEventsTemp, styles);
-      setFilteredEvents(filteredEventsTemp);
-    }, [ styles, types, events])
+    if (filter === true) {
+      let filteredVenuesTemp = filterByTypes(venues, types);
+      filteredVenuesTemp = filterByStyles(filteredVenuesTemp, styles);
+      setFilteredVenues(filteredVenuesTemp);
+    } else {
+      setFilteredVenues(venues)
+    }
+    }, [ styles, types, venues, filter ])
 
-  return (
+    return (
       <GoogleMap
         mapContainerClassName='map'
         center={location}
@@ -39,11 +44,11 @@ const Map = ({zoom, venues}) => {
           disableDefaultUI: true
         }}
         >
-        {filteredEvents && Object.values(filteredEvents).map((event)=> {
-          return <EventMarker event={event}/>
+        {filteredVenues && Object.values(filteredVenues).map((venue)=> {
+          return <VenueMarker venue={venue}/>
         })}
       </GoogleMap>
   )
 };
 
-export default React.memo(Map)
+export default React.memo(VenuesMap)

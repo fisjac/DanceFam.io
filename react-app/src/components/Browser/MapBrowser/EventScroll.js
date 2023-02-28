@@ -1,5 +1,5 @@
 import React from 'react'
-import { groupEventsByDate, sortDates } from '../utils/DateFuncs';
+import { groupEventsByDate, sortDates } from '../../utils/DateFuncs';
 
 
 import EventLine from './EventLine'

@@ -1,19 +1,20 @@
 import React, { useContext } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
-import * as eventActions from '../../store/events';
-import ModalWrapper from '../../context/Modal/Modal'
-import EditEventForm from './forms/EditEventForm';
-import { getUtcTime } from '../utils/DateFuncs';
+import * as eventActions from '../../../store/events';
+import ModalWrapper from '../../../context/Modal/Modal'
+import EditEventForm from '../forms/EditEventForm';
+import { getUtcTime } from '../../utils/DateFuncs';
 
-import { GoogleMapsContext } from '../../context/Maps/MapsLoader';
-import defaultImage from '../../static/dancing_couple1.svg'
-import { eventSelectorsContext } from '../../context/Maps/EventSelector';
+import { GoogleMapsContext } from '../../../context/Maps/MapsLoader';
+import defaultImage from '../../../static/dancing_couple1.svg'
+import { SelectorsContext } from '../../../context/Maps/Selector';
 
 
 export default function EventLine({event}) {
-  const { map } = useContext(GoogleMapsContext)
-  const {hoveredEvent, setHoveredEvent, selectedEvent, setSelectedEvent} = useContext(eventSelectorsContext);
+  const { map } = useContext(GoogleMapsContext);
+  const venues = useSelector(state=>state.venues);
+  const { setHoveredId, setSelectedId} = useContext(SelectorsContext);
   const dispatch = useDispatch();
   const start = new Date(event.start);
   const user = useSelector(state=>state.session.user);
@@ -24,11 +25,11 @@ export default function EventLine({event}) {
         className='eventline-container'
         onClick={(e)=>{
             e.preventDefault()
-            setSelectedEvent(event);
-            map.panTo({lat: event.lat, lng: event.lng});
+            setSelectedId(event.venueId);
+            map.panTo({lat: venues[event.venueId].lat, lng: venues[event.venueId].lng});
         }}
-        onMouseEnter={()=>setHoveredEvent(event)}
-        onMouseLeave={()=> setHoveredEvent(null)}
+        onMouseEnter={()=>setHoveredId(event.venueId)}
+        onMouseLeave={()=> setHoveredId(null)}
         >
         <div className='eventline-body'>
           <img
