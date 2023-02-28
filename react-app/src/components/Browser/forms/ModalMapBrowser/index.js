@@ -6,7 +6,6 @@ import Scroll from './Scroll'
 import MapGenerator from '../../../../context/Maps/MapGenerator'
 import BoundsProvider, { boundsContext } from '../../../../context/Maps/Bounds';
 import { GoogleMapsMapContext, GoogleMapsMapProvider } from '../../../../context/Maps/MapsLoader';
-import SelectionProvider from '../../../../context/Maps/Selector';
 import { filterVenuesByBounds } from '../../../utils/Filters';
 
 import './ModalMapBrowser.css'
@@ -33,16 +32,14 @@ export function MapBrowser() {
     if (mapIsLoaded) {
         setFilteredVenues(filterVenuesByBounds(venues,bounds));
         };
-  }, [bounds])
+  }, [bounds,venues])
 
   return (
-      <SelectionProvider>
         <div className='modal-center-split'>
           { venues && <Scroll data={filteredVenues}/>}
           <div className='modal-map-section'>
             <MapGenerator filter={false}/>
           </div>
         </div>
-      </SelectionProvider>
   )
 }

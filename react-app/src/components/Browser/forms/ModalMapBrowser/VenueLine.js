@@ -1,5 +1,4 @@
 import React, { useContext } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
 
 import { GoogleMapsMapContext } from '../../../../context/Maps/MapsLoader';
 import { SelectorsContext } from '../../../../context/Maps/Selector';

@@ -27,7 +27,7 @@
 #modal-container {
   position: absolute;
   z-index: 1000;
-  padding: 29px 37px;
+  padding: 37px 37px;
   display: flex;
   flex-flow:column;
   max-width: 600px;
@@ -68,7 +68,6 @@
 }
 
 #modal-content {
-  display: flex;
   overflow-y: scroll;
   -ms-overflow-style: none;
   scrollbar-width: none;

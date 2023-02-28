@@ -12,6 +12,7 @@ import SignUpForm from './auth/SignUpForm';
 import AddVenueForm from './Browser/forms/AddVenueForm';
 
 import './NavBar.css'
+import SelectionProvider from '../context/Maps/Selector';
 
 const AddEventButton = () => {
   return (
