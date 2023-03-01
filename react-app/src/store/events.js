@@ -32,6 +32,7 @@ export function editEvent (payload) {
 };
 
 export function removeEvent (payload) {
+  console.log('removing event')
   return {
     type: DELETE,
     payload
@@ -66,13 +67,16 @@ export const createEvent = (event) => async dispatch => {
   });
   if (response.ok) {
     const event = await response.json();
-    batch(async ()=> {
-      await dispatch(loadEvent(event))
-      await dispatch(sessionActions.addEvent(event.id))
-      await dispatch(venueActions.getVenues())
-    })
-
-  }
+    const venueResponse = await fetch('/api/venues');
+    if (venueResponse.ok) {
+      const newVenues = await venueResponse.json()
+      batch(()=> {
+        dispatch(loadEvent(event))
+        dispatch(sessionActions.addEvent(event.id))
+        dispatch(venueActions.loadVenues(newVenues))
+      })
+    } else return venueResponse;
+  };
   return response;
 }
 
@@ -84,25 +88,31 @@ export const updateEvent = (event) => async dispatch => {
   });
   if (response.ok) {
     const event = await response.json();
-    await dispatch(sessionActions.authenticate())
-    batch(async () =>{
-      await dispatch(editEvent(event));
-      await dispatch(venueActions.getVenues())
-    });
+    const venueResponse = await fetch('/api/venues');
+    if (venueResponse.ok) {
+      const newVenues = await venueResponse.json();
+      batch(() =>{
+        dispatch(editEvent(event));
+        dispatch(venueActions.loadVenues(newVenues))
+      });
+    } else return venueResponse;
   };
   return response;
 };
 
 export const deleteEvent = (eventId) => async dispatch => {
-  const response = await fetch (`/api/events/${eventId}`,{
+  const response = await fetch(`/api/events/${eventId}`,{
     method: 'DELETE'
   });
   if (response.ok) {
-    await dispatch(sessionActions.authenticate())
-    batch(async()=>{
-      await dispatch(removeEvent(eventId))
-      await dispatch(venueActions.getVenues())
-    });
+    const venueResponse = await fetch('/api/venues');
+    if (venueResponse.ok) {
+      const newVenues = await venueResponse.json();
+      batch(() => {
+        dispatch(removeEvent(eventId))
+        dispatch(venueActions.loadVenues(newVenues))
+      });
+    } else return venueResponse;
   };
   return response;
 };

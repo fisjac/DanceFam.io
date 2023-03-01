@@ -24,7 +24,6 @@ export function MapBrowser({browserType, filter}) {
   const venues = useSelector(state=>state.venues);
   const types = useSelector(state=>state.types);
   const styles = useSelector(state=>state.styles);
-
   const {bounds} = useContext(boundsContext);
   const {mapIsLoaded} = useContext(GoogleMapsMapContext);
 

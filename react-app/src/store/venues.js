@@ -1,9 +1,10 @@
-import { bindActionCreators } from "redux";
+
 
 const LOAD_VENUES = 'venues/LOAD_ALL';
 const ADD_VENUE = 'venues/ADD_VENUE';
 
 export function loadVenues (payload) {
+  console.log('loading venues')
   return {
     type: LOAD_VENUES,
     payload

@@ -1,7 +1,6 @@
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import session from './session'
-// import communities from './communities'
 import events from './events'
 import keys from './keys'
 import styles from './styles'
