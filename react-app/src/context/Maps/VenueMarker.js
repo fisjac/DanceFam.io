@@ -41,7 +41,7 @@ export default function VenueMarker({venue}) {
         <InfoWindow
           onClick={(e)=>{e.stopPropagation()}}
           onCloseClick={()=>setSelectedId(null)}
-          anchor={currentMarker.marker}
+          anchor={currentMarker?.marker}
           options={{'disableAutoPan': true}}
 
           >
