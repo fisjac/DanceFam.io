@@ -6,7 +6,7 @@ import VenueMarker from './VenueMarker';
 import { GoogleMapsApiContext, GoogleMapsMapContext } from './MapsLoader';
 import { useSelector } from 'react-redux';
 
-import { filterByStyles, filterByTypes } from '../../components/utils/Filters';
+import { filterByStyles, filterByTypes, filterVenuesByBounds } from '../../components/utils/Filters';
 
 const VenuesMap = ({zoom, filter}) => {
   const venues = useSelector(state=>state.venues);
@@ -16,18 +16,19 @@ const VenuesMap = ({zoom, filter}) => {
   const {location} = useContext(GoogleMapsApiContext);
   const {setMapIsLoaded, map, setMap} = useContext(GoogleMapsMapContext)
 
-  const {setBounds} = useContext(boundsContext);
+  const {bounds, setBounds} = useContext(boundsContext);
   const [filteredVenues, setFilteredVenues] = useState(null);
 
   useMemo(()=>{
     if (filter === true) {
-      let filteredVenuesTemp = filterByTypes(venues, types);
+      let filteredVenuesTemp = filterVenuesByBounds(venues, bounds)
+      filteredVenuesTemp = filterByTypes(filteredVenuesTemp, types);
       filteredVenuesTemp = filterByStyles(filteredVenuesTemp, styles);
       setFilteredVenues(filteredVenuesTemp);
     } else {
       setFilteredVenues(venues)
     }
-    }, [ styles, types, venues, filter ])
+    }, [ bounds, styles, types, venues, filter ])
 
     return (
       <GoogleMap

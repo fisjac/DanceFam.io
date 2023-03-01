@@ -58,7 +58,7 @@ export const getEvent = (eventId) => async dispatch => {
   return response;
 };
 
-export const createEvent = ({event}) => async dispatch => {
+export const createEvent = (event) => async dispatch => {
   const response = await fetch(`/api/events`, {
     method: 'POST',
     headers: {'Content-Type': 'application/json'},

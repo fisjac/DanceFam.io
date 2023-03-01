@@ -7,42 +7,42 @@ import SelectionProvider, { SelectorsContext } from '../../../context/Maps/Selec
 
 import  ModalMapBrowser from './ModalMapBrowser';
 
-
 export default function SelectionLinkedForm({setShowModal}) {
   return (
     <SelectionProvider persistSelections={true}>
       <CreateEventForm setShowModal={setShowModal}/>
     </SelectionProvider>
   )
-}
+};
 
 export function CreateEventForm({setShowModal}) {
   const dispatch = useDispatch();
-  const { selectedId} = useContext(SelectorsContext);
+
 
   const styleCategories = useSelector(state=>state.styles);
   const types = useSelector(state=>state.types);
-
   const typesList = Object.keys(types);
 
-  const [page, setPage] = useState(0);
   const [errors, setErrors] = useState([]);
-
+  const [page, setPage] = useState(0);
 
   const [name, setName] = useState('');
   const [startDate, setStartDate] = useState('');
   const [startTime, setStartTime] = useState('');
   const [endDate, setEndDate] = useState('');
   const [endTime, setEndTime] = useState('');
+  const [externalUrl, setExternalUrl] = useState('');
+  const [imageUrl, setImageUrl] = useState('');
   const [type, setType] = useState('');
+  const { selectedId} = useContext(SelectorsContext);
+
   const [styles, setStyles] = useState(
     Object.keys(styleCategories).reduce((accum, key)=> {
       accum[key] = false;
       return accum;
     },{})
   );
-  const [externalUrl, setExternalUrl] = useState('');
-  const [imageUrl, setImageUrl] = useState('');
+
 
 
   const handleSubmit = async (e) => {
@@ -51,7 +51,6 @@ export function CreateEventForm({setShowModal}) {
     const end = new Date(endDate + 'T' + endTime + ':00.000Z');
     const response = await dispatch(
       eventActions.createEvent({
-        event: {
           name,
           start: dateFuncs.dateToBackendFormat(start),
           end: dateFuncs.dateToBackendFormat(end),
@@ -60,7 +59,6 @@ export function CreateEventForm({setShowModal}) {
           styles,
           type,
           venue_id: selectedId
-        }
         }));
     if (response.ok) {
       setShowModal(false);
@@ -71,10 +69,9 @@ export function CreateEventForm({setShowModal}) {
     };
   };
 
-  switch (page) {
-    case 0:
-      return (
-        <>
+  return (
+    <>
+      <div style={{'display': `${page === 0? '':'none'}`}}>
         <ModalMapBrowser
           browserType='venues'
           filter={false}
@@ -91,13 +88,11 @@ export function CreateEventForm({setShowModal}) {
           >
             Next
         </div>
-        </>
-      )
+      </div>
 
-    case 1:
-      return (
-        <>
+          {/* ------ Second Page ------ */}
 
+      <div style={{'display': `${page === 1? '':'none'}`}}>
         <form method='POST' onSubmit={handleSubmit}>
           <div className='errors'>
             {errors.map((error, idx) => (
@@ -125,11 +120,11 @@ export function CreateEventForm({setShowModal}) {
             {Object.keys(styles).map((style)=>(
               <div className='checkbox-line'>
                 <div
-                 className={`checkbox-input ${styles[style]?'checked': 'unchecked'}`}
-                 onClick={()=>{
+                className={`checkbox-input ${styles[style]?'checked': 'unchecked'}`}
+                onClick={()=>{
                   setStyles({...styles, [style]: !styles[style]})
-                 }}
-                 >
+                }}
+                >
                   {<i className="fa-solid fa-check"></i>}
                 </div>
                 <div className='checkbox-label'>{style}</div>
@@ -215,7 +210,7 @@ export function CreateEventForm({setShowModal}) {
           >
             Previous
         </div>
-        </>
-      )
-  }
+      </div>
+    </>
+  )
 };

@@ -112,6 +112,8 @@ def edit_event(id):
                 style_instance = Style.query.filter(Style.name == style)[0]
                 event.styles.append(style_instance)
 
+            event.venue = Venue.query.get(form.data['venue_id'])
+
             db.session.commit()
             return event.to_dict()
         return {'errors': validation_errors_to_error_messages(form.errors)}, 401

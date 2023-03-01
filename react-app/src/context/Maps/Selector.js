@@ -2,9 +2,9 @@ import { createContext, useState } from "react";
 
 export const SelectorsContext = createContext();
 
-export default function SelectionProvider ({children, persistSelections=false}) {
+export default function SelectionProvider ({children, persistSelections=false, initialValue=null}) {
   const [hoveredId, setHoveredId] = useState(null);
-  const [selectedId, setSelectedId] = useState(null);
+  const [selectedId, setSelectedId] = useState(initialValue);
 
 
   return (
