@@ -9,8 +9,9 @@ import  ModalMapBrowser from './ModalMapBrowser';
 
 
 export default function SelectionLinkedForm({setShowModal}) {
+  console.log('rerendering')
   return (
-    <SelectionProvider>
+    <SelectionProvider persistSelections={true}>
       <CreateEventForm setShowModal={setShowModal}/>
     </SelectionProvider>
   )
@@ -22,10 +23,10 @@ export function CreateEventForm({setShowModal}) {
 
   const styleCategories = useSelector(state=>state.styles);
   const types = useSelector(state=>state.types);
+
   const typesList = Object.keys(types);
 
   const [page, setPage] = useState(0);
-
   const [errors, setErrors] = useState([]);
 
 
@@ -49,7 +50,6 @@ export function CreateEventForm({setShowModal}) {
     e.preventDefault();
     const start = new Date(startDate + 'T' + startTime + ':00.000Z');
     const end = new Date(endDate + 'T' + endTime + ':00.000Z');
-    console.log(selectedId);
     const response = await dispatch(
       eventActions.createEvent({
         event: {
@@ -76,7 +76,10 @@ export function CreateEventForm({setShowModal}) {
     case 0:
       return (
         <>
-        <ModalMapBrowser browserType='venues' filter={false}/>
+        <ModalMapBrowser
+          browserType='venues'
+          filter={false}
+          />
         <div
           className={`page-button ${selectedId?'':'disabled'}`}
           onClick={()=>{

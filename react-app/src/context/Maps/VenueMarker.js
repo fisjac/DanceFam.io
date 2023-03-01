@@ -7,7 +7,7 @@ import { SelectorsContext } from './Selector';
 export default function VenueMarker({venue}) {
   const anchorRef = useRef(null);
   const {map} = useContext(GoogleMapsMapContext);
-  const {hoveredId, setHoveredId, selectedId, setSelectedId} = useContext(SelectorsContext);
+  const {hoveredId, setHoveredId, selectedId, setSelectedId, persistSelections} = useContext(SelectorsContext);
 
   const currentMarker = anchorRef?.current;
 
@@ -31,7 +31,7 @@ export default function VenueMarker({venue}) {
         onMouseOver={(e)=>setHoveredId(venue.id)}
         onMouseOut={(e)=>setHoveredId(null)}
         onUnmount={()=>{
-          if (highlightedId === venue.id) {
+          if (highlightedId === venue.id && !persistSelections) {
             setSelectedId(null);
             setHoveredId(null);
           };

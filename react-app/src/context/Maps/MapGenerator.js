@@ -1,7 +1,7 @@
 import React, {useContext, memo} from 'react'
 
 import VenuesMap from './VenuesMap'
-import { GoogleMapsApiContext, GoogleMapsMapProvider } from './MapsLoader'
+import { GoogleMapsApiContext } from './MapsLoader'
 
 
 function MapGenerator({filter}) {
