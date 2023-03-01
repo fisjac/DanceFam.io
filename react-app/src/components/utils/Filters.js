@@ -1,7 +1,7 @@
 export const filterVenuesByBounds = (venues, bounds) => {
   if (!Object.values(venues).length) return {}
   if (!bounds) {
-    return null
+    return {}
   } else {
 
     const filteredVenues = {}

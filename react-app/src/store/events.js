@@ -84,8 +84,8 @@ export const updateEvent = (event) => async dispatch => {
   });
   if (response.ok) {
     const event = await response.json();
+    await dispatch(sessionActions.authenticate())
     batch(async () =>{
-      await dispatch(sessionActions.authenticate())
       await dispatch(editEvent(event));
       await dispatch(venueActions.getVenues())
     });
