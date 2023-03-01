@@ -9,7 +9,6 @@ import  ModalMapBrowser from './ModalMapBrowser';
 
 
 export default function SelectionLinkedForm({setShowModal}) {
-  console.log('rerendering')
   return (
     <SelectionProvider persistSelections={true}>
       <CreateEventForm setShowModal={setShowModal}/>
