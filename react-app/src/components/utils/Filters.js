@@ -1,4 +1,5 @@
 export const filterVenuesByBounds = (venues, bounds) => {
+  if (!Object.values(venues).length) return {}
   if (!bounds) {
     return null
   } else {
@@ -21,6 +22,7 @@ export const filterVenuesByBounds = (venues, bounds) => {
 };
 
 export const filterByTypes = (data, types, dataType='venues') => {
+  if (!Object.values(data).length) return {}
   const activeTypes = new Set(Object.keys(types).filter(type=>types[type]));
   const filteredData = {};
 
@@ -41,6 +43,7 @@ export const filterByTypes = (data, types, dataType='venues') => {
 };
 
 export const filterByStyles = (data, styles) => {
+  if (!Object.values(data).length) return {}
   const activeStyles = new Set(Object.keys(styles).filter(style=>styles[style]));
   const filteredData = {};
 
@@ -58,10 +61,10 @@ export const filterByStyles = (data, styles) => {
 
 
 export const filterEventsByVenues = (events, venues) => {
+  if (!Object.values(events).length) return {}
   const filteredEvents = {};
   for (let venueId in venues) {
     for (let eventId of venues[venueId].events) {
-      console.log(eventId)
       if (!filteredEvents[eventId]) {
         filteredEvents[eventId] = events[eventId];
       };

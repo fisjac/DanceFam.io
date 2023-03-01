@@ -51,8 +51,7 @@ export function MapBrowser({browserType, filter}) {
         setFilteredVenues(venues)
       };
     };
-  }, [bounds, styles, types, events])
-  console.log(filteredEvents)
+  }, [bounds, styles, types, events, venues])
   return (
       <SelectionProvider>
         <div className='center-split'>

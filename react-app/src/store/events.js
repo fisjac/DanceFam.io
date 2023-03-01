@@ -1,5 +1,6 @@
 import { batch } from 'react-redux';
 import * as sessionActions from './session';
+import * as venueActions from './venues';
 
 const LOAD_EVENTS = 'events/LOAD_ALL';
 const LOAD_EVENT = 'events/LOAD_ONE';
@@ -65,8 +66,12 @@ export const createEvent = ({event}) => async dispatch => {
   });
   if (response.ok) {
     const event = await response.json();
-    await dispatch(loadEvent(event))
-    await dispatch(sessionActions.addEvent(event.id))
+    batch(async ()=> {
+      await dispatch(loadEvent(event))
+      await dispatch(sessionActions.addEvent(event.id))
+      await dispatch(venueActions.getVenues())
+    })
+
   }
   return response;
 }
@@ -79,8 +84,11 @@ export const updateEvent = (event) => async dispatch => {
   });
   if (response.ok) {
     const event = await response.json();
-    await dispatch(sessionActions.authenticate())
-    await dispatch(editEvent(event));
+    batch(async () =>{
+      await dispatch(sessionActions.authenticate())
+      await dispatch(editEvent(event));
+      await dispatch(venueActions.getVenues())
+    });
   };
   return response;
 };
@@ -93,6 +101,7 @@ export const deleteEvent = (eventId) => async dispatch => {
     await dispatch(sessionActions.authenticate())
     batch(async()=>{
       await dispatch(removeEvent(eventId))
+      await dispatch(venueActions.getVenues())
     });
   };
   return response;
