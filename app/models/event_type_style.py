@@ -69,7 +69,7 @@ class Event(db.Model):
       "name": self.name,
       "start": self.start,
       "end": self.end,
-      "styles": [style.to_dict() for style in self.styles],
+      "styles": [style.name for style in self.styles],
       "type": self.type.name,
       "organiserId": self.organiser_id,
       "externalUrl": self.external_url,

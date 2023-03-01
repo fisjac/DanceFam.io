@@ -33,16 +33,17 @@ export function MapBrowser({browserType, filter}) {
 
 
   useMemo(()=>{
+
     if (mapIsLoaded) {
       if (filter) {
         let filteredVenuesTemp = filterVenuesByBounds(venues,bounds);
-        filteredVenuesTemp = filterByTypes(filteredVenuesTemp, types);
         filteredVenuesTemp = filterByStyles(filteredVenuesTemp, styles);
+        filteredVenuesTemp = filterByTypes(filteredVenuesTemp, types);
         setFilteredVenues(filteredVenuesTemp);
-        if (browserType==='event') {
-          let filteredEventsTemp = filterEventsByVenues(events,venues);
-          filteredEventsTemp = filterByTypes(events,types);
-          filteredVenuesTemp = filterByStyles(events,styles);
+        if (browserType==='events') {
+          let filteredEventsTemp = filterEventsByVenues(events,filteredVenuesTemp);
+          filteredEventsTemp = filterByTypes(filteredEventsTemp, types,'events');
+          filteredVenuesTemp = filterByStyles(filteredEventsTemp,styles);
           setFilteredEvents(filteredEventsTemp);
         };
       } else {
@@ -51,7 +52,7 @@ export function MapBrowser({browserType, filter}) {
       };
     };
   }, [bounds, styles, types, events])
-
+  console.log(filteredEvents)
   return (
       <SelectionProvider>
         <div className='center-split'>

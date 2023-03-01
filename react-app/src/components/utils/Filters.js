@@ -20,12 +20,22 @@ export const filterVenuesByBounds = (venues, bounds) => {
   };
 };
 
-export const filterByTypes = (data, types) => {
+export const filterByTypes = (data, types, dataType='venues') => {
   const activeTypes = new Set(Object.keys(types).filter(type=>types[type]));
   const filteredData = {};
 
   for (let id in data) {
-    if (activeTypes.has(data[id].type)) filteredData[id] = data[id]
+    if (dataType === 'events') {
+      // console.log(data)
+      if (activeTypes.has(data[id].type)) filteredData[id] = data[id]
+    } else {
+      for (let type of data[id].types) {
+        if (activeTypes.has(type)) {
+          filteredData[id] = data[id]
+          break
+        }
+      }
+    }
   };
   return filteredData;
 };
@@ -36,7 +46,7 @@ export const filterByStyles = (data, styles) => {
 
   for (let id in data) {
     for (let style of data[id].styles) {
-      if (activeStyles.has(style.name)) {
+      if (activeStyles.has(style)) {
         filteredData[id] = data[id];
         break;
       };
@@ -49,9 +59,9 @@ export const filterByStyles = (data, styles) => {
 
 export const filterEventsByVenues = (events, venues) => {
   const filteredEvents = {};
-
-  for (let venue of venues) {
-    for (let eventId in venue.events) {
+  for (let venueId in venues) {
+    for (let eventId of venues[venueId].events) {
+      console.log(eventId)
       if (!filteredEvents[eventId]) {
         filteredEvents[eventId] = events[eventId];
       };
