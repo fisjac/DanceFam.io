@@ -26,7 +26,7 @@ class Venue(db.Model):
       "lat": self.lat,
       "lng": self.lng,
       "url": self.url,
-      "styles": list({style.name for style in [event.styles for event in self.events]}),
+      "styles": list({style[0].name for style in [event.styles for event in self.events]}),
       "types": list({event.type.name for event in self.events }),
       "events": [event.id for event in self.events]
     }
