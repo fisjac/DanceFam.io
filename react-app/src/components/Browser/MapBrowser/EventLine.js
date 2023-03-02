@@ -28,8 +28,17 @@ export default function EventLine({event}) {
             setSelectedId(event.venueId);
             map.panTo({lat: venues[event.venueId].lat, lng: venues[event.venueId].lng});
         }}
-        onMouseEnter={()=>setHoveredId(event.venueId)}
-        onMouseLeave={()=> setHoveredId(null)}
+        onMouseEnter={(e)=>{
+          if (e.target.className === 'eventline-container') {
+            setHoveredId(event.venueId)
+          }
+        }
+        }
+        onMouseLeave={(e)=> {
+          if (e.target.className === 'eventline-container') {
+            setHoveredId(event.null)
+          }}
+        }
         >
         <div className='eventline-body'>
           <img
@@ -43,7 +52,7 @@ export default function EventLine({event}) {
             <div className='eventline-date'>{getUtcTime(start)}</div>
           </div>
           {user && user.id === event.organiserId && (<div className='eventline-body-right'>
-            <ModalWrapper header='Edit this Event' stopProp={true} addClickFunc={async ()=> await dispatch(eventActions.loadEvent(event.id))} form={<EditEventForm event={event}/>}>
+            <ModalWrapper header='Edit this Event' stopProp={true} form={<EditEventForm event={event}/>}>
               <div className='clickable-icon'>
                 <i className="fa-solid fa-pen"></i>
               </div>
