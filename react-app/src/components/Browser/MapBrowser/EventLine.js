@@ -25,19 +25,19 @@ export default function EventLine({event}) {
         className='eventline-container'
         onClick={(e)=>{
           e.preventDefault()
-          if (e.target.className === 'eventline-container') {
+          if (e.target.className.includes('eventline')) {
             setSelectedId(event.venueId);
             map.panTo({lat: venues[event.venueId].lat, lng: venues[event.venueId].lng});
           };
         }}
         onMouseEnter={(e)=>{
-          if (e.target.className === 'eventline-container') {
+          if (e.target.className.includes('eventline') ) {
             setHoveredId(event.venueId)
           };
         }
         }
         onMouseLeave={(e)=> {
-          if (e.target.className === 'eventline-container') {
+          if (e.target.className.includes('eventline')) {
             setHoveredId(event.null)
           }}
         }
