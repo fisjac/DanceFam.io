@@ -8,7 +8,6 @@ import SelectionProvider, { SelectorsContext } from '../../../context/Maps/Selec
 import  ModalMapBrowser from './ModalMapBrowser';
 
 export default function SelectionLinkedForm({event, setShowModal}) {
-  console.log('rendering linked form')
   return (
     <SelectionProvider persistSelections={true} initialValue={event.venueId}>
       <EditEventForm event={event} setShowModal={setShowModal}/>
