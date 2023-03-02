@@ -54,7 +54,10 @@ export default function EventLine({event}) {
             <div className='eventline-date'>{getUtcTime(start)}</div>
           </div>
           {user && user.id === event.organiserId && (<div className='eventline-body-right'>
-            <ModalWrapper header='Edit this Event' stopProp={true} form={<EditEventForm event={event}/>}>
+            <ModalWrapper
+            header='Edit this Event'
+            form={<EditEventForm event={event}/>}
+            >
               <div className='clickable-icon'>
                 <i className="fa-solid fa-pen"></i>
               </div>

@@ -32,13 +32,12 @@ export default function VenueMarker({venue}) {
         onMouseOut={(e)=>setHoveredId(null)}
         onUnmount={()=>{
           if (highlightedId === venue.id && !persistSelections) {
-            console.log('deselecting')
             setSelectedId(null);
             setHoveredId(null);
           };
         }}
         />
-      {highlightedId === venue.id && currentMarker &&
+      {highlightedId === venue.id &&
         <InfoWindow
           onClick={(e)=>{e.stopPropagation()}}
           onCloseClick={()=>setSelectedId(null)}

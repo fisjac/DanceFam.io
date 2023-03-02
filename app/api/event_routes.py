@@ -70,7 +70,7 @@ def create_event():
         db.session.add(event)
         db.session.commit()
         return event.to_dict()
-    return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+    return {'errors': validation_errors_to_error_messages(form.errors)}, 400
 
 # EDIT by Id
 @event_routes.route('/<int:id>', methods=['PUT'])
@@ -97,12 +97,6 @@ def edit_event(id):
             event.name = form.data['name']
             event.start = form.data['start']
             event.end = form.data['end']
-            event.city = form.data['city']
-            event.state = form.data['state']
-            event.address = form.data['address']
-            event.country = form.data['country']
-            event.lat = form.data['lat']
-            event.lng = form.data['lng']
             event.external_url = external_url
             event.image_url = image_url
             event.type_id = Type.query.filter(Type.name == form.data['type'])[0].id
@@ -116,7 +110,7 @@ def edit_event(id):
 
             db.session.commit()
             return event.to_dict()
-        return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+        return {'errors': validation_errors_to_error_messages(form.errors)}, 400
 
 
 # DELETE by Id

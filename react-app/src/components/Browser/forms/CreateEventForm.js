@@ -43,8 +43,6 @@ export function CreateEventForm({setShowModal}) {
     },{})
   );
 
-
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     const start = new Date(startDate + 'T' + startTime + ':00.000Z');
@@ -59,7 +57,8 @@ export function CreateEventForm({setShowModal}) {
           styles,
           type,
           venue_id: selectedId
-        }));
+        })
+      );
     if (response.ok) {
       setShowModal(false);
       setErrors([]);
@@ -79,9 +78,7 @@ export function CreateEventForm({setShowModal}) {
         <div
           className={`page-button ${selectedId?'':'disabled'}`}
           onClick={()=>{
-            if (!selectedId) {
-              return
-            } else {
+            if (selectedId) {
               setPage(page + 1);
             };
           }}
@@ -200,7 +197,9 @@ export function CreateEventForm({setShowModal}) {
             type='submit'
             // className='disabled'
             // disabled={true}
-            >Confirm</button>
+            >
+            Confirm
+          </button>
         </form>
         <div
           className={`page-button`}
