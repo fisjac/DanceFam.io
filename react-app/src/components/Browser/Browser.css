@@ -466,6 +466,19 @@ width:30px;
   flex-grow: 1;
 }
 
+.eventline-link {
+  font-size: 14px;
+  color: blue;
+  cursor: pointer;
+  width: fit-content;
+  transition: .2s;
+  font-weight: 800;
+}
+.eventline-link:hover {
+  /* font-size: 20px; */
+  text-decoration:underline;
+}
+
 .link {
   text-decoration:underline;
   color: blue;
