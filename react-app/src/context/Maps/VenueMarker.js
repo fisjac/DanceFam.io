@@ -50,14 +50,14 @@ export default function VenueMarker({venue}) {
               <div className='infowindow-name'>{venue.name}</div>
               <div>{venue.address},</div>
               <div>{venue.city}, {venue.state}</div>
-              <div
+              {venue.url && <div
                 className='link'
                 onClick={()=>{
                   window.open(venue.url)
                 }}
                 >
-                {venue.url}
-              </div>
+                Website
+              </div>}
               </div>
             </div>
           </InfoWindow>
