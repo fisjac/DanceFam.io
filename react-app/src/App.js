@@ -11,10 +11,10 @@ import Browser from './components/Browser';
 import Footer from './components/Footer';
 import {getKey} from './store/keys'
 import { getStyles } from './store/styles';
-import BoundsProvider from './context/Maps/Bounds';
 import { getEvents } from './store/events';
 import { getTypes } from './store/types';
 import PrivacyPolicy from './components/PrivacyPolicy';
+import { getVenues } from './store/venues';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -23,10 +23,11 @@ function App() {
   useEffect(() => {
     (async () => {
       await dispatch(authenticate());
-      await dispatch(getStyles())
-      await dispatch(getTypes())
-      await dispatch(getKey())
-      await dispatch(getEvents())
+      await dispatch(getStyles());
+      await dispatch(getTypes());
+      await dispatch(getKey());
+      await dispatch(getEvents());
+      await dispatch(getVenues());
       setLoaded(true);
     })();
   }, [dispatch]);
@@ -44,12 +45,14 @@ function App() {
         <Route path='/app'>
           <LoadMaps>
             <NavBar/>
-            <BoundsProvider>
-              <Browser/>
-            </BoundsProvider>
+            <Browser/>
           </LoadMaps>
           <Footer/>
+          <Route path='/app/privacy'>
+            <PrivacyPolicy/>
+          </Route>
         </Route>
+
       </Switch>
     </BrowserRouter>
 

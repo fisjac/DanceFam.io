@@ -6,3 +6,4 @@ from .event_type_style import Event, Type, Style
 from .registration import Registration
 # from .role import Role
 # from .status import Status
+from .venue import Venue

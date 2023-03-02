@@ -177,7 +177,11 @@ width:30px;
   display: flex;
   width: 100%;
   height: calc(100% - 38.4px);
+}
 
+.map-section {
+  width: 60%;
+  height: 100%
 }
 
 .eventscroll {
@@ -471,24 +475,14 @@ width:30px;
 .infowindow-container {
   display: flex;
   flex-direction: row;
-  width: 35vh;
-}
-
-.infowindow-img {
-  width: max(33%,40px);
-  margin: auto 0;
-  /* background-color: var(--theme-light); */
-  border-radius: 5px;
-  background-position: 50%;
-  background-size: cover;
-  border-radius: 5px;
+  /* width: fit-content; */
 }
 
 .infowindow-details {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
-  width: max-content;
+  /* width: fit-content; */
   align-items: flex-start;
   margin-left: 10px;
   /* width: 50px; */

@@ -1,5 +1,6 @@
 import { batch } from 'react-redux';
 import * as sessionActions from './session';
+import * as venueActions from './venues';
 
 const LOAD_EVENTS = 'events/LOAD_ALL';
 const LOAD_EVENT = 'events/LOAD_ONE';
@@ -31,6 +32,7 @@ export function editEvent (payload) {
 };
 
 export function removeEvent (payload) {
+  console.log('removing event')
   return {
     type: DELETE,
     payload
@@ -44,7 +46,6 @@ export const getEvents = () => async dispatch => {
   if (response.ok) {
     const events = await response.json();
     dispatch(loadEvents(events));
-    return response;
   };
   return response;
 };
@@ -54,12 +55,11 @@ export const getEvent = (eventId) => async dispatch => {
   if (response.ok) {
     const event = await response.json();
     dispatch(loadEvent(event));
-    return response;
   };
   return response;
 };
 
-export const createEvent = ({event}) => async dispatch => {
+export const createEvent = (event) => async dispatch => {
   const response = await fetch(`/api/events`, {
     method: 'POST',
     headers: {'Content-Type': 'application/json'},
@@ -67,10 +67,16 @@ export const createEvent = ({event}) => async dispatch => {
   });
   if (response.ok) {
     const event = await response.json();
-    await dispatch(loadEvent(event))
-    await dispatch(sessionActions.addEvent(event.id))
-    return response;
-  }
+    const venueResponse = await fetch('/api/venues');
+    if (venueResponse.ok) {
+      const newVenues = await venueResponse.json()
+      batch(()=> {
+        dispatch(loadEvent(event))
+        dispatch(sessionActions.addEvent(event.id))
+        dispatch(venueActions.loadVenues(newVenues))
+      })
+    } else return venueResponse;
+  };
   return response;
 }
 
@@ -82,23 +88,31 @@ export const updateEvent = (event) => async dispatch => {
   });
   if (response.ok) {
     const event = await response.json();
-    await dispatch(sessionActions.authenticate())
-    await dispatch(editEvent(event));
-    return response;
+    const venueResponse = await fetch('/api/venues');
+    if (venueResponse.ok) {
+      const newVenues = await venueResponse.json();
+      batch(() =>{
+        dispatch(editEvent(event));
+        dispatch(venueActions.loadVenues(newVenues))
+      });
+    } else return venueResponse;
   };
   return response;
 };
 
 export const deleteEvent = (eventId) => async dispatch => {
-  const response = await fetch (`/api/events/${eventId}`,{
+  const response = await fetch(`/api/events/${eventId}`,{
     method: 'DELETE'
   });
   if (response.ok) {
-    await dispatch(sessionActions.authenticate())
-    batch(async()=>{
-      await dispatch(removeEvent(eventId))
-    });
-    return response;
+    const venueResponse = await fetch('/api/venues');
+    if (venueResponse.ok) {
+      const newVenues = await venueResponse.json();
+      batch(() => {
+        dispatch(removeEvent(eventId))
+        dispatch(venueActions.loadVenues(newVenues))
+      });
+    } else return venueResponse;
   };
   return response;
 };

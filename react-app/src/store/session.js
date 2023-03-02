@@ -1,8 +1,6 @@
 // constants
 const SET_USER = 'session/SET_USER';
 const REMOVE_USER = 'session/REMOVE_USER';
-const ADD_COMMUNITY = 'session/ADD_COMMUNITY';
-const REMOVE_COMMUNITY = 'session/REMOVE_COMMUNITY';
 const ADD_EVENT = 'session/ADD_EVENT';
 const REMOVE_EVENT = 'session/REMOVE_EVENT';
 
@@ -15,16 +13,6 @@ const setUser = (user) => ({
 export const removeUser = () => ({
   type: REMOVE_USER,
 })
-
-export const addCommunity = (communityName) => ({
-  type: ADD_COMMUNITY,
-  payload: communityName
-});
-
-export const removeCommunity = (communityName) => ({
-  type: REMOVE_COMMUNITY,
-  payload: communityName
-});
 
 export const addEvent = (eventId) => ({
   type: ADD_EVENT,
@@ -130,12 +118,6 @@ export default function sessionReducer(state = initialState, action) {
       return { user: action.payload }
     case REMOVE_USER:
       return { user: null }
-    case ADD_COMMUNITY:
-      return {user : {...state.user, communities: {...state.user.communities,  [action.payload]: action.payload}}};
-    case REMOVE_COMMUNITY:
-      let newCommunities = {...state.user.communities};
-      delete newCommunities[action.payload]
-      return {user : {...state.user, communities: newCommunities}}
     case ADD_EVENT:
       return {user : {...state.user, events: {...state.user.events,  [action.payload]: action.payload}}};
     case REMOVE_EVENT:

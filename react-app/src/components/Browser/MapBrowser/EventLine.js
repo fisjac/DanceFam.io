@@ -1,19 +1,20 @@
 import React, { useContext } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
-import * as eventActions from '../../store/events';
-import ModalWrapper from '../../context/Modal/Modal'
-import EditEventForm from './forms/EditEventForm';
-import { getUtcTime } from '../utils/DateFuncs';
+import * as eventActions from '../../../store/events';
+import ModalWrapper from '../../../context/Modal/Modal'
+import EditEventForm from '../forms/EditEventForm';
+import { getUtcTime } from '../../utils/DateFuncs';
 
-import { GoogleMapsContext } from '../../context/Maps/MapsLoader';
-import defaultImage from '../../static/dancing_couple1.svg'
-import { eventSelectorsContext } from '../../context/Maps/EventSelector';
+import { GoogleMapsMapContext } from '../../../context/Maps/MapsLoader';
+import defaultImage from '../../../static/dancing_couple1.svg'
+import { SelectorsContext } from '../../../context/Maps/Selector';
 
 
 export default function EventLine({event}) {
-  const { map } = useContext(GoogleMapsContext)
-  const {hoveredEvent, setHoveredEvent, selectedEvent, setSelectedEvent} = useContext(eventSelectorsContext);
+  const { map } = useContext(GoogleMapsMapContext);
+  const venues = useSelector(state=>state.venues);
+  const { setHoveredId, setSelectedId} = useContext(SelectorsContext);
   const dispatch = useDispatch();
   const start = new Date(event.start);
   const user = useSelector(state=>state.session.user);
@@ -23,12 +24,23 @@ export default function EventLine({event}) {
       <div
         className='eventline-container'
         onClick={(e)=>{
-            e.preventDefault()
-            setSelectedEvent(event);
-            map.panTo({lat: event.lat, lng: event.lng});
+          e.preventDefault()
+          if (e.target.className === 'eventline-container') {
+            setSelectedId(event.venueId);
+            map.panTo({lat: venues[event.venueId].lat, lng: venues[event.venueId].lng});
+          };
         }}
-        onMouseEnter={()=>setHoveredEvent(event)}
-        onMouseLeave={()=> setHoveredEvent(null)}
+        onMouseEnter={(e)=>{
+          if (e.target.className === 'eventline-container') {
+            setHoveredId(event.venueId)
+          };
+        }
+        }
+        onMouseLeave={(e)=> {
+          if (e.target.className === 'eventline-container') {
+            setHoveredId(event.null)
+          }}
+        }
         >
         <div className='eventline-body'>
           <img
@@ -42,7 +54,10 @@ export default function EventLine({event}) {
             <div className='eventline-date'>{getUtcTime(start)}</div>
           </div>
           {user && user.id === event.organiserId && (<div className='eventline-body-right'>
-            <ModalWrapper header='Edit this Event' stopProp={true} addClickFunc={async ()=> await dispatch(eventActions.loadEvent(event.id))} form={<EditEventForm event={event}/>}>
+            <ModalWrapper
+            header='Edit this Event'
+            form={<EditEventForm event={event}/>}
+            >
               <div className='clickable-icon'>
                 <i className="fa-solid fa-pen"></i>
               </div>

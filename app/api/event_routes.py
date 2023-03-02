@@ -2,7 +2,7 @@ from flask import Blueprint, jsonify, request
 from flask_login import login_required, current_user
 from datetime import datetime
 
-from app.models import Event, Registration, db, Type, Style
+from app.models import Event, Registration, db, Type, Style, Venue
 from app.forms.event_form import EventForm
 event_routes = Blueprint('events', __name__)
 
@@ -19,7 +19,7 @@ def validation_errors_to_error_messages(validation_errors):
 # GET all
 @event_routes.route('')
 def events():
-    events = Event.query.all()
+    # events = Event.query.all()
     new_events = Event.query.filter(Event.start >= datetime.today().date())
     return jsonify([event.to_dict() for event in new_events])
 
@@ -54,28 +54,23 @@ def create_event():
             name = form.data['name'],
             start = form.data['start'],
             end = form.data['end'],
-            city = form.data['city'],
-            state = form.data['state'],
-            address = form.data['address'],
-            country = form.data['country'],
-            lat = form.data['lat'],
-            lng = form.data['lng'],
             external_url = external_url,
             image_url = image_url,
             type_id = Type.query.filter(Type.name == form.data['type'])[0].id
         )
 
+        event.venue = Venue.query.get(form.data['venue_id'])
+
         for style in form.data['styles']:
             style_instance = Style.query.filter(Style.name == style)[0]
             event.styles.append(style_instance)
-
-        new_registration = Registration()
-        new_registration.user = current_user
-        new_registration.event = event
-        db.session.add_all([new_registration])
+        # new_registration = Registration()
+        # new_registration.user = current_user
+        # new_registration.event = event
+        db.session.add(event)
         db.session.commit()
         return event.to_dict()
-    return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+    return {'errors': validation_errors_to_error_messages(form.errors)}, 400
 
 # EDIT by Id
 @event_routes.route('/<int:id>', methods=['PUT'])
@@ -97,18 +92,11 @@ def edit_event(id):
                 image_url = form.data['image_url']
             else: image_url = None
             if form.data['external_url']:
-                print('-------------',form.data['external_url'])
                 external_url = form.data['external_url']
             else: external_url = None
             event.name = form.data['name']
             event.start = form.data['start']
             event.end = form.data['end']
-            event.city = form.data['city']
-            event.state = form.data['state']
-            event.address = form.data['address']
-            event.country = form.data['country']
-            event.lat = form.data['lat']
-            event.lng = form.data['lng']
             event.external_url = external_url
             event.image_url = image_url
             event.type_id = Type.query.filter(Type.name == form.data['type'])[0].id
@@ -118,9 +106,11 @@ def edit_event(id):
                 style_instance = Style.query.filter(Style.name == style)[0]
                 event.styles.append(style_instance)
 
+            event.venue = Venue.query.get(form.data['venue_id'])
+
             db.session.commit()
             return event.to_dict()
-        return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+        return {'errors': validation_errors_to_error_messages(form.errors)}, 400
 
 
 # DELETE by Id
