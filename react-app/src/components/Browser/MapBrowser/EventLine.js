@@ -24,14 +24,16 @@ export default function EventLine({event}) {
       <div
         className='eventline-container'
         onClick={(e)=>{
-            e.preventDefault()
+          e.preventDefault()
+          if (e.target.className === 'eventline-container') {
             setSelectedId(event.venueId);
             map.panTo({lat: venues[event.venueId].lat, lng: venues[event.venueId].lng});
+          };
         }}
         onMouseEnter={(e)=>{
           if (e.target.className === 'eventline-container') {
             setHoveredId(event.venueId)
-          }
+          };
         }
         }
         onMouseLeave={(e)=> {
