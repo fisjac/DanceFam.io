@@ -48,9 +48,10 @@ export function EditEventForm({event, setShowModal}) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('in handle submit')
-    const start = new Date(startDate + 'T' + startTime + '.000Z');
-    const end = new Date(endDate + 'T' + endTime + '.000Z');
+    const formattedStartTime = dateFuncs.checkTimeFormat(startTime);
+    const formattedEndTime = dateFuncs.checkTimeFormat(endTime);
+    const start = new Date(startDate + 'T' + formattedStartTime + '.000Z');
+    const end = new Date(endDate + 'T' + formattedEndTime + '.000Z');
     const response = await dispatch(
       eventActions.updateEvent({
         id: event.id,
