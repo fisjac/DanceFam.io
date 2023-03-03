@@ -3,6 +3,14 @@ export const dateToBackendFormat = (date) => {
   return dateString.replace('T', ' ').substring(0,dateString.length - 5)
 }
 
+export const checkTimeFormat = (timeString) => {
+  if (timeString.length === 8) {
+    return timeString;
+  } else {
+    return timeString + ':00'
+  };
+};
+
 export const dateToday = (date = new Date()) => {
   return [
       date.getFullYear(),
