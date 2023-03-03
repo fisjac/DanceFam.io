@@ -27,8 +27,9 @@ export const filterByTypes = (data, types, dataType='venues') => {
   const filteredData = {};
 
   for (let id in data) {
+    console.log(data)
     if (dataType === 'events') {
-      if (activeTypes.has(data[id].type)) filteredData[id] = data[id]
+      if (activeTypes.has(data[id]?.type)) filteredData[id] = data[id]
     } else {
       for (let type of data[id].types) {
         if (activeTypes.has(type)) {
