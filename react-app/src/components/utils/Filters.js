@@ -1,20 +1,21 @@
 export const filterVenuesByBounds = (venues, bounds) => {
-  if (!Object.values(venues).length) return {}
+  if (!Object.values(venues).length) return {};
+  console.log(venues)
   if (!bounds) {
-    return {}
+    return {};
   } else {
 
-    const filteredVenues = {}
-    const ne = bounds.getNorthEast();
+    const filteredVenues = {};
+    const ne = bounds.getNorthEast();;
     const sw = bounds.getSouthWest();
-    const latBounds = [ne.lat(), sw.lat()]
-    const lngBounds = [ne.lng(), sw.lng()]
+    const latBounds = [ne.lat(), sw.lat()];
+    const lngBounds = [ne.lng(), sw.lng()];
     for (let venueId in venues) {
       const venue = venues[venueId];
       if (venue.lat >= Math.min(...latBounds) && venue.lat <= Math.max(...latBounds) &&
         venue.lng >= Math.min(...lngBounds) && venue.lng <= Math.max(...lngBounds)
       ) {
-        filteredVenues[venueId] = venue
+        filteredVenues[venueId] = venue;
       }
     };
     return filteredVenues;
@@ -22,18 +23,18 @@ export const filterVenuesByBounds = (venues, bounds) => {
 };
 
 export const filterByTypes = (data, types, dataType='venues') => {
-  if (!Object.values(data).length) return {}
+  if (!Object.values(data).length) return {};
   const activeTypes = new Set(Object.keys(types).filter(type=>types[type]));
   const filteredData = {};
 
   for (let id in data) {
     if (dataType === 'events') {
-      if (activeTypes.has(data[id].type)) filteredData[id] = data[id]
+      if (activeTypes.has(data[id].type)) filteredData[id] = data[id];
     } else {
       for (let type of data[id].types) {
         if (activeTypes.has(type)) {
-          filteredData[id] = data[id]
-          break
+          filteredData[id] = data[id];
+          break;
         }
       }
     }
