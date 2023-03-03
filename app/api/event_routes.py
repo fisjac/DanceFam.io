@@ -23,6 +23,12 @@ def events():
     new_events = Event.query.filter(Event.start >= datetime.today().date())
     return jsonify([event.to_dict() for event in new_events])
 
+# GET all
+@event_routes.route('/all')
+def all_events():
+    # events = Event.query.all()
+    return jsonify([event.to_dict() for event in events])
+
 
 
 # GET by id
