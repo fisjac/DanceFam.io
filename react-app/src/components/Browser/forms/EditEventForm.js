@@ -150,7 +150,6 @@ export function EditEventForm({event, setShowModal}) {
             <label>Start *</label>
             <input
               type='Date'
-              min={dateFuncs.dateToday()}
               max={endDate}
               onChange={(e)=>setStartDate(e.target.value)}
               value={startDate}
@@ -168,7 +167,7 @@ export function EditEventForm({event, setShowModal}) {
             <label>End *</label>
             <input
                 type='Date'
-                min={startDate}
+                min={dateFuncs.dateCompare(startDate,dateFuncs.dateToday(), 'max')}
                 onChange={(e)=>setEndDate(e.target.value)}
                 value={endDate}
                 required
@@ -200,6 +199,7 @@ export function EditEventForm({event, setShowModal}) {
               />
           </div>
           <button
+            className='submit-button'
             type='submit'
             // className='disabled'
             // disabled={true}

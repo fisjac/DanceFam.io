@@ -88,7 +88,7 @@ export default function CreateEventForm({setShowModal}) {
         </div>
         <button
           type='submit'
-          className={`${!venue?'disabled':''}`}
+          className={`submit-button ${!venue?'disabled':''}`}
           disabled={!venue?true:false}
           >Confirm</button>
       </form>

@@ -2,7 +2,8 @@ import React, {useMemo, useContext, useState} from 'react'
 import { useSelector } from 'react-redux';
 
 
-import Scroll from './Scroll'
+import Scroll from './Scroll';
+import Filters from '../Filters';
 import MapGenerator from '../../../context/Maps/MapGenerator'
 import BoundsProvider, { boundsContext } from '../../../context/Maps/Bounds';
 import { GoogleMapsMapContext, GoogleMapsMapProvider } from '../../../context/Maps/MapsLoader';
@@ -54,9 +55,14 @@ export function MapBrowser({browserType, filter}) {
   return (
       <SelectionProvider>
         <div className='center-split'>
-          {browserType === 'events' && events && <Scroll data={filteredEvents} scrollType={browserType}/>}
-          {browserType === 'venues' && venues && <Scroll data={filteredVenues} scrollType={browserType}/>}
+          <div className='scroll-section'>
+            <div className='eventscroll-title'>Upcoming Events</div>
+            {browserType === 'events' && events && <Scroll data={filteredEvents} scrollType={browserType}/>}
+            {browserType === 'venues' && venues && <Scroll data={filteredVenues} scrollType={browserType}/>}
+          </div>
+
           <div className='map-section'>
+            <Filters/>
             <MapGenerator type='event' filter={filter}/>
           </div>
         </div>

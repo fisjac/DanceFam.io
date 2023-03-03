@@ -1,6 +1,5 @@
 export const filterVenuesByBounds = (venues, bounds) => {
   if (!Object.values(venues).length) return {};
-  console.log(venues)
   if (!bounds) {
     return {};
   } else {

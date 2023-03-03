@@ -1,7 +1,7 @@
 .navbar {
   padding: 0 10px;
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   align-items: center;
   position: relative;
   top: 0;
@@ -15,6 +15,32 @@
 
 .navbar * {
   color: var(--icon-grey)
+}
+
+.left-bar-logo {
+  width: 20%;
+}
+
+.left-bar-logo-title{
+  width: 80%;
+}
+
+.left-bar-logo-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  justify-self: flex-start;
+  height: calc(100%);
+  background-color: white;
+  max-width: 217px;
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.left-bar-logo-container:hover {
+  box-shadow: 1px 1px 3px 1px var(--shadow);
+  transition: .3s;
 }
 
 .icon-button {
