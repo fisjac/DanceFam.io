@@ -26,7 +26,7 @@ def events():
 # GET all
 @event_routes.route('/all')
 def all_events():
-    # events = Event.query.all()
+    events = Event.query.all()
     return jsonify([event.to_dict() for event in events])
 
 
