@@ -66,3 +66,11 @@ export const getUtcTime = (date) => {
   const nonMilitaryString = `${String(nonMilitaryHour)}:${nonMilitaryMinutes} ${amPm}`
   return nonMilitaryString
 }
+
+export const dateCompare = (date1, date2, operator) => {
+  if (operator === 'max') {
+    return date1 >= date2 ? date1 : date2
+  } else if (operator === 'min') {
+    return date1 <= date2 ? date1 : date2
+  };
+};

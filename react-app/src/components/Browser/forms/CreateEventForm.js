@@ -47,6 +47,7 @@ export function CreateEventForm({setShowModal}) {
     e.preventDefault();
     const start = new Date(startDate + 'T' + startTime + ':00.000Z');
     const end = new Date(endDate + 'T' + endTime + ':00.000Z');
+
     const response = await dispatch(
       eventActions.createEvent({
           name,
@@ -142,7 +143,6 @@ export function CreateEventForm({setShowModal}) {
             <label>Start *</label>
             <input
               type='Date'
-              min={dateFuncs.dateToday()}
               max={endDate}
               onChange={(e)=>setStartDate(e.target.value)}
               value={startDate}
@@ -161,7 +161,7 @@ export function CreateEventForm({setShowModal}) {
             <label>End *</label>
             <input
                 type='Date'
-                min={startDate}
+                min={dateFuncs.dateCompare(startDate,dateFuncs.dateToday(), 'max')}
                 onChange={(e)=>setEndDate(e.target.value)}
                 value={endDate}
                 required
