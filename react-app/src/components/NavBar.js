@@ -1,11 +1,13 @@
 
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 import LogoutButton from './auth/LogoutButton';
 import DropDownWrapper from '../context/Dropdown/Dropdown';
-import CreateEventForm from './Browser/forms/CreateEventForm';
-// import logo from '../static/DanceFamBrushNoText.svg'
+import CreateEventForm from './Browser/forms/CreateEventForm'
+import logo from '../static/DanceFamBrushNoText.svg';
+import title from '../static/DanceFamTitle.svg';
 import ModalWrapper, { Modal } from '../context/Modal/Modal';
 import LoginForm from './auth/LoginForm';
 import SignUpForm from './auth/SignUpForm';
@@ -72,9 +74,15 @@ const SignupButton = (props) => {
 
 
 const NavBar = () => {
+  const history = useHistory();
+
   const user = useSelector(state=>state.session.user)
   return (
     <div className='navbar'>
+      <div className='left-bar-logo-container' onClick={()=>history.push('/')}>
+        <img className='left-bar-logo' src={logo} alt='logo'/>
+        <img className='left-bar-logo-title' src={title} alt='title'/>
+      </div>
         {/* <div className='search-area'>
           <div className='mag-glass'>
             <i className="fa-solid fa-magnifying-glass"></i>

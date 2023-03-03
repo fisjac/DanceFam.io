@@ -199,6 +199,7 @@ export function EditEventForm({event, setShowModal}) {
               />
           </div>
           <button
+            className='submit-button'
             type='submit'
             // className='disabled'
             // disabled={true}

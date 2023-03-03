@@ -1,9 +1,10 @@
 .map {
+  position: relative;
+  /* z-index: -1; */
   height: 100%;
   width: 100%;
-  border-top-right-radius: 5px;
-  border-bottom-right-radius: 5px;
   box-shadow: 2px 2px rgba(0,0,0,.5) inset;
+  border-top-right-radius: 5px;
 }
 
 .map:before {
