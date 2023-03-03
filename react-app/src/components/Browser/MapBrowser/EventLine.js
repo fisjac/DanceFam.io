@@ -17,6 +17,9 @@ export default function EventLine({event}) {
   const { setHoveredId, setSelectedId} = useContext(SelectorsContext);
   const dispatch = useDispatch();
   const start = new Date(event.start);
+  const startWorkday = start.toString().split(' ')[0]
+  const end = new Date(event.end);
+  const endWorkday = end.toString().split(' ')[0]
   const user = useSelector(state=>state.session.user);
 
   return (
@@ -51,7 +54,7 @@ export default function EventLine({event}) {
             />
           <div className='eventline-details'>
             <div className='eventline-name'>{event.name}</div>
-            <div className='eventline-date'>{getUtcTime(start)}</div>
+            <div className='eventline-date'>{`${startWorkday} ${getUtcTime(start)}` } - {`${endWorkday} ${getUtcTime(end)}`}</div>
             {event.externalUrl && <div
                 className='eventline-link'
                 onClick={()=>{

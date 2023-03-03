@@ -1,4 +1,5 @@
 from .db import db
+from datetime import datetime
 
 class Venue(db.Model):
   __tablename__ = 'venues'
@@ -14,7 +15,6 @@ class Venue(db.Model):
   lng = db.Column(db.Float())
 
   events = db.relationship("Event", back_populates='venue', cascade='delete' )
-
   def to_dict(self):
     return {
       "id": self.id,
@@ -28,5 +28,5 @@ class Venue(db.Model):
       "url": self.url,
       "styles": list({style[0].name for style in [event.styles for event in self.events]}),
       "types": list({event.type.name for event in self.events }),
-      "events": [event.id for event in self.events]
+      "events": [event.id for event in self.events if event.end >= datetime.today()]
     }
