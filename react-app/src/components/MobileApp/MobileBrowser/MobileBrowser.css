@@ -1,3 +1,8 @@
+body {
+  overflow-y: hidden;
+  position: relative;
+}
+
 .main-page {
   display: flex;
   flex-direction: row;
@@ -260,6 +265,7 @@
 .filter-container {
   background-color: var(--theme-background-grey);
   height: 30px;
+  max-width: 100%;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
   display: flex;
@@ -300,7 +306,7 @@
   box-shadow: 1px 1px 1px 1px var(--shadow);
   border-radius: 5px;
   padding: 0;
-  margin:  0 8px;
+  margin:  2px 8px;
   padding: 4px;
   z-index: 1000003;
 }
@@ -423,16 +429,17 @@
 
 .filter-bar {
   position: absolute;
-  width: max-content;
+  width: 100%;
   z-index: 100
 }
 
 .planner {
   position: relative;
   display: flex;
+  flex-wrap: wrap;
   /* flex-direction: column; */
   justify-content: flex-start;
-  width: max-content;
+  width: 100%;
   height: 0px;
   /* background-color: var(--theme-background-grey); */
   padding: 4px;
