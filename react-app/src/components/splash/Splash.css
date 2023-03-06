@@ -29,6 +29,14 @@
   height: 100%;
 }
 
+.logo {
+  width: 40%;
+}
+
+.logo-title {
+width: 60%;
+}
+
 .logo-container {
   display: flex;
   align-items: center;
