@@ -45,6 +45,8 @@ export default function VenueMarker({venue}) {
           options={{'disableAutoPan': true}}
 
           >
+            <>
+            <div style={{'display':'none'}}></div>
             <div className='infowindow-container'>
             <div className='infowindow-details'>
               <div className='infowindow-name'>{venue.name}</div>
@@ -60,6 +62,7 @@ export default function VenueMarker({venue}) {
               </div>}
               </div>
             </div>
+            </>
           </InfoWindow>
       }
     </>
