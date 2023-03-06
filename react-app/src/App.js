@@ -4,11 +4,10 @@ import { useDispatch } from 'react-redux';
 
 
 import LoadMaps from './context/Maps/MapsLoader';
-import NavBar from './components/NavBar';
+import DesktopApp from './components/DesktopApp/';
+import MobileApp from './components/MobileApp/';
 import Splash from './components/splash/Splash';
 import { authenticate } from './store/session';
-import Browser from './components/Browser';
-import Footer from './components/Footer';
 import {getKey} from './store/keys'
 import { getStyles } from './store/styles';
 import { getEvents } from './store/events';
@@ -19,6 +18,7 @@ import { getVenues } from './store/venues';
 function App() {
   const [loaded, setLoaded] = useState(false);
   const dispatch = useDispatch();
+  const [width, setwidth] = useState(window.innerWidth);
 
   useEffect(() => {
     (async () => {
@@ -32,6 +32,15 @@ function App() {
     })();
   }, [dispatch]);
 
+  useEffect(()=> {
+    function handleResize () {
+      setwidth(window.innerWidth)
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  },[])
+
   if (!loaded) {
     return null;
   }
@@ -44,10 +53,14 @@ function App() {
         </Route>
         <Route path='/app'>
           <LoadMaps>
-            <NavBar/>
-            <Browser/>
+            {width >= 600 &&
+              <DesktopApp/>
+            }
+
+            {width < 600 &&
+            <MobileApp/>
+            }
           </LoadMaps>
-          <Footer/>
           <Route path='/app/privacy'>
             <PrivacyPolicy/>
           </Route>

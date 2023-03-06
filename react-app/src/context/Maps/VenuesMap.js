@@ -46,9 +46,12 @@ const VenuesMap = ({zoom, filter}) => {
           disableDefaultUI: true
         }}
         >
-        {filteredVenues && Object.values(filteredVenues).map((venue)=> {
-          return <VenueMarker venue={venue}/>
-        })}
+          <>
+            <div style={{'display':'none'}}></div>
+            {filteredVenues && Object.values(filteredVenues).map((venue)=> {
+              return <VenueMarker venue={venue}/>
+            })}
+          </>
       </GoogleMap>
   )
 };
