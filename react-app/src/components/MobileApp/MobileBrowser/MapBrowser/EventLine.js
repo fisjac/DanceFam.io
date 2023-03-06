@@ -24,7 +24,7 @@ export default function EventLine({event}) {
   return (
     <>
       <div
-        className='eventline-container'
+        className='mobile-eventline-container'
         onClick={(e)=>{
           e.preventDefault()
           if (e.target.className.includes('eventline')) {

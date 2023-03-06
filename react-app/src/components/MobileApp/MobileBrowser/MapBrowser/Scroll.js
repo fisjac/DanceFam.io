@@ -14,7 +14,7 @@ export default function Scroll({data, scrollType}) {
         const groupedEvents = groupEventsByDate(data);
         const sortedDates = sortDates(groupedEvents);
           return (
-            <div className='eventscroll'>
+            <div className='mobile-eventscroll'>
               {
                 sortedDates.map(date => {
                   let dateString = date.toLocaleDateString(undefined, {weekday: 'long',month: 'long', day: 'numeric'});

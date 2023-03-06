@@ -4,15 +4,15 @@ import RightBar from './RightBar';
 
 import MapBrowser from './MapBrowser'
 
-import './Browser.css'
+import './MobileBrowser.css'
 
-export default function Browser() {
+export default function MobileBrowser() {
   return (
     <div className='main-page'>
       <div className='center-container'>
         <MapBrowser browserType={'events'}/>
       </div>
-      <RightBar/>
+      {/* <RightBar/> */}
     </div>
   )
 }

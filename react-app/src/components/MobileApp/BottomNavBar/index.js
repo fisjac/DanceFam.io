@@ -9,12 +9,10 @@ import SignUpForm from '../../auth/SignUpForm';
 
 import DropDownWrapper from '../../../context/Dropdown/Dropdown';
 import ModalWrapper from '../../../context/Modal/Modal';
-import logo from '../../../static/DanceFamBrushNoText.svg';
-import title from '../../../static/DanceFamTitle.svg';
 import AddVenueForm from '../MobileBrowser/forms/AddVenueForm';
 import CreateEventForm from '../MobileBrowser/forms/CreateEventForm'
 
-import './NavBar.css'
+import './BottomNavBar.css'
 
 const AddEventButton = () => {
   return (
@@ -40,7 +38,7 @@ const AddVenueButton = () => {
 
 const CreateMenu = () => {
   return (
-    <div className='create-dropdown'>
+    <div className='mobile-create-dropdown'>
       <AddEventButton/>
       <AddVenueButton/>
     </div>
@@ -82,7 +80,7 @@ const NavBar = () => {
     <div className='bottom-navbar'>
       <div>
         <DropDownWrapper menu={<CreateMenu/>}>
-          <div className='icon-button'>
+          <div className='mobile-icon-button'>
             <i className="fa-solid fa-plus"></i>
             <div className='icon-label'>Create</div>
           </div>
@@ -90,7 +88,7 @@ const NavBar = () => {
       </div>
       <div>
         <DropDownWrapper menu={
-          <div className='user-dropdown'>
+          <div className='mobile-user-dropdown'>
             {user && <LogoutButton />}
             {!user && (
             <>
@@ -100,7 +98,7 @@ const NavBar = () => {
             )}
           </div>
         }>
-          <div className='icon-button'>
+          <div className='mobile-icon-button'>
             <i className="fa-solid fa-user"></i>
             <div className='icon-label'>User</div>
           </div>

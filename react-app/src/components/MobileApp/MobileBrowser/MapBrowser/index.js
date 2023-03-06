@@ -1,4 +1,4 @@
-import React, {useMemo, useContext, useState} from 'react'
+import React, {useMemo, useContext, useState, useRef} from 'react'
 import { useSelector } from 'react-redux';
 
 
@@ -9,6 +9,7 @@ import BoundsProvider, { boundsContext } from '../../../../context/Maps/Bounds';
 import { GoogleMapsMapContext, GoogleMapsMapProvider } from '../../../../context/Maps/MapsLoader';
 import SelectionProvider from '../../../../context/Maps/Selector';
 import { filterVenuesByBounds, filterByStyles, filterByTypes, filterEventsByVenues } from '../../../utils/Filters';
+import Resizer from './Resizer';
 
 export default function BoundsLinkedBrowser ({browserType, filter=true}) {
   return (
@@ -31,6 +32,15 @@ export function MapBrowser({browserType, filter}) {
   const [filteredEvents, setFilteredEvents] = useState(null);
   const [filteredVenues, setFilteredVenues] = useState(null);
 
+  const dragRef = useRef(null)
+
+  const handleResize = (e) => {
+    const movementY = e.movementY;
+    const resizeContainer = dragRef.current;
+    if (!resizeContainer) return;
+    const {height} = resizeContainer.getBoundingClientRect();
+    resizeContainer.style.height = `${height - movementY}px`
+  }
 
   useMemo(()=>{
 
@@ -54,16 +64,18 @@ export function MapBrowser({browserType, filter}) {
   }, [bounds, styles, types, events, venues])
   return (
       <SelectionProvider>
-        <div className='center-split'>
-          <div className='scroll-section'>
-            <div className='eventscroll-title'>Upcoming Events</div>
-            {browserType === 'events' && events && <Scroll data={filteredEvents} scrollType={browserType}/>}
-            {browserType === 'venues' && venues && <Scroll data={filteredVenues} scrollType={browserType}/>}
-          </div>
-
-          <div className='map-section'>
+        <div className='horizontal-split'>
+          <div className='mobile-map-section'>
             <Filters/>
             <MapGenerator type='event' filter={filter}/>
+          </div>
+          <div
+            className='mobile-scroll-section'
+            ref={dragRef}
+            >
+            <Resizer onResize={(e)=>handleResize(e)}/>
+            {browserType === 'events' && events && <Scroll data={filteredEvents} scrollType={browserType}/>}
+            {browserType === 'venues' && venues && <Scroll data={filteredVenues} scrollType={browserType}/>}
           </div>
         </div>
       </SelectionProvider>
