@@ -8,11 +8,11 @@ font-family: Quicksand;
 body {
   margin: 0;
   position: fixed;
-  overscroll-behavior-y: none;
 }
 
 html, body {
   overflow-y: hidden;
+  overscroll-behavior-y: none;
 }
 
 #root {
