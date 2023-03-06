@@ -1,38 +1,26 @@
-import React, {useEffect, useState} from 'react'
+import React, { useEffect, useState } from 'react'
 
 export default function Resizer({onResize}) {
+  const [touchPosition, setTouchPosition] = useState(null)
 
-
-  const [mouseDown, setMouseDown] = useState(false);
-
-  useEffect(()=> {
-    const handleMouseMove = (e)=> {
-      e.preventDefault();
-      onResize(e);
-    };
-
-    if (mouseDown) {
-      window.addEventListener('mousemove', handleMouseMove)
-    };
-
-    const handleMouseUp = () => setMouseDown(false);
-
-    window.addEventListener('mouseup', handleMouseUp);
-
-    return () => {
-      window.removeEventListener('mouseup', handleMouseUp);
-      window.removeEventListener('mousemove', handleMouseMove);
-    };
-  }, [mouseDown]);
-
-  const handleMouseDown = () => {
-    setMouseDown(true)
+  const handleTouchStart = (e) => {
+    setTouchPosition(e.targetTouches[0].clientY)
   };
+
+  const handleTouchMove = (e) => {
+    const newY = e.targetTouches[0].clientY;
+    onResize(newY-touchPosition);
+    setTouchPosition(newY);
+  }
 
   return (
      <div
       className='grip-lines'
-      onMouseDown={handleMouseDown}
+      onTouchStart={(e) => handleTouchStart(e)}
+      onTouchMove={(e)=>{
+        e.preventDefault();
+        handleTouchMove(e);
+      }}
       >
         <i className="fa-solid fa-grip-lines"></i>
       </div>

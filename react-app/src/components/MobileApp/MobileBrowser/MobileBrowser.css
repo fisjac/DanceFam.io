@@ -42,9 +42,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 20px;
+  width: 100%;
   font-size: 20px;
-  height: 16px;
+  height: 20px;
   cursor: pointer;
   color: var(--icon-grey);
 }

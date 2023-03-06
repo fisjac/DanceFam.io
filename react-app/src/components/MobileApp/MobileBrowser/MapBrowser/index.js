@@ -34,12 +34,11 @@ export function MapBrowser({browserType, filter}) {
 
   const dragRef = useRef(null)
 
-  const handleResize = (e) => {
-    const movementY = e.movementY;
+  const handleResize = (deltaY) => {
     const resizeContainer = dragRef.current;
     if (!resizeContainer) return;
     const {height} = resizeContainer.getBoundingClientRect();
-    resizeContainer.style.height = `${height - movementY}px`
+    resizeContainer.style.height = `${height - deltaY}px`
   }
 
   useMemo(()=>{
