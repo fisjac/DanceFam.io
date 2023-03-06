@@ -1,7 +1,7 @@
 import React from 'react'
 import Browser from './Browser'
-import Footer from './Browser/Footer'
-import NavBar from './Browser/NavBar'
+import Footer from './Footer/'
+import NavBar from './NavBar/'
 
 export default function index() {
   return (

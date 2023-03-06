@@ -3,10 +3,10 @@ import { useSelector } from 'react-redux';
 
 
 import Scroll from './Scroll'
-import MapGenerator from '../../../../context/Maps/MapGenerator'
-import BoundsProvider, { boundsContext } from '../../../../context/Maps/Bounds';
-import { GoogleMapsMapContext, GoogleMapsMapProvider } from '../../../../context/Maps/MapsLoader';
-import { filterVenuesByBounds } from '../../../utils/Filters';
+import MapGenerator from '../../../../../context/Maps/MapGenerator'
+import BoundsProvider, { boundsContext } from '../../../../../context/Maps/Bounds';
+import { GoogleMapsMapContext, GoogleMapsMapProvider } from '../../../../../context/Maps/MapsLoader';
+import { filterVenuesByBounds } from '../../../../utils/Filters';
 
 import './ModalMapBrowser.css'
 

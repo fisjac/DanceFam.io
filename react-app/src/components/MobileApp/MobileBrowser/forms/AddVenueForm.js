@@ -1,8 +1,8 @@
 import React, {useState, useEffect, useRef} from 'react'
 import { useDispatch } from 'react-redux';
 
-import * as venueActions from '../../../store/venues';
-import * as autocompleteFuncs from '../../utils/autocomplete';
+import * as venueActions from '../../../../store/venues';
+import * as autocompleteFuncs from '../../../utils/autocomplete';
 import SingleVenueMap from './SingleVenueMap';
 
 export default function CreateEventForm({setShowModal}) {

@@ -1,6 +1,6 @@
 import React from 'react'
-import ModalWrapper from '../../../../context/Modal/Modal';
-import AddVenueForm from '../../forms/AddVenueForm'
+import ModalWrapper from '../../../../../context/Modal/Modal';
+import AddVenueForm from '../AddVenueForm'
 
 
 import VenueLine from './VenueLine';

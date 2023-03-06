@@ -2,10 +2,10 @@ import React from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 
-import ModalWrapper from '../../context/Modal/Modal';
-import * as eventActions from '../../store/events';
-import EditEventForm from './forms/EditEventForm';
-import defaultImage from '../../static/dancing_couple1.svg'
+import ModalWrapper from '../../../context/Modal/Modal';
+import * as eventActions from '../../../store/events';
+import EditEventForm from '../forms/EditEventForm';
+import defaultImage from '../../../static/dancing_couple1.svg'
 
 import './EventPage.css'
 

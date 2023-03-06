@@ -1,9 +1,5 @@
-import React, {useState, useEffect} from 'react'
-import { NavLink, useHistory } from 'react-router-dom';
-
-import ModalWrapper from '../../context/Modal/Modal'
-import PrivacyPolicy from '../PrivacyPolicy';
-
+import React from 'react'
+import { useHistory } from 'react-router-dom';
 
 import './Footer.css'
 

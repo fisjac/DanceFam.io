@@ -4,11 +4,11 @@ import { useSelector } from 'react-redux';
 
 import Scroll from './Scroll';
 import Filters from '../Filters';
-import MapGenerator from '../../../context/Maps/MapGenerator'
-import BoundsProvider, { boundsContext } from '../../../context/Maps/Bounds';
-import { GoogleMapsMapContext, GoogleMapsMapProvider } from '../../../context/Maps/MapsLoader';
-import SelectionProvider from '../../../context/Maps/Selector';
-import { filterVenuesByBounds, filterByStyles, filterByTypes, filterEventsByVenues } from '../../utils/Filters';
+import MapGenerator from '../../../../context/Maps/MapGenerator'
+import BoundsProvider, { boundsContext } from '../../../../context/Maps/Bounds';
+import { GoogleMapsMapContext, GoogleMapsMapProvider } from '../../../../context/Maps/MapsLoader';
+import SelectionProvider from '../../../../context/Maps/Selector';
+import { filterVenuesByBounds, filterByStyles, filterByTypes, filterEventsByVenues } from '../../../utils/Filters';
 
 export default function BoundsLinkedBrowser ({browserType, filter=true}) {
   return (

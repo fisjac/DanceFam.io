@@ -1,4 +1,5 @@
 import React, { useContext } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 
 import { GoogleMapsMapContext } from '../../../../context/Maps/MapsLoader';
 import { SelectorsContext } from '../../../../context/Maps/Selector';
@@ -11,7 +12,7 @@ export default function VenueLine({venue}) {
   return (
     <>
       <div
-        className='modal-eventline-container'
+        className='eventline-container'
         onClick={(e)=>{
             e.preventDefault()
             setSelectedId(venue.id);
@@ -20,8 +21,8 @@ export default function VenueLine({venue}) {
         onMouseEnter={()=>setHoveredId(venue.id)}
         onMouseLeave={()=> setHoveredId(null)}
         >
-        <div className='modal-eventline-body'>
-          <div className='modal-eventline-details'>
+        <div className='eventline-body'>
+          <div className='eventline-details'>
             <div className='eventline-name'>{venue.name}</div>
             {/* add in venue details */}
           </div>

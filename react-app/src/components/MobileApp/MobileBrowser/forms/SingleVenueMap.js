@@ -1,6 +1,6 @@
 import React, { useContext } from "react"
 import { GoogleMap, Marker } from "@react-google-maps/api"
-import { GoogleMapsApiContext } from "../../../context/Maps/MapsLoader"
+import { GoogleMapsApiContext } from "../../../../context/Maps/MapsLoader"
 
 function SingleVenueMap({venue}) {
   const {isLoaded, location} = useContext(GoogleMapsApiContext)

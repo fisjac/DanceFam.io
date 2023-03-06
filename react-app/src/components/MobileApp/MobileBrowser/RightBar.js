@@ -1,6 +1,5 @@
 import React, {useEffect} from 'react';
-import profPic from '../../static/prof_pic.jpg';
-import linkedin from '../../static/linkedin.png';
+
 export default function RightBar() {
   useEffect(() => {
     const pushAd = () => {

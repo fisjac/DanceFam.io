@@ -53,10 +53,11 @@ function App() {
         </Route>
         <Route path='/app'>
           <LoadMaps>
-            {width >= 500 &&
+            {width >= 600 &&
               <DesktopApp/>
             }
-            {width < 500 &&
+
+            {width < 600 &&
             <MobileApp/>
             }
           </LoadMaps>

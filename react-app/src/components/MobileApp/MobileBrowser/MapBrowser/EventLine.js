@@ -1,14 +1,13 @@
 import React, { useContext } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
-import * as eventActions from '../../../store/events';
-import ModalWrapper from '../../../context/Modal/Modal'
+import * as eventActions from '../../../../store/events';
+import ModalWrapper from '../../../../context/Modal/Modal'
 import EditEventForm from '../forms/EditEventForm';
-import { getUtcTime } from '../../utils/DateFuncs';
-
-import { GoogleMapsMapContext } from '../../../context/Maps/MapsLoader';
-import defaultImage from '../../../static/dancing_couple1.svg'
-import { SelectorsContext } from '../../../context/Maps/Selector';
+import { getUtcTime } from '../../../utils/DateFuncs';
+import { GoogleMapsMapContext } from '../../../../context/Maps/MapsLoader';
+import defaultImage from '../../../../static/dancing_couple1.svg'
+import { SelectorsContext } from '../../../../context/Maps/Selector';
 
 
 export default function EventLine({event}) {

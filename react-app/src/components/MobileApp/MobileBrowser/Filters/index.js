@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
-import { toggleStyle } from '../../../store/styles';
-import { toggleType } from '../../../store/types';
+import { toggleStyle } from '../../../../store/styles';
+import { toggleType } from '../../../../store/types';
 import Collapser from './Collapser';
 
 export default function Filter() {

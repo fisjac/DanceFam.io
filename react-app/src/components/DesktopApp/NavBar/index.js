@@ -3,16 +3,16 @@ import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
-import LogoutButton from '../auth/LogoutButton';
-import LoginForm from '../auth/LoginForm';
-import SignUpForm from '../auth/SignUpForm';
+import LogoutButton from '../../auth/LogoutButton';
+import LoginForm from '../../auth/LoginForm';
+import SignUpForm from '../../auth/SignUpForm';
 
-import DropDownWrapper from '../../context/Dropdown/Dropdown';
-import ModalWrapper, { Modal } from '../../context/Modal/Modal';
-import logo from '../../static/DanceFamBrushNoText.svg';
-import title from '../../static/DanceFamTitle.svg';
-import AddVenueForm from './forms/AddVenueForm';
-import CreateEventForm from './forms/CreateEventForm'
+import DropDownWrapper from '../../../context/Dropdown/Dropdown';
+import ModalWrapper from '../../../context/Modal/Modal';
+import logo from '../../../static/DanceFamBrushNoText.svg';
+import title from '../../../static/DanceFamTitle.svg';
+import AddVenueForm from '../Browser/forms/AddVenueForm';
+import CreateEventForm from '../Browser/forms/CreateEventForm';
 
 import './NavBar.css'
 
