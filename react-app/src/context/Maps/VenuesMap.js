@@ -35,6 +35,7 @@ const VenuesMap = ({zoom, filter}) => {
         mapContainerClassName='map'
         center={location}
         zoom={zoom}
+        options={{gestureHandling:'greedy'}}
         onLoad={(map)=>{
           setMap(map);
           setMapIsLoaded(true);
