@@ -18,7 +18,7 @@ import { getVenues } from './store/venues';
 function App() {
   const [loaded, setLoaded] = useState(false);
   const dispatch = useDispatch();
-  const [width, setwidth] = useState(window.innerWidth);
+  const [width, setwidth] = useState(window.screen.availWidth);
 
   useEffect(() => {
     (async () => {
