@@ -3,7 +3,13 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width">
-    <!-- <meta name="viewport" content="'width=device-width; initial-scale:1.0; user-scalable:0"> -->
+    <script>
+      window.onresize = function() {
+        document.body.width = window.innerWidth;
+        document.body.height = window.innerHeight;
+    }
+    window.onresize();
+    </script>
     <meta name="description" content="Where social dancers find their people."/>
     <script src="https://kit.fontawesome.com/10958575e4.js" crossorigin="anonymous"></script>
     <!-- Google Adsense -->
