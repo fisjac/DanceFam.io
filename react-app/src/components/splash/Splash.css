@@ -1,5 +1,6 @@
 .splash-page {
   height: 100%;
+  width: 100%;
   display: flex;
   flex-direction: column;
   color: var(--icon-grey);
@@ -19,6 +20,7 @@
 .splash-main {
   display: flex;
   align-items: center;
+  width: 100%;
   flex-direction: column;
   justify-content: center;
   flex-grow: 1;
