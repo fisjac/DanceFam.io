@@ -6,7 +6,6 @@ export const localToUTC = (date) => {
 
 export const utcToLocal = (utc) => {
   const now = new Date();
-  console.log('now', now)
   const offset = now.getTimezoneOffset();
   const local = new Date(utc - offset*1000*60);
   return local;
