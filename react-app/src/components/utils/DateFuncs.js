@@ -1,3 +1,17 @@
+export const localToUTC = (date) => {
+  const offset = date.getTimezoneOffset();
+  const utcTime = new Date(date + offset*1000*60);
+  return utcTime;
+};
+
+export const utcToLocal = (utc) => {
+  const now = new Date();
+  console.log('now', now)
+  const offset = now.getTimezoneOffset();
+  const local = new Date(utc - offset*1000*60);
+  return local;
+};
+
 export const dateToBackendFormat = (date) => {
   let dateString = date.toISOString();
   return dateString.replace('T', ' ').substring(0,dateString.length - 5)

@@ -38,6 +38,12 @@ export function EditEventForm({event, setShowModal}) {
   const [type, setType] = useState(event.type);
   const { selectedId } = useContext(SelectorsContext);
 
+  const formattedStartTime = dateFuncs.checkTimeFormat(startTime);
+  const start = new Date(startDate + 'T' + formattedStartTime + '.000Z');
+  console.log(start)
+  console.log(dateFuncs.utcToLocal(start))
+  dateFuncs.localToUTC(start)
+
   const eventStyles = new Set(event.styles);
   const [styles, setStyles] = useState(
     Object.keys(styleCategories).reduce((accum, key)=> {

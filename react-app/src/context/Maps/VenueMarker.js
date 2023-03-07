@@ -3,6 +3,7 @@ import {Marker, InfoWindow} from '@react-google-maps/api';
 
 import { GoogleMapsMapContext } from './MapsLoader';
 import { SelectorsContext } from './Selector';
+import CustomInfoWindow from './CustomInfoWindow';
 
 export default function VenueMarker({venue}) {
   const anchorRef = useRef(null);
@@ -38,7 +39,7 @@ export default function VenueMarker({venue}) {
         }}
         />
       {highlightedId === venue.id &&
-        <InfoWindow
+        <CustomInfoWindow
           onClick={(e)=>{e.stopPropagation()}}
           onCloseClick={()=>setSelectedId(null)}
           anchor={currentMarker?.marker}
@@ -46,7 +47,9 @@ export default function VenueMarker({venue}) {
 
           >
             <>
-            <div style={{'display':'none'}}></div>
+            <div
+              tabIndex='0'
+              style={{'width':'0', 'height': '0'}}></div>
             <div className='infowindow-container'>
             <div className='infowindow-details'>
               <div className='infowindow-name'>{venue.name}</div>
@@ -63,7 +66,7 @@ export default function VenueMarker({venue}) {
               </div>
             </div>
             </>
-          </InfoWindow>
+          </CustomInfoWindow>
       }
     </>
   )
