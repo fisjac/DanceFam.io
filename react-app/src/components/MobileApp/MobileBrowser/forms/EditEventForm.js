@@ -22,8 +22,8 @@ export function EditEventForm({event, setShowModal}) {
   const types = useSelector(state=>state.types);
   const typesList = Object.keys(types);
 
-  let [startDateString, startTimeString] = dateFuncs.splitDatetime(event.start);
-  let [endDateString, endTimeString] = dateFuncs.splitDatetime(event.end);
+  let [startDateString, startTimeString] = dateFuncs.splitDatetime(dateFuncs.dateFromBackend(event.start));
+  let [endDateString, endTimeString] = dateFuncs.splitDatetime(dateFuncs.dateFromBackend(event.end));
 
   const [errors, setErrors] = useState([]);
   const [page, setPage] = useState(0);

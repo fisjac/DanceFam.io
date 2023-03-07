@@ -11,6 +11,11 @@ export const utcToLocal = (utc) => {
   return local;
 };
 
+export const dateFromBackend = (dateString) => {
+  const date = new Date(dateString);
+  return utcToLocal(date);
+};
+
 export const dateToBackendFormat = (date) => {
   let dateString = date.toISOString();
   return dateString.replace('T', ' ').substring(0,dateString.length - 5)
@@ -62,23 +67,19 @@ export const sortDates = (groupedEvents) => {
   return dates;
 };
 
-export const splitDatetime = (dateString) => {
-  const dateTime = new Date(dateString);
-  let [date, time] = dateTime.toISOString().split('T');
+export const splitDatetime = (datetime) => {
+  const localCoerced = utcToLocal(datetime)
+  const dateString = localCoerced.toISOString();
+  let [date, time] = dateString.split('T');
   time = time.substring(0,8)
   return [date, time];
 };
 
-export const getUtcTime = (date) => {
-  const utcString = date.toUTCString();
-  const timeStringMilitary = utcString.substring(17,22);
-  const hour = Number(timeStringMilitary.substring(0,2))
-  const nonMilitaryHour = hour % 12 === 0 ? 12 : hour % 12;
-  const nonMilitaryMinutes = timeStringMilitary.substring(3,5)
-  const amPm = Math.floor(hour/12)?'PM':'AM';
-  const nonMilitaryString = `${String(nonMilitaryHour)}:${nonMilitaryMinutes} ${amPm}`
-  return nonMilitaryString
-}
+export const getLocalTime = (date) => {
+  const localString = date.toLocaleTimeString('en-US');
+  const noSeconds = localString.substring(0,localString.length - 6) + localString.substring(localString.length-3,localString.length);
+  return noSeconds
+};
 
 export const dateCompare = (date1, date2, operator) => {
   if (operator === 'max') {
