@@ -18,7 +18,7 @@ import { getVenues } from './store/venues';
 function App() {
   const [loaded, setLoaded] = useState(false);
   const dispatch = useDispatch();
-  const [width, setwidth] = useState(window.innerWidth);
+  const [width, setWidth] = useState(window.innerWidth);
 
 
   useEffect(() => {
@@ -35,7 +35,7 @@ function App() {
 
   useEffect(()=> {
     function handleResize () {
-      setwidth(window.innerWidth)
+      if (window) setWidth(window.innerWidth)
     };
 
     window.addEventListener('resize', handleResize);

@@ -16,7 +16,7 @@ def validation_errors_to_error_messages(validation_errors):
             errorMessages.append(f'{field} : {error}')
     return errorMessages
 
-# GET all
+# GET upcoming events
 @event_routes.route('')
 def events():
     # events = Event.query.all()

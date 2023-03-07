@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import * as eventActions from '../../../../store/events';
 import ModalWrapper from '../../../../context/Modal/Modal'
 import EditEventForm from '../forms/EditEventForm';
-import { getUtcTime } from '../../../utils/DateFuncs';
+import { dateFromBackend, getLocalTime } from '../../../utils/DateFuncs';
 import { GoogleMapsMapContext } from '../../../../context/Maps/MapsLoader';
 import defaultImage from '../../../../static/dancing_couple1.svg'
 import { SelectorsContext } from '../../../../context/Maps/Selector';
@@ -15,9 +15,9 @@ export default function EventLine({event}) {
   const venues = useSelector(state=>state.venues);
   const { setHoveredId, setSelectedId} = useContext(SelectorsContext);
   const dispatch = useDispatch();
-  const start = new Date(event.start);
+  const start = dateFromBackend(event.start);
   const startWorkday = start.toString().split(' ')[0]
-  const end = new Date(event.end);
+  const end = dateFromBackend(event.end);
   const endWorkday = end.toString().split(' ')[0]
   const user = useSelector(state=>state.session.user);
 
@@ -53,7 +53,7 @@ export default function EventLine({event}) {
             />
           <div className='eventline-details'>
             <div className='eventline-name'>{event.name}</div>
-            <div className='eventline-date'>{`${startWorkday} ${getUtcTime(start)}` } - {`${endWorkday} ${getUtcTime(end)}`}</div>
+            <div className='eventline-date'>{`${startWorkday} ${getLocalTime(start)}` } - {`${endWorkday} ${getLocalTime(end)}`}</div>
             {event.externalUrl && <div
                 className='eventline-link'
                 onClick={()=>{

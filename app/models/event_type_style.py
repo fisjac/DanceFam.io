@@ -67,8 +67,8 @@ class Event(db.Model):
     return {
       "id": self.id,
       "name": self.name,
-      "start": self.start,
-      "end": self.end,
+      "start": self.start.strftime('%Y-%m-%dT%H:%M:%S'),
+      "end": self.end.strftime('%Y-%m-%dT%H:%M:%S'),
       "styles": [style.name for style in self.styles],
       "type": self.type.name,
       "organiserId": self.organiser_id,

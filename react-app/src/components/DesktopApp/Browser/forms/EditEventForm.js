@@ -22,8 +22,8 @@ export function EditEventForm({event, setShowModal}) {
   const types = useSelector(state=>state.types);
   const typesList = Object.keys(types);
 
-  let [startDateString, startTimeString] = dateFuncs.splitDatetime(event.start);
-  let [endDateString, endTimeString] = dateFuncs.splitDatetime(event.end);
+  let [startDateString, startTimeString] = dateFuncs.splitDatetime(dateFuncs.dateFromBackend(event.start));
+  let [endDateString, endTimeString] = dateFuncs.splitDatetime(dateFuncs.dateFromBackend(event.end));
 
   const [errors, setErrors] = useState([]);
   const [page, setPage] = useState(0);
@@ -50,8 +50,8 @@ export function EditEventForm({event, setShowModal}) {
     e.preventDefault();
     const formattedStartTime = dateFuncs.checkTimeFormat(startTime);
     const formattedEndTime = dateFuncs.checkTimeFormat(endTime);
-    const start = new Date(startDate + 'T' + formattedStartTime + '.000Z');
-    const end = new Date(endDate + 'T' + formattedEndTime + '.000Z');
+    const start = new Date(startDate + 'T' + formattedStartTime);
+    const end = new Date(endDate + 'T' + formattedEndTime);
     const response = await dispatch(
       eventActions.updateEvent({
         id: event.id,

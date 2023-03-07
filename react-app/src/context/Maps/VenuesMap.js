@@ -48,7 +48,7 @@ const VenuesMap = ({zoom, filter}) => {
         }}
         >
           <>
-            <div style={{'display':'none'}}></div>
+            <div tabIndex='0' style={{'display':'none'}}></div>
             {filteredVenues && Object.values(filteredVenues).map((venue)=> {
               return <VenueMarker venue={venue}/>
             })}
