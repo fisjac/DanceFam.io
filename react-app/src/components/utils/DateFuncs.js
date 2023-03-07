@@ -41,7 +41,7 @@ export const dateToday = (date = new Date()) => {
 export const groupEventsByDate = (events) => {
   const eventsList = Object.values(events);
   const groupedEvents = eventsList.reduce((accum, event) => {
-    let currentDate = new Date(event.start);
+    let currentDate = dateFromBackend(event.start);
     let currentDateString = currentDate.toLocaleDateString(undefined, {weekday: 'long',month: 'long', day: 'numeric'})
     if (!accum[currentDateString]) {
       accum[currentDateString] = [event]
@@ -57,7 +57,7 @@ export const sortDates = (groupedEvents) => {
   const dates = Object.values(groupedEvents)
       .map(event => {
         const dateString = event[0].start
-        const date = new Date(dateString)
+        const date = dateFromBackend(dateString)
         return date
       })
   dates.sort((a,b) => {
