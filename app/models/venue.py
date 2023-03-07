@@ -15,7 +15,9 @@ class Venue(db.Model):
   lng = db.Column(db.Float())
 
   events = db.relationship("Event", back_populates='venue', cascade='delete' )
+
   def to_dict(self):
+    upcoming_events = [event for event in self.events if event.end >= datetime.utcnow()]
     return {
       "id": self.id,
       "name": self.name,
@@ -26,7 +28,7 @@ class Venue(db.Model):
       "lat": self.lat,
       "lng": self.lng,
       "url": self.url,
-      "styles": list({style[0].name for style in [event.styles for event in self.events]}),
-      "types": list({event.type.name for event in self.events }),
-      "events": [event.id for event in self.events if event.end >= datetime.utcnow()]
+      "styles": list({style[0].name for style in [event.styles for event in upcoming_events]}),
+      "types": list({event.type.name for event in upcoming_events }),
+      "events": [event.id for event in upcoming_events]
     }
