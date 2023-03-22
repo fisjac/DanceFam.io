@@ -1,6 +1,5 @@
 
 import React from 'react';
-import { useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 import LogoutButton from '../../auth/LogoutButton';
@@ -73,7 +72,6 @@ const SignupButton = (props) => {
 
 
 const NavBar = () => {
-  const history = useHistory();
 
   const user = useSelector(state=>state.session.user)
   return (

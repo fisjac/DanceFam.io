@@ -1,7 +1,5 @@
 import React from 'react';
 
-import RightBar from './RightBar';
-
 import MapBrowser from './MapBrowser'
 
 import './MobileBrowser.css'

@@ -70,6 +70,7 @@ export default function Scroll({data, scrollType}) {
           </div>
         )
       };
+    default: return;
   }
 
 };
