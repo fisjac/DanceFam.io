@@ -29,8 +29,6 @@ def all_events():
     events = Event.query.all()
     return jsonify([event.to_dict() for event in events])
 
-
-
 # GET by id
 @event_routes.route('/<int:id>')
 def event(id):
@@ -54,7 +52,6 @@ def create_event():
         if form.data['external_url']:
             external_url = form.data['external_url']
         else: external_url = None
-
         event = Event(
             organiser_id = current_user.id,
             name = form.data['name'],

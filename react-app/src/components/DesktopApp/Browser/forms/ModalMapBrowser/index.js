@@ -32,7 +32,7 @@ export function MapBrowser() {
     if (mapIsLoaded) {
         setFilteredVenues(filterVenuesByBounds(venues,bounds));
         };
-  }, [bounds,venues])
+  }, [mapIsLoaded, bounds, venues])
 
   return (
         <div className='modal-center-split'>

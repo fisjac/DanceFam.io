@@ -1,18 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom';
 
 import { toggleStyle } from '../../../../store/styles';
 import { toggleType } from '../../../../store/types';
 import Collapser from './Collapser';
 
 export default function Filter() {
-  const history = useHistory();
   const dispatch = useDispatch();
   const types = useSelector(state=>state.types);
   const styles = useSelector(state=>state.styles);
 
-  const [dateFilterExpanded, setDateFilterExpanded] = useState(false);
+  // const [dateFilterExpanded, setDateFilterExpanded] = useState(false);
   const [typeFilterExpanded, setTypeFilterExpanded] = useState(false);
   const [styleFilterExpanded, setStyleFilterExpanded] = useState(false);
 

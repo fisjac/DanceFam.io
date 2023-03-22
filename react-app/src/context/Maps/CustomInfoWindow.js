@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useContext, Children, useRef} from 'react'
+import {useState, useEffect, useContext, Children, useRef} from 'react'
 import {createPortal} from 'react-dom'
 import { GoogleMapsMapContext } from './MapsLoader';
 

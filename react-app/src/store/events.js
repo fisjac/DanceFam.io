@@ -32,7 +32,6 @@ export function editEvent (payload) {
 };
 
 export function removeEvent (payload) {
-  console.log('removing event')
   return {
     type: DELETE,
     payload

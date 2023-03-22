@@ -60,7 +60,7 @@ export function MapBrowser({browserType, filter}) {
         setFilteredVenues(venues)
       };
     };
-  }, [bounds, styles, types, events, venues])
+  }, [mapIsLoaded, filter, browserType, bounds, styles, types, events, venues])
   return (
       <SelectionProvider>
         <div className='horizontal-split'>
