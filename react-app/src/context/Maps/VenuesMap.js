@@ -42,6 +42,9 @@ const VenuesMap = ({zoom, filter}) => {
         }}
         onBoundsChanged={()=>{
           setBounds(map.getBounds())
+          const lat = map.center.lat();
+          const lng = map.center.lng();
+          localStorage.setItem('location', JSON.stringify({lat,lng}))
         }}
         options={{
           disableDefaultUI: true

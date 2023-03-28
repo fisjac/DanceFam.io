@@ -8,6 +8,11 @@ import './map.css'
 
 
 function getLocation (setter) {
+  const storedLocation = JSON.parse(localStorage.getItem('location'));
+  if (storedLocation) {
+    setter(storedLocation);
+    return
+  };
   const geoLocationApi = navigator.geolocation;
   if (!geoLocationApi) {
     alert('Geolocation API is not available in your browser!')
@@ -15,7 +20,11 @@ function getLocation (setter) {
     geoLocationApi.getCurrentPosition((position)=> {
       const {coords} = position;
       setter({lat: coords.latitude, lng: coords.longitude});
-    }, (error) => alert(`There was a problem getting the user's location: ${error.message}`))
+      localStorage.setItem('location', JSON.stringify({lat: coords.latitude, lng: coords.longitude}))
+    }, (error) => {
+      alert(`There was a problem getting the user's location: ${error.message}`)
+      setter({lat:37.412079, lng:-99.703732})
+  })
   }
 };
 
