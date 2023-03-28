@@ -8,6 +8,11 @@ import './map.css'
 
 
 function getLocation (setter) {
+  const storedLocation = JSON.parse(localStorage.getItem('location'));
+  if (storedLocation) {
+    setter(storedLocation);
+    return
+  };
   const geoLocationApi = navigator.geolocation;
   if (!geoLocationApi) {
     alert('Geolocation API is not available in your browser!')
@@ -15,13 +20,16 @@ function getLocation (setter) {
     geoLocationApi.getCurrentPosition((position)=> {
       const {coords} = position;
       setter({lat: coords.latitude, lng: coords.longitude});
-    }, (error) => alert(`There was a problem getting the user's location: ${error.message}`))
+      localStorage.setItem('location', JSON.stringify({lat: coords.latitude, lng: coords.longitude}))
+    }, (error) => {
+      alert(`There was a problem getting the user's location: ${error.message}`)
+      setter({lat:37.412079, lng:-99.703732})
+  })
   }
 };
 
 // Context for loaded state of Google Maps API (happens once)
 export const GoogleMapsApiContext = createContext();
-
 
 export default function LoadMaps({children}) {
   const key = useSelector(state=>state.keys.places);
@@ -43,16 +51,23 @@ export default function LoadMaps({children}) {
   );
 };
 
-
-const libraries = ['places']
-export function GoogleMapsApiProvider ({children, apiKey}) {
+export const LocationContext = createContext()
+export function LocationProvider ({children}) {
   const [location, setLocation] = useState('');
-
   useEffect(()=>{
     if (!location) {
       getLocation(setLocation)
     };
   },[])
+  return (
+    <LocationContext.Provider value={{location, setLocation}}>
+      {children}
+    </LocationContext.Provider>
+  )
+}
+
+export function GoogleMapsApiProvider ({children, apiKey}) {
+  const libraries = ['places']
   const { isLoaded } = useLoadScript({
       googleMapsApiKey: apiKey,
       libraries
@@ -61,7 +76,7 @@ export function GoogleMapsApiProvider ({children, apiKey}) {
   if (!isLoaded) return <div>Loading...</div>
 
   return (
-    <GoogleMapsApiContext.Provider value={{isLoaded, location}}>
+    <GoogleMapsApiContext.Provider value={{isLoaded}}>
       {children}
     </GoogleMapsApiContext.Provider>
   );

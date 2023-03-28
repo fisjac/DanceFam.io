@@ -7,7 +7,7 @@ function MapGenerator({filter}) {
 
   const {isLoaded} = useContext(GoogleMapsApiContext)
     return (
-      isLoaded && <VenuesMap zoom={10} filter={filter}/>
+      isLoaded && <VenuesMap zoom={5} filter={filter}/>
     )
 
 };

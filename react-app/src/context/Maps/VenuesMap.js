@@ -3,7 +3,7 @@ import {GoogleMap} from '@react-google-maps/api';
 
 import { boundsContext } from './Bounds';
 import VenueMarker from './VenueMarker';
-import { GoogleMapsApiContext, GoogleMapsMapContext } from './MapsLoader';
+import { GoogleMapsMapContext, LocationContext } from './MapsLoader';
 import { useSelector } from 'react-redux';
 
 import { filterByStyles, filterByTypes, filterVenuesByBounds } from '../../components/utils/Filters';
@@ -13,7 +13,7 @@ const VenuesMap = ({zoom, filter}) => {
   const styles = useSelector(state=>state.styles);
   const types = useSelector(state=>state.types);
 
-  const {location} = useContext(GoogleMapsApiContext);
+  const {location, setLocation} = useContext(LocationContext);
   const {setMapIsLoaded, map, setMap} = useContext(GoogleMapsMapContext)
 
   const {bounds, setBounds} = useContext(boundsContext);
@@ -35,7 +35,10 @@ const VenuesMap = ({zoom, filter}) => {
         mapContainerClassName='map'
         center={location}
         zoom={zoom}
-        options={{gestureHandling:'greedy'}}
+        options={{
+          gestureHandling:'greedy',
+          disableDefaultUI: true
+      }}
         onLoad={(map)=>{
           setMap(map);
           setMapIsLoaded(true);
@@ -43,8 +46,12 @@ const VenuesMap = ({zoom, filter}) => {
         onBoundsChanged={()=>{
           setBounds(map.getBounds())
         }}
-        options={{
-          disableDefaultUI: true
+        onDragEnd={()=>{
+          const lat = map.center.lat();
+          const lng = map.center.lng();
+          setLocation({lat,lng})
+          localStorage.setItem('location', JSON.stringify({lat,lng}))
+
         }}
         >
           <>
