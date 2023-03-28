@@ -6,8 +6,8 @@ import BottomNavBar from './BottomNavBar';
 export default function index() {
   return (
     <>
-      <MobileBrowser/>
       <BottomNavBar/>
+      <MobileBrowser/>
     </>
   )
 }
