@@ -52,7 +52,7 @@ export function MapBrowser({browserType, filter}) {
         if (browserType==='events') {
           let filteredEventsTemp = filterEventsByVenues(events,filteredVenuesTemp);
           filteredEventsTemp = filterByTypes(filteredEventsTemp, types,'events');
-          filteredVenuesTemp = filterByStyles(filteredEventsTemp,styles);
+          filteredEventsTemp = filterByStyles(filteredEventsTemp,styles);
           setFilteredEvents(filteredEventsTemp);
         };
       } else {
