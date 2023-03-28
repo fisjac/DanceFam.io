@@ -35,7 +35,10 @@ const VenuesMap = ({zoom, filter}) => {
         mapContainerClassName='map'
         center={location}
         zoom={zoom}
-        options={{gestureHandling:'greedy'}}
+        options={{
+          gestureHandling:'greedy',
+          disableDefaultUI: true
+      }}
         onLoad={(map)=>{
           setMap(map);
           setMapIsLoaded(true);
@@ -45,9 +48,6 @@ const VenuesMap = ({zoom, filter}) => {
           const lat = map.center.lat();
           const lng = map.center.lng();
           localStorage.setItem('location', JSON.stringify({lat,lng}))
-        }}
-        options={{
-          disableDefaultUI: true
         }}
         >
           <>
