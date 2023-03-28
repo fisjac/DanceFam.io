@@ -49,6 +49,7 @@ export const filterByStyles = (data, styles) => {
   for (let id in data) {
     for (let style of data[id].styles) {
       if (activeStyles.has(style)) {
+        console.log(style, activeStyles)
         filteredData[id] = data[id];
         break;
       };
