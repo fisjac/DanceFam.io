@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 import Scroll from './Scroll'
 import MapGenerator from '../../../../../context/Maps/MapGenerator'
 import BoundsProvider, { boundsContext } from '../../../../../context/Maps/Bounds';
-import { GoogleMapsMapContext, GoogleMapsMapProvider } from '../../../../../context/Maps/MapsLoader';
+import { GoogleMapsMapContext, GoogleMapsMapProvider, LocationProvider } from '../../../../../context/Maps/MapsLoader';
 import { filterVenuesByBounds } from '../../../../utils/Filters';
 
 import './ModalMapBrowser.css'
@@ -13,9 +13,11 @@ import './ModalMapBrowser.css'
 export default function BoundsLinkedBrowser () {
   return (
     <BoundsProvider>
-      <GoogleMapsMapProvider>
-        <MapBrowser/>
-      </GoogleMapsMapProvider>
+      <LocationProvider>
+        <GoogleMapsMapProvider>
+          <MapBrowser/>
+        </GoogleMapsMapProvider>
+      </LocationProvider>
     </BoundsProvider>
   );
 };

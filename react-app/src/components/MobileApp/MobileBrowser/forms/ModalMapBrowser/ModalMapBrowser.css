@@ -1,6 +1,6 @@
 .modal-center-split {
   display: flex;
-  /* flex-direction: column; */
+  flex-direction: column;
   width: 100%;
   height: 100%;
   margin-left: 5px;
@@ -13,9 +13,8 @@
 }
 
 .modal-map-section {
-  width: 60%;
-  height: 55vh;
-  /* height: 500px; */
+  width: 100%;
+  height: 45vh;
 }
 
 .modal-eventline-container {
@@ -85,7 +84,8 @@
 .modal-left-section {
   display: flex;
   flex-direction: column;
-  width: 40%;
+  width: 100%;
+  height: calc(100% - 45vh);
 }
 
 .page-button {

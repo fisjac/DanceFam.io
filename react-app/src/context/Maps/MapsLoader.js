@@ -31,7 +31,6 @@ function getLocation (setter) {
 // Context for loaded state of Google Maps API (happens once)
 export const GoogleMapsApiContext = createContext();
 
-
 export default function LoadMaps({children}) {
   const key = useSelector(state=>state.keys.places);
   const dispatch = useDispatch();
@@ -52,16 +51,23 @@ export default function LoadMaps({children}) {
   );
 };
 
-
-const libraries = ['places']
-export function GoogleMapsApiProvider ({children, apiKey}) {
+export const LocationContext = createContext()
+export function LocationProvider ({children}) {
   const [location, setLocation] = useState('');
-
   useEffect(()=>{
     if (!location) {
       getLocation(setLocation)
     };
   },[])
+  return (
+    <LocationContext.Provider value={{location, setLocation}}>
+      {children}
+    </LocationContext.Provider>
+  )
+}
+
+export function GoogleMapsApiProvider ({children, apiKey}) {
+  const libraries = ['places']
   const { isLoaded } = useLoadScript({
       googleMapsApiKey: apiKey,
       libraries
@@ -70,7 +76,7 @@ export function GoogleMapsApiProvider ({children, apiKey}) {
   if (!isLoaded) return <div>Loading...</div>
 
   return (
-    <GoogleMapsApiContext.Provider value={{isLoaded, location}}>
+    <GoogleMapsApiContext.Provider value={{isLoaded}}>
       {children}
     </GoogleMapsApiContext.Provider>
   );
