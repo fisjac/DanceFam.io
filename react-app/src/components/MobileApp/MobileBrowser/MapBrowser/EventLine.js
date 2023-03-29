@@ -54,14 +54,14 @@ export default function EventLine({event}) {
           <div className='eventline-details'>
             <div className='eventline-name'>{event.name}</div>
             <div className='eventline-date'>{`${startWorkday} ${getLocalTime(start)}` } - {`${endWorkday} ${getLocalTime(end)}`}</div>
-            {event.externalUrl && <div
+            <div
                 className='eventline-link'
                 onClick={()=>{
                   window.open(event.externalUrl)
                 }}
                 >
-                Website
-              </div>}
+                {`${event.externalUrl ? 'Website' : ''}`}
+              </div>
           </div>
           {user && user.id === event.organiserId && (<div className='eventline-body-right'>
             <ModalWrapper
