@@ -282,7 +282,6 @@
 
 .no-events {
   display: flex;
-  background-color: var(--icon-grey);
   border-top-left-radius: 5px;
   border-bottom-left-radius: 5px;
   align-items: center;
