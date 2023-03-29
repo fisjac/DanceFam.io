@@ -305,7 +305,7 @@ width:30px;
 .right-bar {
   display: flex;
   flex-direction: column;
-  width: 15%;
+  width: fit-content;
   /* max-width: 150px; */
   justify-content: center;
 }
