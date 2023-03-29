@@ -305,7 +305,7 @@ width:30px;
 .right-bar {
   display: flex;
   flex-direction: column;
-  /* width: max-content; */
+  width: 15%;
   /* max-width: 150px; */
   justify-content: center;
 }
@@ -386,7 +386,6 @@ width:30px;
 
 .no-events {
   display: flex;
-  background-color: var(--icon-grey);
   border-top-left-radius: 5px;
   border-bottom-left-radius: 5px;
   align-items: center;

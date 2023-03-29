@@ -20,7 +20,6 @@ export const dateFromBackend = (dateString) => {
 export const dateToBackendFormat = (date) => {
   const dateString = date.toISOString();
   const backendFormatString = dateString.replace('T', ' ').substring(0,dateString.length - 5);
-  console.log(backendFormatString)
   return backendFormatString
 }
 
