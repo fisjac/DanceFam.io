@@ -8,7 +8,7 @@ import MapGenerator from '../../../../context/Maps/MapGenerator'
 import BoundsProvider, { boundsContext } from '../../../../context/Maps/Bounds';
 import { GoogleMapsMapContext, GoogleMapsMapProvider } from '../../../../context/Maps/MapsLoader';
 import SelectionProvider from '../../../../context/Maps/Selector';
-import { filterVenuesByBounds, filterByStyles, filterByTypes, filterEventsByVenues } from '../../../utils/Filters';
+import { filterVenuesByBounds, filterByStyles, filterByTypes, filterEventsByVenues, filterVenuesByEvents } from '../../../utils/Filters';
 
 export default function BoundsLinkedBrowser ({browserType, filter=true}) {
   return (
@@ -45,6 +45,7 @@ export function MapBrowser({browserType, filter}) {
           filteredEventsTemp = filterByTypes(filteredEventsTemp, types,'events');
           filteredEventsTemp = filterByStyles(filteredEventsTemp,styles);
           setFilteredEvents(filteredEventsTemp);
+          setFilteredVenues(filterVenuesByEvents(filteredEventsTemp, filteredVenuesTemp))
         };
       } else {
         setFilteredEvents(events)

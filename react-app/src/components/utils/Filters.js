@@ -71,3 +71,14 @@ export const filterEventsByVenues = (events, venues) => {
   };
   return filteredEvents;
 };
+
+export const filterVenuesByEvents = (events, venues) => {
+  if (!Object.values(events).length) return {}
+  const filteredVenues = {};
+  for (let eventId in events) {
+    let venueId = events[eventId]
+    if (!filteredVenues[venueId]) {
+      filteredVenues[venueId] = venues[venueId]
+    }
+  }
+}
