@@ -21,6 +21,14 @@ export default function Scroll({data, scrollType}) {
                   return dateString;
                 }).map((date, idx) => (
                       <>
+                      {Math.random() <= 0.1 &&
+                        <ins class="adsbygoogle"
+                          style="display:block"
+                          data-ad-format="fluid"
+                          data-ad-layout-key="-ft+5s-18-2e+93"
+                          data-ad-client="ca-pub-6254698020872115"
+                          data-ad-slot="9226096593"></ins>
+                          }
                         <div key={date + '-' + idx} className='eventline-header'>
                           {date}
                         </div>
