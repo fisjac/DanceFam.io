@@ -88,9 +88,6 @@ export const GoogleMapsMapContext = createContext();
 export function GoogleMapsMapProvider ({children}) {
   const [mapIsLoaded, setMapIsLoaded] = useState(false);
   const [map, setMap] = useState(null);
-  useEffect(()=>{
-    window.document.addEventListener('keypress',()=>console.log(document.activeElement))
-  },[])
 
   return (
     <GoogleMapsMapContext.Provider value={{mapIsLoaded, setMapIsLoaded, map,setMap}}>
