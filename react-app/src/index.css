@@ -9,12 +9,16 @@ body {
   margin: 0;
   position: fixed;
   touch-action: none;
+  width: 100%;
 }
 
 html, body {
   overflow-y: hidden;
+  /* overflow-x: hidden; */
   overscroll-behavior-y: none;
 }
+
+:focus:not(:focus-visible) { outline: none }
 
 #root {
   height:100vh;
