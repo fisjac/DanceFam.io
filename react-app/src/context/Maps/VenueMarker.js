@@ -51,10 +51,20 @@ export default function VenueMarker({venue}) {
               tabIndex='0'
               style={{'width':'0', 'height': '0'}}></div>
             <div className='infowindow-container'>
-            <div className='infowindow-details'>
+            <div
+              className='infowindow-details'
+              >
               <div className='infowindow-name'>{venue.name}</div>
-              <div>{venue.address},</div>
-              <div>{venue.city}, {venue.state}</div>
+              <div
+                className='infowindow-address'
+                onClick={()=>{
+                  venue.address.replace(' ', '+')
+                  window.open(`https://www.google.com/maps/place/${venue.address.replace(' ', '+')},+${venue.city},+${venue.state}`)
+                }}
+                >
+                <div>{venue.address},</div>
+                <div>{venue.city}, {venue.state}</div>
+              </div>
               {venue.url && <div
                 className='link'
                 onClick={()=>{

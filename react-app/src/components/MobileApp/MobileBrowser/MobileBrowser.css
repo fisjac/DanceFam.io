@@ -408,6 +408,16 @@
   flex-grow: 1;
 }
 
+.infowindow-address {
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+}
+
+.infowindow-address:hover {
+  text-decoration: underline;
+}
+
 .infowindow-name {
   font-weight: 800;
   font-size: 14px;
