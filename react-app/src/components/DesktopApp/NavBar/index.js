@@ -20,6 +20,7 @@ const AddEventButton = () => {
   return (
     <ModalWrapper
       header='Create an Event'
+      bespokeClassName='create-event__desktop'
       form={<CreateEventForm/>}
       >
       <div className='dropdown-button'>Create Event</div>
@@ -31,6 +32,7 @@ const AddVenueButton = () => {
   return (
     <ModalWrapper
     form={<AddVenueForm/>}
+    bespokeClassName='create-venue__desktop'
     header='Add a venue'
     >
     <div className='dropdown-button'>Add Venue</div>
@@ -51,7 +53,7 @@ const LoginButton = (props) => {
   return (
     <ModalWrapper
         form={<LoginForm/>}
-        closePrev={props.setShowModal}
+        bespokeClassName='login__desktop'
         header='Log In'>
         <div className='dropdown-button'>
           Log In
@@ -63,9 +65,10 @@ const LoginButton = (props) => {
 const SignupButton = (props) => {
   return (
     <ModalWrapper
-    form={<SignUpForm/>}
-    header='Sign Up'
-    >
+      bespokeClassName='signup__desktop'
+      form={<SignUpForm/>}
+      header='Sign Up'
+      >
     <div className='dropdown-button'>
       Sign Up
     </div>

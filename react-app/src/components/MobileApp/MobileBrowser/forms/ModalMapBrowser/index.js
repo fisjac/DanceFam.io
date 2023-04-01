@@ -37,9 +37,9 @@ export function MapBrowser() {
   }, [mapIsLoaded, bounds, venues])
 
   return (
-        <div className='modal-center-split'>
+        <div className='modal-center-split__mobile'>
           { venues && <Scroll data={filteredVenues}/>}
-          <div className='modal-map-section'>
+          <div className='modal-map-section__mobile'>
             <MapGenerator filter={false}/>
           </div>
         </div>

@@ -16,6 +16,7 @@ import './BottomNavBar.css'
 const AddEventButton = () => {
   return (
     <ModalWrapper
+      bespokeClassName='create-event__mobile'
       header='Create an Event'
       form={<CreateEventForm/>}
       >
@@ -27,9 +28,10 @@ const AddEventButton = () => {
 const AddVenueButton = () => {
   return (
     <ModalWrapper
-    form={<AddVenueForm/>}
-    header='Add a venue'
-    >
+      bespokeClassName='create-venue__mobile'
+      form={<AddVenueForm/>}
+      header='Add a venue'
+      >
     <div className='dropdown-button'>Add Venue</div>
   </ModalWrapper>
   )
@@ -47,8 +49,8 @@ const CreateMenu = () => {
 const LoginButton = (props) => {
   return (
     <ModalWrapper
+      bespokeClassName='login__mobile'
         form={<LoginForm/>}
-        closePrev={props.setShowModal}
         header='Log In'>
         <div className='dropdown-button'>
           Log In
@@ -60,12 +62,13 @@ const LoginButton = (props) => {
 const SignupButton = (props) => {
   return (
     <ModalWrapper
-    form={<SignUpForm/>}
-    header='Sign Up'
-    >
-    <div className='dropdown-button'>
-      Sign Up
-    </div>
+      bespokeClassName='signup__mobile'
+      form={<SignUpForm/>}
+      header='Sign Up'
+      >
+      <div className='dropdown-button'>
+        Sign Up
+      </div>
   </ModalWrapper>
   )
 };

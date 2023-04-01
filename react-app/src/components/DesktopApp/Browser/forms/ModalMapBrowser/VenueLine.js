@@ -11,7 +11,7 @@ export default function VenueLine({venue}) {
   return (
     <>
       <div
-        className='modal-eventline-container'
+        className='modal-venueline-container'
         onClick={(e)=>{
             e.preventDefault()
             setSelectedId(venue.id);
@@ -20,8 +20,8 @@ export default function VenueLine({venue}) {
         onMouseEnter={()=>setHoveredId(venue.id)}
         onMouseLeave={()=> setHoveredId(null)}
         >
-        <div className='modal-eventline-body'>
-          <div className='modal-eventline-details'>
+        <div className='modal-venueline-body__desktop'>
+          <div className='modal-venueline-details'>
             <div className='eventline-name'>{venue.name}</div>
             {/* add in venue details */}
           </div>

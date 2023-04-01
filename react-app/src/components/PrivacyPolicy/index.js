@@ -26,7 +26,7 @@ export default function PrivacyPolicy() {
     <div id="modal">
       <div id="modal-background" onClick={()=>{
         history.push('/app')}} />
-        <div id="modal-container">
+        <div className="modal-container">
           <div id='modal-header'>
             <img id='modal-logo' alt='logo' src={logo}/>
             Privacy Policy
@@ -39,7 +39,7 @@ export default function PrivacyPolicy() {
               <i className="fa-solid fa-x"></i>
             </div>
           </div>
-          <div id='modal-content'>
+          <div className='modal-content'>
             <div dangerouslySetInnerHTML={{__html: htmlFileString}}></div>
           </div>
         </div>
