@@ -27,6 +27,7 @@ export default function VenueMarker({venue}) {
         ref={anchorRef}
         onClick={()=>{
           map.panTo({'lat': venue.lat, 'lng':venue.lng});
+          map.panBy(0,-16-56) //offsetting y pan by height of marker + infowindow
           setSelectedId(venue.id);
         }}
         onMouseOver={(e)=>setHoveredId(venue.id)}
@@ -43,39 +44,37 @@ export default function VenueMarker({venue}) {
           onClick={(e)=>{e.stopPropagation()}}
           onCloseClick={()=>setSelectedId(null)}
           anchor={currentMarker?.marker}
-          options={{'disableAutoPan': true}}
+          options={{
+            'disableAutoPan': true,
+            'maxWidth': '200px'
+        }}
 
           >
-            <>
-            <div
-              tabIndex='0'
-              style={{'width':'0', 'height': '0'}}></div>
-            <div className='infowindow-container'>
-            <div
-              className='infowindow-details'
-              >
-              <div className='infowindow-name'>{venue.name}</div>
+              <div className='infowindow-container'>
               <div
-                className='infowindow-address'
-                onClick={()=>{
-                  venue.address.replace(' ', '+')
-                  window.open(`https://www.google.com/maps/place/${venue.address.replace(' ', '+')},+${venue.city},+${venue.state}`)
-                }}
+                className='infowindow-details'
                 >
-                <div>{venue.address},</div>
-                <div>{venue.city}, {venue.state}</div>
-              </div>
-              {venue.url && <div
-                className='link'
-                onClick={()=>{
-                  window.open(venue.url)
-                }}
-                >
-                Website
-              </div>}
+                <div className='infowindow-name'>{venue.name}</div>
+                <div
+                  className='infowindow-address'
+                  onClick={()=>{
+                    venue.address.replace(' ', '+')
+                    window.open(`https://www.google.com/maps/place/${venue.address.replace(' ', '+')},+${venue.city},+${venue.state}`)
+                  }}
+                  >
+                  <div>{venue.address},</div>
+                  <div>{venue.city}, {venue.state}</div>
+                </div>
+                {venue.url && <div
+                  className='link'
+                  onClick={()=>{
+                    window.open(venue.url)
+                  }}
+                  >
+                  Website
+                </div>}
               </div>
             </div>
-            </>
           </CustomInfoWindow>
       }
     </>

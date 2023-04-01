@@ -16,6 +16,7 @@ export default function VenueLine({venue}) {
             e.preventDefault()
             setSelectedId(venue.id);
             map.panTo({lat: venue.lat, lng: venue.lng});
+            map.panBy(0, -16-56)
         }}
         onMouseEnter={()=>setHoveredId(venue.id)}
         onMouseLeave={()=> setHoveredId(null)}

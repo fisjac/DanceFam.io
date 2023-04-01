@@ -67,6 +67,10 @@
   width: 90vw;
 }
 
+/* #create-event__mobile.modal-content {
+  height: 60vh;
+} */
+
 #modal-header {
   display: flex;
   flex-direction: column;

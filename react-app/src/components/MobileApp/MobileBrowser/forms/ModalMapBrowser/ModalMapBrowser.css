@@ -10,8 +10,16 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  height: 200px;
+
 }
+
+.modal-left-section__mobile {
+  height: 20vh;
+}
+.modal-map-section__mobile {
+  height: 36vh;
+}
+
 
 .modal-eventscroll {
   width: 100%;
@@ -28,7 +36,7 @@
 
 .modal-map-section__mobile {
   width: 100%;
-  height: calc(min(350px,40vh));
+  /* height: calc(min(350px,40vh)); */
 }
 
 .modal-venueline-body__mobile {

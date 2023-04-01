@@ -1,4 +1,4 @@
-import React, {useMemo, useContext, useState} from 'react'
+import React, {useMemo, useContext, useState, createRef, useEffect} from 'react'
 import { useSelector } from 'react-redux';
 
 
@@ -37,9 +37,11 @@ export function MapBrowser() {
   }, [mapIsLoaded, bounds, venues])
 
   return (
-        <div className='modal-center-split__mobile'>
+        <div className='modal-center-split__mobile'
+        >
           { venues && <Scroll data={filteredVenues}/>}
-          <div className='modal-map-section__mobile'>
+          <div className='modal-map-section__mobile'
+          >
             <MapGenerator filter={false}/>
           </div>
         </div>
