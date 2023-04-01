@@ -15,6 +15,7 @@
 
 .modal-left-section__mobile {
   height: calc(20vh - 25px);
+  overscroll-behavior-y: none;
 }
 .modal-map-section__mobile {
   height: calc(36vh- 25px);
