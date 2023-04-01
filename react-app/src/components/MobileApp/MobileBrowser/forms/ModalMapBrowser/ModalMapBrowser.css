@@ -14,10 +14,10 @@
 }
 
 .modal-left-section__mobile {
-  height: 20vh;
+  height: calc(20vh - 25px);
 }
 .modal-map-section__mobile {
-  height: 36vh;
+  height: calc(36vh- 25px);
 }
 
 
