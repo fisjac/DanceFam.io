@@ -15,6 +15,7 @@ function SingleVenueMap({venue}) {
     center={center}
     zoom={5}
     options={{
+      gestureHandling:'greedy',
       disableDefaultUI: true
 
     }}
