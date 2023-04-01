@@ -1,5 +1,6 @@
 .footer {
   display: flex;
+  align-items: center;
   justify-content: center;
   width: 100%;
   height: 30px;
@@ -12,6 +13,8 @@
 }
 
 .footer-link {
+  display: flex;
+  align-items: center;
   margin: 0 4px;
   cursor: pointer;
 }
