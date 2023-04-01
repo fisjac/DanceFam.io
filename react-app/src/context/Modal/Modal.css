@@ -20,6 +20,8 @@
   z-index: 998;
 }
 
+
+
 .hidden {
   display: none !important;
 }
@@ -30,15 +32,35 @@
   padding: 37px 37px;
   display: flex;
   flex-flow:column;
-  max-width: 700px;
+  /* max-width: 700px;
   min-width: 60%;
-  height: 80%;
+  height: 80%; */
   background-color:white;
   transition: bottom .2s ease-out;
   border: 1px solid black;
   border-radius: 5px;
   box-shadow: 0 6px 12px rgb(0 0 0 / 10%);
   border: 1px solid var(--shadow);
+}
+
+#modal-container.login__desktop {
+  width: 50vw;
+  max-width: 500px;
+}
+
+#modal-container.signup__desktop {
+  width: 50vw;
+  max-width: 500px;
+}
+
+#modal-container.create-event__desktop {
+  width: 60vw;
+  max-width: 800px;
+}
+
+#modal-container.create-venue__desktop {
+  width: 60vw;
+  max-width: 800px;
 }
 
 #modal-header {
@@ -71,6 +93,7 @@
   overflow-y: scroll;
   -ms-overflow-style: none;
   scrollbar-width: none;
+  overscroll-behavior-y: none;
 }
 
 #modal-content::-webkit-scrollbar {
