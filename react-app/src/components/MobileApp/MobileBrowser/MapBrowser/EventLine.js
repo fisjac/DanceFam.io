@@ -30,6 +30,7 @@ export default function EventLine({event}) {
           if (e.target.className.includes('eventline')) {
             setSelectedId(event.venueId);
             map.panTo({lat: venues[event.venueId].lat, lng: venues[event.venueId].lng});
+            map.panBy(0,-16-56) //offsetting y pan by height of marker + infowindow
           };
         }}
         onMouseEnter={(e)=>{

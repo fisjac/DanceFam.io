@@ -393,7 +393,7 @@
 .infowindow-container {
   display: flex;
   flex-direction: row;
-  /* width: fit-content; */
+  width: max-content;
 }
 
 .infowindow-details {
@@ -410,6 +410,7 @@
 .infowindow-address {
   display: flex;
   flex-direction: column;
+  max-width: 208px;
   cursor: pointer;
 }
 
@@ -420,9 +421,10 @@
 .infowindow-name {
   font-weight: 800;
   font-size: 14px;
+  max-width: 208px;
   overflow: hidden;
-  overflow-wrap: break-word;
-  /* color: var(--theme-dark); */
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .welcome-user {

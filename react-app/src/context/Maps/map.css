@@ -26,6 +26,6 @@
 }
 
 .inline-map {
-  height: 50vh;
+  height: calc(min(40vh,300px));
   width: 100%;
 }
