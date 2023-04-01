@@ -20,6 +20,7 @@ export default function Scroll({data}) {
             }
             <div className='center'>
               <ModalWrapper
+                bespokeClassName='create-venue__desktop'
                 form={<AddVenueForm/>}
                 header='Add a venue'
                 >

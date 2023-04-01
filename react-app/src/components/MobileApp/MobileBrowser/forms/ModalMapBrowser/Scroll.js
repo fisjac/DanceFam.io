@@ -8,7 +8,7 @@ import VenueLine from './VenueLine';
 export default function Scroll({data}) {
   if (data) {
       return (
-        <div className='modal-left-section'>
+        <div className='modal-left-section__mobile'>
           <div className='select-venue-header'>Select a Venue</div>
           <div className='modal-eventscroll'>
             {Object.values(data).map(venue => (
@@ -20,6 +20,7 @@ export default function Scroll({data}) {
             }
             <div className='center'>
               <ModalWrapper
+                bespokeClassName='create-venue__mobile'
                 form={<AddVenueForm/>}
                 header='Add a venue'
                 >

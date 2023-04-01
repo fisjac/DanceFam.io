@@ -67,8 +67,8 @@ export function Modal (props) {
       <div id="modal-background" onClick={()=>{
         props.setShowModal(false)}} />
         <div
-          id="modal-container"
-          className={props.bespokeClassName}>
+          className="modal-container"
+          id={props.bespokeClassName}>
           <div id='modal-header'>
             <img id='modal-logo' alt='logo' src={logo}/>
             {props.header || 'New Modal'}
@@ -83,8 +83,8 @@ export function Modal (props) {
 
           </div>
           <div
-            id='modal-content'
-            className={props.bespokeClassName}
+            className='modal-content'
+            id={props.bespokeClassName}
             >
             {React.cloneElement(props.children, {...props})}
           </div>

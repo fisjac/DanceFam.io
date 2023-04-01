@@ -1,9 +1,16 @@
-.modal-center-split {
+.modal-center-split__mobile {
   display: flex;
   flex-direction: column;
   width: 100%;
   height: 100%;
-  margin-left: 5px;
+  /* margin-left: 5px; */
+}
+
+.modal-left-section__mobile {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 200px;
 }
 
 .modal-eventscroll {
@@ -12,31 +19,22 @@
   /* height: 80vh; */
 }
 
-.modal-map-section {
+.modal-map-section__mobile {
   width: 100%;
-  height: 45vh;
+  height: calc(min(350px,40vh));
 }
 
-.modal-eventline-container {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-}
-.modal-eventline-body {
+.modal-venueline-body__mobile {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   margin-right: 5px;
-  margin-bottom: 5px;
-  border-radius: 5px;
-  min-height: 25px;
-  overflow: hidden;
+  /* padding-left: 2px; */
+  /* margin-bottom: 2px; */
+  /* border-radius: 5px; */
+  height: 35px;
 }
 
-.modal-eventline-body:hover {
-  box-shadow: 1px 1px 3px 1px var(--shadow);
-  cursor: pointer;
-  /* transition: .1s; */
-}
 
 .add-venue-button {
   color: white;
@@ -81,12 +79,7 @@
   border-bottom: 1px solid var(--shadow);
 }
 
-.modal-left-section {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  height: calc(100% - 45vh);
-}
+
 
 .page-button {
   display: flex;

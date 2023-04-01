@@ -3,7 +3,7 @@
   /* flex-direction: column; */
   width: 100%;
   height: 100%;
-  margin-left: 5px;
+  /* margin-left: 5px; */
 }
 
 .modal-eventscroll {
@@ -18,26 +18,41 @@
   /* height: 500px; */
 }
 
-.modal-eventline-container {
+.modal-venueline-container {
   display: flex;
+  justify-content: center;
   flex-direction: column;
-  width: 100%;
-}
-.modal-eventline-body {
-  display: flex;
-  justify-content: space-between;
+  /* padding-right: 5px; */
+  margin-left: 2px;
   margin-right: 5px;
-  margin-bottom: 5px;
   border-radius: 5px;
-  min-height: 25px;
-  overflow: hidden;
+  width: calc(100%-7px);
 }
 
-.modal-eventline-body:hover {
+.modal-venueline-container:hover {
   box-shadow: 1px 1px 3px 1px var(--shadow);
   cursor: pointer;
   /* transition: .1s; */
 }
+
+.modal-venueline-body__desktop {
+  display: flex;
+  justify-content: space-between;
+  margin-right: 5px;
+  height: 35px;
+  /* margin-bottom: 5px; */
+}
+
+.modal-venueline-details {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  width: 100%;
+  /* margin-left: 10px; */
+  /* flex-grow: 1; */
+}
+
+
 
 .add-venue-button {
   color: white;

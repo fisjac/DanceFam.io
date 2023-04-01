@@ -7,6 +7,10 @@
   border-top-right-radius: 5px;
 }
 
+.map div {
+  width: fit-content
+}
+
 .map:before {
   box-shadow: 4px 0 4px -4px rgba(0, 0, 0, 0.5) inset;
   content: "";
@@ -22,6 +26,6 @@
 }
 
 .inline-map {
-  height: 250px;
+  height: 50vh;
   width: 100%;
 }
