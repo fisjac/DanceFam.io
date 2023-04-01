@@ -7,7 +7,7 @@ import './Browser.css'
 
 export default function Browser() {
   return (
-    <div className='main-page'>
+    <div className='main-page__desktop'>
       <div className='center-container'>
         <MapBrowser browserType={'events'}/>
       </div>

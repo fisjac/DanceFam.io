@@ -15,8 +15,15 @@
 
 .modal-eventscroll {
   width: 100%;
-  /* min-width:141.7px */
-  /* height: 80vh; */
+  height: calc(100% - 31px);
+  overflow-y: scroll;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  overscroll-behavior-y: none;
+}
+
+.modal-eventscroll::-webkit-scrollbar {
+  display: none;
 }
 
 .modal-map-section__mobile {

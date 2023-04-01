@@ -6,7 +6,7 @@ import './MobileBrowser.css'
 
 export default function MobileBrowser() {
   return (
-    <div className='main-page'>
+    <div className='main-page__mobile'>
       <div className='center-container'>
         <MapBrowser browserType={'events'}/>
       </div>
