@@ -18,7 +18,6 @@ export default function Resizer({onResize}) {
       className='grip-lines'
       onTouchStart={(e) => handleTouchStart(e)}
       onTouchMove={(e)=>{
-        e.preventDefault();
         handleTouchMove(e);
       }}
       >

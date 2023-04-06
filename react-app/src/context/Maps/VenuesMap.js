@@ -57,7 +57,10 @@ const VenuesMap = ({zoom, filter}) => {
           <>
             <div tabIndex='0' style={{'display':'none'}}></div>
             {filteredVenues && Object.values(filteredVenues).map((venue)=> {
-              return <VenueMarker venue={venue}/>
+              return <VenueMarker
+                key={'venuemarker' + venues}
+                venue={venue}
+                />
             })}
           </>
       </GoogleMap>

@@ -83,9 +83,9 @@ export default function CreateEventForm({setShowModal}) {
               </div>
           </div>
         </div>}
-        <div className='inline-map'>
+        {/* <div className='inline-map'>
           <SingleVenueMap venue={venue}/>
-        </div>
+        </div> */}
         <button
           type='submit'
           className={`submit-button ${!venue?'disabled':''}`}

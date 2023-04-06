@@ -9,15 +9,15 @@ import SignUpForm from '../../auth/SignUpForm';
 import DropDownWrapper from '../../../context/Dropdown/Dropdown';
 import ModalWrapper from '../../../context/Modal/Modal';
 import AddVenueForm from '../MobileBrowser/forms/AddVenueForm';
-import CreateEventForm from '../MobileBrowser/forms/CreateEventForm'
+import CreateEventForm from '../MobileBrowser/forms/CreateEventForm';
 
-import './BottomNavBar.css'
+import './NavBar.css'
 
 const AddEventButton = () => {
   return (
     <ModalWrapper
-      bespokeClassName='create-event__mobile'
       header='Create an Event'
+      bespokeClassName='create-event__mobile'
       form={<CreateEventForm/>}
       >
       <div className='dropdown-button'>Create Event</div>
@@ -28,10 +28,10 @@ const AddEventButton = () => {
 const AddVenueButton = () => {
   return (
     <ModalWrapper
-      bespokeClassName='create-venue__mobile'
-      form={<AddVenueForm/>}
-      header='Add a venue'
-      >
+    form={<AddVenueForm/>}
+    bespokeClassName='create-venue__mobile'
+    header='Add a venue'
+    >
     <div className='dropdown-button'>Add Venue</div>
   </ModalWrapper>
   )
@@ -39,7 +39,7 @@ const AddVenueButton = () => {
 
 const CreateMenu = () => {
   return (
-    <div className='mobile-create-dropdown'>
+    <div className='create-dropdown'>
       <AddEventButton/>
       <AddVenueButton/>
     </div>
@@ -49,8 +49,8 @@ const CreateMenu = () => {
 const LoginButton = (props) => {
   return (
     <ModalWrapper
-      bespokeClassName='login__mobile'
         form={<LoginForm/>}
+        bespokeClassName='login__mobile'
         header='Log In'>
         <div className='dropdown-button'>
           Log In
@@ -66,9 +66,9 @@ const SignupButton = (props) => {
       form={<SignUpForm/>}
       header='Sign Up'
       >
-      <div className='dropdown-button'>
-        Sign Up
-      </div>
+    <div className='dropdown-button'>
+      Sign Up
+    </div>
   </ModalWrapper>
   )
 };
@@ -78,20 +78,24 @@ const NavBar = () => {
 
   const user = useSelector(state=>state.session.user)
   return (
-    <div className='bottom-navbar'>
-      {user &&
-        <div>
-          <DropDownWrapper menu={<CreateMenu/>}>
-            <div className='mobile-icon-button'>
-              <i className="fa-solid fa-plus"></i>
-              <div className='icon-label'>Create</div>
-            </div>
-          </DropDownWrapper>
+    <div className='navbar__mobile'>
+        <div className='search-area'>
+          {/* <div className='mag-glass'>
+            <i className="fa-solid fa-magnifying-glass"></i>
+          </div>
+          <input
+            type='text'
+            className='search-input'
+            /> */}
         </div>
-      }
-      <div>
+      <div className='navbar-rhs'>
+        {user && (<DropDownWrapper menu={<CreateMenu/>}>
+          <div className='icon-button'>
+            <i className="fa-solid fa-plus"></i>
+          </div>
+        </DropDownWrapper>)}
         <DropDownWrapper menu={
-          <div className='mobile-user-dropdown'>
+          <div className='user-dropdown'>
             {user && <LogoutButton />}
             {!user && (
             <>
@@ -101,9 +105,9 @@ const NavBar = () => {
             )}
           </div>
         }>
-          <div className='mobile-icon-button'>
+          <div className='icon-button'>
             <i className="fa-solid fa-user"></i>
-            <div className='icon-label'>User</div>
+            <i className="fa-solid fa-caret-down"></i>
           </div>
         </DropDownWrapper>
       </div>
