@@ -7,15 +7,22 @@ font-family: Quicksand;
 
 body {
   margin: 0;
-  touch-action: none;
   width: 100%;
 }
 
 html, body {
-  overflow-y: hidden;
-  overscroll-behavior-y: none;
+  overflow: hidden;
+  overscroll-behavior: contain;
   position: fixed;
 }
+
+/* html
+,body
+,html *
+,body *
+{
+  overscroll-behavior: none !important;
+} */
 
 :focus:not(:focus-visible) { outline: none }
 

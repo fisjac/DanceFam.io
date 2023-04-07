@@ -37,13 +37,13 @@ export function MapBrowser() {
   }, [mapIsLoaded, bounds, venues])
 
   return (
-        <div className='modal-center-split__mobile'
-        >
-          { venues && <Scroll data={filteredVenues}/>}
-          <div className='modal-map-section__mobile'
-          >
-            <MapGenerator filter={false}/>
-          </div>
-        </div>
+    <div className='modal-center-split__mobile'>
+      <div className='select-venue-header__mobile'>Select a Venue</div>
+      <div className='modal-map-section__mobile'
+      >
+        <MapGenerator filter={false}/>
+      </div>
+      { venues && <Scroll data={filteredVenues}/>}
+    </div>
   )
 }

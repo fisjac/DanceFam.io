@@ -14,42 +14,33 @@ const drillParent = (node, className) => {
 export default function Collapser (props) {
 
   const close = () => {
-    props.expander(val => !val)
-    document.removeEventListener('touchstart', closeListener)
+    document.removeEventListener('touchstart',closeListener)
+    props.expander(false)
   }
   const closeListener = (e) => {
-    const found = drillParent(e.target, 'filter-fieldset')
+    const found = drillParent(e.target, 'filter-fieldset') //look for a parent element with a class of 'filter-fieldset'
     if (!found) {
-      props.expander(val => !val)
       document.removeEventListener('touchstart',closeListener)
+      props.expander(false)
     };
   };
   const open = () => {
-    props.expander(val=> !val);
+    props.expander(true);
     document.addEventListener('touchstart', closeListener)
   }
   const toggleExpander = (e, expanded) => {
     if (expanded) {
       close()
-      return
     } else {
       open()
-      return
     }
   };
 
   return (
-    <div
-      className='filter-fieldset'
-      onClick={(e)=> {
-        e.stopPropagation()
-      }}
-      >
+    <div className='filter-fieldset'>
       <div
         className='filter-header'
-
         onClick={(e)=>{
-          console.log('clicking header')
           toggleExpander(e, props.expanded)
         }}
         >

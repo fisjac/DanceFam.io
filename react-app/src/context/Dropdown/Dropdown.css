@@ -1,6 +1,6 @@
 .dropdown_container {
   position: relative;
-  z-index: 1000004;
+  z-index: 998;
   width: 0;
   height: 0;
 }
@@ -33,6 +33,7 @@
   align-items: center;
   justify-content: center;
   border-radius: 5px;
+  font-weight: bold;
 }
 
 .dropdown-button:hover {

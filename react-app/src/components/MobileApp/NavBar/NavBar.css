@@ -65,13 +65,14 @@
 
 .search-area {
   display: flex;
+  padding-left: 2px;
+  flex-grow: 1;
   align-items: center;
   max-width: 250px;
   position: relative;
   background-color: var(--theme-light);
   transition: .5s;
   cursor:text;
-
   border-radius: 5px;
 }
 
@@ -86,6 +87,7 @@
   height: 30px;
   padding: 5px;
   border-radius: 5px;
+  font-size: 16px;
   background-color: transparent;
   outline: none;
   border: none;

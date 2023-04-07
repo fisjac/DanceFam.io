@@ -61,10 +61,14 @@
 }
 
 
-#create-event__mobile.modal-container,
-#create-venue__mobile.modal-container
+#create-event__mobile.modal-container
 {
   width: 90vw;
+  height: 90%;
+}
+
+#create-venue__mobile.modal-container {
+  width: 90vw;;
 }
 
 /* #create-event__mobile.modal-content {

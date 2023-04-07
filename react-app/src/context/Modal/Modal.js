@@ -70,7 +70,7 @@ export function Modal (props) {
           className="modal-container"
           id={props.bespokeClassName}>
           <div id='modal-header'>
-            <img id='modal-logo' alt='logo' src={logo}/>
+            {props.showLogo && <img id='modal-logo' alt='logo' src={logo}/>}
             {props.header || 'New Modal'}
             <div
               id='modal-close-button'

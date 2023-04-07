@@ -42,7 +42,6 @@ export function MapBrowser({browserType, filter}) {
   }
 
   useMemo(()=>{
-
     if (mapIsLoaded) {
       if (filter) {
         let filteredVenuesTemp = filterVenuesByBounds(venues,bounds);
