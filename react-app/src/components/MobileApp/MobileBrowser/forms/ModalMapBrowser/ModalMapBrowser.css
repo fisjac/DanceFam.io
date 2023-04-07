@@ -28,7 +28,6 @@
   overflow-y: scroll;
   -ms-overflow-style: none;
   scrollbar-width: none;
-  overscroll-behavior-y: none;
 }
 
 .modal-eventscroll::-webkit-scrollbar {
