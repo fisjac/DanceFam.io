@@ -4,7 +4,6 @@ import DropDownWrapper from '../../context/Dropdown/Dropdown.js';
 
 
 function Types () {
-  const eventTypes = ['Class', 'Convention', 'Social']
   return (
       <fieldset>
         <div className='checkbox-line'>

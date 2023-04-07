@@ -35,7 +35,9 @@ export default function Filter() {
           expander={setTypeFilterExpanded}
           >
             {Object.keys(types).map((type)=>(
-            <div className='checkbox-line'>
+            <div
+              className='checkbox-line'
+              key={type}>
               <div
               className={`checkbox-input ${types[type]?'checked': 'unchecked'}`}
               onClick={()=>{
@@ -54,7 +56,9 @@ export default function Filter() {
           expander={setStyleFilterExpanded}
           >
             {Object.keys(styles).map((style)=>(
-            <div className='checkbox-line'>
+            <div
+              className='checkbox-line'
+              key={style}>
               <div
                className={`checkbox-input ${styles[style]?'checked': 'unchecked'}`}
                onClick={()=>{

@@ -4,7 +4,7 @@
   position: relative;
   flex-grow: 1;
   padding: 0;
-  height: 90%
+  height: calc(100% - 40px)
 }
 
 /* Main portion */
@@ -24,8 +24,9 @@
 .mobile-scroll-section {
   position: absolute;
   bottom: 0;
-  min-height: 20vh;
-  max-height: 60vh;
+  min-height: 20%;
+  height: 20%;
+  max-height: 100%;
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -35,7 +36,8 @@
   background-color: white;
   width: 100%;
   box-shadow: 1px -1px 1px var(--shadow);
-  z-index: 1;
+  z-index: 997;
+  overscroll-behavior: none;
 }
 
 .grip-lines {
@@ -50,7 +52,7 @@
 
 .mobile-map-section {
   width: 100%;
-  height: calc(70vh);
+  height: 80%;
 }
 
 .mobile-eventscroll {
@@ -108,6 +110,10 @@
   font-size: 18px;
   border-bottom: 1px solid var(--shadow);
   padding: 4px 0;
+}
+
+.create-event-parent-div {
+  height: 100%;
 }
 
 .eventline-body {
@@ -303,7 +309,7 @@
   padding: 0;
   margin:  2px 8px;
   padding: 4px;
-  z-index: 1000003;
+  z-index: 995;
 }
 
 .filter-header {
@@ -436,7 +442,7 @@
 
 .filter-bar {
   position: absolute;
-  /* width: 100%; */
+  width: 100%;
   z-index: 100
 }
 

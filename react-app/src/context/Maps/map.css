@@ -26,6 +26,14 @@
 }
 
 .inline-map {
-  height: calc(min(40vh,300px));
+  height: calc(min(40vh,200px));
   width: 100%;
+}
+
+.pac-item {
+  /* display: flex; */
+  overflow-wrap: break-word;
+  height: fit-content;
+  /* text-overflow: unset; */
+  white-space: pre-line;
 }

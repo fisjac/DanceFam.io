@@ -10,21 +10,21 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-
 }
 
 .modal-left-section__mobile {
-  height: calc(20vh - 25px);
+  height: calc(100% - 25vh - 26px); /* 25vh for the map, and X px for nthe header */
   overscroll-behavior-y: none;
 }
 .modal-map-section__mobile {
-  height: calc(36vh- 25px);
+  width: 100%;
+  height: 25vh;
 }
 
 
 .modal-eventscroll {
   width: 100%;
-  height: calc(100% - 31px);
+  height: 100%;
   overflow-y: scroll;
   -ms-overflow-style: none;
   scrollbar-width: none;
@@ -33,11 +33,6 @@
 
 .modal-eventscroll::-webkit-scrollbar {
   display: none;
-}
-
-.modal-map-section__mobile {
-  width: 100%;
-  /* height: calc(min(350px,40vh)); */
 }
 
 .modal-venueline-body__mobile {
@@ -86,11 +81,11 @@
   align-items: center;
 }
 
-.select-venue-header {
+.select-venue-header__mobile {
   font-weight: bold;
   width: 100%;
   padding-bottom: 5px;
-  margin-bottom: 5px;
+  /* margin-bottom: 5px; */
   font-size: 14;
   border-bottom: 1px solid var(--shadow);
 }

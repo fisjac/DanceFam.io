@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import { groupEventsByDate, sortDates } from '../../../utils/DateFuncs';
 
 
@@ -20,26 +20,31 @@ export default function Scroll({data, scrollType}) {
                   let dateString = date.toLocaleDateString(undefined, {weekday: 'long',month: 'long', day: 'numeric'});
                   return dateString;
                 }).map((date, idx) => (
-                      <>
+                      <Fragment key={idx}>
                         {Math.random() <= 0.1 &&
-                          <ins className="adsbygoogle"
+                          <ins
+                            // key={idx + 'ad'}
+                            className="adsbygoogle"
                             style={{"display":"block"}}
                             data-ad-format="fluid"
                             data-ad-layout-key="-ft+5s-18-2e+93"
                             data-ad-client="ca-pub-6254698020872115"
                             data-ad-slot="9226096593"></ins>
                         }
-                        <div key={date + '-' + idx} className='eventline-header'>
+                        <div
+                          key={date + '-' + idx}
+                          className='eventline-header'
+                          >
                           {date}
                         </div>
                         {groupedEvents[date]
                           .map(event => (
                           <EventLine
-                            key={event.name + event.id}
+                            key={event.name + event.id + idx}
                             event={event}/>
                           )
                         )}
-                      </>
+                      </Fragment>
                     )
                   )
               }
@@ -62,7 +67,7 @@ export default function Scroll({data, scrollType}) {
             <div className='eventscroll'>
               {Object.values(data).map(venue => (
                 <VenueLine
-                  key={venue.id}
+                  key={'venue_' + venue.id}
                   venue={venue}
                   />
                 ))

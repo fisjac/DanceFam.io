@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 
 import * as venueActions from '../../../../store/venues';
 import * as autocompleteFuncs from '../../../utils/autocomplete';
-import SingleVenueMap from './SingleVenueMap';
+// import SingleVenueMap from './SingleVenueMap';
 
 export default function CreateEventForm({setShowModal}) {
   const dispatch = useDispatch();
@@ -83,9 +83,9 @@ export default function CreateEventForm({setShowModal}) {
               </div>
           </div>
         </div>}
-        <div className='inline-map'>
+        {/* <div className='inline-map'>
           <SingleVenueMap venue={venue}/>
-        </div>
+        </div> */}
         <button
           type='submit'
           className={`submit-button ${!venue?'disabled':''}`}

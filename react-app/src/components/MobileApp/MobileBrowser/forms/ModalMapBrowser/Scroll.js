@@ -9,7 +9,6 @@ export default function Scroll({data}) {
   if (data) {
       return (
         <div className='modal-left-section__mobile'>
-          <div className='select-venue-header'>Select a Venue</div>
           <div className='modal-eventscroll'>
             {Object.values(data).map(venue => (
               <VenueLine
