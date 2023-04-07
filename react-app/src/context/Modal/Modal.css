@@ -49,6 +49,7 @@
 }
 
 #create-event__desktop.modal-container,
+#edit-event__desktop.modal-container,
 #create-venue__desktop.modal-container {
   width: 60vw;
   max-width: 800px;
@@ -61,7 +62,8 @@
 }
 
 
-#create-event__mobile.modal-container
+#create-event__mobile.modal-container,
+#edit-event__mobile.modal-container
 {
   width: 90vw;
   height: 90%;

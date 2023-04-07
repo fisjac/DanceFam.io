@@ -76,7 +76,10 @@ export function EditEventForm({event, setShowModal}) {
 
   return (
     <>
-      <div style={{'display': `${page === 0?'':'none'}`}}>
+      <div
+        style={{'display': `${page === 0?'':'none'}`}}
+        className='create-event-parent-div'
+      >
         <ModalMapBrowser
           browserType='venues'
           filter={false}

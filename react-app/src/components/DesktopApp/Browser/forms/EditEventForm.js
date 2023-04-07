@@ -97,6 +97,7 @@ export function EditEventForm({event, setShowModal}) {
 
       <div
         style={{'display': `${page === 1? '':'none'}`}}
+        className='create-event-parent-div'
         >
         <form method='POST' onSubmit={handleSubmit}>
           <div className='errors'>

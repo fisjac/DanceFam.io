@@ -66,6 +66,7 @@ export default function EventLine({event}) {
           </div>
           {user && user.id === event.organiserId && (<div className='eventline-body-right'>
             <ModalWrapper
+            bespokeClassName='edit-event__mobile'
             header='Edit this Event'
             form={<EditEventForm event={event}/>}
             >
